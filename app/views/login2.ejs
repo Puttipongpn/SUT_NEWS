@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CodePen - Login/Signup Pure CSS</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='https://unicons.iconscout.com/release/v2.1.9/css/unicons.css'>
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="section">
+        <div class="container">
+            <div class="row full-height justify-content-center">
+                <div class="col-12 text-center align-self-center py-5">
+                    <div class="section pb-5 pt-5 pt-sm-2 text-center">
+                        <h6 class="mb-0 pb-3"><span>Log In </span><span>Sign Up</span></h6>
+                        <input class="checkbox" type="checkbox" id="reg-log" name="reg-log" />
+                        <label for="reg-log"></label>
+                        <div class="card-3d-wrap mx-auto">
+                            <div class="card-3d-wrapper">
+                                <div class="card-front">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Log In</h4>
+                                            <form action="" method="POST">
+                                                <div class="form-group">
+                                                    <input type="email" name="user_email" class="form-style"
+                                                        placeholder="Your Email" id="_email" autocomplete="off"
+                                                        rnodeequired>
+                                                    <i class="input-icon uil uil-at"></i>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="user_pass" class="form-style"
+                                                        placeholder="Your Password" id="_pass" autocomplete="off"
+                                                        required>
+                                                    <i class="input-icon uil uil-lock-alt"></i>
+                                                </div>
+                                                <% if (locals.login_errors) { login_errors.forEach(function(error_msg){
+                                                    %>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <%= error_msg %>
+                                                    </div>
+                                                    <% }); } %>
+                                                        <button type="submit" class="btn btn-primary">Login</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-back">
+                                    <div class="center-wrap">
+                                        <div class="section text-center">
+                                            <h4 class="mb-4 pb-3">Sign Up</h4>
+                                            <form action="/register" method="POST" novalidate>
+                                                <div class="form-group">
+                                                    <input type="text" name="user_name" class="form-style"
+                                                        value="<%= (locals.old_data) ? old_data.user_name : ''; %>"
+                                                        placeholder="Your Full Name" id="_rname" autocomplete="off">
+                                                    <i class="input-icon uil uil-user"></i>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <input type="email" name="user_email" class="form-style"
+                                                        value="<%= (locals.old_data) ? old_data.user_email : ''; %>"
+                                                        placeholder="Your Email" id="_remail" autocomplete="off">
+                                                    <i class="input-icon uil uil-at"></i>
+                                                </div>
+                                                <div class="form-group mt-2">
+                                                    <input type="password" name="user_pass" class="form-style"
+                                                        placeholder="Your Password" id="_rpass" autocomplete="off">
+                                                    <i class="input-icon uil uil-lock-alt"></i>
+                                                </div>
+                                                <% if (locals.register_error) {
+                                                    register_error.forEach(function(error_msg){ %>
+                                                    <div class="alert alert-danger" role="alert">
+                                                        <%= error_msg %>
+                                                    </div>
+                                                    <% }); } %>
+                                                        <button type="submit" class="btn btn-success">Sign Up</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- partial -->
+
+</body>
+
+</html>
