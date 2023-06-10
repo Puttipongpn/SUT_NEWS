@@ -14,17 +14,33 @@
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="stylesheets/style.css">
-    <title>CenterPage</title>
+    <title>AdminPage</title>
 </head>
 
 <body>
     <header>
-        <div class="container">
-            <div>
-                <h1 class="a1">ADMIN.</h1>
-            </div>
-
-
+        <div class="toppage">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">EMPOWER</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">SETTING</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">LOGOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">
+                        <%= name%>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">
+                        ADMIN
+                    </a>
+                </li>
+            </ul>
         </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">

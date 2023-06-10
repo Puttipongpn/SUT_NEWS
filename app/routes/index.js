@@ -57,15 +57,42 @@ const ifLoggedin = (req,res,next) => {
 // END OF CUSTOM MIDDLEWARE
 // ROOT PAGE
 app.get('/', ifNotLoggedin, (req,res,next) => {
-  dbConnection.execute("SELECT `name` FROM `users` WHERE `id`=?",[req.session.userID])
+  req.session = null;
+  dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?",[req.session.userID])
   .then(([rows]) => {
       res.render('home/centerpage',{
-          name:rows[0].name
+          name:rows[0].name,
+          row:rows[0].row,
+      });
+  });
+  
+});
+
+app.get('/guest', function (req, res, next) {
+  res.render('home/guest', { title: 'Express' });
+});
+
+app.get('/user', ifNotLoggedin, (req,res,next) => {
+  dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?",[req.session.userID])
+  .then(([rows]) => {
+      res.render('home/centerpage',{
+          name:rows[0].name,
+          row:rows[0].row,
       });
   });
   
 });// END OF ROOT PAGE
 
+app.get('/admin', ifNotLoggedin, (req,res,next) => {
+  dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?",[req.session.userID])
+  .then(([rows]) => {
+      res.render('home/adminpage',{
+          name:rows[0].name,
+          row:rows[0].row,
+      });
+  });
+  
+});
 
 // REGISTER PAGE
 app.post('/register', ifLoggedin, 
@@ -145,8 +172,15 @@ app.post('/', ifLoggedin, [
               if(compare_result === true){
                   req.session.isLoggedIn = true;
                   req.session.userID = rows[0].id;
-
-                  res.redirect('/');
+                  req.session.row = rows[0].row;
+                  let user_row = rows[0].row
+                  console.log(rows[0].row);
+                  if (user_row === "USER") {
+                    res.redirect('/user');
+                  }else if(user_row === "ADMIN"){
+                    res.redirect('/admin');
+                    console.log("ADMIN");
+                  }
               }
               else{
                   res.render('login2',{
