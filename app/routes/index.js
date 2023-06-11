@@ -86,7 +86,7 @@ app.get('/user', ifNotLoggedin, (req, res, next) => {
                     row: rows[0].row,
                 });
             }else if (rows[0].row === "ADMIN") {
-                res.status(404).send('<h1>404 Page Not Found!</h1>');
+                res.render('404page')
             }else{
                 res.render('plelog')
             }
@@ -102,7 +102,7 @@ app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
                     row: rows[0].row,
                 });
             } else if (rows[0].row === "ADMIN") {
-                res.status(404).send('<h1>404 Page Not Found!</h1>');
+                res.render('404page')
             }
             else {
                 res.render('plelog')
@@ -121,7 +121,7 @@ app.get('/admin', ifNotLoggedin, (req, res, next) => {      //ตั้งชื
                     row: rows[0].row,
                 });
             }else if (rows[0].row === "USER") {
-                res.status(404).send('<h1>404 Page Not Found!</h1>');
+                res.render('404page')
             }else {
                 res.render('plelog')
             }
@@ -137,7 +137,7 @@ app.get('/empower', ifNotLoggedin, (req, res, next) => {
                     row: rows[0].row,
                 });
             }else if (rows[0].row === "USER") {
-                res.status(404).send('<h1>404 Page Not Found!</h1>');
+                res.render('404page')
             }else {
                 res.render('plelog')
             }
