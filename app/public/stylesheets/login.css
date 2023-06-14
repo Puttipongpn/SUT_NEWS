@@ -3,13 +3,15 @@
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900');
 
-body{
+body {
 	font-family: 'Poppins', sans-serif;
 	font-weight: 300;
 	font-size: 15px;
 	line-height: 1.7;
-	color: #c4c3ca;
-	background-color: #1f2029;
+	color: #ffffff;
+  background-size: 100% 110%;
+  background-image: url(//elearning2.sut.ac.th/pluginfile.php/1/theme_suranaree/mainbgimg/1685245456/E_learing%20art_completed.jpg);
+  background-position: 40% 50%;
 	overflow-x: hidden;
 }
 a {
@@ -72,7 +74,7 @@ h6 span{
   height: 36px;
   border-radius: 50%;
   color: #ffeba7;
-  background-color: #102770;
+  background-color: #0024c4;
   font-family: 'unicons';
   content: '\eb4f';
   z-index: 20;
@@ -115,7 +117,7 @@ h6 span{
   background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
   background-position: bottom center;
   background-repeat: no-repeat;
-  background-size: 300%;
+  background-size: 100%;
   position: absolute;
   border-radius: 6px;
   left: 0;

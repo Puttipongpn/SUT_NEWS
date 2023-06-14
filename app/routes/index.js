@@ -6,50 +6,37 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const dbConnection = require('./connect');
 const { body, validationResult, Result } = require('express-validator');
+const session = require('express-session');
 
 //const app = express();
 app.use(express.urlencoded({ extended: false }));
-// SET OUR VIEWS AND VIEW ENGINE
-//  app.set('views', path.join(__dirname,'views'));
-//  app.set('view engine','ejs');
 
-/* GET home page. */
-
-// router.get('/login', function (req, res, next) {
-//   res.render('login', { title: 'Express' });
-// });
-
-// router.get('/login2', function (req, res, next) {
-//   res.render('login2', { title: 'Express' });
-// });
-
-// router.get('/', function (req, res, next) {
-//   res.render('home/centerpage', { title: 'Express' });
-// });
-
-// router.get('/adminpage', function (req, res, next) {
-//   res.render('home/adminpage', { title: 'Express' });
-// });
-
-// app.set('views', path.join(__dirname, 'views'));
-// app.set('view engine', 'ejs');
+app.get('/centerpage', function (req, res, next) {
+  res.render('home/centerpage', {
+    name:'PLEASE LOGIN',
+    row:'GUEST'
+  });
+});
 
 // APPLY COOKIE SESSION MIDDLEWARE
-app.use(cookieSession({     //เป็นการตั้งอายุของการล็อคอิน ซึ่งจะหมดอายุภายใน 1 ชม. แล้วต้อง login ใหม่
+app.use(cookieSession({
     name: 'session',
     keys: ['key1', 'key2'],
     maxAge: 3600 * 1000 // 1hr
 }));
 
 // DECLARING CUSTOM MIDDLEWARE
+
 const ifNotLoggedin = (req, res, next) => {
     if (!req.session.isLoggedIn) {
-        return res.render('login2');
+        if (!req.session.isLoggedIn) {
+            return res.render('login2');
+        }
     }
     next();
 }
 const ifLoggedin = (req, res, next) => {
-    if (req.session.isLoggedIn) {
+    if (req.session.userType) {
         return res.redirect('home/centerpage');
     }
     next();
@@ -57,31 +44,24 @@ const ifLoggedin = (req, res, next) => {
 // END OF CUSTOM MIDDLEWARE
 // ROOT PAGE
 app.get('/', ifNotLoggedin, (req, res, next) => {
-    //req.session = null;
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             res.render('home/centerpage', {
                 name: rows[0].name,
-                row: rows[0].row,
+                row: rows[0].row
             });
         });
 
-});
-//GUEST-----------------------------------------------------------------------------------
-app.get('/guest', function (req, res, next) {
-    res.render('home/guest', { title: 'Express' });
-});
-app.get('/guest_page1', function (req, res, next) {
-    res.render('home/page1', { title: 'Express' });
-});
-//GUEST-----------------------------------------------------------------------------------
+});// END OF ROOT PAGE
+
+
 //USER---------------------------------------------------------------------------------------
 
-app.get('/user', ifNotLoggedin, (req, res, next) => {
+app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].row === "USER") {
-                res.render('home/centerpage', {
+                res.render('user_page/setting_profile', {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
@@ -111,12 +91,13 @@ app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
 
 });
 //USER---------------------------------------------------------------------------------------
+
 //ADMIN--------------------------------------------------------------------------------------
-app.get('/admin', ifNotLoggedin, (req, res, next) => {      //ตั้งชื่อเส้นทาง
+app.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งชื่อเส้นทาง
     dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].row === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
-                res.render('home/adminpage', {
+                res.render('admin_page/request_page', {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
@@ -128,11 +109,11 @@ app.get('/admin', ifNotLoggedin, (req, res, next) => {      //ตั้งชื
         });
 });
 
-app.get('/empower', ifNotLoggedin, (req, res, next) => {
+app.get('/setting', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].row === "ADMIN") {
-                res.render('admin_page/empower', {
+                res.render('admin_page/setting_page', {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
@@ -201,57 +182,51 @@ app.post('/register', ifLoggedin,
 // LOGIN PAGE
 app.post('/', ifLoggedin, [
     body('user_email').custom((value) => {
-        return dbConnection.execute('SELECT email FROM users WHERE email=?', [value])  //ค้นหาจาก DB ว่ามี Email นี้จริงใหม
+        return dbConnection.execute('SELECT email FROM users WHERE email=?', [value])
             .then(([rows]) => {
-                if (rows.length == 1) {     //ถ้ามีส่ง TURE
+                if (rows.length == 1) {
                     return true;
+
                 }
-                return Promise.reject('Invalid Email Address!');    //ไม่มีแจ้ง ERROR
+                return Promise.reject('Invalid Email Address!');
 
             });
     }),
-    body('user_pass', 'Password is empty!').trim().not().isEmpty(), //ตรวจสอบ Password ที่รับเข้ามาถูกฟอร์แมทหรือไม่ เป็นค่าว่างไหม
+    body('user_pass', 'Password is empty!').trim().not().isEmpty(),
 ], (req, res) => {
-    const validation_result = validationResult(req);    
+    const validation_result = validationResult(req);
     const { user_pass, user_email } = req.body;
     if (validation_result.isEmpty()) {
-        dbConnection.execute("SELECT * FROM `users` WHERE `email`=?", [user_email]) 
+
+        dbConnection.execute("SELECT * FROM `users` WHERE `email`=?", [user_email])
             .then(([rows]) => {
-                bcrypt.compare(user_pass, rows[0].password).then(compare_result => {    //นำ Password ที่รับเข้ามา เทียบกับ Password ใน DB ที่ตำแหน่ง Email เดียวกัน เก็บค่าใน compare_result
-                    if (compare_result === true) {  //ถ้าเป็นจริง เก็บตัวแปลต่างๆลง session
+                bcrypt.compare(user_pass, rows[0].password).then(compare_result => {
+                    if (compare_result === true) {
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
-                        req.session.row = rows[0].row;
-                        let user_row = rows[0].row  //เก็บตัวแปล row แยก เพื่อนำไปใช้ในการแบ่ง part เส้นทางหน้าเพจ
-                        console.log(rows[0].row);   //ตรวจสอบ
-                        if (user_row === "USER") {      //ตรวจสอบ row ของผู้ login ถ้าเป็น USER ให้สั่งรันหน้าเฉพาะของ USER
-                            res.redirect('/user');
-                            // res.redirect('/bookmake');
-                        } else if (user_row === "ADMIN") {
-                            res.redirect('/admin');
-                            //console.log("ADMIN");
-                        }
+
+                        res.redirect('/');
                     }
-                    else {                 //ถ้า Password ที่รับเข้ามาไม่ถูกต้องให้แจ้ง error
+                    else {
                         res.render('login2', {
                             login_errors: ['Invalid Password!']
                         });
                     }
                 })
-                    .catch(err => {     //ดักจับ error
+                    .catch(err => {
                         if (err) throw err;
                     });
 
 
-            }).catch(err => { //ดักจับ error
+            }).catch(err => {
                 if (err) throw err;
             });
     }
     else {
-        let allErrors = validation_result.errors.map((error) => {   
+        let allErrors = validation_result.errors.map((error) => {
             return error.msg;
         });
-        // REDERING login PAGE WITH LOGIN VALIDATION ERRORS
+        // REDERING login-register PAGE WITH LOGIN VALIDATION ERRORS
         res.render('login2', {
             login_errors: allErrors
         });
@@ -262,13 +237,13 @@ app.post('/', ifLoggedin, [
 // LOGOUT
 app.get('/logout', (req, res) => {
     //session destroy
-    req.session = null;     //ล้างค่า session ที่เก็บค่าชื่อผู้เข้าใช้งาน
+    req.session = null;
     res.redirect('/');
 });
 // END OF LOGOUT
 
 app.use('/', (req, res) => {
-    res.status(404).send('<h1>404 Page Not Found!</h1>');
+    res.render('404page')
 });
 
 module.exports = app;

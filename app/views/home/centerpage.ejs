@@ -22,19 +22,28 @@
         <div class="toppage">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">MY NEWS</a>
+                    <a class="nav-link" id="Asetting_page" href="/setting">แก้ไขเว็ปเพจ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">SUBSCRIBE</a>
+                    <a class="nav-link" id="Arequest_ADMIN" href="/request">รับคำร้องประกาศข่าว</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/bookmake">BOOK MAKE</a>
+                    <a class="nav-link" id="Aallow_Offuser">อนุญาติบัญชีทางการ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">PROFILE</a>
+                    <a class="nav-link" id="bookmake" href="/bookmake">BOOKMAKE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/logout">LOGOUT</a>
+                    <a class="nav-link" id="userButton" href="/setting_profile">แก้ไขโปรไฟล์</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="AddNEWs">เพิ่มข่าวสาร</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="LOGOUT" href="/logout">LOGOUT</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="LOGIN" href="/">LOGIN</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">
@@ -43,9 +52,106 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link disabled">
-                        USER
+                        <%= row%>
                     </a>
                 </li>
+                <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var setting_page = document.getElementById('Asetting_page');
+                    if (currentUser.row === 'ADMIN') {
+                        setting_page.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        setting_page.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var request_ADMIN = document.getElementById('Arequest_ADMIN');
+                    if (currentUser.row === 'ADMIN') {
+                        request_ADMIN.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        request_ADMIN.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var allow_Offuser = document.getElementById('Aallow_Offuser');
+                    if (currentUser.row === 'ADMIN') {
+                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var userButton = document.getElementById('userButton');
+                    if (currentUser.row === 'USER') {
+                        userButton.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        userButton.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var userButton = document.getElementById('bookmake');
+                    if (currentUser.row === 'USER') {
+                        userButton.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        userButton.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var userButton = document.getElementById('AddNEWs');
+                    if (currentUser.row === 'USER') {
+                        userButton.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        userButton.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var userButton = document.getElementById('LOGIN');
+                    if (currentUser.row === 'GUEST') {
+                        userButton.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        userButton.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+                  <script>
+                    var currentUser = {
+                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                      };
+                    console.log(currentUser.row)
+                    var userButton = document.getElementById('LOGOUT');
+                    if (currentUser.row === 'USER'||currentUser.row === 'ADMIN') {
+                        userButton.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        userButton.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                  </script>
+               
             </ul>
         </div>
     </header>
@@ -61,7 +167,7 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+                    <a class="nav-link" href="#">My News</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
