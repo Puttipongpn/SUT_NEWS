@@ -12,10 +12,14 @@ const session = require('express-session');
 app.use(express.urlencoded({ extended: false }));
 
 app.get('/centerpage', function (req, res, next) {
-  res.render('home/centerpage', {
-    name:'PLEASE LOGIN',
-    row:'GUEST'
-  });
+    res.render('home/centerpage', {
+        name: 'PLEASE LOGIN',
+        row: 'GUEST'
+    });
+});
+
+app.get('/page1', function (req, res, next) {
+    res.render('home/page1');
 });
 
 // APPLY COOKIE SESSION MIDDLEWARE
@@ -29,14 +33,12 @@ app.use(cookieSession({
 
 const ifNotLoggedin = (req, res, next) => {
     if (!req.session.isLoggedIn) {
-        if (!req.session.isLoggedIn) {
-            return res.render('login2');
-        }
+        return res.render('login2');
     }
     next();
 }
 const ifLoggedin = (req, res, next) => {
-    if (req.session.userType) {
+    if (req.session.isLoggedIn) {
         return res.redirect('home/centerpage');
     }
     next();
@@ -65,9 +67,9 @@ app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
-            }else if (rows[0].row === "ADMIN") {
+            } else if (rows[0].row === "ADMIN") {
                 res.render('404page')
-            }else{
+            } else {
                 res.render('plelog')
             }
         });
@@ -90,6 +92,24 @@ app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         });
 
 });
+
+app.get('/page1', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0]) {
+                res.render('home/page1', {
+                    name: rows[0].name,
+                    row: rows[0].row,
+                });
+            }else {
+                req.session.isLoggedIn === true;
+                res.render('home/page1',{
+                    name: 'PLEASE LOGIN',
+                    row: 'GUEST'
+                })
+            }
+        });
+});
 //USER---------------------------------------------------------------------------------------
 
 //ADMIN--------------------------------------------------------------------------------------
@@ -101,9 +121,9 @@ app.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งช�
                     name: rows[0].name,
                     row: rows[0].row,
                 });
-            }else if (rows[0].row === "USER") {
+            } else if (rows[0].row === "USER") {
                 res.render('404page')
-            }else {
+            } else {
                 res.render('plelog')
             }
         });
@@ -117,9 +137,9 @@ app.get('/setting', ifNotLoggedin, (req, res, next) => {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
-            }else if (rows[0].row === "USER") {
+            } else if (rows[0].row === "USER") {
                 res.render('404page')
-            }else {
+            } else {
                 res.render('plelog')
             }
         });

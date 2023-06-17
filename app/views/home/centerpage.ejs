@@ -8,12 +8,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
         integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script>
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+        </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
-        crossorigin="anonymous"></script>
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"> //เลื่อนรูปภาพ
+        </script>
     <link rel="stylesheet" href="stylesheets/style.css">
+    <!-- --------------------------------------------------------------------------------- -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100;1,200&display=swap"
+        rel="stylesheet" />
+
+    <!-- AlpineJS -->
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <!-- Tailwind -->
+
     <title>CenterPage</title>
 </head>
 
@@ -22,43 +34,51 @@
         <div class="toppage">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" id="Asetting_page" href="/setting">แก้ไขเว็ปเพจ</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Asetting_page"
+                        href="/setting">แก้ไขเว็ปเพจ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="Arequest_ADMIN" href="/request">รับคำร้องประกาศข่าว</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Arequest_ADMIN"
+                        href="/request">รับคำร้องประกาศข่าว</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="Aallow_Offuser">อนุญาติบัญชีทางการ</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;"
+                        id="Aallow_Offuser">อนุญาติบัญชีทางการ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="bookmake" href="/bookmake">BOOKMAKE</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="bookmake"
+                        href="/bookmake">BOOKMAKE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="userButton" href="/setting_profile">แก้ไขโปรไฟล์</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="userButton"
+                        href="/setting_profile">แก้ไขโปรไฟล์</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="AddNEWs">เพิ่มข่าวสาร</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;"
+                        id="AddNEWs">เพิ่มข่าวสาร</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="LOGOUT" href="/logout">LOGOUT</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
+                        href="/logout">LOGOUT</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="LOGIN" href="/">LOGIN</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGIN"
+                        href="/">LOGIN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">
+                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
                         <%= name%>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link disabled">
+                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
                         <%= row%>
                     </a>
                 </li>
                 <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var setting_page = document.getElementById('Asetting_page');
                     if (currentUser.row === 'ADMIN') {
@@ -66,11 +86,11 @@
                     } else {
                         setting_page.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var request_ADMIN = document.getElementById('Arequest_ADMIN');
                     if (currentUser.row === 'ADMIN') {
@@ -78,11 +98,11 @@
                     } else {
                         request_ADMIN.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var allow_Offuser = document.getElementById('Aallow_Offuser');
                     if (currentUser.row === 'ADMIN') {
@@ -90,11 +110,11 @@
                     } else {
                         allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var userButton = document.getElementById('userButton');
                     if (currentUser.row === 'USER') {
@@ -102,11 +122,11 @@
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var userButton = document.getElementById('bookmake');
                     if (currentUser.row === 'USER') {
@@ -114,11 +134,11 @@
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var userButton = document.getElementById('AddNEWs');
                     if (currentUser.row === 'USER') {
@@ -126,11 +146,11 @@
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var userButton = document.getElementById('LOGIN');
                     if (currentUser.row === 'GUEST') {
@@ -138,24 +158,28 @@
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-                  <script>
+                </script>
+                <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                      };
+                    };
                     console.log(currentUser.row)
                     var userButton = document.getElementById('LOGOUT');
-                    if (currentUser.row === 'USER'||currentUser.row === 'ADMIN') {
+                    if (currentUser.row === 'USER' || currentUser.row === 'ADMIN') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
                     }
-                  </script>
-               
+                </script>
+
             </ul>
         </div>
     </header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="https://elearning2.sut.ac.th/theme/image.php/suranaree/theme/1685245456/sut-e-learning-logo"
+                alt="" width="30" height="30">
+        </a>
         <a class="navbar-brand" href="#">SUT NEWS</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -191,9 +215,7 @@
             </form>
         </div>
     </nav>
-    <article>
 
-    </article>
     <section>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -220,6 +242,128 @@
             </button>
         </div>
     </section>
+
+    <article>
+        <!-- Card List Section -->
+
+        <div class="menu">
+            <div class="row">
+                <div class="col-6 col-md-1 "></div>
+                <div class="col-6 col-md-10 " style="display: flex; justify-content: center;">
+                    <button class="btn_menu " style="margin: 5px;" type="submit">รอบรั้ว มทส.</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">ร้อนแรงในขณะนี้</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu " style="margin: 5px;" type="submit">Button</button>
+                </div>
+                <div class="col-6 col-md-1 "></div>
+            </div>
+        </div>
+
+        <section x-data="xData()" class="paragrap1 py-3 px-5 ">
+            <!-- Card Grid -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                <template x-for="post in posts">
+                    <!-- Card Item -->
+                    <div class="col my-4">
+                        <!-- Clickable Area -->
+                        <a :href="post.link" class="card h-100 cursor-pointer"
+                            style="color: rgb(0, 0, 0);margin-top: -5px; text-decoration:none ;box-shadow: 2px 2px 16px 16px rgba(252, 252, 252, 0.1);">
+                            <!-- Image -->
+                            <img :src="post.image + '?auto=format&fit=crop&w=400&q=50'" class="card-img-top rounded-top"
+                                alt="Post Image">
+                            <div class="card-body">
+                                <!-- Title -->
+                                <h5 class="card-title text-lg mb-4 font-weight-bold " x-text="post.title"></h5>
+                                <!-- Description -->
+                                <p class="mb-1 " style="line-height: 1.25;" x-text="post.description"></p>
+                            </div>
+                        </a>
+                    </div>
+                </template>
+            </div>
+        </section>
+
+
+        <script>
+            function xData() {
+                /**
+                 * Shuffle an array
+                 * @param {Array} array
+                 * @source https://stackoverflow.com/a/2450976/6940144
+                 */
+                function shuffle(array) {
+                    let currentIndex = array.length,
+                        randomIndex;
+
+                    while (currentIndex != 0) {
+                        randomIndex = Math.floor(Math.random() * currentIndex);
+                        currentIndex--;
+
+                        [array[currentIndex], array[randomIndex]] = [
+                            array[randomIndex],
+                            array[currentIndex],
+                        ];
+                    }
+
+                    return array;
+                }
+
+                const posts = [
+                    {
+                        link: "https://web.facebook.com/sutesports/posts/633797458749370",
+                        image: "/images/paragrap1/pica1.jpg",
+                        title: "‼️ ขยายเวลารับสมัคร FOR FUN‼️",
+                        description:
+                            "🎉🎉🎉 𝑺𝑼𝑻 𝑭𝑶𝑹 𝑭𝑼𝑵 𝑺𝑷𝑬𝑪𝑰𝑨𝑳 𝑪𝑶𝑴𝑬𝑩𝑨𝑪𝑲 𝑭𝑶𝑹 𝑳𝑰𝑽𝑬 ขยายเวลารับสมัครแล้วนะ และสมัครทั้งสองเกมได้เลย แข่งไม่ตรงกันแน่นอน🎯🎯📍📍ปิดรับสมัคร 5 กุมภาพันธ์ 2566 น้า",
+                    },
+                    {
+                        link: "https://web.facebook.com/photo/?fbid=762308985688170&set=a.589020653017005",
+                        image:
+                            "/images/paragrap1/354191408_762308982354837_5881753171290611047_n.jpg",
+                        title: "ประกาศมหาวิทยาลัยเทคโนโลยีสุรนารีเรื่อง รายชื่อผู้มีสิทธิ์รับทุนการศึกษามูลนิธิวัตไกรฤกษ์ประจำปีการศึกษา 2565",
+                        description:
+                            "👉 คลิกลิงค์ประกาศที่นี่ : https://beta.sut.ac.th/dsa-scholar/news/18628",
+                    },
+                    {
+                        link: "/page1",
+                        image:
+                            "/images/paragrap1/preoder1.jpg",
+                        title: "“เสื้อ FRESHY รุ่นที่ 31 โลกานุวัตร เจ้าของอำนาจแห่งอนาคต”",
+                        description:
+                            "สิ้นสุดการรอคอย🫶🏻🎁 ผองานโดย นางสาว ธนกร พงศ์พันธ์พาณิชย์จากแนวความคิด ความร่วมสมัย ลวดลายพริ้วไหวจากความภูมิใจต่อมรดกทางวัฒนธรรมและเอกลักษณ์ของภูมิภาคอีสาน เปิดพรีออเดอร์ 📍📍วันที่ 18-23 มิถุนายน 2566  (5 วันเท่านั้น)  ช่องทางการพรีออเดอร์ 📍📍https://shop.line.me/@725sjatl ",
+                    },
+                    {
+                        link: "https://web.facebook.com/photo?fbid=229192969969194&set=a.104320619123097",
+                        image:
+                            "/images/paragrap1/leadercamp.jpg",
+                        title: "LEADER CAAPE!!!!  COMMING SOON",
+                        description:
+                            "พร้อมแล้วหรือยัง เตรียมตัวพบกับ LEADER CAMP #25 เร็วๆนี้ แล้วเจอกัน!! #ค่ายพัฒนาความเป็นผู้นำครั้งที่25 #อมทส #SUSUTทำAct #มทส",
+                    },
+                ];
+
+                const uniquePosts = Array.from(
+                    new Set([
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                    ]),
+                    JSON.stringify
+                ).map(JSON.parse);
+                return {
+                    posts: uniquePosts,
+                };
+            }
+        </script>
+
+    </article>
+
     <footer>
 
     </footer>
