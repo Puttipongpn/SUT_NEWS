@@ -6,7 +6,7 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const dbConnection = require('./connect');
 const { body, validationResult, Result } = require('express-validator');
-const session = require('express-session');
+//const session = require('express-session');
 
 //const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -134,6 +134,22 @@ app.get('/setting', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].row === "ADMIN") {
                 res.render('admin_page/setting_page', {
+                    name: rows[0].name,
+                    row: rows[0].row,
+                });
+            } else if (rows[0].row === "USER") {
+                res.render('404page')
+            } else {
+                res.render('plelog')
+            }
+        });
+});
+
+app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM users ORDER BY id", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0].row === "ADMIN") {
+                res.render('admin_page/manage_account.ejs', {
                     name: rows[0].name,
                     row: rows[0].row,
                 });
