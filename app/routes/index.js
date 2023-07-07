@@ -150,6 +150,7 @@ app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].row === "ADMIN") {
                 res.render('admin_page/manage_account.ejs', {
+                    users:rows,
                     name: rows[0].name,
                     row: rows[0].row,
                 });
@@ -160,6 +161,26 @@ app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
             }
         });
 });
+
+app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
+    const userId = req.params.id;
+
+    // ใช้ userId เพื่อดึงข้อมูลของผู้ใช้จากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM users WHERE id = ?", [userId])
+        .then(([rows]) => {
+            // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
+            res.render('admin_page/view_user', {
+                users:rows,
+                user: rows[0],
+                name: rows[0].name
+            });
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('404page');
+        });
+});
+
 //ADMIN--------------------------------------------------------------------------------------------
 
 // REGISTER PAGE

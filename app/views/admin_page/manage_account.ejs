@@ -1,11 +1,10 @@
 <%- include('../header')  %>
-class="card mt-3">
     <div class="card-body">
         <div class="card-title">
             <span class="material-symbols-outlined material-icons">
-                person
+                
             </span>
-            ผู้ใช้งานระบบ
+            
         </div>
         <a class="btn btn-info mt-3" href="/addUser">
             <span class="material-symbols-outlined material-icons">
@@ -16,30 +15,26 @@ class="card mt-3">
         <table class="table table-bordered table-striped mt-3">
             <thead>
                 <tr>
-                    <th width="140px"></th>
-                    <th>ชื่อ</th>
-                    <th width="200px">username</th>
-                    <th width="200px">ระดับ</th>
+                    <th>Name</th>
+                    <th width="200px">Email</th>
+                    <th width="200px">ROW</th>
+                    <th width="100px">View</th>
                 </tr>
             </thead>
             <tbody>
-                <% section.forEach((users) => { %>
+                <% users.forEach((users) => { %>
                 <tr>
-                    <td>
-                        <a class="btn btn-info" href="/editUser/<%= users.id %>">
-                            <span class="material-symbols-outlined material-icons">
-                                edit
-                            </span>
-                        </a>
-                        <a class="btn btn-danger" href="/deleteUser/<%= users.id %>" onclick="return confirm('Are you sure delete ?')">
-                            <span class="material-symbols-outlined material-icons">
-                                close
-                            </span>
-                        </a>
-                    </td>
+                    
                     <td><%= users.name %></td>
                     <td><%= users.email %></td>
                     <td><%= users.row %></td>
+                    <td>
+                        <a class="btn btn-info" href="/view_user/<%= users.id %>">
+                            <span class="material-symbols-outlined material-icons">
+                                View
+                            </span>
+                        </a>
+                    </td>
                 </tr>
                 <% }); %>
             </tbody>
