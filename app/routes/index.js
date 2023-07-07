@@ -60,10 +60,11 @@ app.get('/', ifNotLoggedin, (req, res, next) => {
 //USER---------------------------------------------------------------------------------------
 
 app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].row === "USER") {
                 res.render('user_page/setting_profile', {
+                    users:rows,
                     name: rows[0].name,
                     row: rows[0].row,
                 });
@@ -149,7 +150,7 @@ app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users ORDER BY id", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].row === "ADMIN") {
-                res.render('admin_page/manage_account.ejs', {
+                res.render('admin_page/manage_account', {
                     users:rows,
                     name: rows[0].name,
                     row: rows[0].row,
@@ -180,6 +181,8 @@ app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
             res.render('404page');
         });
 });
+
+
 
 //ADMIN--------------------------------------------------------------------------------------------
 
