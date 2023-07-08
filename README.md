@@ -1,7 +1,10 @@
 # SUT_NEWS
 
 ติดตั้งโปรเจคเพิ่มเติม
+
 npm install express-session
+npm install dayjs
+
 
 #คำสั่ง GIT
 -----main------------
