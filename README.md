@@ -1,5 +1,7 @@
 # SUT_NEWS
 
+ติดตั้งโปรเจคเพิ่มเติม
+npm install express-session
 
 #คำสั่ง GIT
 -----main------------
