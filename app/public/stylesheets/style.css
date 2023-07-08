@@ -36,6 +36,11 @@
   padding: 10px;
 }
 
+.btn-green {
+  background-color: green;
+  /* เพิ่มสไตล์ CSS เพิ่มเติมตามต้องการ */
+}
+
 .FristColumn {
   color: #ffffff;
   background-color: #1c1c1d;

@@ -32,19 +32,18 @@
             <div class="card mb-4">
                 <div class="card-header">Account Details</div>
                 <div class="card-body">
-                    <form>
-            
+                    <form method="post" action="/update_user/<%= users[0].id %>">
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (first name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputFirstName">Username</label>
-                                <input class="form-control" id="inputFirstName" type="text" value="<%- users[0].user_name %>" disabled>
+                                <input class="form-control" id="inputFirstName" type="text"  value="<%- users[0].user_name %>" disabled>
                             </div>
                             <!-- Form Group (last name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputLastName">Name</label>
-                                <input class="form-control" id="inputLastName" type="text" value="<%- users[0].name %>" disabled>
+                                <input class="form-control" id="inputLastName" type="text"  value="<%- users[0].name %>" disabled>
                             </div>
                         </div>
                         <!-- Form Row        -->
@@ -52,7 +51,7 @@
                             <!-- Form Group (organization name)-->
                             <div class="col-md-6">
                                 <label class="small mb-1" for="inputOrgName">Email</label>
-                                <input class="form-control" id="inputOrgName" type="text" value="<%- users[0].email %>" disabled>
+                                <input class="form-control" id="inputOrgName" type="text"  value="<%- users[0].email %>" disabled>
                             </div>
                             <!-- Form Group (location)-->
                             <div class="col-md-6">
@@ -61,10 +60,6 @@
                             </div>
                         </div>
                         <!-- Form Group (email address)-->
-                        <div class="mb-3">
-                            <label class="small mb-1" for="inputEmailAddress">Email address</label>
-                            <input class="form-control" id="inputEmailAddress" type="email"  value="<%- users[0].email %>" disabled>
-                        </div>
                         <!-- Form Row-->
                         <div class="row gx-3 mb-3">
                             <!-- Form Group (phone number)-->
@@ -74,12 +69,22 @@
                             </div>
                             <!-- Form Group (birthday)-->
                             <div class="col-md-6">
-                                <label class="small mb-1" for="inputRow">ROW</label>
-                                <input class="form-control" id="inputRow" type="text" name="Row" value="<%- users[0].row %>" disabled>
+                                <label class="small mb-1" for="inputRow">ROLE</label>
+                                <input class="form-control" id="inputRow" type="text" name="row" value="<%- users[0].role %>"disabled >
                             </div>
                         </div>
                         <!-- Save changes button-->
-                        <button class="btn btn-primary" type="button" >Black</button>
+                        <!-- <button class="btn btn-primary " type="button" >Black</button> -->
+                         <div style="display: flex; justify-content: space-between;"> <!-- justify-content: space-betweenกำหนดให้ Flex Items (องค์ประกอบภายใน Flex Container) กระจายตัวอย่างเท่าที่จำเป็นเพื่อเต็มพื้นที่ของ Flex Container -->
+                        <a class="btn btn-info" href="/manage_users">
+                            <span class="material-symbols-outlined material-icons">
+                                Black
+                            </span>
+                        </a>
+                        <button type="submit" class="btn btn-danger ">
+                            Approve
+                        </button>
+                        </div>
                     </form>
                 </div>
             </div>

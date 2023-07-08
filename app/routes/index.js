@@ -6,7 +6,10 @@ const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const dbConnection = require('./connect');
 const { body, validationResult, Result } = require('express-validator');
-//const session = require('express-session');
+const session = require('express-session');
+let numeral = require('numeral');
+let dayjs = require('dayjs');
+let dayFormat = 'DD/MM/YYYY';
 
 //const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -14,7 +17,7 @@ app.use(express.urlencoded({ extended: false }));
 app.get('/centerpage', function (req, res, next) {
     res.render('home/centerpage', {
         name: 'PLEASE LOGIN',
-        row: 'GUEST'
+        role: 'GUEST'
     });
 });
 
@@ -22,12 +25,7 @@ app.get('/page1', function (req, res, next) {
     res.render('home/page1');
 });
 
-// APPLY COOKIE SESSION MIDDLEWARE
-app.use(cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2'],
-    maxAge: 3600 * 1000 // 1hr
-}));
+
 
 // DECLARING CUSTOM MIDDLEWARE
 
@@ -43,14 +41,35 @@ const ifLoggedin = (req, res, next) => {
     }
     next();
 }
-// END OF CUSTOM MIDDLEWARE
+
+// APPLY SESSION MIDDLEWARE
+// // APPLY COOKIE SESSION MIDDLEWARE
+app.use(session({
+    secret: 'sessionforprojectecommerce',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000 
+    }
+}))
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    res.locals.numeral = numeral;
+    res.locals.dayjs = dayjs;
+    res.locals.dayFormat = dayFormat;
+    next();
+});
+
 // ROOT PAGE
 app.get('/', ifNotLoggedin, (req, res, next) => {
+    console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
+    console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
+
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             res.render('home/centerpage', {
                 name: rows[0].name,
-                row: rows[0].row
+                role: rows[0].role
             });
         });
 
@@ -62,13 +81,13 @@ app.get('/', ifNotLoggedin, (req, res, next) => {
 app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "USER") {
+            if (rows[0].role === "USER") {
                 res.render('user_page/setting_profile', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "ADMIN") {
+            } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
             } else {
                 res.render('plelog')
@@ -77,14 +96,14 @@ app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
 
 });
 app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "USER") {
+            if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "ADMIN") {
+            } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
             }
             else {
@@ -95,18 +114,18 @@ app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
 });
 
 app.get('/page1', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0]) {
                 res.render('home/page1', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            }else {
+            } else {
                 req.session.isLoggedIn === true;
-                res.render('home/page1',{
+                res.render('home/page1', {
                     name: 'PLEASE LOGIN',
-                    row: 'GUEST'
+                    role: 'GUEST'
                 })
             }
         });
@@ -115,14 +134,14 @@ app.get('/page1', ifNotLoggedin, (req, res, next) => {
 
 //ADMIN--------------------------------------------------------------------------------------
 app.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งชื่อเส้นทาง
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
+            if (rows[0].role === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
                 res.render('admin_page/request_page', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "USER") {
+            } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
                 res.render('plelog')
@@ -131,14 +150,14 @@ app.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งช�
 });
 
 app.get('/setting', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {
+            if (rows[0].role === "ADMIN") {
                 res.render('admin_page/setting_page', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "USER") {
+            } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
                 res.render('plelog')
@@ -147,21 +166,29 @@ app.get('/setting', ifNotLoggedin, (req, res, next) => {
 });
 
 app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users ORDER BY id", [req.session.userID])
+    const message = req.session.message;
+    req.session.message = undefined;
+    dbConnection.execute("SELECT * FROM users ORDER BY id")
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {
+            console.log(req.session.role)
+            const isAdmin = req.session.role === "ADMIN";
+            if (isAdmin) {
                 res.render('admin_page/manage_account', {
-                    users:rows,
-                    name: rows[0].name,
-                    row: rows[0].row,
+                    users: rows,
+                    name: req.session.name,
+                    role: req.session.role,
+                    message: message  // เพิ่ม message ในข้อมูลที่ส่งไปยังหน้า view
                 });
-            } else if (rows[0].row === "USER") {
-                res.render('404page')
             } else {
-                res.render('plelog')
+                res.render('404page');
             }
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('plelog');
         });
 });
+
 
 app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
     const userId = req.params.id;
@@ -171,14 +198,26 @@ app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
             res.render('admin_page/view_user', {
-                users:rows,
-                user: rows[0],
+                users: rows,
                 name: rows[0].name
             });
         })
         .catch(err => {
             console.log(err);
             res.render('404page');
+        });
+});
+
+app.post('/update_user/:id', ifNotLoggedin, (req, res) => {
+    const userId = req.params.id;
+    dbConnection.execute("UPDATE users SET role = ? WHERE id = ?", ["USER", userId])
+        .then(() => {
+            res.redirect('/manage_users');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
         });
 });
 
@@ -212,7 +251,7 @@ app.post('/register', ifLoggedin,
             // password encryption (using bcryptjs)
             bcrypt.hash(user_pass, 12).then((hash_pass) => {
                 // INSERTING USER INTO DATABASE
-                dbConnection.execute("INSERT INTO `users`(`row`,`name`,`email`,`password`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass])
+                dbConnection.execute("INSERT INTO `users`(`role`,`name`,`email`,`password`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass])
                     .then(result => {
                         res.send(`your account has been created successfully, Now you can <a href="/">Login</a>`);
                     }).catch(err => {
@@ -246,7 +285,6 @@ app.post('/', ifLoggedin, [
             .then(([rows]) => {
                 if (rows.length == 1) {
                     return true;
-
                 }
                 return Promise.reject('Invalid Email Address!');
 
@@ -264,7 +302,8 @@ app.post('/', ifLoggedin, [
                     if (compare_result === true) {
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
-
+                        req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
+                        req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
                         res.redirect('/');
                     }
                     else {
@@ -297,7 +336,7 @@ app.post('/', ifLoggedin, [
 // LOGOUT
 app.get('/logout', (req, res) => {
     //session destroy
-    req.session = null;
+    req.session.destroy(),
     res.redirect('/');
 });
 // END OF LOGOUT

@@ -1,43 +1,48 @@
-<%- include('../header')  %>
-    <div class="card-body">
-        <div class="card-title">
-            <span class="material-symbols-outlined material-icons">
-                
-            </span>
-            
+<%- include('../header') %>
+    <%- include('../nav') %>
+
+        <div class="card-body " style="background-color: #292929;">
+            <a class="btn btn-info mt-3" href="/addUser">
+                <span class="material-symbols-outlined material-icons">
+                    ADD USER
+                </span>
+        
+            </a>
+            <table class="table table-bordered table-striped mt-3" style="background-color: aliceblue;">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Name</th>
+                        <th width="200px">Email</th>
+                        <th width="200px">ROLE</th>
+                        <th width="80px">View</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% users.forEach((users)=> { %>
+                        <tr>
+                            <td>
+                                <%= users.user_name %>
+                            </td>
+                            <td>
+                                <%= users.name %>
+                            </td>
+                            <td>
+                                <%= users.email %>
+                            </td>
+                            <td>
+                                <%= users.role %>
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="/view_user/<%= users.id %>">
+                                    <span class="material-symbols-outlined material-icons">
+                                        View
+                                    </span>
+                                </a>
+                            </td>
+                        </tr>
+                        <% }); %>
+                </tbody>
+            </table>
         </div>
-        <a class="btn btn-info mt-3" href="/addUser">
-            <span class="material-symbols-outlined material-icons">
-                add
-            </span>
-            เพิ่มรายการ
-        </a>
-        <table class="table table-bordered table-striped mt-3">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th width="200px">Email</th>
-                    <th width="200px">ROW</th>
-                    <th width="100px">View</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach((users) => { %>
-                <tr>
-                    
-                    <td><%= users.name %></td>
-                    <td><%= users.email %></td>
-                    <td><%= users.row %></td>
-                    <td>
-                        <a class="btn btn-info" href="/view_user/<%= users.id %>">
-                            <span class="material-symbols-outlined material-icons">
-                                View
-                            </span>
-                        </a>
-                    </td>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
-</div>
+        </div>
