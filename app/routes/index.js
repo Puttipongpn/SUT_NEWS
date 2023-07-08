@@ -210,7 +210,7 @@ app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
 
 app.post('/update_user/:id', ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
-    dbConnection.execute("UPDATE users SET role = ? WHERE id = ?", ["USER", userId])
+    dbConnection.execute("UPDATE users SET role = ? WHERE id = ?", ["OFICIAL USER", userId])
         .then(() => {
             res.redirect('/manage_users');
             req.session.message = 'บันทึกสำเร็จ';
