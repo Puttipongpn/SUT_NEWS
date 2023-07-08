@@ -4,6 +4,7 @@
 
 npm install express-session
 npm install dayjs
+npm install numeral
 
 
 #คำสั่ง GIT
