@@ -95,6 +95,40 @@ router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
         });
 
 });
+
+// router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+//     let sql = 'UPDATE users SET user_name= ?,name= ? ,email= ? ,user_request= ? WHERE id = ?';
+//     let params = [
+//       req.body['user_name'] || null,
+//       req.body['name'] || null,
+//       req.body['email'] || null,
+//       req.body['user_request'] || null,
+//       req.params.id
+//     ]
+//     dbConnection.execute(sql, params, (err, result) => {
+//       if (err) throw err;
+//       res.redirect('/setting_profile');
+//     })
+//   })
+
+// UPDATE `users` SET `id`='[value-1]',`role`='[value-2]',`user_name`='[value-3]',`name`='[value-4]',`email`='[value-5]',`password`='[value-6]',`user_request`='[value-7]' WHERE 1
+router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+    const userId = req.params.id;
+    const user_name = req.body['user_name'] || req.session.user_name ;
+    const name = req.body['name'] || req.session.name;
+    const email = req.body['email']|| req.session.email;
+    const gender = req.body['gender']|| req.session.gender;
+    dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name,name,email,gender, userId])
+        .then(() => {
+            res.redirect('/setting_profile');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
+        });
+});
+
 router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
@@ -303,6 +337,8 @@ router.post('/', ifLoggedin, [
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
                         req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
+                        req.session.user_name = rows[0].user_name;
+                        req.session.email = rows[0].email;
                         req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
                         res.redirect('/');
                     }
