@@ -1,8 +1,8 @@
 <%- include('../header') %>
     <%- include('../nav') %>
-
-        <div class="card-body " style="background-color: #292929;">
-            <a class="btn btn-info mt-3" href="/addUser">
+        
+        <div class="card-body " style="padding: 100px;"> 
+            <a class="btn btn-info mt-3" href="/addUser" >
                 <span class="material-symbols-outlined material-icons">
                     ADD USER
                 </span>
@@ -11,10 +11,11 @@
             <table class="table table-bordered table-striped mt-3" style="background-color: aliceblue;">
                 <thead>
                     <tr>
-                        <th>User Name</th>
-                        <th>Name</th>
+                        <th width="100px">User Name</th>
+                        <th width="200px">Name</th>
                         <th width="200px">Email</th>
-                        <th width="200px">ROLE</th>
+                        <th width="50px">ROLE</th>
+                        <th width="120px">Official Request</th>
                         <th width="80px">View</th>
                     </tr>
                 </thead>
@@ -34,6 +35,9 @@
                                 <%= users.role %>
                             </td>
                             <td>
+                                <%= users.user_request %>
+                            </td>
+                            <td>
                                 <a class="btn btn-info" href="/view_user/<%= users.id %>">
                                     <span class="material-symbols-outlined material-icons">
                                         View
@@ -45,4 +49,16 @@
                 </tbody>
             </table>
         </div>
-        </div>
+        
+    </div>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #292929;
+        }
+    
+        .card-body {
+            min-height: 100%;
+        }
+    </style>
