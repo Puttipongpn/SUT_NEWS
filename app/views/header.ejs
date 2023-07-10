@@ -75,19 +75,11 @@
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a class="dropdown-item" href="/setting_profile">แก้ไขโปรไฟล์</a>
                                 <a class="dropdown-item" href="/logout">Logout</a>
-                                <a class="dropdown-item disabled" href="#" ><%= row%> </a>
+                                <a class="dropdown-item disabled" href="#" ><%= role%> </a>
                               </div>
                     </a>
                 </li>
-<<<<<<< HEAD
                 
-=======
-                <li class="nav-item">
-                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
-                        <%= role%>
-                    </a>
-                </li>
->>>>>>> 815e099cf6a2a7637bb0751e48286b8558b6659a
                 <script>
                     var currentUser = {
                         role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
@@ -128,15 +120,9 @@
                     var currentUser = {
                         role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-<<<<<<< HEAD
-                    console.log(currentUser.row)
-                    var userButton = document.getElementById('news_doom');
-                    if (currentUser.row === 'USER') {
-=======
                     console.log(currentUser.role)
-                    var userButton = document.getElementById('userButton');
+                    var userButton = document.getElementById('news_doom');
                     if (currentUser.role === 'USER') {
->>>>>>> 815e099cf6a2a7637bb0751e48286b8558b6659a
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม

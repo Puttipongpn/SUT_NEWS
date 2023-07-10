@@ -141,7 +141,25 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
                 res.render('404page')
             }
             else {
-                res.render('plelog')
+                res.render('404page')
+            }
+        });
+
+});
+
+router.get('/news_doom', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0].role === "USER") {
+                res.render('user_page/news_doom', {
+                    name: rows[0].name,
+                    role: rows[0].role,
+                });
+            } else if (rows[0].role === "ADMIN") {
+                res.render('404page')
+            }
+            else {
+                res.render('404page')
             }
         });
 
@@ -178,7 +196,7 @@ router.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้ง�
             } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
-                res.render('plelog')
+                res.render('404page')
             }
         });
 });
@@ -196,7 +214,7 @@ router.get('/setting', ifNotLoggedin, (req, res, next) => {
             } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
-                res.render('plelog')
+                res.render('404page')
             }
         });
 });
@@ -221,7 +239,7 @@ router.get('/manage_users', ifNotLoggedin, (req, res, next) => {
         })
         .catch(err => {
             console.log(err);
-            res.render('plelog');
+            res.render('404page');
         });
 });
 
