@@ -50,31 +50,36 @@
                         href="/bookmake">BOOKMAKE</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="userButton"
-                        href="/setting_profile">แก้ไขโปรไฟล์</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="news_doom"
+                        href="/news_doom">DOOM</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;"
                         id="AddNEWs">เพิ่มข่าวสาร</a>
                 </li>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
                         href="/logout">LOGOUT</a>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGIN"
                         href="/">LOGIN</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
+                    <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                     style="color: aliceblue;font-size: 18px;margin-top: -8px;"href="#">
                         <%= name%>
+                        <img src="https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg"
+                          style="width: 30px; height: 30px;" class="rounded-circle">
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/setting_profile">แก้ไขโปรไฟล์</a>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                                <a class="dropdown-item disabled" href="#" ><%= row%> </a>
+                              </div>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
-                        <%= row%>
-                    </a>
-                </li>
+                
                 <script>
                     var currentUser = {
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
@@ -116,7 +121,7 @@
                         row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
                     console.log(currentUser.row)
-                    var userButton = document.getElementById('userButton');
+                    var userButton = document.getElementById('news_doom');
                     if (currentUser.row === 'USER') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
