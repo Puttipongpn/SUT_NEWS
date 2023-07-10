@@ -79,14 +79,22 @@
                               </div>
                     </a>
                 </li>
+<<<<<<< HEAD
                 
+=======
+                <li class="nav-item">
+                    <a class="nav-link disabled" style="color: aliceblue;font-size: 15px;margin-top: -5px;">
+                        <%= role%>
+                    </a>
+                </li>
+>>>>>>> 815e099cf6a2a7637bb0751e48286b8558b6659a
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
                     console.log(currentUser.row)
                     var setting_page = document.getElementById('Asetting_page');
-                    if (currentUser.row === 'ADMIN') {
+                    if (currentUser.role === 'ADMIN') {
                         setting_page.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         setting_page.style.display = 'none'; // ซ่อนปุ่ม
@@ -94,11 +102,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var request_ADMIN = document.getElementById('Arequest_ADMIN');
-                    if (currentUser.row === 'ADMIN') {
+                    if (currentUser.role === 'ADMIN') {
                         request_ADMIN.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         request_ADMIN.style.display = 'none'; // ซ่อนปุ่ม
@@ -106,11 +114,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var allow_Offuser = document.getElementById('Aallow_Offuser');
-                    if (currentUser.row === 'ADMIN') {
+                    if (currentUser.role === 'ADMIN') {
                         allow_Offuser.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
@@ -118,11 +126,17 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
+<<<<<<< HEAD
                     console.log(currentUser.row)
                     var userButton = document.getElementById('news_doom');
                     if (currentUser.row === 'USER') {
+=======
+                    console.log(currentUser.role)
+                    var userButton = document.getElementById('userButton');
+                    if (currentUser.role === 'USER') {
+>>>>>>> 815e099cf6a2a7637bb0751e48286b8558b6659a
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -130,11 +144,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var userButton = document.getElementById('bookmake');
-                    if (currentUser.row === 'USER') {
+                    if (currentUser.role === 'USER') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -142,11 +156,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var userButton = document.getElementById('AddNEWs');
-                    if (currentUser.row === 'OFFICIAL USER') {
+                    if (currentUser.role === 'OFFICIAL USER') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -154,11 +168,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var userButton = document.getElementById('LOGIN');
-                    if (currentUser.row === 'GUEST') {
+                    if (currentUser.role === 'GUEST') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -166,11 +180,11 @@
                 </script>
                 <script>
                     var currentUser = {
-                        row: '<%= row %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
                     };
-                    console.log(currentUser.row)
+                    console.log(currentUser.role)
                     var userButton = document.getElementById('LOGOUT');
-                    if (currentUser.row === 'USER' || currentUser.row === 'ADMIN' || currentUser.row === 'OFFICIAL USER' ) {
+                    if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER' ) {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม

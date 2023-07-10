@@ -1,33 +1,31 @@
-const express = require('express');
-const app = express.Router();
+var express = require('express');
+const router = express.Router();
 //let conn = require('./connect')
 const path = require('path');
 const cookieSession = require('cookie-session');
 const bcrypt = require('bcrypt');
 const dbConnection = require('./connect');
 const { body, validationResult, Result } = require('express-validator');
-//const session = require('express-session');
+const session = require('express-session');
+let numeral = require('numeral');
+let dayjs = require('dayjs');
+let dayFormat = 'DD/MM/YYYY';
 
 //const app = express();
-app.use(express.urlencoded({ extended: false }));
+router.use(express.urlencoded({ extended: false }));
 
-app.get('/centerpage', function (req, res, next) {
+router.get('/centerpage', function (req, res, next) {
     res.render('home/centerpage', {
         name: 'PLEASE LOGIN',
-        row: 'GUEST'
+        role: 'GUEST'
     });
 });
 
-app.get('/page1', function (req, res, next) {
+router.get('/page1', function (req, res, next) {
     res.render('home/page1');
 });
 
-// APPLY COOKIE SESSION MIDDLEWARE
-app.use(cookieSession({
-    name: 'session',
-    keys: ['key1', 'key2'],
-    maxAge: 3600 * 1000 // 1hr
-}));
+
 
 // DECLARING CUSTOM MIDDLEWARE
 
@@ -43,14 +41,35 @@ const ifLoggedin = (req, res, next) => {
     }
     next();
 }
-// END OF CUSTOM MIDDLEWARE
+
+// APPLY SESSION MIDDLEWARE
+// // APPLY COOKIE SESSION MIDDLEWARE
+router.use(session({
+    secret: 'sessionforprojectecommerce',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000 
+    }
+}))
+router.use((req, res, next) => {
+    res.locals.session = req.session;
+    res.locals.numeral = numeral;
+    res.locals.dayjs = dayjs;
+    res.locals.dayFormat = dayFormat;
+    next();
+});
+
 // ROOT PAGE
-app.get('/', ifNotLoggedin, (req, res, next) => {
+router.get('/', ifNotLoggedin, (req, res, next) => {
+    console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
+    console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
+
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             res.render('home/centerpage', {
                 name: rows[0].name,
-                row: rows[0].row
+                role: rows[0].role
             });
         });
 
@@ -59,16 +78,16 @@ app.get('/', ifNotLoggedin, (req, res, next) => {
 
 //USER---------------------------------------------------------------------------------------
 
-app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
+router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "USER") {
+            if (rows[0].role === "USER") {
                 res.render('user_page/setting_profile', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "ADMIN") {
+            } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
             } else {
                 res.render('plelog')
@@ -76,15 +95,49 @@ app.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
         });
 
 });
-app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+
+// router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+//     let sql = 'UPDATE users SET user_name= ?,name= ? ,email= ? ,user_request= ? WHERE id = ?';
+//     let params = [
+//       req.body['user_name'] || null,
+//       req.body['name'] || null,
+//       req.body['email'] || null,
+//       req.body['user_request'] || null,
+//       req.params.id
+//     ]
+//     dbConnection.execute(sql, params, (err, result) => {
+//       if (err) throw err;
+//       res.redirect('/setting_profile');
+//     })
+//   })
+
+// UPDATE `users` SET `id`='[value-1]',`role`='[value-2]',`user_name`='[value-3]',`name`='[value-4]',`email`='[value-5]',`password`='[value-6]',`user_request`='[value-7]' WHERE 1
+router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+    const userId = req.params.id;
+    const user_name = req.body['user_name'] || req.session.user_name ;
+    const name = req.body['name'] || req.session.name;
+    const email = req.body['email']|| req.session.email;
+    const gender = req.body['gender']|| req.session.gender;
+    dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name,name,email,gender, userId])
+        .then(() => {
+            res.redirect('/setting_profile');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
+        });
+});
+
+router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "USER") {
+            if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "ADMIN") {
+            } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
             }
             else {
@@ -94,19 +147,19 @@ app.get('/bookmake', ifNotLoggedin, (req, res, next) => {
 
 });
 
-app.get('/page1', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+router.get('/page1', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0]) {
                 res.render('home/page1', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            }else {
+            } else {
                 req.session.isLoggedIn === true;
-                res.render('home/page1',{
+                res.render('home/page1', {
                     name: 'PLEASE LOGIN',
-                    row: 'GUEST'
+                    role: 'GUEST'
                 })
             }
         });
@@ -114,31 +167,33 @@ app.get('/page1', ifNotLoggedin, (req, res, next) => {
 //USER---------------------------------------------------------------------------------------
 
 //ADMIN--------------------------------------------------------------------------------------
-app.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งชื่อเส้นทาง
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+router.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้งชื่อเส้นทาง
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
+            if (rows[0].role === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
                 res.render('admin_page/request_page', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "USER") {
+            } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
                 res.render('plelog')
             }
         });
 });
+//SELECT * FROM users ORDER BY CASE WHEN user_request = 'request' THEN 0 ELSE 1 END, id; sql ที่โชว์ตารางทุกคน
 
-app.get('/setting', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`row` FROM `users` WHERE `id`=?", [req.session.userID])
+
+router.get('/setting', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {
+            if (rows[0].role === "ADMIN") {
                 res.render('admin_page/setting_page', {
                     name: rows[0].name,
-                    row: rows[0].row,
+                    role: rows[0].role,
                 });
-            } else if (rows[0].row === "USER") {
+            } else if (rows[0].role === "USER") {
                 res.render('404page')
             } else {
                 res.render('plelog')
@@ -146,34 +201,39 @@ app.get('/setting', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-app.get('/manage_users', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users ORDER BY id", [req.session.userID])
+router.get('/manage_users', ifNotLoggedin, (req, res, next) => {
+    const message = req.session.message;
+    req.session.message = undefined;
+    dbConnection.execute("SELECT * FROM users WHERE user_request = 'request' ORDER BY id;")
         .then(([rows]) => {
-            if (rows[0].row === "ADMIN") {
+            console.log(req.session.role)
+            const isAdmin = req.session.role === "ADMIN";
+            if (isAdmin) {
                 res.render('admin_page/manage_account', {
-                    users:rows,
-                    name: rows[0].name,
-                    row: rows[0].row,
+                    users: rows,
+                    name: req.session.name,
+                    role: req.session.role,
+                    message: message  // เพิ่ม message ในข้อมูลที่ส่งไปยังหน้า view
                 });
-            } else if (rows[0].row === "USER") {
-                res.render('404page')
             } else {
-                res.render('plelog')
+                res.render('404page');
             }
+        })
+        .catch(err => {
+            console.log(err);
+            res.render('plelog');
         });
 });
 
-app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
-    const userId = req.params.id;
 
+router.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
+    const userId = req.params.id;
     // ใช้ userId เพื่อดึงข้อมูลของผู้ใช้จากฐานข้อมูล
-    dbConnection.execute("SELECT * FROM users WHERE id = ?", [userId])
+    dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE user_id = ?;", [userId])
         .then(([rows]) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
             res.render('admin_page/view_user', {
-                users:rows,
-                user: rows[0],
-                name: rows[0].name
+                users: rows,
             });
         })
         .catch(err => {
@@ -182,12 +242,25 @@ app.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
         });
 });
 
+router.post('/update_user/:id', ifNotLoggedin, (req, res) => {
+    const userId = req.params.id;
+    dbConnection.execute("UPDATE users SET role = ? , user_request = ? WHERE id = ?", ["OFICIAL USER","not request", userId])
+        .then(() => {
+            res.redirect('/manage_users');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
+        });
+});
+
 
 
 //ADMIN--------------------------------------------------------------------------------------------
 
 // REGISTER PAGE
-app.post('/register', ifLoggedin,
+router.post('/register', ifLoggedin,
     // post data validation(using express-validator)
     [
         body('user_email', 'Invalid email address!').isEmail().custom((value) => {
@@ -212,7 +285,7 @@ app.post('/register', ifLoggedin,
             // password encryption (using bcryptjs)
             bcrypt.hash(user_pass, 12).then((hash_pass) => {
                 // INSERTING USER INTO DATABASE
-                dbConnection.execute("INSERT INTO `users`(`row`,`name`,`email`,`password`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass])
+                dbConnection.execute("INSERT INTO `users`(`role`,`name`,`email`,`password`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass])
                     .then(result => {
                         res.send(`your account has been created successfully, Now you can <a href="/">Login</a>`);
                     }).catch(err => {
@@ -240,13 +313,12 @@ app.post('/register', ifLoggedin,
 
 
 // LOGIN PAGE
-app.post('/', ifLoggedin, [
+router.post('/', ifLoggedin, [
     body('user_email').custom((value) => {
         return dbConnection.execute('SELECT email FROM users WHERE email=?', [value])
             .then(([rows]) => {
                 if (rows.length == 1) {
                     return true;
-
                 }
                 return Promise.reject('Invalid Email Address!');
 
@@ -264,7 +336,10 @@ app.post('/', ifLoggedin, [
                     if (compare_result === true) {
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
-
+                        req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
+                        req.session.user_name = rows[0].user_name;
+                        req.session.email = rows[0].email;
+                        req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
                         res.redirect('/');
                     }
                     else {
@@ -295,16 +370,16 @@ app.post('/', ifLoggedin, [
 // END OF LOGIN PAGE
 
 // LOGOUT
-app.get('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
     //session destroy
-    req.session = null;
+    req.session.destroy(),
     res.redirect('/');
 });
 // END OF LOGOUT
 
-app.use('/', (req, res) => {
+router.use('/', (req, res) => {
     res.render('404page')
 });
 
-module.exports = app;
+module.exports = router;
 
