@@ -262,7 +262,7 @@ router.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
 
 router.post('/update_user/:id', ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
-    dbConnection.execute("UPDATE users SET role = ? , user_request = ? WHERE id = ?", ["OFICIAL USER","not request", userId])
+    dbConnection.execute("UPDATE users SET role = ? , user_request = ? WHERE id = ?", ["OFFICIAL USER","not request", userId])
         .then(() => {
             res.redirect('/manage_users');
             req.session.message = 'บันทึกสำเร็จ';
