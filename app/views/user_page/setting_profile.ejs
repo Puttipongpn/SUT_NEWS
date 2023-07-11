@@ -1,100 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>view_user</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/setting_profile.css">
 </head>
+
 <body>
     <%- include('../header') %>
-    <%- include('../nav') %>
-    <hr class="mt-0 mb-4">
-    <div class="container-xl px-4 mt-4">
-    <!-- Account page navigation-->
-    
-    <div class="row">
-        <div class="col-xl-4">
-            <!-- Profile picture card-->
-            <div class="card mb-4 mb-xl-0">
-                <div class="card-header">Profile Picture</div>
-                <div class="card-body text-center">
-                    <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                    <!-- Profile picture help block-->
-                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
-                    <!-- Profile picture upload button-->
-                    <button class="btn btn-primary" type="button" disabled>Upload new image</button>
+        <%- include('../nav') %>
+            <hr class="mt-0 mb-4">
+            <div class="container-xl px-4 mt-4">
+                <!-- Account page navigation-->
+                <div class="row">
+                    <div class="col-xl-4">
+                        <!-- Profile picture card-->
+                        <div class="card mb-4 mb-xl-0">
+                            <div class="card-header">Profile Picture</div>
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                <img class="img-account-profile rounded-circle mb-2"
+                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <!-- Profile picture help block-->
+                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>
+                                <!-- Profile picture upload button-->
+                                <button class="btn btn-primary" type="button" disabled>Upload new image</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-8">
+                        <!-- Account details card-->
+                        <div class="card mb-4">
+                            <div class="card-header">Account Details</div>
+                            <div class="card-body">
+                                <form method="post" action="/update_profile/<%= users[0].id %>">
+                                    <!-- Form Row-->
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (first name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputFirstName">Username</label>
+                                            <input class="form-control" id="inputFirstName" name="user_name" type="text"
+                                                value="<%- users[0].user_name %>">
+                                        </div>
+                                        <!-- Form Group (last name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputLastName">Name</label>
+                                            <input class="form-control" id="inputLastName" name="name" type="text"
+                                                value="<%- users[0].name %>">
+                                        </div>
+                                    </div>
+                                    <!-- Form Row        -->
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (organization name)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputOrgName">Email</label>
+                                            <input class="form-control" id="inputOrgName" name="email" type="text"
+                                                value="<%- users[0].email %>">
+                                        </div>
+                                        <!-- Form Group (location)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputLocation">PASSWORD</label>
+                                            <input class="form-control" id="inputLocation" type="text"
+                                                value="<%- users[0].password %>" disabled>
+                                        </div>
+                                    </div>
+                                    <!-- Form Row-->
+                                    <div class="row gx-3 mb-3">
+                                        <!-- Form Group (phone number)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputPhone">GENDER</label>
+                                            <select class="form-select" style="height: 49px;" name="gender"
+                                                aria-label="Default select example">
+                                                <option value="female" name="gender" <% if (users[0].gender==='female' )
+                                                    { %>selected<% } %>>female</option>
+                                                <option value="male" name="gender" <% if (users[0].gender==='male' ) {
+                                                    %>selected<% } %>>male</option>
+                                                <option value="no gender" name="gender" <% if (users[0].gender !=='male'
+                                                    && users[0].gender !=='female' ) { %>selected<% } %>>no gender
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <!-- Form Group (birthday)-->
+                                        <div class="col-md-6">
+                                            <label class="small mb-1" for="inputRow">ROLE</label>
+                                            <input class="form-control" id="inputRow" type="text" name="Row"
+                                                value="<%- users[0].role %> " disabled>
+                                        </div>
+                                    </div>
+                                    <!-- Save changes button-->
+                                    <div style="display: flex; justify-content: space-between;">
+                                        <!-- justify-content: space-betweenกำหนดให้ Flex Items (องค์ประกอบภายใน Flex Container) กระจายตัวอย่างเท่าที่จำเป็นเพื่อเต็มพื้นที่ของ Flex Container -->
+                                        <a class="btn btn-info" href="/"
+                                            style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);">
+                                            <span class="material-symbols-outlined material-icons">
+                                                BLACK
+                                            </span>
+                                        </a>
+                                        <button type="submit" class="btn btn-danger "
+                                            style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-xl-8">
-            <!-- Account details card-->
-            <div class="card mb-4">
-                <div class="card-header">Account Details</div>
-                <div class="card-body">
-                    <form method="post" action="/update_profile/<%= users[0].id %>">
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (first name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputFirstName">Username</label>
-                                <input class="form-control" id="inputFirstName" name="user_name" type="text" value="<%- users[0].user_name %>" >
-                            </div>
-                            <!-- Form Group (last name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLastName">Name</label>
-                                <input class="form-control" id="inputLastName" name="name" type="text" value="<%- users[0].name %>" >
-                            </div>
-                        </div>
-                        <!-- Form Row        -->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (organization name)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputOrgName">Email</label>
-                                <input class="form-control" id="inputOrgName" name="email" type="text" value="<%- users[0].email %>" >
-                            </div>
-                            <!-- Form Group (location)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputLocation">PASSWORD</label>
-                                <input class="form-control" id="inputLocation" type="text"  value="<%- users[0].password %>" disabled>
-                            </div>
-                        </div>
-                        <!-- Form Row-->
-                        <div class="row gx-3 mb-3">
-                            <!-- Form Group (phone number)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputPhone">GENDER</label>
-                                <select class="form-select" style="height: 49px;" name="gender" aria-label="Default select example">
-                                    <option value="female" name="gender"<% if (users[0].gender !== 'male') { %>selected<% } %>>female</option>
-                                    <option value="male" name="gender"<% if (users[0].gender === 'male') { %>selected<% } %>>male</option>
-                                    <option value="no gender" name="gender">no gender</option>
-                                  </select>
-                            </div>
-                            <!-- Form Group (birthday)-->
-                            <div class="col-md-6">
-                                <label class="small mb-1" for="inputRow">ROLE</label>
-                                <input class="form-control" id="inputRow" type="text" name="Row" value="<%- users[0].role %> " disabled>
-                            </div>
-                        </div>
-                        <!-- Save changes button-->
-                        <div style="display: flex; justify-content: space-between;"> <!-- justify-content: space-betweenกำหนดให้ Flex Items (องค์ประกอบภายใน Flex Container) กระจายตัวอย่างเท่าที่จำเป็นเพื่อเต็มพื้นที่ของ Flex Container -->
-                            <a class="btn btn-info" href="/">
-                                <span class="material-symbols-outlined material-icons">
-                                    BLACK
-                                </span>
-                            </a>
-                            <button type="submit" class="btn btn-danger ">
-                                SAVE
-                            </button>
-                            </div>
-                    </form>
+            <div class="container-xl px-4 " style="margin-right: 5ยป;margin-top: -5px;">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a class="btn btn-warning" style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);" href="/request_official
+                    " id="request_officeal">
+                        <span class="material-symbols-outlined material-icons">
+                            request official account
+                        </span>
+                    </a>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            <script>
+                var currentUser = {
+                    role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                };
+                console.log(currentUser.row)
+                var setting_page = document.getElementById('request_officeal');
+                if (currentUser.role === 'USER') {
+                    setting_page.style.display = 'block'; // แสดงปุ่ม
+                } else {
+                    setting_page.style.display = 'none'; // ซ่อนปุ่ม
+                }
+            </script>
 </body>
+
+
 </html>

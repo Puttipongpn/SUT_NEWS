@@ -49,7 +49,7 @@ router.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000 
+        maxAge: 30 * 24 * 60 * 60 * 1000
     }
 }))
 router.use((req, res, next) => {
@@ -81,8 +81,27 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].role === "USER") {
+            if (rows[0].role === "USER" || rows[0].role === "OFFICIAL USER" || rows[0].role === "ADMIN") {
                 res.render('user_page/setting_profile', {
+                    users: rows,
+                    name: rows[0].name,
+                    role: rows[0].role,
+                });
+            } else {
+                res.redirect('/')
+            }
+        });
+});
+
+// router.get('/request_official', ifNotLoggedin, (req, res) => {
+//     res.render('user_page/request_official', {users: {}});
+//   }) 
+
+router.get('/request_official', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM users LEFT JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?;", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0].role === "USER") {
+                res.render('user_page/request_official', {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
@@ -90,11 +109,45 @@ router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
             } else {
-                res.render('plelog')
+                res.redirect('/')
             }
         });
-
 });
+
+// router.post('/addrequest_official/:id', ifNotLoggedin, (req, res) => {
+//     let sql = 'INSERT INTO user_request SET ?';
+//     let params = { ...req.body, user_id: req.params.id }; //เพื่อรวมข้อมูลที่มาจาก req.body และเพิ่ม user_id จาก req.params.id เข้าไปในพารามิเตอร์ params
+//     dbConnection.query(sql, params, (err, result) => {
+//       if (err) throw err;
+//       res.redirect('/setting_profile');
+//     })
+//   })
+
+router.post('/addrequest_official/:id', ifNotLoggedin, (req, res) => {
+    let params = { ...req.body, user_id: req.params.id };
+    dbConnection.query("INSERT INTO user_request SET ?", [params])
+        .then(() => {
+            res.redirect('/setting_profile');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
+        });
+});
+
+// router.post('/addrequest_official/:id', ifNotLoggedin, (req, res, next) => {
+//     let params = { ...req.body, user_id: req.params.id };
+//     dbConnection.execute("INSERT INTO user_request SET =?", [params])
+//         .then(() => {
+//             res.redirect('/setting_profile');
+//             req.session.message = 'บันทึกสำเร็จ';
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.redirect('404page');
+//         });
+// });
 
 // router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
 //     let sql = 'UPDATE users SET user_name= ?,name= ? ,email= ? ,user_request= ? WHERE id = ?';
@@ -114,11 +167,11 @@ router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
 // UPDATE `users` SET `id`='[value-1]',`role`='[value-2]',`user_name`='[value-3]',`name`='[value-4]',`email`='[value-5]',`password`='[value-6]',`user_request`='[value-7]' WHERE 1
 router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
-    const user_name = req.body['user_name'] || req.session.user_name ;
+    const user_name = req.body['user_name'] || req.session.user_name;
     const name = req.body['name'] || req.session.name;
-    const email = req.body['email']|| req.session.email;
-    const gender = req.body['gender']|| req.session.gender;
-    dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name,name,email,gender, userId])
+    const email = req.body['email'] || req.session.email;
+    const gender = req.body['gender'] || req.session.gender;
+    dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name, name, email, gender, userId])
         .then(() => {
             res.redirect('/setting_profile');
             req.session.message = 'บันทึกสำเร็จ';
@@ -162,7 +215,6 @@ router.get('/news_doom', ifNotLoggedin, (req, res, next) => {
                 res.render('404page')
             }
         });
-
 });
 
 router.get('/page1', ifNotLoggedin, (req, res, next) => {
@@ -222,7 +274,7 @@ router.get('/setting', ifNotLoggedin, (req, res, next) => {
 router.get('/manage_users', ifNotLoggedin, (req, res, next) => {
     const message = req.session.message;
     req.session.message = undefined;
-    dbConnection.execute("SELECT * FROM users WHERE user_request = 'request' ORDER BY id;")
+    dbConnection.execute("SELECT * FROM users LEFT JOIN user_request ON users.id = user_request.user_id WHERE user_request.request_status = 'waiting for approval';")
         .then(([rows]) => {
             console.log(req.session.role)
             const isAdmin = req.session.role === "ADMIN";
@@ -262,7 +314,10 @@ router.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
 
 router.post('/update_user/:id', ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
-    dbConnection.execute("UPDATE users SET role = ? , user_request = ? WHERE id = ?", ["OFFICIAL USER","not request", userId])
+    dbConnection.execute("UPDATE users SET role = ?  WHERE id = ?", ["OFFICIAL USER", userId])
+        .then(() => {
+            return dbConnection.execute("UPDATE user_request SET request_status = ? WHERE user_id = ?", ["approve", userId]);
+        })
         .then(() => {
             res.redirect('/manage_users');
             req.session.message = 'บันทึกสำเร็จ';
@@ -303,7 +358,7 @@ router.post('/register', ifLoggedin,
             // password encryption (using bcryptjs)
             bcrypt.hash(user_pass, 12).then((hash_pass) => {
                 // INSERTING USER INTO DATABASE
-                dbConnection.execute("INSERT INTO `users`(`role`,`name`,`email`,`password`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass])
+                dbConnection.execute("INSERT INTO `users`(`role`,`name`,`email`,`password`,`gender`) VALUES(?,?,?,?)", ["USER", user_name, user_email, hash_pass, "no gender"])
                     .then(result => {
                         res.send(`your account has been created successfully, Now you can <a href="/">Login</a>`);
                     }).catch(err => {
@@ -391,7 +446,7 @@ router.post('/', ifLoggedin, [
 router.get('/logout', (req, res) => {
     //session destroy
     req.session.destroy(),
-    res.redirect('/');
+        res.redirect('/');
 });
 // END OF LOGOUT
 
