@@ -6,7 +6,9 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@splidejs/splide": "^4.1.4",
     "bcrypt": "^5.1.0",
+    "bootstrap-icons": "^1.10.5",
     "cookie-parser": "~1.4.4",
     "cookie-session": "^2.0.0",
     "dayjs": "^1.11.9",

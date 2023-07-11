@@ -1,11 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ENPOWER</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/splide.min.css">
+    <link rel="stylesheet" href="/stylesheets/card.css">
+    <style>
+        .card-text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    </style>
 </head>
+
 <body>
-    SETTING PAGE
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="p-3">
+                <div class="splide" role="group" aria-label="Splide Basic HTML Example">
+                    <div class="splide__track">
+                        <ul class="splide__list card-columns">
+                            <li class="splide__slide">
+                                <div class="card">
+                                    <a href="#" class="text-decoration-none">
+                                        <img class="card-img-top"
+                                            src="https://images.unsplash.com/photo-1472076638602-b1f8b1ac0b4a?ixlib=rb-0.3.5&s=63c9de7246b535be56c8eaff9b87dd89&auto=format&fit=crop&w=500&q=80"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lorem ipsum ing elit. Consequatur, doloremque!</h5>
+                                            <p class="card-text">Lorem ipsum dolor sit ime nemo omnis praesentium
+                                                similique.</p>
+                                            <p class="card-text"><small class="text-muted"><i
+                                                        class="fas fa-eye"></i>1000<i
+                                                        class="far fa-user"></i>admin<i
+                                                        class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="card" >
+                                    <a href="#" class="text-decoration-none">
+                                        <img class="card-img-top"
+                                            src="https://images.unsplash.com/photo-1535086181678-5a5c4d23aa7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34c86263bec2c8f74ceb74e9f4c5a5fc&auto=format&fit=crop&w=500&q=80"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
+                                            <p class="card-text">Amet commodi deleniti enim laboriosam odio placeat
+                                                praesentium quis ratione rerum suscipit.</p>
+                                            <p class="card-text"><small class="text-muted"><i
+                                                        class="fas fa-eye"></i>1000<i
+                                                        class="far fa-user"></i>admin<i
+                                                        class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                            <li class="splide__slide">
+                                <div class="card ">
+                                    <a href="#" class="text-decoration-none" style="border-radius: 39px;">
+                                        <img class="card-img-top" "
+                                            src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
+                                            alt="Card image cap">
+                                        <div class="card-body">
+                                            <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
+                                            <p class="card-text">
+                                                rnatur atque culpa cumฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ
+                                            </p>
+                                            <p class="card-text"><small class="text-muted"><i
+                                                        class="fas fa-eye"></i>1000<i
+                                                        class="far fa-user"></i>admin<i
+                                                        class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+   
+    <script src="/javascripts/splide.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        var splide = new Splide('.splide', {
+            type: 'loop',
+            perPage: 4,
+            perMove: 1,
+            gap: '1rem',
+        });
+        splide.mount();
+    </script>
 </body>
+
 </html>
