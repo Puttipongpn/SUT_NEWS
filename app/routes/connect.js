@@ -3,7 +3,7 @@ const dbConnection = mysql.createPool({
     host     : 'localhost', // MYSQL HOST NAME
     user     : 'root', // MYSQL USERNAME
     password : '', // MYSQL PASSWORD
-    database : 'sutnews_project' // MYSQL DB NAME
+    database : 'project_sutnews' // MYSQL DB NAME
 }).promise();
 
 module.exports = dbConnection;
