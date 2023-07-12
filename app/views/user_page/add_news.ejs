@@ -5,109 +5,189 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/stylesheets/add_news.css">
+
 </head>
+
 <body>
     <%- include('../header') %>
-    <%- include('../nav') %>
-    <div class="container">
-        <div class="row gutters">
-            <div class="col-12 col-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="account-settings">
-                            <div class="user-profile">
-                                <div class="user-avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
+        <%- include('../nav') %>
+            <div class="container" 
+            ">
+                <div class="row gutters">
+                    <div class="col-12 col-md-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="account-settings">
+                                    <div class="user-profile">
+                                        <div class="user-avatar">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
+                                                alt="Maxwell Admin">
+                                        </div>
+                                        <h5 class="user-name">Yuki Hayashi</h5>
+                                        <h6 class="user-email">yuki@Maxwell.com</h6>
+                                    </div>
+                                    <div class="about">
+                                        <h5 class="mb-2 text-primary">About</h5>
+                                        <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and
+                                            human experiences.</p>
+                                    </div>
                                 </div>
-                                <h5 class="user-name">Yuki Hayashi</h5>
-                                <h6 class="user-email">yuki@Maxwell.com</h6>
                             </div>
-                            <div class="about">
-                                <h5 class="mb-2 text-primary">About</h5>
-                                <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-9">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row gutters">
+                                    <div class="col-12">
+                                        <h6 class="mb-3 text-primary">ADD NEWS</h6>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <div>
+                                                <label for="fullName">NEWS TYPE</label>
+                                            </div>
+                                            <div>
+                                                <select class="form-select-ad form-select-lg"
+                                                    placeholder="Enter email ID" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-group">
+                                            <div>
+                                                <label for="">NEWS TOPIC</label>
+                                            </div>
+                                            <div>
+                                                <select class="form-select-ad form-select-sm"
+                                                    placeholder="Enter email ID" aria-label="Default select example">
+                                                    <option selected>Open this select menu</option>
+                                                    <option value="1">One</option>
+                                                    <option value="2">Two</option>
+                                                    <option value="3">Three</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div>
+                                            <div>
+                                                <label for="street">Headline Picture 1</label>
+                                            </div>
+                                            <div>
+                                                <img id="img1"
+                                                    src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                    height="150">
+                                            </div>
+                                            <input id="input1" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div>
+                                            <div>
+                                                <label for="street">Headline Picture 2</label>
+                                            </div>
+                                            <div>
+                                                <img id="img2"
+                                                    src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                    height="150">
+                                            </div>
+                                            <input id="input2" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6" style="padding-top: 10px;">
+                                        <div class="form-group">
+                                            <label for="phone">Title</label>
+                                            <input type="text" class="form-control form-control-lg" id="phone"
+                                                placeholder="Enter phone number">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6"style="padding-top: 10px;">
+                                        <div class="form-group">
+                                            <label for="website">Welding</label>
+                                            <input type="url" class="form-control form-control-lg" id="website"
+                                                placeholder="Website URL">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row gutters">
+                                    <div class="col-12 col-md-6">
+                                        <div>
+                                            <div>
+                                                <label for="street">Main Picture 1</label>
+                                            </div>
+                                            <div>
+                                                <img id="img1"
+                                                    src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                    height="150">
+                                            </div>
+                                            <input id="input1" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div>
+                                            <div>
+                                                <label for="street">Main Picture 2</label>
+                                            </div>
+                                            <div>
+                                                <img id="img2"
+                                                    src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                    height="150">
+                                            </div>
+                                            <input id="input2" type="file">
+                                        </div>
+                                    </div>
+                                    <div class="col-12" style="padding-top: 10px;">
+                                        <label for="street">Main paragrap</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="street">End paragrap</label>
+                                        <textarea class="form-control" id="exampleFormControlTextarea1"
+                                            rows="3"></textarea>
+                                    </div>
+                                </div>
+                                <div class="row gutters">
+                                    <div class="col-12" style="padding-top: 20px;">
+                                        <div class="text-end">
+                                            <button type="button" id="submit" name="submit"
+                                                class="btn btn-secondary">Cancel</button>
+                                            <button type="button" id="submit" name="submit"
+                                                class="btn btn-primary">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-md-9">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="row gutters">
-                            <div class="col-12">
-                                <h6 class="mb-3 text-primary">Personal Details</h6>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="fullName">Full Name</label>
-                                    <input type="text" class="form-control form-control-lg" id="fullName" placeholder="Enter full name">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="eMail">Email</label>
-                                    <input type="email" class="form-control form-control-lg" id="eMail" placeholder="Enter email ID">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="phone">Phone</label>
-                                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="Enter phone number">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="website">Website URL</label>
-                                    <input type="url" class="form-control form-control-lg" id="website" placeholder="Website URL">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-12">
-                                <h6 class="mb-3 text-primary">Address</h6>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="street">Street</label>
-                                    <input type="name" class="form-control form-control-lg" id="street" placeholder="Enter Street">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="city">City</label>
-                                    <input type="name" class="form-control form-control-lg" id="city" placeholder="Enter City">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="state">State</label>
-                                    <input type="text" class="form-control form-control-lg" id="state" placeholder="Enter State">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="zip">Zip Code</label>
-                                    <input type="text" class="form-control form-control-lg" id="zip" placeholder="Zip Code">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row gutters">
-                            <div class="col-12">
-                                <div class="text-end">
-                                    <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
-                                    <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <style>
-
-    </style>
+            <style>
+                body {
+                    color: #bcd0f7;
+                    background: #1A233A;
+                  }
+            </style>
 </body>
+<script>
+    let img1 = document.getElementById('img1');
+    let input1 = document.getElementById('input1');
+    input1.onchange = (e) => {
+        if (input1.files[0])
+            img1.src = URL.createObjectURL(input1.files[0]);
+    };
+    let img2 = document.getElementById('img2');
+    let input2 = document.getElementById('input2');
+    input2.onchange = (e) => {
+        if (input2.files[0])
+            img2.src = URL.createObjectURL(input2.files[0]);
+    };
+</script>
 
 </html>

@@ -1,6 +1,5 @@
 <%- include('../header') %>
 <%- include('../nav') %>
-
     <section>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -54,13 +53,13 @@
                 <template x-for="post in posts">
                     <!-- Card Item -->
                     <div class="col my-4">
-                        <!-- Clickable Area -->
-                        <a :href="post.link" class="card h-100 cursor-pointer"
-                            style="color: rgb(0, 0, 0);margin-top: -5px; text-decoration:none ;box-shadow: 2px 2px 16px 16px rgba(252, 252, 252, 0.1);">
+                        <!-- Clickable Area --> 
+                        <a :href="post.link" class="card h-100 cursor-pointer" 
+                            style="color: rgb(0, 0, 0);margin-top: -5px;background-color: aliceblue; text-decoration:none ;box-shadow: 2px 2px 16px 16px rgba(255, 255, 255, 0.1); ">
                             <!-- Image -->
                             <img :src="post.image + '?auto=format&fit=crop&w=400&q=50'" class="card-img-top rounded-top"
                                 alt="Post Image">
-                            <div class="card-body">
+                            <div class="card-body" >
                                 <!-- Title -->
                                 <h5 class="card-title text-lg mb-4 font-weight-bold " x-text="post.title"></h5>
                                 <!-- Description -->
