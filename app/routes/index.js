@@ -136,34 +136,6 @@ router.post('/addrequest_official/:id', ifNotLoggedin, (req, res) => {
         });
 });
 
-// router.post('/addrequest_official/:id', ifNotLoggedin, (req, res, next) => {
-//     let params = { ...req.body, user_id: req.params.id };
-//     dbConnection.execute("INSERT INTO user_request SET =?", [params])
-//         .then(() => {
-//             res.redirect('/setting_profile');
-//             req.session.message = 'บันทึกสำเร็จ';
-//         })
-//         .catch(err => {
-//             console.log(err);
-//             res.redirect('404page');
-//         });
-// });
-
-// router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
-//     let sql = 'UPDATE users SET user_name= ?,name= ? ,email= ? ,user_request= ? WHERE id = ?';
-//     let params = [
-//       req.body['user_name'] || null,
-//       req.body['name'] || null,
-//       req.body['email'] || null,
-//       req.body['user_request'] || null,
-//       req.params.id
-//     ]
-//     dbConnection.execute(sql, params, (err, result) => {
-//       if (err) throw err;
-//       res.redirect('/setting_profile');
-//     })
-//   })
-
 // UPDATE `users` SET `id`='[value-1]',`role`='[value-2]',`user_name`='[value-3]',`name`='[value-4]',`email`='[value-5]',`password`='[value-6]',`user_request`='[value-7]' WHERE 1
 router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
@@ -182,11 +154,13 @@ router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
         });
 });
 
+//SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
 router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
+                    bookmark: rows[0],
                     name: rows[0].name,
                     role: rows[0].role,
                 });
@@ -197,6 +171,7 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
                 res.render('404page')
             }
         });
+
 
 });
 
