@@ -5,7 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>doom</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/splide.min.css">
+    <link rel="stylesheet" href="/stylesheets/card.css">
+    <style>
+        .card-text {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    </style>
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -15,40 +26,11 @@
     <%- include('../nav') %>
 
         <body>
-            <section>
-                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                    <ol class="carousel-indicators">
-                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                    </ol>
-                    <div class="carousel-inner ">
-                        <div class="carousel-item active">
-                            <img src="https://scontent-sin6-3.xx.fbcdn.net/v/t39.30808-6/358524824_770699764849938_6395121392402954700_n.png?_nc_cat=110&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeFQErIHok5rGoy3zmyQqLmuQo3z7FJ12zRCjfPsUnXbNCyBDl4m0qiwxcnuvB3Tb1L9ojaPZUdLYfcbO14GMg76&_nc_ohc=-CKpWwkTlScAX8QEVAA&_nc_ht=scontent-sin6-3.xx&oh=00_AfC3y3P-QyqFlhstgU4o0MgiPMuBU9xx04A1C1Wz4FjIdQ&oe=64AEE77D"
-                                class="d-block w-100 " alt="...">
-                        </div>
-                        <div class="carousel-item ">
-                            <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/347256262_763679018885346_8425627238980888532_n.jpg?stp=dst-jpg_s1080x2048&_nc_cat=101&ccb=1-7&_nc_sid=8bfeb9&_nc_eui2=AeFNKsdoBBsNTgN9vpSiBgRXl6OwBcDSp5yXo7AFwNKnnH2l3JThyCdtBkHRL932BjFhcK8PLrJ7GJgVitD2zg2v&_nc_ohc=U4DlP327l3YAX_xLD3q&_nc_oc=AQlvBXIAfj3vU3D0Mn4XznBFkiW300CnZsrEzvkZjQsXkIb5ZFSktcC8vHG1yN39kuE&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfDpHg4RkXldeUJ9BNT51oYWnBrh2IeGZpBbMDxvIyEyWw&oe=64AE0D3B"
-                                class="d-block w-100 " alt="...">
-                        </div>
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-target="#carouselExampleIndicators"
-                        data-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-target="#carouselExampleIndicators"
-                        data-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="sr-only">Next</span>
-                    </button>
+                <div class="heading mb-4 ml-5">
+                    <h4 ><u><b>Highlights</b></u></h4>
                 </div>
-            </section>
-
-            <div class="heading mb-4 ml-5">
-                <h4><u><b>Highlights</b></u></h4>
-            </div>
-            <div class="container-fluid">
-                <div id="Highlights" class="carousel slide" data-ride="carousel">
+                <div class="container-fluid">
+                <div id="Highlights" class="carousel slide" data-ride="carousel" >
                     <ol class="carousel-indicators">
                         <li data-target="#Highlights" data-slide-to="0" class="active"></li>
                         <li data-target="#Highlights" data-slide-to="1"></li>
@@ -60,16 +42,14 @@
                             <div class="row">
                                 <div class="col-5 mt-3">
                                     <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg"
-                                        class="card-img-top">
+                                    class="card-img-top">
                                 </div>
                                 <div class="col-7 mt-1">
                                     <div class="card-body">
                                         <h4 class="card-title">งานรับน้องบ้อเกิด</h4>
                                         <p class="card-text">ome quick example text to build on the card title and make
                                             up the bulk of the card's content.</p> <br>
-                                        <a href="#" class="card-link ">go link<i
-                                                class="fa-regular fa-arrow-right-long fa-lg"
-                                                style="margin-left: 3;"></i></a>
+                                        <a href="#" class="card-link ">go link <i class="fa-regular fa-arrow-right-long fa-lg" style="color: #1a6eff;"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -78,7 +58,7 @@
                             <div class="row">
                                 <div class="col-5 mt-3">
                                     <img src="https://www.cobmediathailand.com/wp-content/uploads/2022/12/2.%E0%B8%9B%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B9%80%E0%B8%A3%E0%B9%87%E0%B8%A7%E0%B8%8A%E0%B8%B1%E0%B8%95%E0%B9%80%E0%B8%95%E0%B8%AD%E0%B8%A3%E0%B9%8C%E0%B9%83%E0%B8%AB%E0%B9%89%E0%B8%95%E0%B9%88%E0%B8%B3-%E0%B9%80%E0%B8%9E%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%A3%E0%B8%B1%E0%B8%9A%E0%B9%81%E0%B8%AA%E0%B8%87%E0%B9%80%E0%B8%82%E0%B9%89%E0%B8%B2%E0%B8%81%E0%B8%A5%E0%B9%89%E0%B8%AD%E0%B8%87%E0%B9%84%E0%B8%94%E0%B9%89%E0%B8%A1%E0%B8%B2%E0%B8%81%E0%B8%A2%E0%B8%B4%E0%B9%88%E0%B8%87%E0%B8%82%E0%B8%B6%E0%B9%89%E0%B8%99.jpg"
-                                        class="card-img-top">
+                                    class="card-img-top">
                                 </div>
                                 <div class="col-7 mt-1">
                                     <div class="card-body">
@@ -99,7 +79,7 @@
                             <div class="row">
                                 <div class="col-5 mt-3 ">
                                     <img src="https://www.dozzdiy.com/wp-content/uploads/2018/11/what-to-know-before-selling-stokphoto.jpg"
-                                        class="card-img-top">
+                                    class="card-img-top">
                                 </div>
                                 <div class="col-7 mt-1">
                                     <div class="card-body">
@@ -126,27 +106,7 @@
                         <span class="sr-only ">Next</span>
                     </a>
                 </div>
-
-
-                <!-- <div class="class-content">
-            <div class="container text-center">
-                <div class="row">
-                  <div class="col-5 mt-3">
-                    <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" width="95%" height="95%" >
-                  </div>
-                  <div class="col-7 mt-1">
-                    <div class="card-body">
-                        <h4 class="card-title">ffffffffffffff</h4>
-                        <p class="card-text">ome quick example text to build on the card title and make up the bulk of the card's content.</p> <br>
-                        <a href="#" class="card-link ">go link<i class="fa-regular fa-arrow-right-long fa-lg" style="margin-left: 3;"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-        </div> -->
             </div>
-
-
             <nav class="navbar navbar-expand-lg mt-3 ml-5">
                 <a class="navbar-brand disabled text-dark" style="font-size: xx-large;"><b>NEWS</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -162,107 +122,172 @@
                                     class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" style="font-size:large;" href="#"><b>หมวดหมู่</b> <i
+                            <a class="nav-link text-dark" style="font-size:large;" href="/topic"><b>หมวดหมู่</b> <i
                                     class="fa-duotone fa-layer-group"
                                     style="--fa-primary-color: #000000; --fa-secondary-color: #000000;"></i></a>
                         </li>
                     </ul>
                 </div>
-
             </nav>
+            <div class="row">
+                <div class="col-12">
+                    <div class="p-3">
+                        <div class="splide" role="group" aria-label="Splide Basic HTML Example">
+                            <div class="splide__track">
+                                <ul class="splide__list card-columns">
+                                    <li class="splide__slide mb-3">
+                                        <div class="card">
+                                            <a href="#" class="text-decoration-none">
+                                                <img class="card-img-top"
+                                                    src="https://images.unsplash.com/photo-1472076638602-b1f8b1ac0b4a?ixlib=rb-0.3.5&s=63c9de7246b535be56c8eaff9b87dd89&auto=format&fit=crop&w=500&q=80"
+                                                    alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Lorem ipsum ing elit. Consequatur, doloremque!</h5>
+                                                    <p class="card-text">Lorem ipsum dolor sit ime nemo omnis praesentium
+                                                        similique.</p>
+                                                    <p class="card-text"><small class="text-muted"><i
+                                                                class="fas fa-eye"></i>1000<i
+                                                                class="far fa-user"></i>admin<i
+                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="splide__slide mb-3">
+                                        <div class="card" >
+                                            <a href="#" class="text-decoration-none">
+                                                <img class="card-img-top"
+                                                    src="https://images.unsplash.com/photo-1535086181678-5a5c4d23aa7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34c86263bec2c8f74ceb74e9f4c5a5fc&auto=format&fit=crop&w=500&q=80"
+                                                    alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
+                                                    <p class="card-text">Amet commodi deleniti enim laboriosam odio placeat
+                                                        praesentium quis ratione rerum suscipit.</p>
+                                                    <p class="card-text"><small class="text-muted"><i
+                                                                class="fas fa-eye"></i>1000<i
+                                                                class="far fa-user"></i>admin<i
+                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="splide__slide mb-3">
+                                        <div class="card ">
+                                            <a href="#" class="text-decoration-none" style="border-radius: 39px;">
+                                                <img class="card-img-top" 
+                                                    src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
+                                                    alt="Card image cap">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
+                                                    <p class="card-text">
+                                                        rnatur atque culpa cumฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ
+                                                    </p>
+                                                    <p class="card-text"><small class="text-muted"><i
+                                                                class="fas fa-eye"></i>1000<i
+                                                                class="far fa-user"></i>admin<i
+                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                <div id="news">
+                    <div class="card-columns">
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
+                            <p class="card-text">
+                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad alias, aliquid amet aspernatur atque culpa cum debitis dicta doloremque, dolorum ea eos et excepturi explicabo facilis harum illo impedit incidunt laborum laudantium...
+                            </p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1472076638602-b1f8b1ac0b4a?ixlib=rb-0.3.5&s=63c9de7246b535be56c8eaff9b87dd89&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, doloremque!</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio iusto maxime nemo omnis praesentium similique.</p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1535086181678-5a5c4d23aa7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34c86263bec2c8f74ceb74e9f4c5a5fc&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
+                            <p class="card-text">Amet commodi deleniti enim laboriosam odio placeat praesentium quis ratione rerum suscipit.</p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1535074153497-b08c5aa9c236?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d2aaf944a59f16fe1fe72f5057b3a7dd&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
+                            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1535124406821-d2848dfbb25c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c434d75b44c9c23fc9df2a9a77d59f&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, consequatur culpa cumque deserunt dignissimos error explicabo fugiat harum ipsam magni minus mollitia nemo perferendis qui repellendus rerum saepe vel voluptate voluptatem voluptatum!
+                            Aperiam, labore, molestiae!..</p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                        <div class="card">
+                        <a href="#">
+                        <img class="card-img-top" src="https://images.unsplash.com/photo-1508015926936-4eddcc6d4866?ixlib=rb-0.3.5&s=10b3a8717ab609be8d7786cab50c4e0b&auto=format&fit=crop&w=500&q=80" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
+                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi debitis eaque explicabo fuga maiores necessitatibus, neque omnis optio vel!</p>
+                            <p class="card-text"><small class="text-muted"><i class="fas fa-eye"></i>1000<i class="far fa-user"></i>admin<i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                        </div>
+                        </a>
+                        </div>
+                    </div>
+                </div>
 
-            <!-- <div class="d-flex p-2">
-        <div class="card-group mt-1">
-            <img src="https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg" class="card-img-top" >
-            <div class="card-body">
-                <h4 class="card-title">ffffffffffffff</h4>
-                <p class="card-text">ome quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">go link</a>
-            </div>
-        </div>
-    </div> -->
-            <div class="d-flex flex-row mb-3 mt-2 justify-content-around">
-                <div class="p-2">
-                    <div class="card">
-                        <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/359225636_771952694724645_2601221970330046925_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHdKppXFaofEkdvt-vxUD96DeGH6UiMGokN4YfpSIwaiebM-iO0obd4wQJAHUykF7PLEUHqUNfK_kbtZZV2AS3M&_nc_ohc=Kld-kg_oFiEAX-IWTNV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAM44wVdXXLc9gxe9oAoZFf1D90V-zwwjWIeRyrooAJwQ&oe=64ADCEBC"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card with stretched link</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="https://www.facebook.com/SUTdorm/posts/pfbid0oCYRmUktojBCSsCPV1tKXgFgufJnd3u6WgPjjPdWMB9sqAkrZPiy3yXm11eMFbSQl"
-                                class="btn btn-primary stretched-link">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2">
-                    <div class="card">
-                        <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/359225636_771952694724645_2601221970330046925_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHdKppXFaofEkdvt-vxUD96DeGH6UiMGokN4YfpSIwaiebM-iO0obd4wQJAHUykF7PLEUHqUNfK_kbtZZV2AS3M&_nc_ohc=Kld-kg_oFiEAX-IWTNV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAM44wVdXXLc9gxe9oAoZFf1D90V-zwwjWIeRyrooAJwQ&oe=64ADCEBC"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card with stretched link</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="https://www.facebook.com/SUTdorm/posts/pfbid0oCYRmUktojBCSsCPV1tKXgFgufJnd3u6WgPjjPdWMB9sqAkrZPiy3yXm11eMFbSQl"
-                                class="btn btn-primary stretched-link">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2">
-                    <div class="card">
-                        <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/359225636_771952694724645_2601221970330046925_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHdKppXFaofEkdvt-vxUD96DeGH6UiMGokN4YfpSIwaiebM-iO0obd4wQJAHUykF7PLEUHqUNfK_kbtZZV2AS3M&_nc_ohc=Kld-kg_oFiEAX-IWTNV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAM44wVdXXLc9gxe9oAoZFf1D90V-zwwjWIeRyrooAJwQ&oe=64ADCEBC"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card with stretched link</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="https://www.facebook.com/SUTdorm/posts/pfbid0oCYRmUktojBCSsCPV1tKXgFgufJnd3u6WgPjjPdWMB9sqAkrZPiy3yXm11eMFbSQl"
-                                class="btn btn-primary stretched-link">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2">
-                    <div class="card">
-                        <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/359225636_771952694724645_2601221970330046925_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHdKppXFaofEkdvt-vxUD96DeGH6UiMGokN4YfpSIwaiebM-iO0obd4wQJAHUykF7PLEUHqUNfK_kbtZZV2AS3M&_nc_ohc=Kld-kg_oFiEAX-IWTNV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAM44wVdXXLc9gxe9oAoZFf1D90V-zwwjWIeRyrooAJwQ&oe=64ADCEBC"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card with stretched link</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="https://www.facebook.com/SUTdorm/posts/pfbid0oCYRmUktojBCSsCPV1tKXgFgufJnd3u6WgPjjPdWMB9sqAkrZPiy3yXm11eMFbSQl"
-                                class="btn btn-primary stretched-link">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-2">
-                    <div class="card">
-                        <img src="https://scontent.fbkk10-1.fna.fbcdn.net/v/t39.30808-6/359225636_771952694724645_2601221970330046925_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeHdKppXFaofEkdvt-vxUD96DeGH6UiMGokN4YfpSIwaiebM-iO0obd4wQJAHUykF7PLEUHqUNfK_kbtZZV2AS3M&_nc_ohc=Kld-kg_oFiEAX-IWTNV&_nc_ht=scontent.fbkk10-1.fna&oh=00_AfAM44wVdXXLc9gxe9oAoZFf1D90V-zwwjWIeRyrooAJwQ&oe=64ADCEBC"
-                            class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card with stretched link</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                            <a href="https://www.facebook.com/SUTdorm/posts/pfbid0oCYRmUktojBCSsCPV1tKXgFgufJnd3u6WgPjjPdWMB9sqAkrZPiy3yXm11eMFbSQl"
-                                class="btn btn-primary stretched-link">Go somewhere</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            </div>
+
             <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-start ml-5">
+                <ul class="pagination justify-content-start ml-5 mb-4 mt-3">
                     <li class="page-item disabled">
                         <a class="page-link">Previous</a>
                     </li>
-                    <li class="page-item disabled"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>
                     <li class="page-item">
                         <a class="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> 
+            <%- include('../footer') %>
         </body>
+        <script src="/javascripts/splide.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            var splide = new Splide('.splide', {
+                type: 'loop',
+                perPage: 4,
+                perMove: 1,
+                gap: '1rem',
+            });
+            splide.mount();
+        </script>
         <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
 
 </html>
