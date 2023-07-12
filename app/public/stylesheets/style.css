@@ -1,14 +1,17 @@
 * {
   font-family: 'Lilita One', cursive;
-  
+
 }
-.menu { 
+
+.menu {
   padding-top: 30px;
   background-color: #111827;
 }
-.paragrap1{
+
+.paragrap1 {
   background-color: #111827
 }
+
 .btn_menu {
   box-shadow: 2px 2px 16px 16px rgba(252, 252, 252, 0.1);
   font-size: 18px;
@@ -18,6 +21,7 @@
   border-radius: 20px;
   padding: 10px;
 }
+
 .toppage {
   background-color: #1c1c1d;
   width: 100%;
@@ -28,9 +32,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
 .carousel-inner {
   height: 300px;
 }
+
 section {
   font-family: "Poppins", sans-serif;
 }
@@ -39,7 +45,7 @@ section {
 .container-sm {
   border-radius: 25px;
   width: 1800px;
-  height: 600px; 
+  height: 600px;
   margin-top: 30px;
   background-color: rgb(150, 150, 150);
 }
@@ -51,7 +57,7 @@ h4 {
   font-size: 30px;
 }
 
-.container-bk{
+.container-bk {
   color: #242424;
   font-weight: 600;
   text-align: center;
@@ -59,8 +65,8 @@ h4 {
   height: 100%;
   margin-top: 2%;
   background-color: #e8e8e8;
-  padding-top: 3; 
-  padding-bottom: 3; 
+  padding-top: 3;
+  padding-bottom: 3;
   border-radius: 25px;
 }
 
@@ -70,3 +76,70 @@ h4 {
   background-color: rgb(185, 175, 175);
 }
 
+
+/* add news */
+body {
+  color: #bcd0f7;
+  background: #1A233A;
+}
+
+.form-select-ad{
+  color: #bcd0f7;
+  background: #1A233A;
+  width: 100%;
+  height: 40px;
+}
+
+.account-settings .user-profile {
+  margin: 0 0 1rem 0;
+  padding-bottom: 1rem;
+  text-align: center;
+}
+
+.account-settings .user-profile .user-avatar {
+  margin: 0 0 1rem 0;
+}
+
+.account-settings .user-profile .user-avatar img {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+
+.account-settings .user-profile h5.user-name {
+  margin: 0 0 0.5rem 0;
+}
+
+.account-settings .user-profile h6.user-email {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 400;
+}
+
+.account-settings .about {
+  margin: 1rem 0 0 0;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.card {
+  background: #272E48;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 0;
+  margin-bottom: 1rem;
+  margin-top: 40px;
+}
+
+.form-control {
+  border: 1px solid #596280;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
+  font-size: .825rem;
+  background: #1A233A;
+  color: #bcd0f7;
+}
