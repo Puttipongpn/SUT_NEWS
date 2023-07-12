@@ -1,94 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bookmask</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <title>setting_bookmake</title>
 </head>
 
 <%- include('../header') %>
-    <%- include('../nav') %>
+<%- include('../nav') %>
 
-        <body>
-            <div class="container-sm">
-                <div class="class-content">
-                    <div class="">
-                        <div class="heading-section mb-4">
-                            <h4><b>Bookmark</b></h4>
-                        </div>
-                        <div class="container">
-                            <div class="card-body text-start p-4">
-                                <table id="example" class="table align-middle mb-0 table-hover">
-                                    <thead class="bg-light">
-                                        <tr>
-                                            <!-- <th>Image</th> -->
-                                            <th>News_type</th>
-                                            <th>Topic</th>
-                                            <th>Headline</th>
-                                            <th>View</th>
-                                            <th>Delete</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <% users.forEach((users)=> { %>
-                                            <tr>
-                                                <td>
-                                                    <p class="fw-normal mb-1">
-                                                        <%- users.news_type_name %>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="fw-normal mb-1">
-                                                        <%- users.topic_name %>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="fw-normal mb-1">
-                                                        <%- users.title %>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="fw-normal mb-1">
-                                                        <i class="bi bi-search fa-lg" style="color: #000000;"></i>
-                                                    </p>
-                                                </td>
-                                                <td>
-                                                    <p class="fw-normal mb-1">
-                                                        <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
-                                                    </p>
-                                                </td>
-                                            </tr>
-                                            <% }); %>
-                                    </tbody>
-                                </table>
-                                <nav style="margin-top: 2%;">
-                                    <ul class="pagination pagination-md justify-content-end">
-                                        <li class="page-item">
-                                            <a class="page-link text-dark" href="#" aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active"><a class="page-link text-dark" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link text-dark" href="#" aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<body>
+    <div class="container mt-2">
+        <div class="card card-block mb-2 mb-3">
+          <h4 class="card-title"><b>BOOKMARK</b></h4>
+          <p class="card-text">Welcom to bookmark</p>
+          <span><a href="/setting_bookmark" class="btn btn-drak mb-3">setting <i class="fa-sharp fa-solid fa-gears fa-sm" style="color: #030303;"></i></a></span>
+        </div>  
+        <div class="container">
+          <div class="card-deck">
+            <div class="card">
+              <a href="#">
+              <img class="card-img-top" src="https://picsum.photos/309/200?image=1050" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
             </div>
-        </body>
-        <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+          </a>
+            <div class="card">
+              <a href="#">
+              <img class="card-img-top" src="https://picsum.photos/309/200?image=1041" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </a>
+            <div class="card">
+              <a href="#">
+              <img class="card-img-top" src="https://picsum.photos/309/200?image=1039" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </a>
+            <div class="card">
+              <a href="#">
+              <img class="card-img-top" src="https://picsum.photos/309/200?image=1019" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+              </div>
+            </div>
+          </a>
+          </div>
+</div>
 
+ <nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-end mr-5 mt-3 mb-3">
+      <li class="page-item disabled">
+          <a class="page-link">Previous</a>
+      </li>
+      <li class="page-item active"><a class="page-link" href="#">1</a></li>
+      <li class="page-item"><a class="page-link" href="#">2</a></li>
+      <li class="page-item"><a class="page-link" href="#">3</a></li>
+      <li class="page-item">
+          <a class="page-link" href="#">Next</a>
+      </li>
+  </ul>
+</nav>
+
+</body>
+<script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
 </html>

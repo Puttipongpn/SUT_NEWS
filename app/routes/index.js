@@ -160,7 +160,7 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
-                    users: rows,
+                    bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                 });
@@ -192,11 +192,12 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
 
 });
 
-router.get('/setting_bookmake', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "USER") {
-                res.render('user_page//setting_bookmake', {
+                res.render('user_page/setting_bookmark', {
+                    bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                 });
@@ -214,7 +215,7 @@ router.get('/topic', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "USER") {
-                res.render('user_page//topic', {
+                res.render('user_page/topic', {
                     name: rows[0].name,
                     role: rows[0].role,
                 });
