@@ -160,7 +160,7 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
-                    bookmark: rows[0],
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                 });
@@ -171,7 +171,24 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
                 res.render('404page')
             }
         });
+});
 
+
+router.get('/addnews', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0].role === "USER") {
+                res.render('user_page/add_news', {
+                    name: rows[0].name,
+                    role: rows[0].role,
+                });
+            } else if (rows[0].role === "ADMIN") {
+                res.render('404page')
+            }
+            else {
+                res.render('404page')
+            }
+        });
 
 });
 
