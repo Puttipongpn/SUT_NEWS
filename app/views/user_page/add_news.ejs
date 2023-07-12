@@ -1,11 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/add_news.css">
 </head>
 <body>
-    add new
+    <%- include('../header') %>
+    <%- include('../nav') %>
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-12 col-md-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Maxwell Admin">
+                                </div>
+                                <h5 class="user-name">Yuki Hayashi</h5>
+                                <h6 class="user-email">yuki@Maxwell.com</h6>
+                            </div>
+                            <div class="about">
+                                <h5 class="mb-2 text-primary">About</h5>
+                                <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-9">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-12">
+                                <h6 class="mb-3 text-primary">Personal Details</h6>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" class="form-control form-control-lg" id="fullName" placeholder="Enter full name">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="eMail">Email</label>
+                                    <input type="email" class="form-control form-control-lg" id="eMail" placeholder="Enter email ID">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control form-control-lg" id="phone" placeholder="Enter phone number">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="website">Website URL</label>
+                                    <input type="url" class="form-control form-control-lg" id="website" placeholder="Website URL">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-12">
+                                <h6 class="mb-3 text-primary">Address</h6>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="street">Street</label>
+                                    <input type="name" class="form-control form-control-lg" id="street" placeholder="Enter Street">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="name" class="form-control form-control-lg" id="city" placeholder="Enter City">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" class="form-control form-control-lg" id="state" placeholder="Enter State">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="zip">Zip Code</label>
+                                    <input type="text" class="form-control form-control-lg" id="zip" placeholder="Zip Code">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-12">
+                                <div class="text-end">
+                                    <button type="button" id="submit" name="submit" class="btn btn-secondary">Cancel</button>
+                                    <button type="button" id="submit" name="submit" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+
+    </style>
 </body>
+
 </html>

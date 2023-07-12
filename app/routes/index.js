@@ -160,7 +160,7 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
-                    users: rows,
+                    bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                 });
@@ -177,7 +177,7 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].role === "USER") {
+            if (rows[0].role === "OFFICIAL USER") {
                 res.render('user_page/add_news', {
                     name: rows[0].name,
                     role: rows[0].role,
