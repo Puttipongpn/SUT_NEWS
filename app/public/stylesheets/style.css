@@ -145,7 +145,7 @@ h4 {
 }
 .card-deck {
   margin: 0 -15px;
-  justify-content: space-between;
+  margin-left: 3%;
 }
 
 .card-deck .card {
