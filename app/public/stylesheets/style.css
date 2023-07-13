@@ -3,7 +3,9 @@
 
 }
 
-.menu {
+.menu-c {
+  display: flex;
+  justify-content: center;
   padding-top: 30px;
   background-color: #111827;
 }

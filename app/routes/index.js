@@ -68,8 +68,11 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             res.render('home/centerpage', {
+                users: rows,
                 name: rows[0].name,
-                role: rows[0].role
+                role: rows[0].role,
+                user_name: rows[0].user_name,
+                email: rows[0].email,
             });
         });
 
@@ -86,7 +89,10 @@ router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
-                });
+                    picture: rows[0].profile_image,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
+                }); console.log(rows[0].profile_image)
             } else {
                 res.redirect('/')
             }
@@ -105,6 +111,8 @@ router.get('/request_official', ifNotLoggedin, (req, res, next) => {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -137,22 +145,73 @@ router.post('/addrequest_official/:id', ifNotLoggedin, (req, res) => {
 });
 
 // UPDATE `users` SET `id`='[value-1]',`role`='[value-2]',`user_name`='[value-3]',`name`='[value-4]',`email`='[value-5]',`password`='[value-6]',`user_request`='[value-7]' WHERE 1
-router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+// router.post('/update_profile/:id', ifNotLoggedin, (req, res) => {
+//     const userId = req.params.id;
+//     const user_name = req.body['user_name'] || req.session.user_name;
+//     const name = req.body['name'] || req.session.name;
+//     const email = req.body['email'] || req.session.email;
+//     const gender = req.body['gender'] || req.session.gender;
+//     dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name, name, email, gender, userId])
+//         .then(() => {
+//             res.redirect('/setting_profile');
+//             req.session.message = 'บันทึกสำเร็จ';
+//         })
+//         .catch(err => {
+//             console.log(err);
+//             res.redirect('404page');
+//         });
+// });
+
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/images/users_picture'); // ระบุโฟลเดอร์ที่เก็บไฟล์ภาพที่อัปโหลด
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.originalname); // ใช้ชื่อไฟล์เดิม
+    }
+});
+const upload = multer({ storage });
+
+router.post('/update_profile/:id', upload.single('profile_image'), ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
     const user_name = req.body['user_name'] || req.session.user_name;
     const name = req.body['name'] || req.session.name;
     const email = req.body['email'] || req.session.email;
     const gender = req.body['gender'] || req.session.gender;
-    dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name, name, email, gender, userId])
-        .then(() => {
-            res.redirect('/setting_profile');
-            req.session.message = 'บันทึกสำเร็จ';
-        })
-        .catch(err => {
-            console.log(err);
-            res.redirect('404page');
-        });
+
+    // เช็คว่ามีการอัปโหลดรูปภาพหรือไม่
+    if (req.file) { // แก้ไขเป็น req.file แทน req.files
+        console.log("if!");
+        const imagePath = req.file.path; // เส้นทางไฟล์ภาพที่อัปโหลด
+        // ทำการบันทึกเส้นทางไฟล์ภาพลงในฐานข้อมูล หรือในที่นี้คืออัปโหลดไฟล์ภาพไปยังโฟลเดอร์เซิร์ฟเวอร์และบันทึกเส้นทางไฟล์ลงในฐานข้อมูล
+        dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ?, profile_image = ? WHERE id = ?", [user_name, name, email, gender, imagePath, userId])
+            .then(() => {
+                // ลบไฟล์รูปภาพเดิมออกจากโฟลเดอร์อัปโหลด (ถ้าต้องการ)
+                // fs.unlinkSync(req.session.profile_image);
+                req.session.profile_image = imagePath; // อัปเดตเส้นทางไฟล์รูปภาพใน session
+                res.redirect('/setting_profile');
+                req.session.message = 'บันทึกสำเร็จ';
+            })
+            .catch(err => {
+                console.log(err);
+                res.redirect('404page');
+            });
+    } else {
+        console.log("else!");
+        // ถ้าไม่มีการอัปโหลดรูปภาพ ให้แก้ไขข้อมูลอื่นๆ โดยไม่เปลี่ยนแปลงรูปภาพ
+        dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name, name, email, gender, userId])
+            .then(() => {
+                res.redirect('/setting_profile');
+                req.session.message = 'บันทึกสำเร็จ';
+            })
+            .catch(err => {
+                console.log(err);
+                res.redirect('404page');
+            });
+    }
 });
+
 
 //SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
 router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
@@ -160,9 +219,12 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
+                    users:rows,
                     bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -176,34 +238,37 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
 router.get('/news_type_combobox', (req, res) => {
     // ดึงข้อมูลจากฐานข้อมูล
     dbConnection.execute("SELECT * FROM news_type")
-      .then(([rows]) => {
-        res.json(rows); // ส่งข้อมูลเป็น JSON
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
-      });
-  });
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
-  router.get('/news_topic_combobox', (req, res) => {
+router.get('/news_topic_combobox', (req, res) => {
     // ดึงข้อมูลจากฐานข้อมูล
     dbConnection.execute("SELECT * FROM topic")
-      .then(([rows]) => {
-        res.json(rows); // ส่งข้อมูลเป็น JSON
-      })
-      .catch(err => {
-        console.error(err);
-        res.status(500).json({ error: 'Internal Server Error' });
-      });
-  });
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "OFFICIAL USER") {
                 res.render('user_page/add_news', {
+                    users:rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -219,9 +284,12 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/setting_bookmark', {
+                    users:rows,
                     bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -236,15 +304,15 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
 router.get('/details', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].role === "USER") {
+            if (rows[0]) {
                 res.render('user_page/details', {
+                    users:rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
-            } else if (rows[0].role === "ADMIN") {
-                res.render('404page')
-            }
-            else {
+            } else {
                 res.render('404page')
             }
         });
@@ -255,8 +323,11 @@ router.get('/news_doom', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/news_doom', {
+                    users:rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -272,8 +343,11 @@ router.get('/page1', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0]) {
                 res.render('home/page1', {
+                    users:rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else {
                 req.session.isLoggedIn === true;
@@ -294,6 +368,8 @@ router.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้ง�
                 res.render('admin_page/request_page', {
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -312,6 +388,8 @@ router.get('/setting', ifNotLoggedin, (req, res, next) => {
                 res.render('admin_page/setting_page', {
                     name: rows[0].name,
                     role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -354,6 +432,9 @@ router.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
             res.render('admin_page/view_user', {
                 users: rows,
+                user_name:rows[0].user_name,
+                email:rows[0].email,
+
             });
         })
         .catch(err => {

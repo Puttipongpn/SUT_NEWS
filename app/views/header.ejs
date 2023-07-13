@@ -30,7 +30,7 @@
 </head>
 
 <body>
-    <header>    
+    <header>
         <div class="toppage">
             <ul class="nav justify-content-end">
                 <li class="nav-item">
@@ -43,7 +43,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Aallow_Offuser"
-                    href="/manage_users">จัดการสมาชิก</a>
+                        href="/manage_users">จัดการสมาชิก</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="bookmake"
@@ -54,8 +54,8 @@
                         href="/news_doom">DOOM</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;"
-                       href="/addnews" id="AddNEWs">เพิ่มข่าวสาร</a>
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/addnews"
+                        id="AddNEWs">เพิ่มข่าวสาร</a>
                 </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
@@ -67,19 +67,96 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                     style="color: aliceblue;font-size: 18px;margin-top: -8px;"href="#">
+                    <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"
+                        style="color: aliceblue;font-size: 18px;margin-top: -8px;" href="#">
                         <%= name%>
-                        <img src="https://imgv3.fotor.com/images/cover-photo-image/a-beautiful-girl-with-gray-hair-and-lucxy-neckless-generated-by-Fotor-AI.jpg"
-                          style="width: 30px; height: 30px;" class="rounded-circle">
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="/setting_profile">แก้ไขโปรไฟล์</a>
-                                <a class="dropdown-item" href="/logout">Logout</a>
-                                <a class="dropdown-item disabled" href="#" ><%= role%> </a>
-                              </div>
+                            <!-- Profile picture image-->
+                            <% if (users[0].profile_image) { %>
+                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                    style="height: 30px; padding-top: 1px;" <% const
+                                    imagePath=users[0].profile_image.substring(7); %>
+                                src="<%= imagePath %>" alt="">
+                                    <% } else { %>
+                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                            style="height: 30px;"
+                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <% } %>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <a class="dropdown-item">
+                                                    <div class="profile-card-h">
+                                                        <div class="image-h" >
+                                                            <% if (users[0].profile_image) { %>
+                                                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                                    style="height: 80px; padding-top: 1px;" <% const
+                                                                    imagePath=users[0].profile_image.substring(7); %>
+                                                                src="<%= imagePath %>" alt="">
+                                                                    <% } else { %>
+                                                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                                            style="height: 30px;"
+                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                                        <% } %>
+                                                            <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
+                                                        </div>
+                                                        <div class="data-h">
+                                                            <%= user_name%>
+                                                            <span><%= role%></span>
+                                                            <span><%= email%></span>
+                                                        </div>
+                                                        <!-- <div class="info-h">
+                                                            Posts
+                                                            <span>209</span>
+                                                        </div> -->
+                                                        <a class="dropdown-item" href="/setting_profile">
+                                                            <div style="padding-left: 5px;">
+                                                                แก้ไขโปรไฟล์
+                                                            </div> 
+                                                        </a>
+
+                                                    </div>
+                                                </a>
+                                                <!-- 
+                                                <a class="dropdown-item" href="/logout">Logout</a>
+                                                <a class="dropdown-item disabled" href="#">
+                                                    <%= role%>
+                                                </a> -->
+                                            </div>
                     </a>
                 </li>
-                
+                <style>
+                    .profile-card-h {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        max-width: 150px;
+                        width: 100%;
+                        height: 200px;
+                        border-radius: 25px;
+                    }
+
+                    .image-h {
+                        padding-left: 15px;
+                        position: relative;
+                        height: 30px;
+                        width: auto;
+                    }
+
+                    .data-h {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        margin-top: 60px;
+                    }
+                    span {
+                        font-size: 10px;
+                    }
+                   
+
+                    .row-h .info-h {
+                        text-align: center;
+                    }
+                </style>
+
                 <script>
                     var currentUser = {
                         role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
@@ -170,7 +247,7 @@
                     };
                     console.log(currentUser.role)
                     var userButton = document.getElementById('LOGOUT');
-                    if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER' ) {
+                    if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER') {
                         userButton.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         userButton.style.display = 'none'; // ซ่อนปุ่ม
