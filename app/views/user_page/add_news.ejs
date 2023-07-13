@@ -49,8 +49,9 @@
                                                 <label for="fullName">NEWS TYPE</label>
                                             </div>
                                             <div>
-                                                <select class="form-select-ad form-select-lg" id="news_type_select" name="news_type_id"
-                                                    placeholder="Enter email ID" aria-label="Default select example">
+                                                <select class="form-select-ad form-select-lg" id="news_type_select"
+                                                    name="news_type_id" placeholder="Enter email ID"
+                                                    aria-label="Default select example">
                                                     <!-- <option selected>Open this select menu</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
@@ -65,8 +66,9 @@
                                                 <label for="">NEWS TOPIC</label>
                                             </div>
                                             <div>
-                                                <select class="form-select-ad form-select-sm" id="news_topic_select" name="topic_id"
-                                                    placeholder="Enter email ID" aria-label="Default select example">
+                                                <select class="form-select-ad form-select-sm" id="news_topic_select"
+                                                    name="topic_id" placeholder="Enter email ID"
+                                                    aria-label="Default select example">
                                                     <!-- <option selected>Open this select menu</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
@@ -111,7 +113,7 @@
                                                         <th>ลบ</th>
                                                     </tr>
                                                 </thead>
-                       
+
                                                 <tbody>
 
                                                 </tbody>
@@ -318,53 +320,53 @@
 </script>
 <script> //ดึงข้อมูลเข้า combobox
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-const dataSelect_news_type = document.getElementById('news_type_select');
-const defaultOption2 = document.createElement('option');
-defaultOption2.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-defaultOption2.textContent = 'กรุณาเลือก';
-dataSelect_news_type.appendChild(defaultOption2);
-// ดึงข้อมูลจากฐานข้อมูล
-fetch('/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-  .then(response => response.json())
-  .then(data => {
-    // สร้างตัวเลือกในกล่องคอมโบ
-    data.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.news_type_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
-      option.textContent = item.news_type_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
-      dataSelect_news_type.appendChild(option);
-    });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+    const dataSelect_news_type = document.getElementById('news_type_select');
+    const defaultOption2 = document.createElement('option');
+    defaultOption2.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+    defaultOption2.textContent = 'กรุณาเลือก';
+    dataSelect_news_type.appendChild(defaultOption2);
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+        .then(response => response.json())
+        .then(data => {
+            // สร้างตัวเลือกในกล่องคอมโบ
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.news_type_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
+                option.textContent = item.news_type_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
+                dataSelect_news_type.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 </script>
 
 
 
 <script> //ดึงข้อมูลเข้า combobox news_type
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-const dataSelect_topic = document.getElementById('news_topic_select');
-const defaultOption1 = document.createElement('option');
-defaultOption1.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-defaultOption1.textContent = 'กรุณาเลือก';
-dataSelect_topic.appendChild(defaultOption1);
+    const dataSelect_topic = document.getElementById('news_topic_select');
+    const defaultOption1 = document.createElement('option');
+    defaultOption1.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+    defaultOption1.textContent = 'กรุณาเลือก';
+    dataSelect_topic.appendChild(defaultOption1);
 
-// ดึงข้อมูลจากฐานข้อมูล
-fetch('/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-  .then(response => response.json())
-  .then(data => {
-    // สร้างตัวเลือกในกล่องคอมโบ
-    data.forEach(item => {
-      const option = document.createElement('option');
-      option.value = item.topic_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
-      option.textContent = item.topic_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
-      dataSelect_topic.appendChild(option);
-    });
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+        .then(response => response.json())
+        .then(data => {
+            // สร้างตัวเลือกในกล่องคอมโบ
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.topic_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
+                option.textContent = item.topic_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
+                dataSelect_topic.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 </script>
 
 </html>

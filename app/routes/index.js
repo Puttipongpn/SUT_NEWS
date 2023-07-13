@@ -73,6 +73,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                 role: rows[0].role,
                 user_name: rows[0].user_name,
                 email: rows[0].email,
+                profile_image: req.session.profile_image,
             });
         });
 
@@ -89,9 +90,9 @@ router.get('/setting_profile', ifNotLoggedin, (req, res, next) => {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
-                    picture: rows[0].profile_image,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 }); console.log(rows[0].profile_image)
             } else {
                 res.redirect('/')
@@ -113,6 +114,7 @@ router.get('/request_official', ifNotLoggedin, (req, res, next) => {
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -219,12 +221,13 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/bookmake', {
-                    users:rows,
+                    users: rows,
                     bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -264,11 +267,12 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "OFFICIAL USER") {
                 res.render('user_page/add_news', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -284,12 +288,13 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/setting_bookmark', {
-                    users:rows,
+                    users: rows,
                     bookmark: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -306,11 +311,12 @@ router.get('/details', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0]) {
                 res.render('user_page/details', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else {
                 res.render('404page')
@@ -323,11 +329,12 @@ router.get('/news_doom', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER") {
                 res.render('user_page/news_doom', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -343,11 +350,12 @@ router.get('/page1', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0]) {
                 res.render('home/page1', {
-                    users:rows,
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else {
                 req.session.isLoggedIn === true;
@@ -366,10 +374,12 @@ router.get('/request', ifNotLoggedin, (req, res, next) => {      //ตั้ง�
         .then(([rows]) => {
             if (rows[0].role === "ADMIN") {  //เมื่อได้ข้อมูลที่ลอคอินเข้ามา นำ ROW มาเปรียบเทียบเพิ่อแบ่งเส้นทางที่ถูกต้อง
                 res.render('admin_page/request_page', {
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -386,10 +396,12 @@ router.get('/setting', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "ADMIN") {
                 res.render('admin_page/setting_page', {
+                    users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
+                    profile_image: req.session.profile_image,
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -411,6 +423,9 @@ router.get('/manage_users', ifNotLoggedin, (req, res, next) => {
                     users: rows,
                     name: req.session.name,
                     role: req.session.role,
+                    profile_image: req.session.profile_image,
+                    user_name: req.session.user_name,
+                    email: req.session.email,
                     message: message  // เพิ่ม message ในข้อมูลที่ส่งไปยังหน้า view
                 });
             } else {
@@ -432,9 +447,9 @@ router.get('/view_user/:id', ifNotLoggedin, (req, res, next) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
             res.render('admin_page/view_user', {
                 users: rows,
-                user_name:rows[0].user_name,
-                email:rows[0].email,
-
+                user_name: rows[0].user_name,
+                email: rows[0].email,
+                profile_image: req.session.profile_image,
             });
         })
         .catch(err => {
@@ -544,6 +559,7 @@ router.post('/', ifLoggedin, [
                         req.session.user_name = rows[0].user_name;
                         req.session.email = rows[0].email;
                         req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
+                        req.session.profile_image = rows[0].profile_image;
                         res.redirect('/');
                     }
                     else {

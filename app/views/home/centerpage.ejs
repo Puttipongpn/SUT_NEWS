@@ -30,18 +30,18 @@
         <article>
             <!-- Card List Section -->
             <div class="menu-c">
-            <div class="col-md-6 ">
-                <button class="btn_menu" style="margin: 5px;" type="submit">รอบรั้ว มทส.</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">ร้อนแรงในขณะนี้</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">Dorm</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
-                <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
+                <div class="col-md-6 ">
+                    <button class="btn_menu" style="margin: 5px;" type="submit">รอบรั้ว มทส.</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">ร้อนแรงในขณะนี้</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">Dorm</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
+                </div>
             </div>
-        </div>
 
-        
+
             <div>
 
                 <section x-data="xData()" class="paragrap1 py-3 px-5 ">
@@ -71,81 +71,81 @@
         </article>
 
 
-            <script>
-                function xData() {
-                    /**
-                     * Shuffle an array
-                     * @param {Array} array
-                     * @source https://stackoverflow.com/a/2450976/6940144
-                     */
-                    function shuffle(array) {
-                        let currentIndex = array.length,
-                            randomIndex;
+        <script>
+            function xData() {
+                /**
+                 * Shuffle an array
+                 * @param {Array} array
+                 * @source https://stackoverflow.com/a/2450976/6940144
+                 */
+                function shuffle(array) {
+                    let currentIndex = array.length,
+                        randomIndex;
 
-                        while (currentIndex != 0) {
-                            randomIndex = Math.floor(Math.random() * currentIndex);
-                            currentIndex--;
+                    while (currentIndex != 0) {
+                        randomIndex = Math.floor(Math.random() * currentIndex);
+                        currentIndex--;
 
-                            [array[currentIndex], array[randomIndex]] = [
-                                array[randomIndex],
-                                array[currentIndex],
-                            ];
-                        }
-
-                        return array;
+                        [array[currentIndex], array[randomIndex]] = [
+                            array[randomIndex],
+                            array[currentIndex],
+                        ];
                     }
 
-                    const posts = [
-                        {
-                            link: "/details",
-                            image: "/images/paragrap1/pica1.jpg",
-                            title: "‼️ ขยายเวลารับสมัคร FOR FUN‼️",
-                            description:
-                                "🎉🎉🎉 𝑺𝑼𝑻 𝑭𝑶𝑹 𝑭𝑼𝑵 𝑺𝑷𝑬𝑪𝑰𝑨𝑳 𝑪𝑶𝑴𝑬𝑩𝑨𝑪𝑲 𝑭𝑶𝑹 𝑳𝑰𝑽𝑬 ขยายเวลารับสมัครแล้วนะ และสมัครทั้งสองเกมได้เลย แข่งไม่ตรงกันแน่นอน🎯🎯📍📍ปิดรับสมัคร 5 กุมภาพันธ์ 2566 น้า",
-                        },
-                        {
-                            link: "https://web.facebook.com/photo/?fbid=762308985688170&set=a.589020653017005",
-                            image:
-                                "/images/paragrap1/354191408_762308982354837_5881753171290611047_n.jpg",
-                            title: "ประกาศมหาวิทยาลัยเทคโนโลยีสุรนารีเรื่อง รายชื่อผู้มีสิทธิ์รับทุนการศึกษามูลนิธิวัตไกรฤกษ์ประจำปีการศึกษา 2565",
-                            description:
-                                "👉 คลิกลิงค์ประกาศที่นี่ : https://beta.sut.ac.th/dsa-scholar/news/18628",
-                        },
-                        {
-                            link: "/page1",
-                            image:
-                                "/images/paragrap1/preoder1.jpg",
-                            title: "“เสื้อ FRESHY รุ่นที่ 31 โลกานุวัตร เจ้าของอำนาจแห่งอนาคต”",
-                            description:
-                                "สิ้นสุดการรอคอย🫶🏻🎁 ผองานโดย นางสาว ธนกร พงศ์พันธ์พาณิชย์จากแนวความคิด ความร่วมสมัย ลวดลายพริ้วไหวจากความภูมิใจต่อมรดกทางวัฒนธรรมและเอกลักษณ์ของภูมิภาคอีสาน เปิดพรีออเดอร์ 📍📍วันที่ 18-23 มิถุนายน 2566  (5 วันเท่านั้น)  ช่องทางการพรีออเดอร์ 📍📍https://shop.line.me/@725sjatl ",
-                        },
-                        {
-                            link: "https://web.facebook.com/photo?fbid=229192969969194&set=a.104320619123097",
-                            image:
-                                "/images/paragrap1/leadercamp.jpg",
-                            title: "LEADER CAAPE!!!!  COMMING SOON",
-                            description:
-                                "พร้อมแล้วหรือยัง เตรียมตัวพบกับ LEADER CAMP #25 เร็วๆนี้ แล้วเจอกัน!! #ค่ายพัฒนาความเป็นผู้นำครั้งที่25 #อมทส #SUSUTทำAct #มทส",
-                        },
-                    ];
-
-                    const uniquePosts = Array.from(
-                        new Set([
-                            ...shuffle(posts),
-                            ...shuffle(posts),
-                            ...shuffle(posts),
-                            ...shuffle(posts),
-                            ...shuffle(posts),
-                        ]),
-                        JSON.stringify
-                    ).map(JSON.parse);
-                    return {
-                        posts: uniquePosts,
-                    };
+                    return array;
                 }
-            </script>
 
-        
+                const posts = [
+                    {
+                        link: "/details",
+                        image: "/images/paragrap1/pica1.jpg",
+                        title: "‼️ ขยายเวลารับสมัคร FOR FUN‼️",
+                        description:
+                            "🎉🎉🎉 𝑺𝑼𝑻 𝑭𝑶𝑹 𝑭𝑼𝑵 𝑺𝑷𝑬𝑪𝑰𝑨𝑳 𝑪𝑶𝑴𝑬𝑩𝑨𝑪𝑲 𝑭𝑶𝑹 𝑳𝑰𝑽𝑬 ขยายเวลารับสมัครแล้วนะ และสมัครทั้งสองเกมได้เลย แข่งไม่ตรงกันแน่นอน🎯🎯📍📍ปิดรับสมัคร 5 กุมภาพันธ์ 2566 น้า",
+                    },
+                    {
+                        link: "https://web.facebook.com/photo/?fbid=762308985688170&set=a.589020653017005",
+                        image:
+                            "/images/paragrap1/354191408_762308982354837_5881753171290611047_n.jpg",
+                        title: "ประกาศมหาวิทยาลัยเทคโนโลยีสุรนารีเรื่อง รายชื่อผู้มีสิทธิ์รับทุนการศึกษามูลนิธิวัตไกรฤกษ์ประจำปีการศึกษา 2565",
+                        description:
+                            "👉 คลิกลิงค์ประกาศที่นี่ : https://beta.sut.ac.th/dsa-scholar/news/18628",
+                    },
+                    {
+                        link: "/page1",
+                        image:
+                            "/images/paragrap1/preoder1.jpg",
+                        title: "“เสื้อ FRESHY รุ่นที่ 31 โลกานุวัตร เจ้าของอำนาจแห่งอนาคต”",
+                        description:
+                            "สิ้นสุดการรอคอย🫶🏻🎁 ผองานโดย นางสาว ธนกร พงศ์พันธ์พาณิชย์จากแนวความคิด ความร่วมสมัย ลวดลายพริ้วไหวจากความภูมิใจต่อมรดกทางวัฒนธรรมและเอกลักษณ์ของภูมิภาคอีสาน เปิดพรีออเดอร์ 📍📍วันที่ 18-23 มิถุนายน 2566  (5 วันเท่านั้น)  ช่องทางการพรีออเดอร์ 📍📍https://shop.line.me/@725sjatl ",
+                    },
+                    {
+                        link: "https://web.facebook.com/photo?fbid=229192969969194&set=a.104320619123097",
+                        image:
+                            "/images/paragrap1/leadercamp.jpg",
+                        title: "LEADER CAAPE!!!!  COMMING SOON",
+                        description:
+                            "พร้อมแล้วหรือยัง เตรียมตัวพบกับ LEADER CAMP #25 เร็วๆนี้ แล้วเจอกัน!! #ค่ายพัฒนาความเป็นผู้นำครั้งที่25 #อมทส #SUSUTทำAct #มทส",
+                    },
+                ];
+
+                const uniquePosts = Array.from(
+                    new Set([
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                        ...shuffle(posts),
+                    ]),
+                    JSON.stringify
+                ).map(JSON.parse);
+                return {
+                    posts: uniquePosts,
+                };
+            }
+        </script>
+
+
 
         </body>
 

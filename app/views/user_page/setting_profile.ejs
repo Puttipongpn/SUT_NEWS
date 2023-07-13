@@ -28,24 +28,26 @@
                                 <div class="card-body text-center">
                                     <!-- Profile picture image-->
                                     <% if (users[0].profile_image) { %>
-                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                            <% const imagePath = users[0].profile_image.substring(7); %>
-                                            src="<%= imagePath %>" alt="">
-                                        <% } else { %>
-                                            <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                                src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                            <% } %>
-                                                <!-- Profile picture help block-->
-                                                <div class="small font-italic text-muted mb-4">JPG or PNG no larger than5 MB</div>
-                                                <!-- Profile picture upload button-->
-                                                <!-- <input id="profileImage" type="file" class="btn btn-primary"name="profile_image"
+                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2" <%
+                                            const imagePath=users[0].profile_image.substring(7); %>
+                                        src="<%= imagePath %>" alt="">
+                                            <% } else { %>
+                                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                <% } %>
+                                                    <!-- Profile picture help block-->
+                                                    <div class="small font-italic text-muted mb-4">JPG or PNG no larger
+                                                        than5 MB</div>
+                                                    <!-- Profile picture upload button-->
+                                                    <!-- <input id="profileImage" type="file" class="btn btn-primary"name="profile_image"
                                                 style="height: 38px; padding-top:4px"> -->
-                                                <input type="file" id="profileImage" name="profile_image"
-                                                    style="display: none;" onchange="previewImage(this);">
-                                                <label for="profileImage" class="btn btn-primary" type="button">Upload
-                                                    new image</label>
-                                                <!-- Preview image container -->
-                                                <div id="imagePreview" style="display: none;"></div>
+                                                    <input type="file" id="profileImage" name="profile_image"
+                                                        style="display: none;" onchange="previewImage(this);">
+                                                    <label for="profileImage" class="btn btn-primary"
+                                                        type="button">Upload
+                                                        new image</label>
+                                                    <!-- Preview image container -->
+                                                    <div id="imagePreview" style="display: none;"></div>
                                 </div>
                             </div>
                             <script>
@@ -67,7 +69,7 @@
                             <div class="card mb-4">
                                 <div class="card-header">Account Details</div>
                                 <div class="card-body">
-                                    
+
                                     <!-- Form Row-->
                                     <div class="row gx-3 mb-3">
                                         <!-- Form Group (first name)-->

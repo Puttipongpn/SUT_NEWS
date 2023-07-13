@@ -72,10 +72,10 @@
                         style="color: aliceblue;font-size: 18px;margin-top: -8px;" href="#">
                         <%= name%>
                             <!-- Profile picture image-->
-                            <% if (users[0].profile_image) { %>
+                            <% if (profile_image) { %>
                                 <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
                                     style="height: 30px; padding-top: 1px;" <% const
-                                    imagePath=users[0].profile_image.substring(7); %>
+                                    imagePath=profile_image.substring(7); %>
                                 src="<%= imagePath %>" alt="">
                                     <% } else { %>
                                         <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
@@ -85,23 +85,30 @@
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item">
                                                     <div class="profile-card-h">
-                                                        <div class="image-h" >
-                                                            <% if (users[0].profile_image) { %>
-                                                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                        <div class="image-h">
+                                                            <% if (profile_image) { %>
+                                                                <img id="profilePicture"
+                                                                    class="img-account-profile rounded-circle mb-2"
                                                                     style="height: 80px; padding-top: 1px;" <% const
-                                                                    imagePath=users[0].profile_image.substring(7); %>
+                                                                    imagePath=profile_image.substring(7); %>
                                                                 src="<%= imagePath %>" alt="">
                                                                     <% } else { %>
-                                                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                                        <img id="profilePicture"
+                                                                            class="img-account-profile rounded-circle mb-2"
                                                                             style="height: 30px;"
-                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                            alt="">
                                                                         <% } %>
-                                                            <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
+                                                                            <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
                                                         </div>
                                                         <div class="data-h">
                                                             <%= user_name%>
-                                                            <span><%= role%></span>
-                                                            <span><%= email%></span>
+                                                                <span>
+                                                                    <%= role%>
+                                                                </span>
+                                                                <span>
+                                                                    <%= email%>
+                                                                </span>
                                                         </div>
                                                         <!-- <div class="info-h">
                                                             Posts
@@ -110,16 +117,13 @@
                                                         <a class="dropdown-item" href="/setting_profile">
                                                             <div style="padding-left: 5px;">
                                                                 แก้ไขโปรไฟล์
-                                                            </div> 
+                                                            </div>
                                                         </a>
-
+                                                        <div>
+                                                            <a class="dropdown-item" href="/logout">Logout</a>
+                                                        </div>
                                                     </div>
                                                 </a>
-                                                <!-- 
-                                                <a class="dropdown-item" href="/logout">Logout</a>
-                                                <a class="dropdown-item disabled" href="#">
-                                                    <%= role%>
-                                                </a> -->
                                             </div>
                     </a>
                 </li>
@@ -130,7 +134,7 @@
                         align-items: center;
                         max-width: 150px;
                         width: 100%;
-                        height: 200px;
+                        height: 220px;
                         border-radius: 25px;
                     }
 
@@ -147,10 +151,11 @@
                         align-items: center;
                         margin-top: 60px;
                     }
+
                     span {
                         font-size: 10px;
                     }
-                   
+
 
                     .row-h .info-h {
                         text-align: center;
