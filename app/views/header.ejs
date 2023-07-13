@@ -61,10 +61,7 @@
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
                         href="/logout">LOGOUT</a>
                 </li> -->
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGIN"
-                        href="/">LOGIN</a>
-                </li>
+               
 
                 <li class="nav-item">
                     <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -95,7 +92,7 @@
                                                                     <% } else { %>
                                                                         <img id="profilePicture"
                                                                             class="img-account-profile rounded-circle mb-2"
-                                                                            style="height: 30px;"
+                                                                            style="height: 80px;"
                                                                             src="http://bootdey.com/img/Content/avatar/avatar1.png"
                                                                             alt="">
                                                                         <% } %>
@@ -114,13 +111,16 @@
                                                             Posts
                                                             <span>209</span>
                                                         </div> -->
-                                                        <a class="dropdown-item" href="/setting_profile">
+                                                        <a class="dropdown-item" href="/setting_profile" id="setting_profile">  
                                                             <div style="padding-left: 5px;">
                                                                 แก้ไขโปรไฟล์
                                                             </div>
                                                         </a>
                                                         <div>
-                                                            <a class="dropdown-item" href="/logout">Logout</a>
+                                                            <a class="dropdown-item" id="Logout" href="/logout">Logout</a>
+                                                        </div>
+                                                        <div>
+                                                            <a class="dropdown-item"  id="LOGIN" href="/">Login</a>
                                                         </div>
                                                     </div>
                                                 </a>
@@ -193,6 +193,30 @@
                     console.log(currentUser.role)
                     var allow_Offuser = document.getElementById('Aallow_Offuser');
                     if (currentUser.role === 'ADMIN') {
+                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                </script>
+                <script>
+                    var currentUser = {
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                    };
+                    
+                    var allow_Offuser = document.getElementById('setting_profile');
+                    if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
+                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+                    } else {
+                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+                    }
+                </script>
+                <script>
+                    var currentUser = {
+                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                    };
+                    
+                    var allow_Offuser = document.getElementById('Logout');
+                    if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
                         allow_Offuser.style.display = 'block'; // แสดงปุ่ม
                     } else {
                         allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม

@@ -17,7 +17,10 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/centerpage', function (req, res, next) {
     res.render('home/centerpage', {
         name: 'PLEASE LOGIN',
-        role: 'GUEST'
+        role: 'GUEST',
+        user_name: 'PLEASE LOGIN',
+        email: 'PLEASE LOGIN',
+        profile_image: '',
     });
 });
 

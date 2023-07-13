@@ -1,7 +1,7 @@
-* {
+/* * {
   font-family: 'Lilita One', cursive;
 
-}
+} */
 
 .menu-c {
   display: flex;
@@ -136,18 +136,9 @@ h4 {
   margin-top: 40px;
 }
 
-.form-control {
-  border: 1px solid #596280;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  border-radius: 2px;
-  font-size: .825rem;
-  background: #1A233A;
-  color: #bcd0f7;
-}
 .card-deck {
   margin: 0 -15px;
-  margin-left: 3%;
+  justify-content: space-between;
 }
 
 .card-deck .card {
