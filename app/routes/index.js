@@ -173,6 +173,29 @@ router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
         });
 });
 
+router.get('/news_type_combobox', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM news_type")
+      .then(([rows]) => {
+        res.json(rows); // ส่งข้อมูลเป็น JSON
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+      });
+  });
+
+  router.get('/news_topic_combobox', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM topic")
+      .then(([rows]) => {
+        res.json(rows); // ส่งข้อมูลเป็น JSON
+      })
+      .catch(err => {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+      });
+  });
 
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
@@ -189,7 +212,6 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
                 res.render('404page')
             }
         });
-
 });
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
