@@ -5,6 +5,7 @@
 npm install express-session
 npm install dayjs
 npm install numeral
+npx install multer sequelize
 
 
 #คำสั่ง GIT
