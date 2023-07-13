@@ -211,11 +211,11 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
 
 });
 
-router.get('/topic', ifNotLoggedin, (req, res, next) => {
+router.get('/details', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "USER") {
-                res.render('user_page/topic', {
+                res.render('user_page/details', {
                     name: rows[0].name,
                     role: rows[0].role,
                 });
