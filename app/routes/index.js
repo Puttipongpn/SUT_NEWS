@@ -266,11 +266,12 @@ router.get('/news_topic_combobox', (req, res) => {
 });
 
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "OFFICIAL USER") {
                 res.render('user_page/add_news', {
                     users: rows,
+                    description: rows[0].description,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
@@ -285,6 +286,21 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
             }
         });
 });
+
+router.post('/addnews/:id', ifNotLoggedin, (req, res) => {
+    let params = { ...req.body, user_id: req.params.id };
+    console.log(params);
+    dbConnection.query("INSERT INTO news SET ?", [params])
+        .then(() => {
+            res.redirect('user_page/add_news');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
+        });
+});
+
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])

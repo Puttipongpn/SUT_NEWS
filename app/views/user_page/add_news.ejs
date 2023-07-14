@@ -13,155 +13,166 @@
 <body>
     <%- include('../header') %>
         <%- include('../nav') %>
-            <div class="container">
-                <div class=" row gutters">
-                    <div class="col-12 col-md-3">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="account-settings">
-                                    <div class="user-profile">
-                                        <div class="user-avatar">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png"
-                                                alt="Maxwell Admin">
+            <form method="post" action="/addnews/<%= users[0].id %>" 
+                class="d-flex justify-content-between align-items-center">
+                <div class="container">
+                    <div class=" row gutters">
+                        <div class="col-12 col-md-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+                                            <div class="user-avatar">
+                                                <% if (users[0].profile_image) { %>
+                                                    <img id="profilePicture-s"
+                                                        class="img-account-profile rounded-circle mb-2" <% const
+                                                        imagePath=users[0].profile_image.substring(7); %>
+                                                    src="<%= imagePath %>" alt="">
+                                                        <% } else { %>
+                                                            <img id="profilePicture-s"
+                                                                class="img-account-profile rounded-circle mb-2"
+                                                                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                alt="">
+                                                            <% } %>
+                                            </div>
+                                            <h5 class="user-name">
+                                                <%= user_name %>
+                                            </h5>
+                                            <h6 class="user-email"><%- email %></h6>
                                         </div>
-                                        <h5 class="user-name">Yuki Hayashi</h5>
-                                        <h6 class="user-email">yuki@Maxwell.com</h6>
-                                    </div>
-                                    <div class="about">
-                                        <h5 class="mb-2 text-primary">About</h5>
-                                        <p>I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and
-                                            human experiences.</p>
+                                        <div class="about">
+                                            <h5 class="mb-2 text-primary">About</h5>
+                                            <p> <%- description %> </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-9">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row gutters">
-                                    <div class="col-12">
-                                        <h6 class="mb-3 text-primary">ADD NEWS</h6>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
-                                            <div>
-                                                <label for="fullName">NEWS TYPE</label>
+
+                        <div class="col-12 col-md-9">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row gutters">
+                                        <div class="col-12">
+                                            <h6 class="mb-3 text-primary">ADD NEWS</h6>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="form-group">
+                                                <div>
+                                                    <label for="news_type_select">NEWS TYPE</label>
+                                                </div>
+                                                <div>
+                                                    <select class="form-select-ad form-select-lg" id="news_type_select"
+                                                        name="news_type_id" 
+                                                        aria-label="Default select example">
+                                                    </select>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                    name="news_type_id" placeholder="Enter email ID"
-                                                    aria-label="Default select example">
-                                                    <!-- <option selected>Open this select menu</option>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <div class="">
+                                                <div>
+                                                    <label for="">NEWS TOPIC</label>
+                                                </div>
+                                                <div>
+                                                    <select class="form-select-ad form-select-sm" id="news_topic_select"
+                                                        name="topic_id" placeholder="Enter email ID"
+                                                        aria-label="Default select example">
+                                                        <!-- <option selected>Open this select menu</option>
                                                     <option value="1">One</option>
                                                     <option value="2">Two</option>
                                                     <option value="3">Three</option> -->
-                                                </select>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <div class="form-group">
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div>
-                                                <label for="">NEWS TOPIC</label>
-                                            </div>
-                                            <div>
-                                                <select class="form-select-ad form-select-sm" id="news_topic_select"
-                                                    name="topic_id" placeholder="Enter email ID"
-                                                    aria-label="Default select example">
-                                                    <!-- <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option> -->
-                                                </select>
+                                                <div>
+                                                    <label for="street">Headline Picture</label>
+                                                </div>
+                                                <div>
+                                                    <img id="img"
+                                                        src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                        height="200">
+                                                </div>
+                                                <div style="padding-top: 10px;">
+                                                    <input id="input" type="file" class="btn btn-primary"
+                                                        style="height: 38px; padding-top:4px">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                        <div>
+                                        <div class="col-12" style="padding-top: 20px;">
                                             <div>
-                                                <label for="street">Headline Picture</label>
+                                                <label for="">ADD Picture or Video</label>
                                             </div>
-                                            <div>
-                                                <img id="img"
-                                                    src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
-                                                    height="200">
+                                            <div style="padding-top: 5px;">
+                                                <button class="btn btn-warning" style="margin-right: 5px;"
+                                                    onclick="addMedia()">เพิ่มสื่อ</button>
+                                                <input class="btn btn-primary" style="height: 38px; padding-top:3px"
+                                                    type="file" id="mediaFile">
                                             </div>
                                             <div style="padding-top: 10px;">
-                                                <input id="input" type="file" class="btn btn-primary"
-                                                    style="height: 38px; padding-top:4px">
+                                                <table id="mediaTable">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>ชื่อภาพ</th>
+                                                            <th>ประเภท</th>
+                                                            <th>ดูรูปภาพ/วิดิโอ</th>
+                                                            <th>ลบ</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                            <div class="">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control form-control-lg" id="title"
+                                                    name="title" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                            <div class="">
+                                                <label for="welding_para">Welding</label>
+                                                <input class="form-control form-control-lg" id="welding_para"
+                                                    name="welding_para" placeholder="">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-12" style="padding-top: 20px;">
-                                        <div>
-                                            <label for="">ADD Picture or Video</label>
+                                    <div class="row gutters">
+                                        <div class="col-12" style="padding-top: 10px;">
+                                            <label for="main_para">Main paragrap</label>
+                                            <textarea class="form-control" id="main_para"
+                                                name="main_para" rows="3"></textarea>
                                         </div>
-                                        <div style="padding-top: 5px;">
-                                            <button class="btn btn-warning" style="margin-right: 5px;"
-                                                onclick="addMedia()">เพิ่มสื่อ</button>
-                                            <input class="btn btn-primary" style="height: 38px; padding-top:3px"
-                                                type="file" id="mediaFile">
-                                        </div>
-                                        <div style="padding-top: 10px;">
-                                            <table id="mediaTable">
-                                                <thead>
-                                                    <tr>
-                                                        <th>ชื่อภาพ</th>
-                                                        <th>ประเภท</th>
-                                                        <th>ดูรูปภาพ/วิดิโอ</th>
-                                                        <th>ลบ</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-
-                                                </tbody>
-                                            </table>
+                                        <div class="col-12">
+                                            <label for="end_para">End paragrap</label>
+                                            <textarea class="form-control" id="end_para"
+                                                name="end_para" rows="3"></textarea>
                                         </div>
                                     </div>
-                                    <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                        <div class="form-group">
-                                            <label for="phone">Title</label>
-                                            <input type="text" class="form-control form-control-lg" id="phone"
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                    <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                        <div class="form-group">
-                                            <label for="website">Welding</label>
-                                            <input type="url" class="form-control form-control-lg" id="website"
-                                                placeholder="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row gutters">
-                                    <div class="col-12" style="padding-top: 10px;">
-                                        <label for="street">Main paragrap</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="street">End paragrap</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1"
-                                            rows="3"></textarea>
-                                    </div>
-                                </div>
-                                <div class="row gutters">
-                                    <div class="col-12" style="padding-top: 20px;">
-                                        <div class="d-flex justify-content-between">
-                                            <button type="button" id="submit" name="submit"
-                                                class="btn btn-danger">Cancel</button>
-                                            <button type="button" id="submit" name="submit"
-                                                class="btn btn-primary">Update</button>
+                                    <div class="row gutters">
+                                        <div class="col-12" style="padding-top: 20px;">
+                                            <div class="d-flex justify-content-between">
+                                                <button type="" id="submit" name="submit"
+                                                    class="btn btn-danger">Cancel</button>
+                                                <button type="submit"
+                                                    class="btn btn-primary">Sent</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
             <style>
                 .card {
                     background: #030c29;
@@ -218,6 +229,7 @@
                     max-width: 80%;
                     max-height: 80%;
                 }
+
                 .form-control {
                     border: 1px solid #596280;
                     -webkit-border-radius: 2px;
@@ -226,7 +238,7 @@
                     font-size: .825rem;
                     background: #1A233A;
                     color: #bcd0f7;
-                  }
+                }
             </style>
 </body>
 <script>
