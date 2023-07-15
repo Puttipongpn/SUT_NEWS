@@ -66,8 +66,9 @@
                 <li class="nav-item">
                     <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false"
-                        style="color: aliceblue;font-size: 18px;margin-top: -8px;" href="#">
-                        <%= name%>
+                        style="color: aliceblue; font-size: 18px; margin-top: -8px;" href="#">
+                        <%= name %>
+
                             <!-- Profile picture image-->
                             <% if (profile_image) { %>
                                 <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
@@ -79,215 +80,207 @@
                                             style="height: 30px;"
                                             src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                         <% } %>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item">
-                                                    <div class="profile-card-h">
-                                                        <div class="image-h">
-                                                            <% if (profile_image) { %>
-                                                                <img id="profilePicture"
-                                                                    class="img-account-profile rounded-circle mb-2"
-                                                                    style="height: 80px; padding-top: 1px;" <% const
-                                                                    imagePath=profile_image.substring(7); %>
-                                                                src="<%= imagePath %>" alt="">
-                                                                    <% } else { %>
-                                                                        <img id="profilePicture"
-                                                                            class="img-account-profile rounded-circle mb-2"
-                                                                            style="height: 80px;"
-                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png"
-                                                                            alt="">
-                                                                        <% } %>
-                                                                            <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
-                                                        </div>
-                                                        <a class="dropdown-item" href="/profile">
-                                                            <div class="data-h">
-                                                                <%= user_name%>
-                                                                    <span>
-                                                                        <%= role%>
-                                                                    </span>
-                                                                    <span>
-                                                                        <%= email%>
-                                                                    </span>
-                                                            </div>
-                                                        </a>
-                                                        <!-- <div class="info-h">
-                                                            Posts
-                                                            <span>209</span>
-                                                        </div> -->
-                                                        <div>
-                                                        <a class="dropdown-item" href="/setting_profile"
-                                                            id="setting_profile">
-                                                            <div style="padding-left: 5px;">
-                                                                แก้ไขโปรไฟล์
-                                                            </div>
-                                                        </a>
-                                                        </div>
-                                                        <div>
-                                                            <a class="dropdown-item" id="Logout"
-                                                                href="/logout">Logout</a>
-                                                        </div>
-                                                        <div>
-                                                            <a class="dropdown-item" id="LOGIN" href="/">Login</a>
-                                                        </div>
-                                                    </div>
-                                                </a>
-                                            </div>
                     </a>
-                </li>
-                <style>
-                    .profile-card-h {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        max-width: 150px;
-                        width: 100%;
-                        height: 220px;
-                        border-radius: 25px;
-                    }
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/profile">
+                        <div class="profile-card-h">
+                            <div class="image-h">
+                                <% if (profile_image) { %>
+                                    <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                        style="height: 80px; padding-top: 1px;" <% const
+                                        imagePath=profile_image.substring(7); %>
+                                    src="<%= imagePath %>" alt="">
+                                        <% } else { %>
+                                            <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                                style="height: 80px;"
+                                                src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                            <% } %>
+                                                <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
+                            </div>
+                            <div class="data-h">
+                                <%= user_name %>
+                                    <span>
+                                        <%= role %>
+                                    </span>
+                                    <span>
+                                        <%= email %>
+                                    </span>
+                            </div>
+                        </div>
+                        </a>
 
-                    .image-h {
-                        padding-left: 15px;
-                        position: relative;
-                        height: 30px;
-                        width: auto;
-                    }
+                        <div>
+                            <a class="dropdown-item" href="/setting_profile" id="setting_profile">
+                                <div style="padding-left: 5px;">
+                                    แก้ไขโปรไฟล์
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <a class="dropdown-item" id="Logout" href="/logout">Logout</a>
+                        </div>
+                        <div>
+                            <a class="dropdown-item" id="LOGIN" href="/">Login</a>
+                        </div>
+                    </div>
+        </div>
 
-                    .data-h {
-                        display: flex;
-                        flex-direction: column;
-                        align-items: center;
-                        margin-top: 60px;
-                    }
+        </li>
 
-                    span {
-                        font-size: 10px;
-                    }
+        <style>
+            .profile-card-h {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                max-width: 150px;
+                width: 100%;
+                border-radius: 25px;
+            }
+
+            .image-h {
+                padding-left: 15px;
+                position: relative;
+                height: 30px;
+                width: auto;
+            }
+
+            .data-h {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 60px;
+            }
+
+            span {
+                font-size: 10px;
+            }
 
 
-                    .row-h .info-h {
-                        text-align: center;
-                    }
-                </style>
+            .row-h .info-h {
+                text-align: center;
+            }
+        </style>
 
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.row)
-                    var setting_page = document.getElementById('Asetting_page');
-                    if (currentUser.role === 'ADMIN') {
-                        setting_page.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        setting_page.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var request_ADMIN = document.getElementById('Arequest_ADMIN');
-                    if (currentUser.role === 'ADMIN') {
-                        request_ADMIN.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        request_ADMIN.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var allow_Offuser = document.getElementById('Aallow_Offuser');
-                    if (currentUser.role === 'ADMIN') {
-                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.row)
+            var setting_page = document.getElementById('Asetting_page');
+            if (currentUser.role === 'ADMIN') {
+                setting_page.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                setting_page.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var request_ADMIN = document.getElementById('Arequest_ADMIN');
+            if (currentUser.role === 'ADMIN') {
+                request_ADMIN.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                request_ADMIN.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var allow_Offuser = document.getElementById('Aallow_Offuser');
+            if (currentUser.role === 'ADMIN') {
+                allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
 
-                    var allow_Offuser = document.getElementById('setting_profile');
-                    if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
-                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
+            var allow_Offuser = document.getElementById('setting_profile');
+            if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
+                allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
 
-                    var allow_Offuser = document.getElementById('Logout');
-                    if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
-                        allow_Offuser.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var userButton = document.getElementById('news_doom');
-                    if (currentUser.role === 'USER') {
-                        userButton.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        userButton.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var userButton = document.getElementById('bookmake');
-                    if (currentUser.role === 'USER') {
-                        userButton.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        userButton.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var userButton = document.getElementById('AddNEWs');
-                    if (currentUser.role === 'OFFICIAL USER') {
-                        userButton.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        userButton.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var userButton = document.getElementById('LOGIN');
-                    if (currentUser.role === 'GUEST') {
-                        userButton.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        userButton.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-                <script>
-                    var currentUser = {
-                        role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-                    };
-                    console.log(currentUser.role)
-                    var userButton = document.getElementById('LOGOUT');
-                    if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER') {
-                        userButton.style.display = 'block'; // แสดงปุ่ม
-                    } else {
-                        userButton.style.display = 'none'; // ซ่อนปุ่ม
-                    }
-                </script>
-            </ul>
+            var allow_Offuser = document.getElementById('Logout');
+            if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
+                allow_Offuser.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('news_doom');
+            if (currentUser.role === 'USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('bookmake');
+            if (currentUser.role === 'USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('AddNEWs');
+            if (currentUser.role === 'OFFICIAL USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('LOGIN');
+            if (currentUser.role === 'GUEST') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('LOGOUT');
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        </ul>
         </div>
     </header>

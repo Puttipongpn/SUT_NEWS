@@ -1,108 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>profile</title>
-     <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/stylesheets/splide.min.css">
-    <link rel="stylesheet" href="/stylesheets/card.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>profile</title>
+  <!-- Add icon library -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="/stylesheets/splide.min.css">
+  <link rel="stylesheet" href="/stylesheets/card.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
 
-    <style>
-            .gradient-custom-2 {
-            /* fallback for old browsers */
-            background: #ffffff;
+  <style>
+    .gradient-custom-2 {
+      /* fallback for old browsers */
+      background: #ffffff;
 
-            /* Chrome 10-25, Safari 5.1-6 */
-            /* background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1)); */
+      /* Chrome 10-25, Safari 5.1-6 */
+      /* background: -webkit-linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1)); */
 
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            /* background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1)) */
-            }
-            #bi-bi-x-square-fill{
-              text-align: end;
-              margin-right: 5%;
-            }
-            @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-            *{
-                margin:0;
-                padding:0;
-            }
-            .card-c{
-                height:100%;
-                width:380px;
-                border-radius:10px;
-                background-color:#fff;
-                overflow:hidden;
-                cursor:pointer;
-                
-            }
-            .border{
-                height:220px;
-                width:100%;
-                border:none;
-                position:relative;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-              
-            }
-            .border:hover i{
-                position:absolute;
-                top:10px;
-            }
-            .border i{
-                position:absolute;
-                top:-100px;
-                right:10px;
-                font-size:25px;
-                color:white;
-                transition:all 0.5s;
-            }
-            .border .i-red{
-                color:red;
-            }
-            .border img{
-                height:100%;
-                width:100%;
-                object-fit:cover;
-                  transition:all 2s;
-            }
-            .central-div{
-                display:flex;
-                justify-content:space-between;
-                padding:20px 10px;
-            }
-            .central-div .fa-bookmark{
-              font-size:30px;
-            }
-            .central-div .fa-bookmark-red{
-                color:red;
-                border:none;
-            }
-   
-    </style>
+      /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      /* background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1)) */
+    }
+
+    #bi-bi-x-square-fill {
+      text-align: end;
+      margin-right: 5%;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .container-st{
+      width: 90%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+    
+    }
+    
+    .col-st {
+      -ms-flex-preferred-size: 0;
+      flex-basis: 0;
+      -ms-flex-positive: 1;
+      flex-grow: 1;
+      max-width: 60%;
+    }
+
+    .card-c {
+      margin-left: 6px;
+      height: 100%;
+      width: 380px;
+      border-radius: 10px;
+      background-color: #ffffff;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+      transition: 0.3s;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .border {
+      height: 220px;
+      width: 100%;
+      border: none;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
+    .border:hover i {
+      position: absolute;
+      top: 10px;
+    }
+
+    .border i {
+      position: absolute;
+      top: -100px;
+      right: 10px;
+      font-size: 25px;
+      color: white;
+      transition: all 0.5s;
+    }
+
+    .border .i-red {
+      color: red;
+    }
+
+    .border img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+      transition: all 2s;
+    }
+
+    .central-div {
+      display: flex;
+      justify-content: space-between;
+      padding: 20px 10px;
+    }
+
+    .central-div .fa-bookmark {
+      font-size: 30px;
+    }
+
+    .central-div .fa-bookmark-red {
+      color: red;
+      border: none;
+    }
+  </style>
 </head>
+
 <body>
-    <section class="h-100 gradient-custom-2">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center">
-            <div class="col ">
-              <div class="card" style="height: 100%;">
+  <%- include('../header') %>
+    <%- include('../nav') %>
+      <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
+        <div class="container-st   h-100 ">
+          <div class="row  d-flex justify-content-center align-items-center" style="margin-top: -40px;">
+            <div class="col">
+              <div class="card" style="height: 100%;box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);">
                 <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                    <img src="data:image/jpeg;base64,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"
+                    <img
+                      src="data:image/jpeg;base64,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"
                       alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                       style="width: 150px; z-index: 1">
-                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                      style="z-index: 1;">
+                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                       Edit profile
                     </button>
                   </div>
@@ -113,13 +150,12 @@
                 </div>
                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
                   <div class="d-flex justify-content-end text-center py-1">
-                    <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark"
-                      style="z-index: 1;">
+                    <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                       ติดตาม
                     </button>
                   </div>
                 </div>
-                <div class="card-body p-4 text-black">
+                <div class="p-4 text-black" style="background-color: #ffffff;">
                   <div class="mb-5">
                     <p class="lead fw-normal mb-1">About</p>
                     <div class="p-4" style="background-color: #f8f9fa;">
@@ -131,142 +167,127 @@
                   <div class="d-flex justify-content-between align-items-center mb-4">
                     <p class="lead fw-normal mb-0">All news</p>
                   </div>
-                  <div class="row g-2">
-                    <div class="col mb-2">
-                      <div class="card-c">
-                        <a href="#" class="text-decoration-none">
-                        <div class="border">
-                          <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                            <img class="card-img-top" src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/352372897_766075741822009_1557405820142149132_n.png?stp=dst-jpg_p843x403&_nc_cat=111&ccb=1-7&_nc_sid=8631f5&_nc_eui2=AeH5ntHiLsQoJWMWoKrQrrk-QgIrCmjFkcpCAisKaMWRyvnUxJc9SgYJz4VgpNdP2l5FdFN_n2RT5tmhTlZw2yhV&_nc_ohc=Gqfx9wJ5j8gAX_eJ2hi&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&oh=00_AfB-hE_N3fWusrBJcHs73b5_ZwoA3K_L8K4U-7m-lIGx4A&oe=64B67E57" >
-                        </div>
-                        <div class="central-div">
-                            <h5>ประชาสัมพันธ์</h5>
-                            <i class="fa fa-bookmark"></i>
-                        </div>
-                        <div style="color: #000;">
-                          <p>ขอพื้นที่ประชาสัมพันธ์ค่ะ
-                            นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว 
-                            นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
-                        </div>
-                        <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                        </div>
-                      </a>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="container-st  py-1 h-100 justify-content-center ">
+              <div class="row ">
+                <div class="col-st my-4 ">
+                  <div class="card-c justify-content-center">
+                    <a href="#" class="text-decoration-none" style="padding: 5px;">
+                      <div class="border">
+                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                        <img class="card-img-top"
+                          src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/352372897_766075741822009_1557405820142149132_n.png?stp=dst-jpg_p843x403&_nc_cat=111&ccb=1-7&_nc_sid=8631f5&_nc_eui2=AeH5ntHiLsQoJWMWoKrQrrk-QgIrCmjFkcpCAisKaMWRyvnUxJc9SgYJz4VgpNdP2l5FdFN_n2RT5tmhTlZw2yhV&_nc_ohc=Gqfx9wJ5j8gAX_eJ2hi&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&oh=00_AfB-hE_N3fWusrBJcHs73b5_ZwoA3K_L8K4U-7m-lIGx4A&oe=64B67E57">
                       </div>
-                    </div>
-                    <div class="col mb-2">
-                      <div class="card-c">
-                        <a href="#" class="text-decoration-none">
-                        <div class="border">
-                          <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                            <img class="card-img-top" src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/9996419385177035953?url=https%3A%2F%2Flh3.googleusercontent.com%2Fdocs%2FADP-6oEkIvdoSe2uELFd61xBasTFfs3C-4LxNj4wNyDA-RUSjeY9VMWbMQimrVeUQAWL4KYn79LBgGDIRxGHXPzlIz9WQP0HsBY-fb7HivlmPg%3Dw1200-h630-p&fb_obo=1&utld=googleusercontent.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeGtMHVP7JEP2FbUGVfd_PqdoM5TY95dPCugzlNj3l08KxxUPkIfig-yJrrd2uMEmNiAAtgbSGzvcfWraVumfjQF&ccb=13-1&oh=06_AbHMwdoguLXi6X579ovt7l-1-jgEGMDGZrbsPg9Vm0eosw&oe=64B408A8&_nc_sid=9a47cc" >
-                        </div>
-                        <div class="central-div">
-                            <h5>กำหนดการนำเสนอโครงงานฯ ประจำภาคการศึกษาที่ 3/2565</h5>
-                            <i class="fa fa-bookmark"></i>
-                        </div>
-                        <div style="color: #000;">
-                          <p>ในวันศุกร์ที่ 7 กรกฎาคม 2566 โดยเป็นการสอบออนไลน์ผ่าน Zoom ID: 2563016003
-                            หมายเหตุ: เวลาสอบอาจมีการเปลี่ยนแปลงได้ตามความเหมาะสม ทั้งนี้ขอให้นักศึกษายืนยันเวลากับอาจารย์ที่ปรึกษาโครงงานอีกครั้งหนึ่ง
-                            https://docs.google.com/.../1clRRN61fdvVBZ.../edit...</p>
-                        </div>
-                        <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                        </div>
-                      </a>
+                      <div class="central-div">
+                        <h5>ประชาสัมพันธ์</h5>
+                        <i class="fa fa-bookmark"></i>
                       </div>
-                    </div>
-                    <div class="col mb-2">
-                      <div class="card-c">
-                        <a href="#" class="text-decoration-none">
-                        <div class="border">
-                          <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                            <img class="card-img-top" src="https://scontent.fbkk22-8.fna.fbcdn.net/v/t39.30808-6/356930324_785383100040806_8470983989892658069_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeE6aSB8IhmvDXiEoViDD3XVlRhzzZbJw5OVGHPNlsnDkyP4oGsMmYqOnBLfpDv4FZDemVjsxe0Of7_d8qabzaAf&_nc_ohc=FsbPbp4hDQEAX-JaRSD&_nc_zt=23&_nc_ht=scontent.fbkk22-8.fna&oh=00_AfARO5lHA50u2Rt3icPnkvGDjkGfT79cGkRUycKpwMVUeQ&oe=64B6C3C4" >
-                        </div>
-                        <div class="central-div">
-                            <h5>ประชาสัมพันธ์ตำแหน่งงาน</h5>
-                            <i class="fa fa-bookmark"></i>
-                        </div>
-                        <div style="color: #000;">
-                          <p>ของบริษัท เนาวรัตน์พัฒนาการ จำกัด (มหาชน)</p>
-                        </div>
-                        <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                        </div>
-                      </a>
+                      <div style="color: #000;">
+                        <p>ขอพื้นที่ประชาสัมพันธ์ค่ะ
+                          นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว
+                          นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ
+                          ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
                       </div>
-                    </div>
-                    <div class="col mb-2">
-                      <div class="card-c">
-                        <a href="#" class="text-decoration-none">
-                        <div class="border">
-                          <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                            <img class="card-img-top" src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/1323460406344787765?url=https%3A%2F%2Fth.jobsdb.com%2Fstatic%2Fshared-web%2Fbanner-ac16df6d9822896298e5bdde8b8fcfde.png&fb_obo=1&utld=jobsdb.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeHztESUtkk-XRXnQDviXZdq-rKrn-U1Gq36squf5TUarcelrpJLiBzw8tMIN_kx6TVV0k3BhWzNzMH-QdyljSuO&ccb=13-1&oh=06_AbFb7ZjLloWPSZLRSM-MzlGpNcZGeYzZ3yCq5kNo4pNTdQ&oe=64B40EE7&_nc_sid=dbad39" >
-                        </div>
-                        <div class="central-div">
-                            <h5>ประชาสัมพันธ์ข่าวรับสมัครงาน</h5>
-                            <i class="fa fa-bookmark"></i>
-                        </div>
-                        <div style="color: #000;">
-                          <p>RPA Developer (Fresh Grad/ Junior RPA Developer)
-                            Land and Houses Bank Public Company Limited
-                            สาทร
-                            ดูรายละเอียดเพิ่มเติมได้ที่... ดูเพิ่มเติม</p>
-                        </div>
-                        <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                        </div>
-                      </a>
+                      <div class="card-text"><small class="text-muted">
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
                       </div>
-                    </div>
-                        <!-- <div class="card">
-                            <a href="#" class="text-decoration-none">
-                            <div id="bi-bi-x-square-fill">
-                                <i class="bi bi-x-square-fill" style="position: absolute; font-size: x-large; color: rgb(250, 18, 18); "></i>
-                            </div>
-                            <img class="card-img-top" src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
-                            alt="image 1" class="w-100 rounded-3">
-                            <div class="card-body" >
-                            <h5 class="card-title" style="color: #000;">Lorem ipsum dolor sit amet.</h5>
-                            <p class="card-text" style="color: #000; margin-bottom: 3%;">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad alias, aliquid amet aspernatur atque culpa cum debitis dicta doloremque, dolorum ea eos et excepturi explicabo facilis harum illo impedit incidunt laborum laudantium...
-                            </p>
-                            <p class="card-text"><small class="text-muted">
-                                <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-journal-bookmark-fill fa-lg"></i></i> bookmork</a>
-                                <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                                <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                           </div>
-                           </a>
-                        </div> -->
-                    </div>
-                    <!-- <div class="col mb-2">
-                      <div class="card">
-                        <a href="#" class="text-decoration-none">
-                        <div id="bi-bi-x-square-fill">
-                            <i class="bi bi-x-square-fill" style="position: absolute; font-size: x-large; color: rgb(250, 18, 18); "></i>
-                        </div>
-                        <img class="card-img-top" src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
-                        alt="image 1" class="w-100 rounded-3">
-                        <div class="card-body" >
-                        <h5 class="card-title" style="color: #000;">Lorem ipsum dolor sit amet.</h5>
-                        <p class="card-text" style="color: #000; margin-bottom: 3%;">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad alias, aliquid amet aspernatur atque culpa cum debitis dicta doloremque, dolorum ea eos et excepturi explicabo facilis harum illo impedit incidunt laborum laudantium...
-                        </p>
-                        <p class="card-text"><small class="text-muted">
-                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="bi bi-journal-bookmark-fill fa-lg"></i></i> bookmork</a>
-                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a> 
-                            <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                       </div>
-                       </a>
-                  </div> -->
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-st my-4">
+                  <div class="card-c justify-content-center">
+                    <a href="#" class="text-decoration-none">
+                      <div class="border">
+                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                        <img class="card-img-top"
+                          src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/9996419385177035953?url=https%3A%2F%2Flh3.googleusercontent.com%2Fdocs%2FADP-6oEkIvdoSe2uELFd61xBasTFfs3C-4LxNj4wNyDA-RUSjeY9VMWbMQimrVeUQAWL4KYn79LBgGDIRxGHXPzlIz9WQP0HsBY-fb7HivlmPg%3Dw1200-h630-p&fb_obo=1&utld=googleusercontent.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeGtMHVP7JEP2FbUGVfd_PqdoM5TY95dPCugzlNj3l08KxxUPkIfig-yJrrd2uMEmNiAAtgbSGzvcfWraVumfjQF&ccb=13-1&oh=06_AbHMwdoguLXi6X579ovt7l-1-jgEGMDGZrbsPg9Vm0eosw&oe=64B408A8&_nc_sid=9a47cc">
+                      </div>
+                      <div class="central-div">
+                        <h5>กำหนดการนำเสนอโครงงานฯ ประจำภาคการศึกษาที่ 3/2565</h5>
+                        <i class="fa fa-bookmark"></i>
+                      </div>
+                      <div style="color: #000;">
+                        <p>ในวันศุกร์ที่ 7 กรกฎาคม 2566 โดยเป็นการสอบออนไลน์ผ่าน Zoom ID: 2563016003
+                          หมายเหตุ: เวลาสอบอาจมีการเปลี่ยนแปลงได้ตามความเหมาะสม
+                          ทั้งนี้ขอให้นักศึกษายืนยันเวลากับอาจารย์ที่ปรึกษาโครงงานอีกครั้งหนึ่ง
+                          https://docs.google.com/.../1clRRN61fdvVBZ.../edit...</p>
+                      </div>
+                      <div class="card-text"><small class="text-muted">
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-st my-4">
+                  <div class="card-c justify-content-center">
+                    <a href="#" class="text-decoration-none">
+                      <div class="border">
+                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                        <img class="card-img-top"
+                          src="https://scontent.fbkk22-8.fna.fbcdn.net/v/t39.30808-6/356930324_785383100040806_8470983989892658069_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeE6aSB8IhmvDXiEoViDD3XVlRhzzZbJw5OVGHPNlsnDkyP4oGsMmYqOnBLfpDv4FZDemVjsxe0Of7_d8qabzaAf&_nc_ohc=FsbPbp4hDQEAX-JaRSD&_nc_zt=23&_nc_ht=scontent.fbkk22-8.fna&oh=00_AfARO5lHA50u2Rt3icPnkvGDjkGfT79cGkRUycKpwMVUeQ&oe=64B6C3C4">
+                      </div>
+                      <div class="central-div">
+                        <h5>ประชาสัมพันธ์ตำแหน่งงาน</h5>
+                        <i class="fa fa-bookmark"></i>
+                      </div>
+                      <div style="color: #000;">
+                        <p>ของบริษัท เนาวรัตน์พัฒนาการ จำกัด (มหาชน)</p>
+                      </div>
+                      <div class="card-text"><small class="text-muted">
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
+                <div class="col-st my-4">
+                  <div class="card-c justify-content-center">
+                    <a href="#" class="text-decoration-none">
+                      <div class="border">
+                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                        <img class="card-img-top"
+                          src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/1323460406344787765?url=https%3A%2F%2Fth.jobsdb.com%2Fstatic%2Fshared-web%2Fbanner-ac16df6d9822896298e5bdde8b8fcfde.png&fb_obo=1&utld=jobsdb.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeHztESUtkk-XRXnQDviXZdq-rKrn-U1Gq36squf5TUarcelrpJLiBzw8tMIN_kx6TVV0k3BhWzNzMH-QdyljSuO&ccb=13-1&oh=06_AbFb7ZjLloWPSZLRSM-MzlGpNcZGeYzZ3yCq5kNo4pNTdQ&oe=64B40EE7&_nc_sid=dbad39">
+                      </div>
+                      <div class="central-div">
+                        <h5>ประชาสัมพันธ์ข่าวรับสมัครงาน</h5>
+                        <i class="fa fa-bookmark"></i>
+                      </div>
+                      <div style="color: #000;">
+                        <p>RPA Developer (Fresh Grad/ Junior RPA Developer)
+                          Land and Houses Bank Public Company Limited
+                          สาทร
+                          ดูรายละเอียดเพิ่มเติมได้ที่... ดูเพิ่มเติม</p>
+                      </div>
+                      <div class="card-text"><small class="text-muted">
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
+                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
+                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -277,4 +298,5 @@
 </body>
 
 <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
 </html>
