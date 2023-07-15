@@ -190,7 +190,7 @@ router.get('/profile', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id WHERE users.id = 3;", [req.session.userID])
         .then(([rows]) => {
             if (rows[0].role === "USER") {
-                res.render('user_page/request_official', {
+                res.render('user_page/profile', {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,

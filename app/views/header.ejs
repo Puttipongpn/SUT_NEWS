@@ -98,25 +98,29 @@
                                                                         <% } %>
                                                                             <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
                                                         </div>
-                                                        <div class="data-h">
-                                                            <%= user_name%>
-                                                                <span>
-                                                                    <%= role%>
-                                                                </span>
-                                                                <span>
-                                                                    <%= email%>
-                                                                </span>
-                                                        </div>
+                                                        <a class="dropdown-item" href="/profile">
+                                                            <div class="data-h">
+                                                                <%= user_name%>
+                                                                    <span>
+                                                                        <%= role%>
+                                                                    </span>
+                                                                    <span>
+                                                                        <%= email%>
+                                                                    </span>
+                                                            </div>
+                                                        </a>
                                                         <!-- <div class="info-h">
                                                             Posts
                                                             <span>209</span>
                                                         </div> -->
+                                                        <div>
                                                         <a class="dropdown-item" href="/setting_profile"
                                                             id="setting_profile">
                                                             <div style="padding-left: 5px;">
                                                                 แก้ไขโปรไฟล์
                                                             </div>
                                                         </a>
+                                                        </div>
                                                         <div>
                                                             <a class="dropdown-item" id="Logout"
                                                                 href="/logout">Logout</a>
