@@ -13,7 +13,7 @@
 <body>
     <%- include('../header') %>
         <%- include('../nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" 
+            <form method="post" action="/addnews/<%= users[0].id %>"
                 class="d-flex justify-content-between align-items-center">
                 <div class="container">
                     <div class=" row gutters">
@@ -47,6 +47,60 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="form-group">
+                                            <div>
+                                                <label for="tags">Tags Select</label>
+                                            </div>
+                                            <div>
+                                                <select class="form-select-ad form-select-lg" id="tags" name="section"
+                                                    aria-label="Default select example">
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <table id="selectedTagsTable">
+                                    <thead>
+                                        <tr>
+                                            <th>tags id</th>
+                                            <th>name</th>
+                                            <th>delect</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                                <script>
+                                    const tagsSelect = document.getElementById('tags');
+                                    const selectedTagsTable = document.getElementById('selectedTagsTable');
+                                    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+                                    let nextId = 1;
+
+                                    tagsSelect.addEventListener('change', function () {
+                                        const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
+                                        const selectedId = tagsSelect.value;
+                                        if (selectedTag) {
+                                            const newRow = selectedTagsTableBody.insertRow();
+                                            const idCell = newRow.insertCell();
+                                            idCell.textContent = selectedId;
+                                            const nameCell = newRow.insertCell();
+                                            nameCell.textContent = selectedTag;
+                                            const actionCell = newRow.insertCell();
+                                            const deleteButton = document.createElement('button');
+                                            deleteButton.textContent = 'Delete';
+                                            deleteButton.addEventListener('click', function () {
+                                                selectedTagsTableBody.removeChild(newRow);
+                                            });
+                                            actionCell.appendChild(deleteButton);
+                                            nextId++;
+                                        }
+                                    });
+                                </script>
+                            </div>
+
                         </div>
 
                         <div class="col-12 col-md-9">
@@ -63,8 +117,7 @@
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                        name="news_type_id" 
-                                                        aria-label="Default select example">
+                                                        name="news_type_id" aria-label="Default select example">
                                                     </select>
                                                 </div>
                                             </div>
@@ -147,22 +200,22 @@
                                     <div class="row gutters">
                                         <div class="col-12" style="padding-top: 10px;">
                                             <label for="main_para">Main paragrap</label>
-                                            <textarea class="form-control" id="main_para"
-                                                name="main_para" rows="3"></textarea>
+                                            <textarea class="form-control" id="main_para" name="main_para"
+                                                rows="3"></textarea>
                                         </div>
                                         <div class="col-12">
                                             <label for="end_para">End paragrap</label>
-                                            <textarea class="form-control" id="end_para"
-                                                name="end_para" rows="3"></textarea>
+                                            <textarea class="form-control" id="end_para" name="end_para"
+                                                rows="3"></textarea>
                                         </div>
                                     </div>
+
                                     <div class="row gutters">
                                         <div class="col-12" style="padding-top: 20px;">
                                             <div class="d-flex justify-content-between">
                                                 <button type="" id="submit" name="submit"
                                                     class="btn btn-danger">Cancel</button>
-                                                <button type="submit"
-                                                    class="btn btn-primary">Sent</button>
+                                                <button type="submit" class="btn btn-primary">Sent</button>
                                             </div>
                                         </div>
                                     </div>
@@ -383,6 +436,31 @@
                 option.value = item.topic_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
                 option.textContent = item.topic_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
                 dataSelect_topic.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+</script>
+
+<script> //ดึงข้อมูลเข้า combobox news_type
+    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+    const dataSelect_tags = document.getElementById('tags');
+    const defaultOption3 = document.createElement('option');
+    defaultOption3.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+    defaultOption3.textContent = 'กรุณาเลือก';
+    dataSelect_tags.appendChild(defaultOption3);
+
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+        .then(response => response.json())
+        .then(data => {
+            // สร้างตัวเลือกในกล่องคอมโบ
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.section_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
+                option.textContent = item.name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
+                dataSelect_tags.appendChild(option);
             });
         })
         .catch(error => {

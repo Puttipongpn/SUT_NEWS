@@ -301,6 +301,18 @@ router.get('/news_topic_combobox', (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         });
 });
+// tags กับ section คือตัวเดียวกัน
+router.get('/tags', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM section")
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?", [req.session.userID])
