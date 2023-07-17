@@ -55,8 +55,8 @@
                                                 <label for="tags">Tags Select</label>
                                             </div>
                                             <div>
-                                                <select class="form-select-ad form-select-lg" id="tags" name="section"
-                                                    aria-label="Default select example">
+                                                <select class="form-select-ad form-select-lg" id="tags"
+                                                    name="section_id" aria-label="Default select example">
                                                 </select>
                                             </div>
                                         </div>
@@ -73,6 +73,7 @@
                                     <tbody>
                                     </tbody>
                                 </table>
+                              
                                 <script>
                                     const tagsSelect = document.getElementById('tags');
                                     const selectedTagsTable = document.getElementById('selectedTagsTable');
@@ -96,8 +97,35 @@
                                             });
                                             actionCell.appendChild(deleteButton);
                                             nextId++;
+                                            // Send section_id to backend
+                                            sendSectionToBackend(selectedId);
                                         }
                                     });
+
+                                    function sendSectionToBackend(sectionId) {
+                                        // Make an AJAX request or submit a form to send section_id to backend
+                                        // Example using fetch and POST method:
+                                        fetch('/addnews/:id', {
+                                            method: 'POST',
+                                            headers: {
+                                                'Content-Type': 'application/json'
+                                            },
+                                            body: JSON.stringify({ section_id: sectionId })
+                                        })
+                                            .then(response => {
+                                                if (response.ok) {
+                                                    // Handle successful response from backend
+                                                    console.log('Section sent to backend successfully');
+                                                } else {
+                                                    // Handle error response from backend
+                                                    console.error('Failed to send section to backend');
+                                                }
+                                            })
+                                            .catch(error => {
+                                                // Handle network error or other exceptions
+                                                console.error('Error sending section to backend:', error);
+                                            });
+                                    }
                                 </script>
                             </div>
 
@@ -137,6 +165,13 @@
                                                     <option value="3">Three</option> -->
                                                     </select>
                                                 </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                            <div class="">
+                                                <label for="title">Title</label>
+                                                <input type="text" class="form-control form-control-lg" id="title"
+                                                    name="title" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
@@ -184,9 +219,9 @@
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div class="">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control form-control-lg" id="title"
-                                                    name="title" placeholder="">
+                                                <label for="Intro_para">Introl</label>
+                                                <input type="text" class="form-control form-control-lg" id="Intro_para"
+                                                    name="Intro_para" placeholder="">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
