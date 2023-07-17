@@ -301,6 +301,18 @@ router.get('/news_topic_combobox', (req, res) => {
             res.status(500).json({ error: 'Internal Server Error' });
         });
 });
+// tags กับ section คือตัวเดียวกัน
+router.get('/tags', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM section")
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?", [req.session.userID])
@@ -324,13 +336,38 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
         });
 });
 
+
 router.post('/addnews/:id', ifNotLoggedin, (req, res) => {
-    let params = { ...req.body, user_id: req.params.id };
-    console.log(params);
-    dbConnection.query("INSERT INTO news SET ?", [params])
-        .then(() => {
-            res.redirect('user_page/add_news');
-            req.session.message = 'บันทึกสำเร็จ';
+    const { section_id, ...newsData } = req.body;
+
+    const newsDataWithUserId = {
+        user_id: req.params.id,
+        ...newsData
+      };
+
+    dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
+        .then(result => {
+            const newsId = result[0].insertId;
+            console.log(result);
+            if (section_id) {
+                const groupSectionData = {
+                    news_id: newsId,
+                    section_id: section_id
+                };
+
+                dbConnection.query("INSERT INTO group_section SET ?", groupSectionData)
+                    .then(() => {
+                        res.redirect('/addnews');
+                        req.session.message = 'บันทึกสำเร็จ';
+                    })
+                    .catch(err => {
+                        console.log(err);
+                        res.redirect('404page');
+                    });
+            } else {
+                res.redirect('/addnews');
+                req.session.message = 'บันทึกสำเร็จ';
+            }
         })
         .catch(err => {
             console.log(err);
