@@ -40,12 +40,15 @@
       padding: 0;
     }
 
+    #container-fluid{
+      background-color: rgb(255, 255, 255);
+    }
+
     .container-st {
-      width: 90%;
+      width: 85%;
       height: 100%;
       display: grid;
-      place-items: center;
-
+ 
     }
 
     .col-st {
@@ -59,7 +62,7 @@
     .card-c {
       margin-left: 6px;
       height: 100%;
-      width: 380px;
+      width: 360px;
       border-radius: 10px;
       background-color: #ffffff;
       overflow: hidden;
@@ -71,6 +74,7 @@
       flex-direction: column;
       align-items: center;
     }
+    
 
     .border {
       height: 220px;
@@ -129,10 +133,10 @@
   <%- include('../header') %>
     <%- include('../nav') %>
       <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
-        <div class="container-st   h-100 ">
-          <div class="row  d-flex justify-content-center align-items-center" style="margin-top: -40px;">
+        <div class="container-st h-100 ">
+          <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
             <div class="col">
-              <div class="card" style="height: 100%;box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);">
+              <div class="card" style="height: 100%; width: 100%;box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);">
                 <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                   <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; padding-top:40px">
                     <img
@@ -174,125 +178,114 @@
             </div>
 
 
-            <div class="container-st  py-1 h-100 justify-content-center ">
-              <div class="row ">
-                <div class="col-st my-4 ">
-                  <div class="card-c justify-content-center">
-                    <a href="#" class="text-decoration-none" style="padding: 5px;">
-                      <div class="border">
-                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                        <img class="card-img-top"
-                          src="https://scontent.fbkk22-3.fna.fbcdn.net/v/t39.30808-6/352372897_766075741822009_1557405820142149132_n.png?stp=dst-jpg_p843x403&_nc_cat=111&ccb=1-7&_nc_sid=8631f5&_nc_eui2=AeH5ntHiLsQoJWMWoKrQrrk-QgIrCmjFkcpCAisKaMWRyvnUxJc9SgYJz4VgpNdP2l5FdFN_n2RT5tmhTlZw2yhV&_nc_ohc=Gqfx9wJ5j8gAX_eJ2hi&_nc_zt=23&_nc_ht=scontent.fbkk22-3.fna&oh=00_AfB-hE_N3fWusrBJcHs73b5_ZwoA3K_L8K4U-7m-lIGx4A&oe=64B67E57">
-                      </div>
-                      <div class="central-div">
-                        <h5>ประชาสัมพันธ์</h5>
-                        <i class="fa fa-bookmark"></i>
-                      </div>
-                      <div style="color: #000;">
-                        <p>ขอพื้นที่ประชาสัมพันธ์ค่ะ
-                          นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว
-                          นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ
-                          ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
-                      </div>
-                      <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                      </div>
-                    </a>
+            <div id="container-fluid" class="container-fluid py-1 h-100 justify-content-center ">
+              <div class="row g-2">
+                <div class="col-4">
+                    <div class="col-st my-4 ">
+                        <div class="card-c justify-content-start">
+                          <a href="#" class="text-decoration-none">
+                            <div class="border">
+                              <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                              <img class="card-img-top"
+                                  src="https://scontent.fnak3-1.fna.fbcdn.net/v/t39.30808-6/290507053_5243622955718298_6432959834940703092_n.png?stp=dst-png_p843x403&_nc_cat=102&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeEkAvtQzk3VU5I1TNEBY1nu-hmKpN9oK7T6GYqk32grtNGtCOx4iSc2uz7wkRkQT2j65vjZTJ3i13ACZ_qCG5WP&_nc_ohc=B_g-U76SCykAX903iLs&_nc_ht=scontent.fnak3-1.fna&oh=00_AfAdMnO6UaXPwUobJDiINxNA3C3kDAiFFZ1Kt87S2M4X7Q&oe=64B99CEE">
+                              </div>
+                              <div class="card-body">
+                                  <h5 class="card-title"><b>ประชาสัมพันธ์</b></h5>
+                                  <p class="card-text">ขอพื้นที่ประชาสัมพันธ์ค่ะ
+                                    นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว
+                                    นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ
+                                    ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
+                                  <p class="card-text"><small class="text-muted">
+                                      <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                      <i class="far fa-user"></i>admin
+                                      <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                              </div>
+                            </div>
+                          </a>
+                       </div>
+                    </div>
+                    <div class="col-st my-4">
+                      <div class="card-c justify-content-center">
+                        <a href="#" class="text-decoration-none">
+                          <div class="border">
+                            <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                            <img class="card-img-top"
+                                src="https://external.fnak3-1.fna.fbcdn.net/emg1/v/t13/9723147905655134363?url=https%3A%2F%2Flh5.googleusercontent.com%2F2NiuIvaD5rRmlwMxIK_xae7n8tr7W4TVWY0kmyd2ChLfosEHkBMn3RI56wX0YZASd5cTzUIwvz3PrQ%3Dw1200-h630-p&fb_obo=1&utld=googleusercontent.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeGl2ZzlZhqLCCfcKMOA2f-e6vtlLhB0NJXq-2UuEHQ0lVSkB1UA8623L3nPhxxvyfBoyg2qIjAPtkmw3a31OtwZ&ccb=13-1&oh=06_AbEeQGfVGeKbk5Xv3SAMig5W4UXjL0uRyfvQ2UjTqvx56Q&oe=64B73F99&_nc_sid=9a47cc">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><b>ประชาสัมพันธ์</b></h5>
+                                <p class="card-text">ขอพื้นที่ประชาสัมพันธ์ค่ะ
+                                  นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว
+                                  นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ
+                                  ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
+                                <p class="card-text"><small class="text-muted">
+                                    <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                    <i class="far fa-user"></i>admin
+                                    <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                            </div>
+                          </div>
+                        </a>
+                     </div>
                   </div>
+                  <div class="col-st my-4">
+                    <div class="card-c justify-content-end">
+                      <a href="#" class="text-decoration-none">
+                        <div class="border">
+                          <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
+                          <img class="card-img-top"
+                              src="https://external.fnak3-1.fna.fbcdn.net/emg1/v/t13/9723147905655134363?url=https%3A%2F%2Flh5.googleusercontent.com%2F2NiuIvaD5rRmlwMxIK_xae7n8tr7W4TVWY0kmyd2ChLfosEHkBMn3RI56wX0YZASd5cTzUIwvz3PrQ%3Dw1200-h630-p&fb_obo=1&utld=googleusercontent.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeGl2ZzlZhqLCCfcKMOA2f-e6vtlLhB0NJXq-2UuEHQ0lVSkB1UA8623L3nPhxxvyfBoyg2qIjAPtkmw3a31OtwZ&ccb=13-1&oh=06_AbEeQGfVGeKbk5Xv3SAMig5W4UXjL0uRyfvQ2UjTqvx56Q&oe=64B73F99&_nc_sid=9a47cc">
+                          </div>
+                          <div class="card-body">
+                              <h5 class="card-title"><b>ประชาสัมพันธ์</b></h5>
+                              <p class="card-text">ขอพื้นที่ประชาสัมพันธ์ค่ะ
+                                นักศึกษารหัส 64 ที่ได้อาจารย์โปรเจคแล้ว
+                                นักศึกษาที่อยู่กับอาจารย์ศรัญญา ขอให้เข้ากลุ่ม Facebook ด้วยนะคะ
+                                ไม่เช่นนั้นจะไม่สามารถรับข่าวสารภายในกลุ่มได้ค่ะ </p>
+                              <p class="card-text"><small class="text-muted">
+                                  <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                  <i class="far fa-user"></i>admin
+                                  <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                          </div>
+                        </div>
+                      </a>
+                   </div>
                 </div>
-
-                <div class="col-st my-4">
-                  <div class="card-c justify-content-center">
-                    <a href="#" class="text-decoration-none">
-                      <div class="border">
-                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                        <img class="card-img-top"
-                          src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/9996419385177035953?url=https%3A%2F%2Flh3.googleusercontent.com%2Fdocs%2FADP-6oEkIvdoSe2uELFd61xBasTFfs3C-4LxNj4wNyDA-RUSjeY9VMWbMQimrVeUQAWL4KYn79LBgGDIRxGHXPzlIz9WQP0HsBY-fb7HivlmPg%3Dw1200-h630-p&fb_obo=1&utld=googleusercontent.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeGtMHVP7JEP2FbUGVfd_PqdoM5TY95dPCugzlNj3l08KxxUPkIfig-yJrrd2uMEmNiAAtgbSGzvcfWraVumfjQF&ccb=13-1&oh=06_AbHMwdoguLXi6X579ovt7l-1-jgEGMDGZrbsPg9Vm0eosw&oe=64B408A8&_nc_sid=9a47cc">
-                      </div>
-                      <div class="central-div">
-                        <h5>กำหนดการนำเสนอโครงงานฯ ประจำภาคการศึกษาที่ 3/2565</h5>
-                        <i class="fa fa-bookmark"></i>
-                      </div>
-                      <div style="color: #000;">
-                        <p>ในวันศุกร์ที่ 7 กรกฎาคม 2566 โดยเป็นการสอบออนไลน์ผ่าน Zoom ID: 2563016003
-                          หมายเหตุ: เวลาสอบอาจมีการเปลี่ยนแปลงได้ตามความเหมาะสม
-                          ทั้งนี้ขอให้นักศึกษายืนยันเวลากับอาจารย์ที่ปรึกษาโครงงานอีกครั้งหนึ่ง
-                          https://docs.google.com/.../1clRRN61fdvVBZ.../edit...</p>
-                      </div>
-                      <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-st my-4">
-                  <div class="card-c justify-content-center">
-                    <a href="#" class="text-decoration-none">
-                      <div class="border">
-                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                        <img class="card-img-top"
-                          src="https://scontent.fbkk22-8.fna.fbcdn.net/v/t39.30808-6/356930324_785383100040806_8470983989892658069_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=730e14&_nc_eui2=AeE6aSB8IhmvDXiEoViDD3XVlRhzzZbJw5OVGHPNlsnDkyP4oGsMmYqOnBLfpDv4FZDemVjsxe0Of7_d8qabzaAf&_nc_ohc=FsbPbp4hDQEAX-JaRSD&_nc_zt=23&_nc_ht=scontent.fbkk22-8.fna&oh=00_AfARO5lHA50u2Rt3icPnkvGDjkGfT79cGkRUycKpwMVUeQ&oe=64B6C3C4">
-                      </div>
-                      <div class="central-div">
-                        <h5>ประชาสัมพันธ์ตำแหน่งงาน</h5>
-                        <i class="fa fa-bookmark"></i>
-                      </div>
-                      <div style="color: #000;">
-                        <p>ของบริษัท เนาวรัตน์พัฒนาการ จำกัด (มหาชน)</p>
-                      </div>
-                      <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-
-                <div class="col-st my-4">
-                  <div class="card-c justify-content-center">
-                    <a href="#" class="text-decoration-none">
-                      <div class="border">
-                        <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
-                        <img class="card-img-top"
-                          src="https://external.fbkk22-4.fna.fbcdn.net/emg1/v/t13/1323460406344787765?url=https%3A%2F%2Fth.jobsdb.com%2Fstatic%2Fshared-web%2Fbanner-ac16df6d9822896298e5bdde8b8fcfde.png&fb_obo=1&utld=jobsdb.com&stp=c0.5000x0.5000f_dst-jpg_flffffff_p500x261_q75&_nc_eui2=AeHztESUtkk-XRXnQDviXZdq-rKrn-U1Gq36squf5TUarcelrpJLiBzw8tMIN_kx6TVV0k3BhWzNzMH-QdyljSuO&ccb=13-1&oh=06_AbFb7ZjLloWPSZLRSM-MzlGpNcZGeYzZ3yCq5kNo4pNTdQ&oe=64B40EE7&_nc_sid=dbad39">
-                      </div>
-                      <div class="central-div">
-                        <h5>ประชาสัมพันธ์ข่าวรับสมัครงาน</h5>
-                        <i class="fa fa-bookmark"></i>
-                      </div>
-                      <div style="color: #000;">
-                        <p>RPA Developer (Fresh Grad/ Junior RPA Developer)
-                          Land and Houses Bank Public Company Limited
-                          สาทร
-                          ดูรายละเอียดเพิ่มเติมได้ที่... ดูเพิ่มเติม</p>
-                      </div>
-                      <div class="card-text"><small class="text-muted">
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="bi bi-person-circle fa-lg"></i>P'Cream</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-comments fa-fw fa-lg m-r-3"></i> Comment</a>
-                          <a href="javascript:;" class="m-r-15 text-inverse-lighter"><i
-                              class="fa fa-share fa-fw fa-lg m-r-3"></i> Share</a></small></p>
-                      </div>
-                    </a>
-                  </div>
                 </div>
               </div>
+              <!-- <div class="container">
+                <div class="row align-items-start">
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">ประชาสัมพันธ์</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="card" style="width: 18rem;">
+                      <img src="..." class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div> -->
             </div>
           </div>
         </div>

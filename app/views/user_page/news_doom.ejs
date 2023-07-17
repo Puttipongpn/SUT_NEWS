@@ -16,6 +16,41 @@
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
         }
+        .top{
+            height: 220px;
+            width: 100%;
+            border: none;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+        .top:hover i {
+            position: absolute;
+            top: 10px;
+        }
+
+        .top i {
+            position: absolute;
+            top: -100px;
+            right: 10px;
+            font-size: 25px;
+            color: white;
+            transition: all 0.5s;
+        }
+
+        .top .i-red {
+            color: red;
+        }
+
+        .top img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+            transition: all 2s;
+        }
+           
     </style>
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -138,17 +173,20 @@
                                     <li class="splide__slide mb-3">
                                         <div class="card">
                                             <a href="#" class="text-decoration-none">
+                                                <div class="top">
+                                                <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
                                                 <img class="card-img-top"
                                                     src="https://images.unsplash.com/photo-1472076638602-b1f8b1ac0b4a?ixlib=rb-0.3.5&s=63c9de7246b535be56c8eaff9b87dd89&auto=format&fit=crop&w=500&q=80"
                                                     alt="Card image cap">
+                                                </div>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Lorem ipsum ing elit. Consequatur, doloremque!</h5>
+                                                    <h5 class="card-title"><b>Lorem ipsum ing elit. Consequatur, doloremque!</b></h5>
                                                     <p class="card-text">Lorem ipsum dolor sit ime nemo omnis praesentium
                                                         similique.</p>
-                                                    <p class="card-text"><small class="text-muted"><i
-                                                                class="fas fa-eye"></i>1000<i
-                                                                class="far fa-user"></i>admin<i
-                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                    <p class="card-text"><small class="text-muted">
+                                                        <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                                        <i class="far fa-user"></i>admin
+                                                        <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
                                                 </div>
                                             </a>
                                         </div>
@@ -156,17 +194,20 @@
                                     <li class="splide__slide mb-3">
                                         <div class="card" >
                                             <a href="#" class="text-decoration-none">
+                                                <div class="top">
+                                                <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
                                                 <img class="card-img-top"
                                                     src="https://images.unsplash.com/photo-1535086181678-5a5c4d23aa7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34c86263bec2c8f74ceb74e9f4c5a5fc&auto=format&fit=crop&w=500&q=80"
                                                     alt="Card image cap">
+                                                </div>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
+                                                    <h5 class="card-title"> <b>Lorem ipsum dolor sit amet, consectetur.</b></h5>
                                                     <p class="card-text">Amet commodi deleniti enim laboriosam odio placeat
                                                         praesentium quis ratione rerum suscipit.</p>
-                                                    <p class="card-text"><small class="text-muted"><i
-                                                                class="fas fa-eye"></i>1000<i
-                                                                class="far fa-user"></i>admin<i
-                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                    <p class="card-text"><small class="text-muted">
+                                                        <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                                        <i class="far fa-user"></i>admin
+                                                        <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
                                                 </div>
                                             </a>
                                         </div>
@@ -174,18 +215,21 @@
                                     <li class="splide__slide mb-3">
                                         <div class="card ">
                                             <a href="#" class="text-decoration-none" style="border-radius: 39px;">
+                                                <div class="top">
+                                                <i class="bi bi-x-square-fill" style=" font-size: x-large; color: rgb(250, 18, 18); "></i>
                                                 <img class="card-img-top" 
                                                     src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
                                                     alt="Card image cap">
+                                                </div>
                                                 <div class="card-body">
-                                                    <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
+                                                    <h5 class="card-title"> <b>Lorem ipsum dolor sit amet.</b></h5>
                                                     <p class="card-text">
                                                         rnatur atque culpa cumฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟฟ
                                                     </p>
-                                                    <p class="card-text"><small class="text-muted"><i
-                                                                class="fas fa-eye"></i>1000<i
-                                                                class="far fa-user"></i>admin<i
-                                                                class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
+                                                    <p class="card-text"><small class="text-muted">
+                                                        <i class="bi bi-person-circle fa-lg"></i>P'Cream
+                                                        <i class="far fa-user"></i>admin
+                                                        <i class="fas fa-calendar-alt"></i>Jan 20, 2018</small></p>
                                                 </div>
                                             </a>
                                         </div>
