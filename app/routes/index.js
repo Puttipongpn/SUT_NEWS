@@ -314,6 +314,28 @@ router.get('/tags', (req, res) => {
         });
 });
 
+router.get('/setting_news', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM news WHERE id = ?", [req.session.userID])
+        .then(([rows]) => {
+            if (rows[0].role === "OFFICIAL USER") {
+                res.render('user_page/setting_news', {
+                    users: rows,
+                    description: rows[0].description,
+                    name: rows[0].name,
+                    role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
+                    profile_image: req.session.profile_image,
+                });
+            } else if (rows[0].role === "ADMIN") {
+                res.render('404page')
+            }
+            else {
+                res.render('404page')
+            }
+        });
+});
+
 router.get('/addnews', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?", [req.session.userID])
         .then(([rows]) => {
