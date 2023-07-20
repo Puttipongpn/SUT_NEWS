@@ -476,6 +476,32 @@ router.get('/page1', ifNotLoggedin, (req, res, next) => {
             }
         });
 });
+
+
+router.get('/section_setting', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM `section`", [req.session.userID])
+        .then(([rows]) => {
+            if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
+                res.render('user_page/tags_setting', {
+                    section: rows,
+                    name: req.session.name,
+                    role: req.session.role,
+                    user_name: req.session.user_name,
+                    email: req.session.email,
+                    profile_image: req.session.profile_image,
+                });
+            }else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
+                res.render('404page');
+            }
+            else {
+                req.session.isLoggedIn === true;
+                res.render('home/page1', {
+                    name: 'PLEASE LOGIN',
+                    role: 'GUEST'
+                })
+            }
+        });
+});
 //USER---------------------------------------------------------------------------------------
 
 //ADMIN--------------------------------------------------------------------------------------
