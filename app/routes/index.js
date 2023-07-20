@@ -336,45 +336,40 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-
 router.post('/addnews/:id', ifNotLoggedin, (req, res) => {
     const { section_id, ...newsData } = req.body;
 
     const newsDataWithUserId = {
         user_id: req.params.id,
         ...newsData
-      };
+    };
 
     dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
         .then(result => {
             const newsId = result[0].insertId;
-            console.log(result);
+            console.log(section_id);
             if (section_id) {
-                const groupSectionData = {
+                const sectionIds = JSON.parse(section_id); // แปลง JSON string กลับเป็น Array
+               
+                const groupSectionData = sectionIds.map(id => ({
                     news_id: newsId,
-                    section_id: section_id
-                };
+                    section_id: id
+                }));
 
-                dbConnection.query("INSERT INTO group_section SET ?", groupSectionData)
-                    .then(() => {
-                        res.redirect('/addnews');
-                        req.session.message = 'บันทึกสำเร็จ';
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        res.redirect('404page');
-                    });
-            } else {
-                res.redirect('/addnews');
-                req.session.message = 'บันทึกสำเร็จ';
+                return Promise.all(groupSectionData.map(data =>
+                    dbConnection.query("INSERT INTO group_section SET ?", data)
+                ));
             }
+        })
+        .then(() => {
+            res.redirect('/addnews');
+            req.session.message = 'บันทึกสำเร็จ';
         })
         .catch(err => {
             console.log(err);
             res.redirect('404page');
         });
 });
-
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
