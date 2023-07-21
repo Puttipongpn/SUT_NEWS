@@ -69,18 +69,18 @@
 			    <% bookmark.forEach((bookmark)=> { %>
                     <tr>
                         <td>
-                            <p class="fw-normal mb-1">
+                            <p class="fw-normal mb-2">
                                 <%- bookmark.news_type_name %>
                             </p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">
+                            <p class="fw-normal mb-2">
                                 <%- bookmark.topic_name %>
                             </p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">
-                                <%- bookmark.news_type_name %>
+                            <p class="fw-normal mb-2" style="width: 450px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                <%- bookmark.intro_para %>
                             </p>
                         </td>
                         <td>
