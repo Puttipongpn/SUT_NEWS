@@ -54,6 +54,10 @@
                         href="/news_doom">DOOM</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/setting_news"
+                        id="setting_news">แก้ไขข่าวสาร</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/addnews"
                         id="AddNEWs">เพิ่มข่าวสาร</a>
                 </li>
@@ -258,6 +262,18 @@
             };
             console.log(currentUser.role)
             var userButton = document.getElementById('AddNEWs');
+            if (currentUser.role === 'OFFICIAL USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            console.log(currentUser.role)
+            var userButton = document.getElementById('setting_news');
             if (currentUser.role === 'OFFICIAL USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
