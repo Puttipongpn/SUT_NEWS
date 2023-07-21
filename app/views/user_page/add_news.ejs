@@ -73,31 +73,6 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                                <!-- <script>
-                                    const tagsSelect = document.getElementById('tags');
-                                    const selectedTagsTable = document.getElementById('selectedTagsTable');
-                                    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
-                                    
-
-                                    tagsSelect.addEventListener('change', function () {
-                                        const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
-                                        const selectedId = tagsSelect.value;
-                                        if (selectedTag) {
-                                            const newRow = selectedTagsTableBody.insertRow();
-                                            const idCell = newRow.insertCell();
-                                            idCell.textContent = selectedId;
-                                            const nameCell = newRow.insertCell();
-                                            nameCell.textContent = selectedTag;
-                                            const actionCell = newRow.insertCell();
-                                            const deleteButton = document.createElement('button');
-                                            deleteButton.textContent = 'Delete';
-                                            deleteButton.addEventListener('click', function () {
-                                                selectedTagsTableBody.removeChild(newRow);
-                                            });
-                                            actionCell.appendChild(deleteButton);
-                                        }
-                                    });
-                                </script> -->
                             </div>
 
                         </div>
@@ -169,7 +144,7 @@
                                             </div>
                                             <div style="padding-top: 5px;">
                                                 <button class="btn btn-warning" style="margin-right: 5px;"
-                                                    onclick="addMedia()">เพิ่มสื่อ</button>
+                                                    onclick="addMedia()"type="button">เพิ่มสื่อ</button>
                                                 <input class="btn btn-primary" style="height: 38px; padding-top:3px"
                                                     type="file" id="mediaFile">
                                             </div>
@@ -183,9 +158,7 @@
                                                             <th>ลบ</th>
                                                         </tr>
                                                     </thead>
-
                                                     <tbody>
-
                                                     </tbody>
                                                 </table>
                                             </div>
@@ -301,6 +274,7 @@
                     color: #bcd0f7;
                 }
             </style>
+            <%- include('../footer') %>
 </body>
 <script>
     let img = document.getElementById('img');
@@ -328,6 +302,7 @@
             var viewButtonCell = newRow.insertCell();
             var viewButton = document.createElement("button");
             viewButton.className = "view-button";
+            viewButton.type = "button"
             var viewIcon = document.createElement("i");
             viewIcon.className = "bi bi-eye";
             viewButton.appendChild(viewIcon);
@@ -451,7 +426,7 @@
         });
 </script>
 
-<script> //ดึงข้อมูลเข้า combobox news_type
+<script> //ดึงข้อมูลเข้า combobox section
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
    // Fetch section data and populate the select dropdown
    fetch('/tags')
@@ -470,7 +445,7 @@
    });
 </script>
 
-<!-- ... ส่วนอื่น ๆ ... -->
+<!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
 <script>
     const tagsSelect = document.getElementById('tags');
     const selectedTagsTable = document.getElementById('selectedTagsTable');
