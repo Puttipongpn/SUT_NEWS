@@ -13,7 +13,7 @@
 <body>
     <%- include('../header') %>
         <%- include('../nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>"
+            <form method="post" action="/addnews/<%= users[0].id %>" id="news"
                 class="d-flex justify-content-between align-items-center">
                 <div class="container">
                     <div class=" row gutters">
@@ -56,7 +56,7 @@
                                             </div>
                                             <div>
                                                 <select class="form-select-ad form-select-lg" id="tags"
-                                                    name="section_id" aria-label="Default select example">
+                                                     aria-label="Default select example" >
                                                 </select>
                                             </div>
                                         </div>
@@ -73,12 +73,11 @@
                                     <tbody>
                                     </tbody>
                                 </table>
-                              
-                                <script>
+                                <!-- <script>
                                     const tagsSelect = document.getElementById('tags');
                                     const selectedTagsTable = document.getElementById('selectedTagsTable');
                                     const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
-                                    let nextId = 1;
+                                    
 
                                     tagsSelect.addEventListener('change', function () {
                                         const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
@@ -96,37 +95,9 @@
                                                 selectedTagsTableBody.removeChild(newRow);
                                             });
                                             actionCell.appendChild(deleteButton);
-                                            nextId++;
-                                            // Send section_id to backend
-                                            sendSectionToBackend(selectedId);
                                         }
                                     });
-
-                                    function sendSectionToBackend(sectionId) {
-                                        // Make an AJAX request or submit a form to send section_id to backend
-                                        // Example using fetch and POST method:
-                                        fetch('/addnews/:id', {
-                                            method: 'POST',
-                                            headers: {
-                                                'Content-Type': 'application/json'
-                                            },
-                                            body: JSON.stringify({ section_id: sectionId })
-                                        })
-                                            .then(response => {
-                                                if (response.ok) {
-                                                    // Handle successful response from backend
-                                                    console.log('Section sent to backend successfully');
-                                                } else {
-                                                    // Handle error response from backend
-                                                    console.error('Failed to send section to backend');
-                                                }
-                                            })
-                                            .catch(error => {
-                                                // Handle network error or other exceptions
-                                                console.error('Error sending section to backend:', error);
-                                            });
-                                    }
-                                </script>
+                                </script> -->
                             </div>
 
                         </div>
@@ -173,6 +144,8 @@
                                                 <input type="text" class="form-control form-control-lg" id="title"
                                                     name="title" placeholder="">
                                             </div>
+                                        </div>
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div>
@@ -480,27 +453,66 @@
 
 <script> //ดึงข้อมูลเข้า combobox news_type
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    const dataSelect_tags = document.getElementById('tags');
-    const defaultOption3 = document.createElement('option');
-    defaultOption3.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-    defaultOption3.textContent = 'กรุณาเลือก';
-    dataSelect_tags.appendChild(defaultOption3);
+   // Fetch section data and populate the select dropdown
+   fetch('/tags')
+   .then(response => response.json())
+   .then(data => {
+       const tagsSelect = document.getElementById('tags');
+       data.forEach(tag => {
+           const option = document.createElement('option');
+           option.value = tag.section_id;
+           option.textContent = tag.name;
+           tagsSelect.appendChild(option);
+       });
+   })
+   .catch(error => {
+       console.error('Error fetching section data:', error);
+   });
+</script>
 
-    // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-        .then(response => response.json())
-        .then(data => {
-            // สร้างตัวเลือกในกล่องคอมโบ
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.section_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
-                option.textContent = item.name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
-                dataSelect_tags.appendChild(option);
+<!-- ... ส่วนอื่น ๆ ... -->
+<script>
+    const tagsSelect = document.getElementById('tags');
+    const selectedTagsTable = document.getElementById('selectedTagsTable');
+    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+
+    tagsSelect.addEventListener('change', function () {
+        const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
+        const selectedId = tagsSelect.value;
+
+        if (selectedTag) {
+            const newRow = selectedTagsTableBody.insertRow();
+            const idCell = newRow.insertCell();
+            idCell.textContent = selectedId;
+            const nameCell = newRow.insertCell();
+            nameCell.textContent = selectedTag;
+            const actionCell = newRow.insertCell();
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                selectedTagsTableBody.removeChild(newRow);
             });
-        })
-        .catch(error => {
-            console.error('Error:', error);
+            actionCell.appendChild(deleteButton);
+        }
+    });
+
+    // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
+    const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
+    form.addEventListener('submit', function () {
+        const rows = selectedTagsTableBody.querySelectorAll('tr');
+        const sectionIds = [];
+        rows.forEach(row => {
+            const idCell = row.querySelector('td:nth-child(1)');
+            const sectionId = idCell.textContent.trim();
+            sectionIds.push(sectionId);
         });
+        
+        const hiddenInput = document.createElement('input');
+        hiddenInput.type = 'hidden';
+        hiddenInput.name = 'section_id';
+        hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
+        form.appendChild(hiddenInput);
+    });
 </script>
 
 </html>
