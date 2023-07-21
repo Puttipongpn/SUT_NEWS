@@ -315,9 +315,9 @@ router.get('/tags', (req, res) => {
 });
 
 router.get('/setting_news', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM news WHERE id = ?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM news WHERE user_id = ?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].role === "OFFICIAL USER") {
+            if (req.session.role === "OFFICIAL USER") {
                 res.render('user_page/setting_news', {
                     users: rows,
                     description: rows[0].description,
@@ -327,7 +327,7 @@ router.get('/setting_news', ifNotLoggedin, (req, res, next) => {
                     email: rows[0].email,
                     profile_image: req.session.profile_image,
                 });
-            } else if (rows[0].role === "ADMIN") {
+            } else if (req.session.role === "ADMIN") {
                 res.render('404page')
             }
             else {
