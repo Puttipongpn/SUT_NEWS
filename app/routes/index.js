@@ -319,12 +319,12 @@ router.get('/setting_news', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (req.session.role === "OFFICIAL USER") {
                 res.render('user_page/setting_news', {
-                    users: rows,
-                    description: rows[0].description,
-                    name: rows[0].name,
-                    role: rows[0].role,
-                    user_name: rows[0].user_name,
-                    email: rows[0].email,
+                    users: req.session,
+                    description: req.session.description,
+                    name: req.session.name,
+                    role: req.session.role,
+                    user_name: req.session.user_name,
+                    email: req.session.email,
                     profile_image: req.session.profile_image,
                 });
             } else if (req.session.role === "ADMIN") {
