@@ -477,12 +477,11 @@ router.get('/page1', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-
 router.get('/section_setting', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `section`", [req.session.userID])
         .then(([rows]) => {
             if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
-                res.render('user_page/tags_setting', {
+                res.render('user_page/setting_section', {
                     section: rows,
                     name: req.session.name,
                     role: req.session.role,
@@ -500,6 +499,19 @@ router.get('/section_setting', ifNotLoggedin, (req, res, next) => {
                     role: 'GUEST'
                 })
             }
+        });
+});
+
+router.post('/add_section', ifNotLoggedin, (req, res) => {
+    let params = req.body;
+    dbConnection.query("INSERT INTO section SET ?", [params])
+        .then(() => {
+            res.redirect('/section_setting');
+            req.session.message = 'บันทึกสำเร็จ';
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('404page');
         });
 });
 //USER---------------------------------------------------------------------------------------
