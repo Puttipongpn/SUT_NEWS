@@ -10,7 +10,7 @@ const session = require('express-session');
 let numeral = require('numeral');
 let dayjs = require('dayjs');
 let dayFormat = 'DD/MM/YYYY';
-
+const multer = require('multer');
 //const app = express();
 router.use(express.urlencoded({ extended: false }));
 
@@ -204,18 +204,18 @@ router.get('/profile', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-const multer = require('multer');
-const storage = multer.diskStorage({
+const upload_profile = multer({
+  storage: multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, 'public/images/users_picture'); // ระบุโฟลเดอร์ที่เก็บไฟล์ภาพที่อัปโหลด
+      cb(null, 'public/images/users_picture');
     },
     filename: (req, file, cb) => {
-        cb(null, file.originalname); // ใช้ชื่อไฟล์เดิม
+      cb(null, file.originalname);
     }
+  })
 });
-const upload = multer({ storage });
 
-router.post('/update_profile/:id', upload.single('profile_image'), ifNotLoggedin, (req, res) => {
+router.post('/update_profile/:id', upload_profile.single('profile_image'), ifNotLoggedin, (req, res) => {
     const userId = req.params.id;
     const user_name = req.body['user_name'] || req.session.user_name;
     const name = req.body['name'] || req.session.name;
@@ -358,21 +358,37 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-router.post('/addnews/:id', ifNotLoggedin, (req, res) => {
-    const { section_id, ...newsData } = req.body;
 
+const upload_card = multer({
+    storage: multer.diskStorage({
+      destination: (req, file, cb) => {
+        cb(null, 'public/images/card_picture');
+      },
+      filename: (req, file, cb) => {
+        cb(null, file.originalname);
+      }
+    })
+  });
+
+router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res) => {
+    const { section_id, ...newsData } = req.body;
+    
     const newsDataWithUserId = {
         user_id: req.params.id,
+        card_picture: req.file.path,
         ...newsData
     };
-
+    if (req.file){
+        console.log(req.file);
+        imagePath = req.file.path;
+    
     dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
         .then(result => {
+            req.session.card_picture = imagePath;
             const newsId = result[0].insertId;
             console.log(section_id);
             if (section_id) {
                 const sectionIds = JSON.parse(section_id); // แปลง JSON string กลับเป็น Array
-               
                 const groupSectionData = sectionIds.map(id => ({
                     news_id: newsId,
                     section_id: id
@@ -391,6 +407,7 @@ router.post('/addnews/:id', ifNotLoggedin, (req, res) => {
             console.log(err);
             res.redirect('404page');
         });
+    }
 });
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
@@ -489,7 +506,7 @@ router.get('/section_setting', ifNotLoggedin, (req, res, next) => {
                     email: req.session.email,
                     profile_image: req.session.profile_image,
                 });
-            }else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
+            } else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
                 res.render('404page');
             }
             else {

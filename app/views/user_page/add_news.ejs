@@ -13,12 +13,13 @@
 <body>
     <%- include('../header') %>
         <%- include('../nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news"
+            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data"
                 class="d-flex justify-content-between align-items-center">
                 <div class="container">
                     <div class=" row gutters">
                         <div class="col-12 col-md-3">
                             <div class="card">
+                                
                                 <div class="card-body">
                                     <div class="account-settings">
                                         <div class="user-profile">
@@ -133,7 +134,7 @@
                                                         height="200">
                                                 </div>
                                                 <div style="padding-top: 10px;">
-                                                    <input id="input" type="file" class="btn btn-primary"
+                                                    <input id="input_card" type="file" class="btn btn-primary" name="card_picture"
                                                         style="height: 38px; padding-top:4px">
                                                 </div>
                                             </div>
@@ -278,11 +279,13 @@
 </body>
 <script>
     let img = document.getElementById('img');
-    let input = document.getElementById('input');
+    let input = document.getElementById('input_card');
     input.onchange = (e) => {
         if (input.files[0])
             img.src = URL.createObjectURL(input.files[0]);
     };
+
+
     function addMedia() {
         var fileInput = document.getElementById("mediaFile");
         var file = fileInput.files[0];
