@@ -191,6 +191,7 @@ router.get('/profile', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (rows[0].role === "USER" || rows[0].role === "OFFICIAL USER" || rows[0].role === "ADMIN") {
                 res.render('user_page/profile', {
+                    profile: rows,
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
@@ -319,6 +320,7 @@ router.get('/setting_news', ifNotLoggedin, (req, res, next) => {
         .then(([rows]) => {
             if (req.session.role === "OFFICIAL USER") {
                 res.render('user_page/setting_news', {
+                    settingnews: rows,
                     users: req.session,
                     description: req.session.description,
                     name: req.session.name,
