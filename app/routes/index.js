@@ -193,6 +193,7 @@ router.get('/profile', ifNotLoggedin, (req, res, next) => {
                 res.render('user_page/profile', {
                     profile: rows,
                     users: rows,
+                    card_picture: rows[0].card_picture,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
@@ -374,16 +375,13 @@ const upload_card = multer({
 
 router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res) => {
     const { section_id, ...newsData } = req.body;
-    
+
     const newsDataWithUserId = {
         user_id: req.params.id,
         card_picture: req.file.path,
         ...newsData
     };
-    if (req.file){
-        console.log(req.file);
         imagePath = req.file.path;
-    
     dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
         .then(result => {
             req.session.card_picture = imagePath;
@@ -395,7 +393,6 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
                     news_id: newsId,
                     section_id: id
                 }));
-
                 return Promise.all(groupSectionData.map(data =>
                     dbConnection.query("INSERT INTO group_section SET ?", data)
                 ));
@@ -409,7 +406,24 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
             console.log(err);
             res.redirect('404page');
         });
-    }
+});
+
+router.get('/test_newscontent', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM `news` WHERE news_id = 133;")
+    .then(([rows]) => {
+        if (rows.length > 0) {
+             // ข้อมูลข่าวที่ได้จากฐานข้อมูล
+            res.render('home/page1', { 
+                newsData:rows[0], 
+            }); // แสดงผลที่ frontend ด้วย template engine
+        } else {
+            res.render('404page');
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        res.render('error_page'); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
+    });
 });
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {

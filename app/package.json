@@ -6,6 +6,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@ckeditor/ckeditor5-build-classic": "^39.0.0",
     "@splidejs/splide": "^4.1.4",
     "bcrypt": "^5.1.0",
     "bootstrap-icons": "^1.10.5",

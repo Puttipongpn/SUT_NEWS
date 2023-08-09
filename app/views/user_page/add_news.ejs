@@ -13,13 +13,11 @@
 <body>
     <%- include('../header') %>
         <%- include('../nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data"
-                class="d-flex justify-content-between align-items-center">
+            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="">
                 <div class="container">
                     <div class=" row gutters">
                         <div class="col-12 col-md-3">
                             <div class="card">
-                                
                                 <div class="card-body">
                                     <div class="account-settings">
                                         <div class="user-profile">
@@ -48,32 +46,28 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="account-settings">
-                                        <div class="form-group">
-                                            <div>
-                                                <label for="tags">Tags Select</label>
-                                            </div>
-                                            <div>
-                                                <select class="form-select-ad form-select-lg" id="tags"
-                                                     aria-label="Default select example" >
-                                                </select>
-                                            </div>
+                            <div class="card d-flex justify-content-between align-items-center"
+                                style="margin-top: -5px;">
+                                <div class="col-12">
+                                    <h5 class="text-center" style="padding-top: 5px;">วันที่จัดกิจกรรม</h5>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p>เริ่มกิจกรรม</p>
+                                        </div>
+                                        <div style="padding-left: 10px;">
+                                            <input type="date">
                                         </div>
                                     </div>
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div>
+                                            <p>สิ้นสุด</p>
+                                        </div>
+                                        <div style="padding-left: 10px;">
+                                            <input type="date">
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <table id="selectedTagsTable">
-                                    <thead>
-                                        <tr>
-                                            <th>tags id</th>
-                                            <th>name</th>
-                                            <th>delect</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                    </tbody>
-                                </table>
                             </div>
 
                         </div>
@@ -83,7 +77,7 @@
                                 <div class="card-body">
                                     <div class="row gutters">
                                         <div class="col-12">
-                                            <h6 class="mb-3 text-primary">ADD NEWS</h6>
+                                            <h1  class="mb-3 ">CARD SETTING</h1>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
@@ -106,10 +100,6 @@
                                                     <select class="form-select-ad form-select-sm" id="news_topic_select"
                                                         name="topic_id" placeholder="Enter email ID"
                                                         aria-label="Default select example">
-                                                        <!-- <option selected>Open this select menu</option>
-                                                    <option value="1">One</option>
-                                                    <option value="2">Two</option>
-                                                    <option value="3">Three</option> -->
                                                     </select>
                                                 </div>
                                             </div>
@@ -118,15 +108,21 @@
                                             <div class="">
                                                 <label for="title">Title</label>
                                                 <input type="text" class="form-control form-control-lg" id="title"
-                                                    name="title" placeholder="">
+                                                    name="title" placeholder="เพิ่มหัวข้อข่าว">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                            <div class="">
+                                                <label for="welding_para">Welding</label>
+                                                <input class="form-control form-control-lg" id="welding_para"
+                                                    name="welding_para" placeholder="เพิ่มคำอธิบายเพิ่มเติม">
+                                            </div>
+
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div>
                                                 <div>
-                                                    <label for="street">Headline Picture</label>
+                                                    <label for="street">Card Picture</label>
                                                 </div>
                                                 <div>
                                                     <img id="img"
@@ -134,29 +130,27 @@
                                                         height="200">
                                                 </div>
                                                 <div style="padding-top: 10px;">
-                                                    <input id="input_card" type="file" class="btn btn-primary" name="card_picture"
-                                                        style="height: 38px; padding-top:4px">
+                                                    <input id="input_card" type="file" class="btn btn-primary"
+                                                        name="card_picture" style="height: 38px; padding-top:4px">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-12" style="padding-top: 20px;">
+                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div>
-                                                <label for="">ADD Picture or Video</label>
+                                                <label for="tags">Tags Select</label>
                                             </div>
-                                            <div style="padding-top: 5px;">
-                                                <button class="btn btn-warning" style="margin-right: 5px;"
-                                                    onclick="addMedia()"type="button">เพิ่มสื่อ</button>
-                                                <input class="btn btn-primary" style="height: 38px; padding-top:3px"
-                                                    type="file" id="mediaFile">
+                                            <div>
+                                                <select class="form-select-ad form-select-lg" id="tags"
+                                                    aria-label="Default select example">
+                                                </select>
                                             </div>
                                             <div style="padding-top: 10px;">
-                                                <table id="mediaTable">
+                                                <table id="selectedTagsTable">
                                                     <thead>
                                                         <tr>
-                                                            <th>ชื่อภาพ</th>
-                                                            <th>ประเภท</th>
-                                                            <th>ดูรูปภาพ/วิดิโอ</th>
-                                                            <th>ลบ</th>
+                                                            <th>tags id</th>
+                                                            <th>tags name</th>
+                                                            <th>delect</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -164,34 +158,21 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div class="">
-                                                <label for="Intro_para">Introl</label>
-                                                <input type="text" class="form-control form-control-lg" id="Intro_para"
-                                                    name="Intro_para" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div class="">
-                                                <label for="welding_para">Welding</label>
-                                                <input class="form-control form-control-lg" id="welding_para"
-                                                    name="welding_para" placeholder="">
-                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
+                        <div class=" row gutters">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="col-12">
+                                        <div class="col-12" style="padding-top:20px">
+                                            <h1>Edit News Paragrap </h1>
+                                                <textarea rows="20" cols="70" id="newseditor" name="news_content"></textarea>
                                         </div>
                                     </div>
-                                    <div class="row gutters">
-                                        <div class="col-12" style="padding-top: 10px;">
-                                            <label for="main_para">Main paragrap</label>
-                                            <textarea class="form-control" id="main_para" name="main_para"
-                                                rows="3"></textarea>
-                                        </div>
-                                        <div class="col-12">
-                                            <label for="end_para">End paragrap</label>
-                                            <textarea class="form-control" id="end_para" name="end_para"
-                                                rows="3"></textarea>
-                                        </div>
-                                    </div>
-
                                     <div class="row gutters">
                                         <div class="col-12" style="padding-top: 20px;">
                                             <div class="d-flex justify-content-between">
@@ -203,14 +184,20 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </form>
             <style>
+                .form-select-ad {
+                    color: #000000;
+                    background: #ffffff;
+                    width: 100%;
+                    height: 40px;
+                }
+
                 .card {
-                    background: #030c29;
+                    background: #fcfcff;
                     -webkit-border-radius: 5px;
                     -moz-border-radius: 5px;
                     border-radius: 5px;
@@ -220,7 +207,6 @@
                 }
 
                 body {
-                    color: #bcd0f7;
                     background: #1A233A;
                 }
 
@@ -266,13 +252,14 @@
                 }
 
                 .form-control {
-                    border: 1px solid #596280;
+                    border: 1px solid #fefefe;
                     -webkit-border-radius: 2px;
                     -moz-border-radius: 2px;
                     border-radius: 2px;
                     font-size: .825rem;
-                    background: #1A233A;
-                    color: #bcd0f7;
+                    background: #ffffff;
+                    border-color: #000000;
+                    color: #000000;
                 }
             </style>
             <%- include('../footer') %>
@@ -285,98 +272,6 @@
             img.src = URL.createObjectURL(input.files[0]);
     };
 
-
-    function addMedia() {
-        var fileInput = document.getElementById("mediaFile");
-        var file = fileInput.files[0];
-
-        if (file) {
-            var mediaTable = document.getElementById("mediaTable");
-            var tbody = mediaTable.getElementsByTagName("tbody")[0];
-
-            // เพิ่มข้อมูลในตาราง
-            var newRow = tbody.insertRow();
-            var nameCell = newRow.insertCell();
-            nameCell.textContent = file.name;
-
-            var typeCell = newRow.insertCell();
-            typeCell.textContent = file.type.startsWith("image/") ? "ภาพ" : "วิดิโอ";
-
-            var viewButtonCell = newRow.insertCell();
-            var viewButton = document.createElement("button");
-            viewButton.className = "view-button";
-            viewButton.type = "button"
-            var viewIcon = document.createElement("i");
-            viewIcon.className = "bi bi-eye";
-            viewButton.appendChild(viewIcon);
-            viewButton.onclick = function () {
-                viewMedia(file);
-            };
-            viewButtonCell.appendChild(viewButton);
-
-            var deleteButtonCell = newRow.insertCell();
-            var deleteButton = document.createElement("button");
-            deleteButton.className = "delete-button";
-            deleteButton.onclick = function () {
-                deleteMedia(newRow);
-            };
-            var deleteIcon = document.createElement("i");
-            deleteIcon.className = "bi bi-archive"; // หรือใช้คลาสไอคอนของ Font Awesome ที่คุณต้องการ
-            deleteButton.appendChild(deleteIcon);
-            deleteButtonCell.appendChild(deleteButton);
-        }
-    }
-
-    function viewMedia(file) {
-        // ตรวจสอบว่าเป็นไฟล์รูปภาพหรือวิดิโอ
-        if (file.type.startsWith("image/")) {
-            // สร้างตัวอ้างอิงให้กับรูปภาพในการดู
-            var image = new Image();
-            image.src = URL.createObjectURL(file);
-
-            // สร้างตัวกล่องโมดัลสำหรับแสดงรูปภาพ
-            var modal = document.createElement("div");
-            modal.className = "modal";
-            modal.onclick = function () {
-                document.body.removeChild(modal);
-            };
-
-            // สร้างตัวรูปภาพและเพิ่มลงในโมดัล
-            var imageView = document.createElement("img");
-            imageView.src = image.src;
-            imageView.className = "modal-image";
-            imageView.alt = file.name;
-            modal.appendChild(imageView);
-
-            // เพิ่มโมดัลลงในเอกสาร
-            document.body.appendChild(modal);
-        } else if (file.type.startsWith("video/")) {
-            // สร้างตัวเล่นวิดิโอ
-            var videoPlayer = document.createElement("video");
-            videoPlayer.src = URL.createObjectURL(file);
-            videoPlayer.controls = true;
-            videoPlayer.autoplay = true;
-
-            // สร้างตัวกล่องโมดัลสำหรับแสดงวิดิโอ
-            var modal = document.createElement("div");
-            modal.className = "modal";
-            modal.onclick = function () {
-                document.body.removeChild(modal);
-            };
-
-            // เพิ่มวิดิโอเข้าไปในโมดัล
-            modal.appendChild(videoPlayer);
-
-            // เพิ่มโมดัลลงในเอกสาร
-            document.body.appendChild(modal);
-        }
-    }
-    function deleteMedia(row) {
-        var mediaTable = document.getElementById("mediaTable");
-        var tbody = mediaTable.getElementsByTagName("tbody")[0];
-
-        tbody.removeChild(row);
-    }
 </script>
 <script> //ดึงข้อมูลเข้า combobox
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
@@ -401,8 +296,6 @@
             console.error('Error:', error);
         });
 </script>
-
-
 
 <script> //ดึงข้อมูลเข้า combobox news_type
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
@@ -431,21 +324,21 @@
 
 <script> //ดึงข้อมูลเข้า combobox section
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-   // Fetch section data and populate the select dropdown
-   fetch('/tags')
-   .then(response => response.json())
-   .then(data => {
-       const tagsSelect = document.getElementById('tags');
-       data.forEach(tag => {
-           const option = document.createElement('option');
-           option.value = tag.section_id;
-           option.textContent = tag.name;
-           tagsSelect.appendChild(option);
-       });
-   })
-   .catch(error => {
-       console.error('Error fetching section data:', error);
-   });
+    // Fetch section data and populate the select dropdown
+    fetch('/tags')
+        .then(response => response.json())
+        .then(data => {
+            const tagsSelect = document.getElementById('tags');
+            data.forEach(tag => {
+                const option = document.createElement('option');
+                option.value = tag.section_id;
+                option.textContent = tag.name;
+                tagsSelect.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error fetching section data:', error);
+        });
 </script>
 
 <!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
@@ -484,12 +377,163 @@
             const sectionId = idCell.textContent.trim();
             sectionIds.push(sectionId);
         });
-        
+
         const hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = 'section_id';
         hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
         form.appendChild(hiddenInput);
+    });
+</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
+<script>
+    // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+    CKEDITOR.ClassicEditor.create(document.getElementById("newseditor"), {
+        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+        toolbar: {
+            items: [
+                'exportPDF', 'exportWord', '|',
+                'findAndReplace', 'selectAll', '|',
+                'heading', '|',
+                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                'bulletedList', 'numberedList', 'todoList', '|',
+                'outdent', 'indent', '|',
+                'undo', 'redo',
+                '-',
+                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                'alignment', '|',
+                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                'textPartLanguage', '|',
+                'sourceEditing'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+        // Changing the language of the interface requires loading the language file using the <script> tag.
+        // language: 'es',
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+            ]
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+        placeholder: 'Welcome to SUT NEWS Editor',
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+        fontFamily: {
+            options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+        htmlSupport: {
+            allow: [
+                {
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }
+            ]
+        },
+        // Be careful with enabling previews
+        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+        htmlEmbed: {
+            showPreviews: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+        link: {
+            decorators: {
+                addTargetToExternalLinks: true,
+                defaultProtocol: 'https://',
+                toggleDownloadable: {
+                    mode: 'manual',
+                    label: 'Downloadable',
+                    attributes: {
+                        download: 'file'
+                    }
+                }
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+        mention: {
+            feeds: [
+                {
+                    marker: '@',
+                    feed: [
+                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                        '@sugar', '@sweet', '@topping', '@wafer'
+                    ],
+                    minimumCharacters: 1
+                }
+            ]
+        },
+        // The "super-build" contains more premium features that require additional configuration, disable them below.
+        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+        removePlugins: [
+            // These two are commercial, but you can try them out without registering to a trial.
+            // 'ExportPdf',
+            // 'ExportWord',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+            // Storing images as Base64 is usually a very bad idea.
+            // Replace it on production website with other solutions:
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+            // 'Base64UploadAdapter',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+            // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+            'MathType',
+            // The following features are part of the Productivity Pack and require additional license.
+            'SlashCommand',
+            'Template',
+            'DocumentOutline',
+            'FormatPainter',
+            'TableOfContents'
+        ]
     });
 </script>
 

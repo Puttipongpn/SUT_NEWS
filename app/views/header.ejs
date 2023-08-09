@@ -65,6 +65,10 @@
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/section_setting"
                         id="section_setting">เพิ่ม section</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/test_newscontent"
+                        >News Content</a>
+                </li>
                 <!-- <li class="nav-item">
                     <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
                         href="/logout">LOGOUT</a>
@@ -296,7 +300,9 @@
                 role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('LOGOUT');
-            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.row === 'OFFICIAL USER') {
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.role
+            
+            === 'OFFICIAL USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
