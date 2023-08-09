@@ -408,11 +408,12 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
         });
 });
 
-router.get('/test_newscontent', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM `news` WHERE news_id = 133;")
+router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
+    const newsId = req.params.news_id;
+    dbConnection.execute("SELECT * FROM `news` WHERE news_id = ?;", [newsId])
     .then(([rows]) => {
+        console.log(rows[0]);
         if (rows.length > 0) {
-             // ข้อมูลข่าวที่ได้จากฐานข้อมูล
             res.render('home/page1', { 
                 newsData:rows[0], 
             }); // แสดงผลที่ frontend ด้วย template engine
@@ -422,7 +423,7 @@ router.get('/test_newscontent', ifNotLoggedin, (req, res, next) => {
     })
     .catch(error => {
         console.error(error);
-        res.render('error_page'); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
+        res.render(error); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
     });
 });
 
