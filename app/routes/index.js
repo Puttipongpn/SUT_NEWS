@@ -410,12 +410,13 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
 
 router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
     const newsId = req.params.news_id;
-    dbConnection.execute("SELECT * FROM `news` WHERE news_id = ?;", [newsId])
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN group_section ON group_section.news_id = news.news_id WHERE news.news_id = ?", [newsId])
     .then(([rows]) => {
         console.log(rows[0]);
         if (rows.length > 0) {
             res.render('home/page1', { 
                 newsData:rows[0], 
+                email:rows[0].email,
             }); // แสดงผลที่ frontend ด้วย template engine
         } else {
             res.render('404page');
