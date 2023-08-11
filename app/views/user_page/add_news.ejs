@@ -77,7 +77,7 @@
                                 <div class="card-body">
                                     <div class="row gutters">
                                         <div class="col-12">
-                                            <h1  class="mb-3 ">CARD SETTING</h1>
+                                            <h1 class="mb-3 ">CARD SETTING</h1>
                                         </div>
                                         <div class="col-12 col-md-6">
                                             <div class="form-group">
@@ -170,7 +170,8 @@
                                     <div class="col-12">
                                         <div class="col-12" style="padding-top:20px">
                                             <h1>Edit News Paragrap </h1>
-                                                <textarea rows="20" cols="70" id="newseditor" name="news_content"></textarea>
+                                            <textarea rows="20" cols="70" id="newseditor"
+                                                name="news_content"></textarea>
                                         </div>
                                     </div>
                                     <div class="row gutters">
@@ -386,6 +387,7 @@
     });
 </script>
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
+
 <script>
     // This sample still does not showcase all CKEditor&nbsp;5 features (!)
     // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
@@ -410,6 +412,8 @@
             ],
             shouldNotGroupWhenFull: true
         },
+     
+
         // Changing the language of the interface requires loading the language file using the <script> tag.
         // language: 'es',
         list: {
@@ -432,7 +436,7 @@
             ]
         },
         // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-        placeholder: 'Welcome to SUT NEWS Editor',
+        placeholder: 'Welcome to CKEditor&nbsp;5!',
         // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
         fontFamily: {
             options: [
@@ -499,6 +503,7 @@
                 }
             ]
         },
+        
         // The "super-build" contains more premium features that require additional configuration, disable them below.
         // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
         removePlugins: [

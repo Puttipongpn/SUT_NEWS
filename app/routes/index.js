@@ -206,6 +206,29 @@ router.get('/profile', ifNotLoggedin, (req, res, next) => {
         });
 });
 
+
+
+
+const ckeditorUpload = multer({
+    storage: multer.diskStorage({
+        destination: (req, file, cb) => {
+            cb(null, 'public/ckuploads'); // เปลี่ยนเส้นทางให้ตรงกับที่คุณต้องการ
+        },
+        filename: (req, file, cb) => {
+            const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+            cb(null, uniqueSuffix + '-' + file.originalname);
+        },
+    }),
+});
+
+// ...
+
+router.post('/addnews/upload', ckeditorUpload.single('upload'), (req, res) => {
+    const imageUrl = path.join('ckuploads', req.file.filename);
+    res.json({ url: imageUrl });
+});
+
+
 const upload_profile = multer({
   storage: multer.diskStorage({
     destination: (req, file, cb) => {
@@ -362,6 +385,7 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
 });
 
 
+
 const upload_card = multer({
     storage: multer.diskStorage({
       destination: (req, file, cb) => {
@@ -373,6 +397,7 @@ const upload_card = multer({
     })
   });
 
+
 router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res) => {
     const { section_id, ...newsData } = req.body;
 
@@ -380,7 +405,7 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
         user_id: req.params.id,
         card_picture: req.file.path,
         ...newsData
-    };
+    }; 
         imagePath = req.file.path;
     dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
         .then(result => {
