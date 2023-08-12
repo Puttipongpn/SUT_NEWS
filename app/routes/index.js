@@ -29,6 +29,9 @@ router.get('/page1', function (req, res, next) {
     res.render('home/page1');
 });
 
+router.get('/totags', function (req, res, next) {
+    res.render('home/tags');
+});
 
 
 // DECLARING CUSTOM MIDDLEWARE
