@@ -11,6 +11,7 @@ let numeral = require('numeral');
 let dayjs = require('dayjs');
 let dayFormat = 'DD/MM/YYYY';
 const multer = require('multer');
+const { group } = require('console');
 //const app = express();
 router.use(express.urlencoded({ extended: false }));
 
@@ -433,25 +434,73 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
         });
 });
 
+// router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
+//     const newsId = req.params.news_id;
+//     dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN group_section ON group_section.news_id = news.news_id WHERE news.news_id = ?", [newsId])
+//     .then(([rows]) => {
+//         console.log(rows[0]);
+//         if (rows.length > 0) {
+//             res.render('home/page1', { 
+//                 newsData:rows[0], 
+//                 email:rows[0].email,
+//             }); // แสดงผลที่ frontend ด้วย template engine
+//         }if (group_id) {
+            
+//         }
+//         else {
+//             res.render('404page');
+//         }
+//     })
+//     .catch(error => {
+//         console.error(error);
+//         res.render(error); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
+//     });
+// });
 router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
     const newsId = req.params.news_id;
-    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN group_section ON group_section.news_id = news.news_id WHERE news.news_id = ?", [newsId])
-    .then(([rows]) => {
-        console.log(rows[0]);
-        if (rows.length > 0) {
-            res.render('home/page1', { 
-                newsData:rows[0], 
-                email:rows[0].email,
-            }); // แสดงผลที่ frontend ด้วย template engine
+
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id WHERE news.news_id = ?", [newsId])
+    .then(([newsRows]) => {
+        if (newsRows.length > 0) {
+            const newsData = newsRows[0];
+
+            dbConnection.execute("SELECT * FROM `group_section` LEFT JOIN section ON group_section.section_id = section.section_id WHERE news_id = ?", [newsId])
+            .then(([groupRows]) => {
+                // ตรวจสอบว่ามีข้อมูล group_id หรือไม่
+                if (groupRows.length > 0) {
+                    const groupData = groupRows.map(group =>({
+                        group_id:group.group_id,
+                        news_id:group.news_id,
+                        name: group.name
+                    }));
+                    
+                    res.render('home/page1', { 
+                        newsData: newsData, 
+                        email: newsData.email,
+                        groupData: groupData // ส่งข้อมูล group_id ไปยัง template
+                    });
+                } else {
+                    res.render('home/page1', { 
+                        newsData: newsData, 
+                        email: newsData.email,
+                        groupData: null // ไม่พบข้อมูล group_id
+                    });
+                }
+            })
+            .catch(error => {
+                console.error(error);
+                res.render('404page'); // หรือจัดการข้อผิดพลาดอื่น ๆ
+            });
         } else {
             res.render('404page');
         }
     })
     .catch(error => {
         console.error(error);
-        res.render(error); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
+        res.render('404page');
     });
 });
+
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
