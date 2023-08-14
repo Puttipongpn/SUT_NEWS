@@ -16,67 +16,70 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 
-    <style>
-   
-      @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
-  
-      * {
-        margin: 0;
-        padding: 0;
-      }
-      .card{
-        overflow: hidden;
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-      }
-  
-      .container-st {
-        width: 85%;
-        height: 100%;
-        display: grid;
-      }
-      .top{
-        border: none;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
     }
+
+    .card {
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+
+    .container-st {
+      width: 85%;
+      height: 100%;
+      display: grid;
+    }
+
+    .top {
+      border: none;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+    }
+
     .top:hover i {
-        position: absolute;
-        top: 10px;
+      position: absolute;
+      top: 10px;
     }
-  
+
     .top i {
-        position: absolute;
-        top: -100px;
-        right: 10px;
-        color: rgb(226, 28, 28);
-        transition: all 0.5s;
+      position: absolute;
+      top: -100px;
+      right: 10px;
+      color: rgb(226, 28, 28);
+      transition: all 0.5s;
     }
-  
+
     .top .i-red {
-        color: rgb(226, 13, 13);
+      color: rgb(226, 13, 13);
     }
-    @keyframes anim{
-      from{
-           transform:rotate(0deg);
+
+    @keyframes anim {
+      from {
+        transform: rotate(0deg);
       }
-      to{
-           transform:rotate(360deg);
+
+      to {
+        transform: rotate(360deg);
       }
-  }
-  
+    }
+
     .top img {
-        height: 220px;
-        width: 100%;
-        object-fit: cover;
-        transition: all 2s;
+      height: 220px;
+      width: 100%;
+      object-fit: cover;
+      transition: all 2s;
     }
-  
-    </style>
+  </style>
 </head>
 
 <body>
@@ -138,21 +141,22 @@
                 <div class="row pt-3">
                   <% profile.forEach((profile)=> { %>
                     <div class="col-lg-3 col-md-6 mb-3">
-                      <div class="card h-100"
-                        style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+
+                      <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
                         <div class="top">
-                        <% if (profile.card_picture) { %>
-                          <% const imcard = profile.card_picture.substring(7) %>
-                          <!-- bookmark -->
-                          <i class="fa fa-bookmark" style="font-size: x-large;"></i> 
-                          <!-- image -->
-                          <img class="card-img-top"
-                            src="<%= imcard %>" 
-                            alt="" >
-                        <% } %>
+                          <a href="/details/<%= profile.news_id %>">
+                            <% if (profile.card_picture) { %>
+                              <% const imcard=profile.card_picture.substring(7) %>
+                                <!-- bookmark -->
+                                <i class="fa fa-bookmark" style="font-size: x-large;"></i>
+                                <!-- image -->
+                                <img class="card-img-top" src="<%= imcard %>" alt="">
+                                <% } %>
+                          </a>
                         </div>
+
                         <div class="card-body">
-                          <h5 class="card-title" >
+                          <h5 class="card-title">
                             <a href="/details/<%= profile.news_id %>" class="">
                               <!-- title -->
                               <b><%- profile.title %></b>
@@ -166,14 +170,15 @@
                         <div class="card-footer">
                           <small class="text-muted">
                             <a>
-                              <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl" style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                              <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
+                                  style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
                               <i class="fa-regular fa-thumbs-up fa-sm"></i>33
                               <!-- ชื่อ -->
                               <i class="bi bi-person-circle fa-sm"></i><%- name %>
-                              <!-- อีเมล -->
-                              <i class="bi bi-envelope fa-sm"></i></i><%- email %>
-                              <!-- วันที่ประกาศ -->
-                              <p> โพสเมื่อ: Jan 20, 2023</p>
+                                <!-- อีเมล -->
+                                <i class="bi bi-envelope fa-sm"></i></i><%- email %>
+                                  <!-- วันที่ประกาศ -->
+                                  <p> โพสเมื่อ: Jan 20, 2023</p>
                             </a>
                           </small>
                         </div>
