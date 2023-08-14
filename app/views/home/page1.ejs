@@ -67,10 +67,49 @@
                 <p style="text-align: start; margin-bottom: 2%; margin-top: 3%; ">
                     <%- newsData.news_content %>
                 </p>
+                <p class="card-text">
+                    <p style="padding: 10px;">
+                        <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
+                        <% if (groupData && Array.isArray(groupData)) { %>
+                            <% groupData.forEach(group=> { %>
+                                <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
+                                    <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
+                                        <a href="/totags" type="button" class="btn"
+                                            style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                            <%= group.name %>
+                                        </a>
+                                        <% }); %>
+                                            <% } else { %>
+                                                <p>No Tag data available.</p>
+                                                <% } %>
+                    </p>
+                </p>
             </div>
         </div>
 
     </div>
+<<<<<<< HEAD
+    
+    
+    <div class="card mb-3 mt-2" style="max-width: auto;">
+        <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="card-text">
+                    <!-- <p style="text-align: center; color: #f32929;">กำหนดการ</p>
+                    <p>12 สิงหาคม 2566 - 19 สิงหาคม 2566</p> -->
+                    <p style="text-align: center;">
+                        <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
+                    </p>
+                    <p style="font-size: 15px; text-align: center;"><b>12 ส.ค. 66 - 19 ส.ค. 66</b></p>
+
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card-text" style="text-align: center;color: #000;">
+                    <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
+                    <p ><%- newsData.explain %></p>
+=======
     <div class="row" style="padding-top: 10px;">
         <div class="col-12">
             <div class="card">
@@ -91,11 +130,18 @@
                     <div>
                         <p><%- newsData.explain %></p>
                     </div>
+<<<<<<< HEAD
 
+=======
+                   
+>>>>>>> 7bceb8a172d69d40b4b5153cd8d8dabb6bf3f0a2
+>>>>>>> cd1c63764b9da65f8036aeb33d40bfd053911e1b
                 </div>
             </div>
         </div>
     </div>
+            
+<!-- 
     <div class="row" style="padding-top: 10px;">
         <div class="col-12">
             <div class="card">
@@ -108,7 +154,7 @@
                             <% groupData.forEach(group=> { %>
                                 <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
                                     <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                        <a type="button" class="btn"
+                                        <a href="/totags" type="button" class="btn"
                                             style="background-color: <%= colors[randomColorIndex] %>;">
                                             <%= group.name %>
                                         </a>
@@ -120,7 +166,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <div class="row g-0">
@@ -131,6 +177,7 @@
             </div>
             <div class="col-md-8">
                 <div class="card-body">
+                    <small>
                     <h5 class="card-title">
                         <%= newsData.user_name %>
                     </h5>
