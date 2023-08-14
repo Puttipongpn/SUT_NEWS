@@ -10,112 +10,257 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/splide.min.css">
     <link rel="stylesheet" href="/stylesheets/card.css">
+     <!-- Style -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/fresh-bootstrap-table.css" rel="stylesheet" />
+
+  <!-- Fonts and icons -->
+  <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
+  <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <div class="container">
-        <div class="text-center mt-4">
-            <h1>Bootstrap card tiled layout</h1>
+    <div class="fresh-table full-color-orange">
+        <!--
+          Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
+          Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
+        -->
+      
+        <div class="toolbar">
+          <button id="alertBtn" class="btn btn-default">Alert</button>
         </div>
-        <div class="card-columns mt-4">
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1535025639604-9a804c092faa?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6cb0ceb620f241feb2f859e273634393&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab accusantium ad alias, aliquid amet
-                            aspernatur atque culpa cum debitis dicta doloremque, dolorum ea eos et excepturi explicabo facilis
-                            harum illo impedit incidunt laborum laudantium...
-                        </p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1472076638602-b1f8b1ac0b4a?ixlib=rb-0.3.5&s=63c9de7246b535be56c8eaff9b87dd89&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur,
-                            doloremque!</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio iusto
-                            maxime nemo omnis praesentium similique.</p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1535086181678-5a5c4d23aa7d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=34c86263bec2c8f74ceb74e9f4c5a5fc&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
-                        <p class="card-text">Amet commodi deleniti enim laboriosam odio placeat praesentium quis ratione
-                            rerum suscipit.</p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1535074153497-b08c5aa9c236?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=d2aaf944a59f16fe1fe72f5057b3a7dd&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur.</h5>
-                        <p class="card-text">This is a longer card with supporting text below as a natural lead-in to
-                            additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1535124406821-d2848dfbb25c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=98c434d75b44c9c23fc9df2a9a77d59f&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet.</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. At, consequatur
-                            culpa cumque deserunt dignissimos error explicabo fugiat harum ipsam magni minus mollitia nemo
-                            perferendis qui repellendus rerum saepe vel voluptate voluptatem voluptatum!
-                            Aperiam, labore, molestiae!..</p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-            <div class="card">
-                <a href="#" class="text-decoration-none">
-                    <img class="card-img-top"
-                        src="https://images.unsplash.com/photo-1508015926936-4eddcc6d4866?ixlib=rb-0.3.5&s=10b3a8717ab609be8d7786cab50c4e0b&auto=format&fit=crop&w=500&q=80"
-                        alt="Card image cap">
-                    <div class="card-body">
-                        <h5 class="card-title">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h5>
-                        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi debitis
-                            eaque explicabo fuga maiores necessitatibus, neque omnis optio vel!</p>
-                        <p class="card-text"><small class="text-muted"><i class="bi bi-eye"></i>1000<i
-                                    class="far fa-user ms-1"></i>admin<i class="fas fa-calendar-alt ms-1"></i>Jan 20,
-                                2018</small></p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
-    
+      
+        <table id="fresh-table" class="table">
+          <thead>
+            <th data-field="id">ID</th>
+            <th data-field="name">Name</th>
+            <th data-field="salary">Salary</th>
+            <th data-field="country">Country</th>
+            <th data-field="city">City</th>
+            <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Dakota Rice</td>
+              <td>$36,738</td>
+              <td>Niger</td>
+              <td>Oud-Turnhout</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Minerva Hooper</td>
+              <td>$23,789</td>
+              <td>Curaçao</td>
+              <td>Sinaai-Waas</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>Sage Rodriguez</td>
+              <td>$56,142</td>
+              <td>Netherlands</td>
+              <td>Baileux</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Philip Chaney</td>
+              <td>$38,735</td>
+              <td>Korea, South</td>
+              <td>Overland Park</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>Doris Greene</td>
+              <td>$63,542</td>
+              <td>Malawi</td>
+              <td>Feldkirchen in Kärnten</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>Mason Porter</td>
+              <td>$78,615</td>
+              <td>Chile</td>
+              <td>Gloucester</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>Alden Chen</td>
+              <td>$63,929</td>
+              <td>Finland</td>
+              <td>Gary</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Colton Hodges</td>
+              <td>$93,961</td>
+              <td>Nicaragua</td>
+              <td>Delft</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Illana Nelson</td>
+              <td>$56,142</td>
+              <td>Heard Island</td>
+              <td>Montone</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Nicole Lane</td>
+              <td>$93,148</td>
+              <td>Cayman Islands</td>
+              <td>Cottbus</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Chaim Saunders</td>
+              <td>$5,502</td>
+              <td>Romania</td>
+              <td>New Quay</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>Josiah Simon</td>
+              <td>$50,265</td>
+              <td>Christmas Island</td>
+              <td>Sint-Jans-Molenbeek</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>Ila Poole</td>
+              <td>$67,413</td>
+              <td>Montenegro</td>
+              <td>Pontevedra</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Shana Mejia</td>
+              <td>$58,566</td>
+              <td>Afghanistan</td>
+              <td>Ballarat</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>Lana Ryan</td>
+              <td>$64,151</td>
+              <td>Martinique</td>
+              <td>Portobuffolè</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>Daquan Bender</td>
+              <td>$91,906</td>
+              <td>Sao Tome and Principe</td>
+              <td>Walhain-Saint-Paul</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Connor Wagner</td>
+              <td>$86,537</td>
+              <td>Germany</td>
+              <td>Solihull</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>Boris Horton</td>
+              <td>$35,094</td>
+              <td>Laos</td>
+              <td>Saint-Mard</td>
+              <td></td>
+            </tr>
+            <tr>
+              <td>19</td>
+              <td>Winifred Ryan</td>
+              <td>$64,436</td>
+              <td>Ireland</td>
+              <td>Ronciglione</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     
 </body>
+<!-- Javascript -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+
+<script type="text/javascript">
+  var $table = $('#fresh-table')
+  var $alertBtn = $('#alertBtn')
+
+  window.operateEvents = {
+    'click .like': function (e, value, row, index) {
+      alert('You click like icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .edit': function (e, value, row, index) {
+      alert('You click edit icon, row: ' + JSON.stringify(row))
+      console.log(value, row, index)
+    },
+    'click .remove': function (e, value, row, index) {
+      $table.bootstrapTable('remove', {
+        field: 'id',
+        values: [row.id]
+      })
+    }
+  }
+
+  function operateFormatter(value, row, index) {
+    return [
+      '</a>',
+      '<a rel="tooltip" title="Edit" class="table-action edit" href="javascript:void(0)" title="Edit">',
+        '<i class="fa fa-edit"></i>',
+      '</a>',
+      '<a rel="tooltip" title="Remove" class="table-action remove" href="javascript:void(0)" title="Remove">',
+        '<i class="fa fa-remove"></i>',
+      '</a>'
+    ].join('')
+  }
+
+  $(function () {
+    $table.bootstrapTable({
+      classes: 'table table-hover table-striped',
+      toolbar: '.toolbar',
+
+      search: true,
+      showRefresh: true,
+      showToggle: true,
+      showColumns: true,
+      pagination: true,
+      striped: true,
+      sortable: true,
+      pageSize: 8,
+      pageList: [8, 10, 25, 50, 100],
+
+      formatShowingRows: function (pageFrom, pageTo, totalRows) {
+        return ''
+      },
+      formatRecordsPerPage: function (pageNumber) {
+        return pageNumber + ' rows visible'
+      }
+    })
+
+    $alertBtn.click(function () {
+      alert('You pressed on Alert')
+    })
+  })
+
+</script>
 </html>
