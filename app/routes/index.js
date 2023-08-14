@@ -12,6 +12,7 @@ let dayjs = require('dayjs');
 let dayFormat = 'DD/MM/YYYY';
 const multer = require('multer');
 const { group } = require('console');
+const { DateTime } = require('luxon'); // นำเข้าแพ็คเกจ luxon
 //const app = express();
 router.use(express.urlencoded({ extended: false }));
 
@@ -227,10 +228,7 @@ const ckeditorUpload = multer({
 
 // ...
 
-router.post('/addnews/upload', ckeditorUpload.single('upload'), (req, res) => {
-    const imageUrl = path.join('ckuploads', req.file.filename);
-    res.json({ url: imageUrl });
-});
+
 
 
 const upload_profile = multer({
@@ -388,7 +386,10 @@ router.get('/addnews', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-
+// router.post('/addnews/upload', ckeditorUpload.single('upload'), (req, res) => {
+//     const imageUrl = path.join('ckuploads', req.file.filename);
+//     res.json({ url: imageUrl });
+// });
 
 const upload_card = multer({
     storage: multer.diskStorage({
@@ -407,6 +408,7 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
 
     const newsDataWithUserId = {
         user_id: req.params.id,
+        time_stamp: DateTime.local().setZone('Asia/Bangkok'),
         card_picture: req.file.path,
         ...newsData
     }; 
@@ -437,32 +439,10 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
         });
 });
 
-// router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
-//     const newsId = req.params.news_id;
-//     dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN group_section ON group_section.news_id = news.news_id WHERE news.news_id = ?", [newsId])
-//     .then(([rows]) => {
-//         console.log(rows[0]);
-//         if (rows.length > 0) {
-//             res.render('home/page1', { 
-//                 newsData:rows[0], 
-//                 email:rows[0].email,
-//             }); // แสดงผลที่ frontend ด้วย template engine
-//         }if (group_id) {
-            
-//         }
-//         else {
-//             res.render('404page');
-//         }
-//     })
-//     .catch(error => {
-//         console.error(error);
-//         res.render(error); // หรือจัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้นในกรณีนี้
-//     });
-// });
 router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
     const newsId = req.params.news_id;
 
-    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id WHERE news.news_id = ?", [newsId])
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN topic ON news.topic_id = topic.topic_id WHERE news.news_id = ?", [newsId])
     .then(([newsRows]) => {
         if (newsRows.length > 0) {
             const newsData = newsRows[0];
