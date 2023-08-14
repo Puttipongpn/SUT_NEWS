@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
     <style>
         .card {
             margin-left: 14.5%;
@@ -32,6 +33,7 @@
             padding: 5px;
         }
     </style>
+
 </head>
 
 <body>
@@ -41,18 +43,23 @@
                 <%- newsData.title %>
             </h2>
             <div style="margin-left: 2%; margin-right: 2%;">
-                <button type="button" class="btn" style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%- newsData.topic_name %></b></button>
-                <button type="button" class="btn" style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%- newsData.news_type_name %></b></button>
-                <% const date=newsData.time_stamp %>
-                    <% const newsdate=date.toISOString().substring(0, 20) %>
-                        <!--toISOString() สำหรับแปลงวันที่เป็น ISO 8601 string -->
-                        <button type="button" class="btn" style="background-color: rgb(219, 160, 23);"><b><%- newsdate %></b>
-                        </button>
-                        <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
-                                class="bi bi-eye"></i><b>363 view</b></button>
-                        <button type="button" class="btn">
-                            <p><%- newsData.section %></p>
-                        </button>
+                <button type="button" class="btn" style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
+                            newsData.topic_name %></b></button>
+                <button type="button" class="btn"
+                    style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%- newsData.news_type_name
+                            %></b></button>
+                <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
+                    <% const date=newsData.time_stamp %>
+                        <% const newDate=new Date(date); %>
+                            <% newDate.setHours(newDate.getHours() + 7); %>
+                                <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' ' )%>
+                                    <b><%- formattedDate %></b>
+                </button>
+                <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
+                        class="bi bi-eye"></i><b>363 view</b></button>
+                <button type="button" class="btn">
+                    <p><%- newsData.section %></p>
+                </button>
             </div>
             <hr>
             <div class="card-title">
@@ -73,16 +80,18 @@
                     </div>
                     <div>
                         <% const Sstart=newsData.start %>
-                        <% const Send=newsData.end %>
-                        <% const newsStart=Sstart.toISOString().substring(0, 9) %>
-                        <% const newsEnd=Send.toISOString().substring(0, 9) %>
-                        <%- newsStart %>
-                        <%- newsEnd %>
+                            <% const Send=newsData.end %>
+                                <% Sstart.setDate(Sstart.getDate() + 1); %>
+                                    <% Send.setDate(Send.getDate() + 1); %>
+                                        <% const newsStart=Sstart.toISOString().substring(0, 10) %>
+                                            <% const newsEnd=Send.toISOString().substring(0, 10) %>
+                                                <%- newsStart %>
+                                                    <%- newsEnd %>
                     </div>
                     <div>
                         <p><%- newsData.explain %></p>
                     </div>
-                   
+
                 </div>
             </div>
         </div>
@@ -93,7 +102,6 @@
                 <div class="card-body d-flex">
                     <div class="card-title" style="padding-right: 10px;">
                         <i class="bi bi-tags" style="font-size: 2rem; color: cornflowerblue;"></i>
-
                     </div>
                     <div class="card-title" style="padding-top: 10px;">
                         <% if (groupData && Array.isArray(groupData)) { %>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>setting_bookmake</title>
-    <!-- Add icon library -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>setting_bookmake</title>
+  <!-- Add icon library -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/stylesheets/splide.min.css">
   <link rel="stylesheet" href="/stylesheets/card.css">
@@ -17,29 +18,35 @@
 </head>
 
 <%- include('../header') %>
-<%- include('../nav') %>
-<style>
-    
-</style>
-<body>
-    <div class="container-bk mt-2">
+  <%- include('../nav') %>
+    <style>
+
+    </style>
+
+    <body>
+      <div class="container-bk mt-2">
         <div class="card card-block mb-2 mb-3">
           <h4 class="card-title-h"><b>BOOKMARK</b></h4>
           <p class="card-text">Welcom to bookmark</p>
-          <span><a href="/setting_bookmark" class="btn btn-drak mb-3">setting <i class="fa-sharp fa-solid fa-gears fa-sm" style="color: #030303;"></i></a></span>
-        </div>  
+          <span><a href="/setting_bookmark" class="btn btn-drak mb-3">setting <i
+                class="fa-sharp fa-solid fa-gears fa-sm" style="color: #030303;"></i></a></span>
+        </div>
         <div class="container-bk">
           <div class="row">
             <div class="col-lg-12 my-2">
-                <div class="row">
+              <div class="row">
+                <% if (bookmark && bookmark.length> 0) { %>
                   <% bookmark.forEach((bookmark)=> { %>
+                    <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์ค) ... -->
                     <div class="col-lg-3 col-md-6 mb-3">
-                      <div class="card cardindex h-90" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
-                        <img class="card-img-top" src="https://scontent.fbkk22-4.fna.fbcdn.net/v/t39.30808-6/366146408_825003999006574_3011763503879010226_n.jpg?stp=cp6_dst-jpg&_nc_cat=1&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeF0ln1QM-6SQPyHu2efrtbXm0RTapPwFqqbRFNqk_AWqtoRUpODVSb5z1DfmZ0wFC75lqPL06OlNCbNlcP0C-a9&_nc_ohc=91GutGErgrsAX8vhlc0&_nc_zt=23&_nc_ht=scontent.fbkk22-4.fna&oh=00_AfDHvjJ4jJrt1lsSeh9rFzxqx9lPHMqdHqVXWlX0GnWMMw&oe=64DB5961" alt="" width="100%" height="230px">
+                      <div class="card cardindex h-90"
+                        style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                        <img class="card-img-top"
+                          src="https://scontent.fbkk22-4.fna.fbcdn.net/v/t39.30808-6/366146408_825003999006574_3011763503879010226_n.jpg?stp=cp6_dst-jpg&_nc_cat=1&ccb=1-7&_nc_sid=dd63ad&_nc_eui2=AeF0ln1QM-6SQPyHu2efrtbXm0RTapPwFqqbRFNqk_AWqtoRUpODVSb5z1DfmZ0wFC75lqPL06OlNCbNlcP0C-a9&_nc_ohc=91GutGErgrsAX8vhlc0&_nc_zt=23&_nc_ht=scontent.fbkk22-4.fna&oh=00_AfDHvjJ4jJrt1lsSeh9rFzxqx9lPHMqdHqVXWlX0GnWMMw&oe=64DB5961"
+                          alt="" width="100%" height="230px">
                         <div class="card d-flex flex-column" style="margin-top: -1px;">
                           <h6 class="card-title mb-4 mt-1">
-                            <a href="#"
-                              class="text-decoration-none bg-transparent border-0">
+                            <a href="#" class="text-decoration-none bg-transparent border-0">
                               <b><%- bookmark.title %></b>
                             </a>
                           </h6>
@@ -47,43 +54,54 @@
                             <%- bookmark.welding_para %>
                           </p>
                         </div>
-                          <div class=" align-self-center">
-                            <small class="text-muted">
-                              <a>
-                                <p style="font-size: small; "><i class="bi bi-calendar2-week" style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                        <div class=" align-self-center">
+                          <small class="text-muted">
+                            <a>
+                              <p style="font-size: small; "><i class="bi bi-calendar2-week"
+                                  style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
                               <i class="fa-regular fa-thumbs-up fa-sm"></i>33
                               <!-- ชื่อ -->
                               <i class="bi bi-person-circle fa-sm"></i><%- name %>
-                              <!-- อีเมล -->
-                              <i class="bi bi-envelope fa-sm"></i></i><%- email %>
-                              <!-- วันที่ประกาศ -->
-                              <p> โพสเมื่อ: Jan 20, 2018</p>
-                              </a>
-                            </small>
-                          </div>
+                                <!-- อีเมล -->
+                                <i class="bi bi-envelope fa-sm"></i></i><%- email %>
+                                  <!-- วันที่ประกาศ -->
+                                  <p> โพสเมื่อ: Jan 20, 2018</p>
+                            </a>
+                          </small>
+                        </div>
                       </div>
                     </div>
                     <% }); %>
-                </div>
+                      <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end mr-5 mt-3 mb-3">
+                          <li class="page-item disabled">
+                            <a class="page-link">Previous</a>
+                          </li>
+                          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                          <li class="page-item"><a class="page-link" href="#">2</a></li>
+                          <li class="page-item"><a class="page-link" href="#">3</a></li>
+                          <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                          </li>
+                        </ul>
+                      </nav>
+                      <% }else { %>
+                        <!-- แสดงข้อความเมื่อไม่มีบุ๊กมาร์ค -->
+                        <div class="col-lg-3 col-md-6 mb-3">
+                         
+                            <p class="align-items-center"> คุณยังไม่ได้บันทึก BOOKMARK</p>
+                         
+                        </div>
+                        <% } %>
+              </div>
             </div>
-          </div> 
+          </div>
         </div>
-<!-- 
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-end mr-5 mt-3 mb-3">
-              <li class="page-item disabled">
-                  <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                  <a class="page-link" href="#">Next</a>
-              </li>
-          </ul>
-        </nav> -->
 
-</body>
 
-<script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
+    </body>
+
+    <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
 </html>

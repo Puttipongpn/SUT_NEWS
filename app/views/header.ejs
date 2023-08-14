@@ -254,7 +254,7 @@
                 role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('bookmake');
-            if (currentUser.role === 'USER') {
+            if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม

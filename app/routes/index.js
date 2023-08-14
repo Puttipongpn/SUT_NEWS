@@ -282,28 +282,6 @@ router.post('/update_profile/:id', upload_profile.single('profile_image'), ifNot
 });
 
 
-//SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
-router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
-        .then(([rows]) => {
-            if (rows[0].role === "USER") {
-                res.render('user_page/bookmake', {
-                    users: rows,
-                    bookmark: rows,
-                    name: rows[0].name,
-                    role: rows[0].role,
-                    user_name: rows[0].user_name,
-                    email: rows[0].email,
-                    profile_image: req.session.profile_image,
-                });
-            } else if (rows[0].role === "ADMIN") {
-                res.render('404page')
-            }
-            else {
-                res.render('404page')
-            }
-        });
-});
 
 router.get('/news_type_combobox', (req, res) => {
     // ดึงข้อมูลจากฐานข้อมูล
@@ -441,12 +419,10 @@ router.post('/addnews/:id', upload_card.single('card_picture'), ifNotLoggedin, (
 
 router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
     const newsId = req.params.news_id;
-
     dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN topic ON news.topic_id = topic.topic_id WHERE news.news_id = ?", [newsId])
     .then(([newsRows]) => {
         if (newsRows.length > 0) {
             const newsData = newsRows[0];
-
             dbConnection.execute("SELECT * FROM `group_section` LEFT JOIN section ON group_section.section_id = section.section_id WHERE news_id = ?", [newsId])
             .then(([groupRows]) => {
                 // ตรวจสอบว่ามีข้อมูล group_id หรือไม่
@@ -456,11 +432,13 @@ router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
                         news_id:group.news_id,
                         name: group.name
                     }));
+                     // แปลงวันที่และเวลาจากฐานข้อมูลเป็นรูปแบบที่ต้องการ
                     
                     res.render('home/page1', { 
                         newsData: newsData, 
                         email: newsData.email,
-                        groupData: groupData // ส่งข้อมูล group_id ไปยัง template
+                        groupData: groupData, // ส่งข้อมูล group_id ไปยัง template
+                        formattedDate: newsData.time_stamp, // ส่งวันที่และเวลาที่ถูกแปลงไปยัง template
                     });
                 } else {
                     res.render('home/page1', { 
@@ -484,6 +462,27 @@ router.get('/details/:news_id', ifNotLoggedin, (req, res, next) => {
     });
 });
 
+//SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
+router.get('/bookmake', ifNotLoggedin, (req, res, next) => {
+    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
+        .then(([rows]) => {
+            if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
+                res.render('user_page/bookmake', {
+                    users: rows,
+                    bookmark: rows,
+                    name: req.session.name,
+                    role: req.session.role,
+                    user_name: req.session.user_name,
+                    email: req.session.email,
+                    profile_image: req.session.profile_image,
+                });
+            } 
+            else {
+                console.error(error);
+                res.render('404page')
+            }
+        });
+});
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
