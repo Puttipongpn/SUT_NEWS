@@ -71,7 +71,14 @@
                     <div class="card-title" style="padding-right: 10px;">
                         <p>รายละเอียดเพิ่มเติม</p>
                     </div>
-                    
+                    <div>
+                        <% const Sstart=newsData.start %>
+                        <% const Send=newsData.end %>
+                        <% const newsStart=Sstart.toISOString().substring(0, 9) %>
+                        <% const newsEnd=Send.toISOString().substring(0, 9) %>
+                        <%- newsStart %>
+                        <%- newsEnd %>
+                    </div>
                     <div>
                         <p><%- newsData.explain %></p>
                     </div>
