@@ -58,7 +58,7 @@
 		    <thead style="position: sticky;top: 0" class="thead-dark">
 			<tr>
 				<!-- <th class="header" scope="col">Image</th> -->
-				<th class="header" scope="col">News_type</th>
+				<th class="header" scope="col">bookmark_id</th>
 				<th class="header" scope="col">Topic</th>
 				<th class="header" scope="col">Headline</th>
                 <th class="header" scope="col">View</th>
@@ -69,13 +69,13 @@
 			    <% bookmark.forEach((bookmark)=> { %>
                     <tr>
                         <td>
-                            <p class="fw-normal mb-2">
-                                <%- bookmark.news_type_name %>
+                            <p class="fw-normal mb-2 ml-5">
+                                <%- bookmark.bookmark_id %>
                             </p>
                         </td>
                         <td>
                             <p class="fw-normal mb-2">
-                                <%- bookmark.topic_name %>
+                                <%- bookmark.title %>
                             </p>
                         </td>
                         <td>

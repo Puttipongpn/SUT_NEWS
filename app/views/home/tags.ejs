@@ -4,8 +4,171 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+    <style>
+
+        /*----  Main Style  ----*/
+        #cards_landscape_wrap-2{
+        text-align: start;
+        background: #f0f0f0;
+        }
+
+        #cards_landscape_wrap-2 .container{
+        padding-top: 60px; 
+        padding-bottom: 100px;
+        }
+       
+        #cards_landscape_wrap-2 .card:hover .img{
+        opacity: 0.7;
+        -webkit-transform:scale(1.15);
+        -moz-transform:scale(1.15);
+        -ms-transform:scale(1.15);
+        -o-transform:scale(1.15);
+        transform:scale(1.15);
+        }
+
+        #cards_landscape_wrap-2 .card.text-box{
+        text-align: start;
+        }
+
+        #cards_landscape_wrap-2 .card:hover{
+        background: #fff;
+        box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+        -webkit-transition: all 0.2s ease-in;
+        -moz-transition: all 0.2s ease-in;
+        -ms-transition: all 0.2s ease-in;
+        -o-transition: all 0.2s ease-in;
+        transition: all 0.2s ease-in;
+        margin-top: 5px;
+        }
+      
+        
+    </style>
 </head>
+
 <body>
+    <!-- Topic Cards -->
+    <div id="cards_landscape_wrap-2">
+        <div class="container">
+            <div class="heading">
+                <h1 style="margin-bottom: 5%;"><b>มหาวิทยาลัยเทคโนโลยีสุรนารี</b></h1>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <a href="" class="text-decoration-none" style="color: black;">
+                                <div class="card h-100 ">
+                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" class="card-img-top" alt="" />
+                                    <!-- <div class="image-box">
+                                    </div> -->
+                                    <div class="card-body">                                   
+                                        <div class="card-title">
+                                            <h5><b>Title 01cccccccccccccccccccccccc</b></h5>
+                                        </div>
+                                        <div class="card-text">
+                                            <p >Lorem typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <small class="text-muted">
+                                          <a>
+                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
+                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                                            <i class="fa-regular fa-thumbs-up fa-sm"></i>33
+                                            <!-- ชื่อ -->
+                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
+                                            <!-- อีเมล -->
+                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
+                                            <!-- วันที่ประกาศ -->
+                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
+                                          </a>
+                                        </small>
+                                      </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <a href="" class="text-decoration-none" style="color: black;">
+                                <div class="card h-100">
+                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" class="card-img-top" alt="Deer" />
+                                    <div class="card-body">
+                                        <h5 class="card-title"><b>Title 01</b></h5>
+                                        <p class="card-text">Lorem typesetting industry. Lorem Ipsum has be</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <small>
+                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
+                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                                            <i class="far fa-thumbs-up fa-sm"></i> 33
+                                            <i class="bi bi-person-circle fa-sm"></i> P'Cream
+                                            <i class="bi bi-envelope fa-sm"></i> c@gmail.com
+                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
+                                        </small>
+                                    </div>
+                                </div>                                
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <a href="" class="text-decoration-none" style="color: black;">
+                                <div class="card h-100">
+                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" class="card-img-top"  alt="" />
+                                    <div class="card-body">
+                                        <h5 class="card-title"><b>Title 03</b></h5>
+                                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <small>
+                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
+                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                                            <i class="far  fa-thumbs-up fa-sm"></i>33
+                                            <!-- ชื่อ -->
+                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
+                                            <!-- อีเมล -->
+                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
+                                            <!-- วันที่ประกาศ -->
+                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
+                                        </small>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <a href="" class="text-decoration-none" style="color: black;">
+                                <div class="card h-100">
+                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" class="card-img-top"  alt="" />
+                                    <div class="card-body">
+                                        <h5 class="card-title"><b>Title 03</b></h5>
+                                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+                                        
+                                    </div>
+                                    <div class="card-footer text-muted">
+                                        <small>
+                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
+                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                                            <i class="far  fa-thumbs-up fa-sm"></i>33
+                                            <!-- ชื่อ -->
+                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
+                                            <!-- อีเมล -->
+                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
+                                            <!-- วันที่ประกาศ -->
+                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
+                                        </small>
+                                    </div>
+                                </div>  
+                            </a>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
     
 </body>
 </html>
