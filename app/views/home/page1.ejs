@@ -52,7 +52,8 @@
                     <% const date=newsData.time_stamp %>
                         <% const newDate=new Date(date); %>
                             <% newDate.setHours(newDate.getHours() + 7); %>
-                                <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' ' )%>
+                                <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' '
+                                    )%>
                                     <b><%- formattedDate %></b>
                 </button>
                 <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
@@ -68,105 +69,58 @@
                     <%- newsData.news_content %>
                 </p>
                 <p class="card-text">
-                    <p style="padding: 10px;">
-                        <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
-                        <% if (groupData && Array.isArray(groupData)) { %>
-                            <% groupData.forEach(group=> { %>
-                                <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
-                                    <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                        <a href="/totags" type="button" class="btn"
-                                            style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
-                                            <%= group.name %>
-                                        </a>
-                                        <% }); %>
-                                            <% } else { %>
-                                                <p>No Tag data available.</p>
-                                                <% } %>
-                    </p>
+                <p style="padding: 10px;">
+                    <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
+                    <% if (groupData && Array.isArray(groupData)) { %>
+                        <% groupData.forEach(group=> { %>
+                            <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
+                                <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
+                                    <a href="/totags" type="button" class="btn"
+                                        style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                        <%= group.name %>
+                                    </a>
+                                    <% }); %>
+                                        <% } else { %>
+                                            <p>No Tag data available.</p>
+                                            <% } %>
+                </p>
                 </p>
             </div>
         </div>
 
     </div>
-<<<<<<< HEAD
-    
-    
+
+
+
+
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
         <div class="row g-0">
             <div class="col-md-6">
                 <div class="card-text">
-                    <!-- <p style="text-align: center; color: #f32929;">กำหนดการ</p>
-                    <p>12 สิงหาคม 2566 - 19 สิงหาคม 2566</p> -->
                     <p style="text-align: center;">
                         <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
                     </p>
-                    <p style="font-size: 15px; text-align: center;"><b>12 ส.ค. 66 - 19 ส.ค. 66</b></p>
+                    <% const Sstart=newsData.start %>
+                        <% const Send=newsData.end %>
+                            <% Sstart.setDate(Sstart.getDate() + 1); %>
+                                <% Send.setDate(Send.getDate() + 1); %>
+                                    <% const newsStart=Sstart.toISOString().substring(0, 10) %>
+                                        <% const newsEnd=Send.toISOString().substring(0, 10) %>
+                                            <p style="font-size: 15px; text-align: center;"><b><%- newsStart %> - <%- newsEnd %> </b></p>
 
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card-text" style="text-align: center;color: #000;">
                     <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
-                    <p ><%- newsData.explain %></p>
-=======
-    <div class="row" style="padding-top: 10px;">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body d-flex">
-                    <div class="card-title" style="padding-right: 10px;">
-                        <p>รายละเอียดเพิ่มเติม</p>
-                    </div>
-                    <div>
-                        <% const Sstart=newsData.start %>
-                            <% const Send=newsData.end %>
-                                <% Sstart.setDate(Sstart.getDate() + 1); %>
-                                    <% Send.setDate(Send.getDate() + 1); %>
-                                        <% const newsStart=Sstart.toISOString().substring(0, 10) %>
-                                            <% const newsEnd=Send.toISOString().substring(0, 10) %>
-                                                <%- newsStart %>
-                                                    <%- newsEnd %>
-                    </div>
-                    <div>
-                        <p><%- newsData.explain %></p>
-                    </div>
-<<<<<<< HEAD
-
-=======
-                   
->>>>>>> 7bceb8a172d69d40b4b5153cd8d8dabb6bf3f0a2
->>>>>>> cd1c63764b9da65f8036aeb33d40bfd053911e1b
+                    <p><%- newsData.explain %></p>
                 </div>
             </div>
         </div>
     </div>
-            
-<!-- 
-    <div class="row" style="padding-top: 10px;">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body d-flex">
-                    <div class="card-title" style="padding-right: 10px;">
-                        <i class="bi bi-tags" style="font-size: 2rem; color: cornflowerblue;"></i>
-                    </div>
-                    <div class="card-title" style="padding-top: 10px;">
-                        <% if (groupData && Array.isArray(groupData)) { %>
-                            <% groupData.forEach(group=> { %>
-                                <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
-                                    <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                        <a href="/totags" type="button" class="btn"
-                                            style="background-color: <%= colors[randomColorIndex] %>;">
-                                            <%= group.name %>
-                                        </a>
-                                        <% }); %>
-                                            <% } else { %>
-                                                <p>No Tag data available.</p>
-                                                <% } %>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
+
+    
 
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <div class="row g-0">
@@ -178,14 +132,14 @@
             <div class="col-md-8">
                 <div class="card-body">
                     <small>
-                    <h5 class="card-title">
-                        <%= newsData.user_name %>
-                    </h5>
-                    <p class="card-text"><i class="bi bi-person"></i>: <%= newsData.name %>
-                    </p>
-                    <p class="card-text"><i class="bi bi-envelope"></i>: <%= email%>
-                    </p>
-                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">
+                            <%= newsData.user_name %>
+                        </h5>
+                        <p class="card-text"><i class="bi bi-person"></i>: <%= newsData.name %>
+                        </p>
+                        <p class="card-text"><i class="bi bi-envelope"></i>: <%= email%>
+                        </p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                 </div>
             </div>
         </div>
