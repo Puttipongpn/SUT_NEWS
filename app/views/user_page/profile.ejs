@@ -141,19 +141,33 @@
                 <div class="row pt-3">
                   <% profile.forEach((profile)=> { %>
                     <div class="col-lg-3 col-md-6 mb-3">
-
                       <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
                         <div class="top">
                           <a href="/details/<%= profile.news_id %>">
                             <% if (profile.card_picture) { %>
                               <% const imcard=profile.card_picture.substring(7) %>
                                 <!-- bookmark -->
-                                <i class="fa fa-bookmark" style="font-size: x-large;"></i>
+                                <i class="fa fa-bookmark" style="font-size: x-large;" onclick="addBookmark('<%= profile.news_id %>')"></i>
                                 <!-- image -->
                                 <img class="card-img-top" src="<%= imcard %>" alt="">
                                 <% } %>
                           </a>
                         </div>
+                        <script>
+                          function addBookmark(newsId) {
+                              fetch(`/addbookmark/${newsId}`, {
+                                  method: 'POST'
+                              })
+                              .then(response => response.json())
+                              .then(data => {
+                                  // ทำสิ่งที่คุณต้องการหลังจากบันทึกข้อมูล
+                                  console.log(data.message); // เช่นแสดงข้อความเพื่อแจ้งให้ผู้ใช้ทราบ
+                              })
+                              .catch(error => {
+                                  console.error('เกิดข้อผิดพลาด:', error);
+                              });
+                          }
+                      </script>
 
                         <div class="card-body">
                           <h5 class="card-title">

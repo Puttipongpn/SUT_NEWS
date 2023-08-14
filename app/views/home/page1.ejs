@@ -87,12 +87,7 @@
                 </p>
             </div>
         </div>
-
     </div>
-
-
-
-
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
         <div class="row g-0">
@@ -101,26 +96,40 @@
                     <p style="text-align: center;">
                         <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
                     </p>
-                    <% const Sstart=newsData.start %>
-                        <% const Send=newsData.end %>
-                            <% Sstart.setDate(Sstart.getDate() + 1); %>
-                                <% Send.setDate(Send.getDate() + 1); %>
-                                    <% const newsStart=Sstart.toISOString().substring(0, 10) %>
-                                        <% const newsEnd=Send.toISOString().substring(0, 10) %>
-                                            <p style="font-size: 15px; text-align: center;"><b><%- newsStart %> - <%- newsEnd %> </b></p>
+                    <% if (newsData.start || newsData.end) { %>
+                        <% const Sstart=newsData.start %>
+                            <% const Send=newsData.end %>
+                                <% Sstart.setDate(Sstart.getDate() + 1); %>
+                                    <% Send.setDate(Send.getDate() + 1); %>
+                                        <% const newsStart=Sstart.toISOString().substring(0, 10) %>
+                                            <% const newsEnd=Send.toISOString().substring(0, 10) %>
+                                                <p style="font-size: 15px; text-align: center;">
+                                                    <b><%- newsStart %> - <%- newsEnd %></b>
+                                                </p>
+                                                <% } else { %>
+                                                    <p style="font-size: 15px; text-align: center;">
+                                                        <b>ไม่มีรายละเอียดเพิ่มเติม</b>
+                                                    </p>
+                                                    <% } %>
 
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card-text" style="text-align: center;color: #000;">
                     <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
-                    <p><%- newsData.explain %></p>
+                    <% if (newsData.explain) { %>
+                     <p><%- newsData.explain %></p>
+                    <% } else{ %>
+                        <p style="font-size: 15px; text-align: center;">
+                            ไม่มีรายละเอียดเพิ่มเติม
+                        </p>
+                        <%}%>
                 </div>
             </div>
         </div>
     </div>
 
-    
+
 
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <div class="row g-0">
