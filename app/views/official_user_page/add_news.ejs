@@ -11,8 +11,8 @@
 </head>
 
 <body>
-    <%- include('../header') %>
-        <%- include('../nav') %>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
             <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="">
                 <div class="container">
                     <div class=" row gutters">
@@ -272,7 +272,7 @@
                     color: #000000;
                 }
             </style>
-            <%- include('../footer') %>
+            <%- include('../home/footer') %>
 </body>
 <script>
     let img = document.getElementById('img');
@@ -291,7 +291,7 @@
     defaultOption2.textContent = 'กรุณาเลือก';
     dataSelect_news_type.appendChild(defaultOption2);
     // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+    fetch('AddNews/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
             // สร้างตัวเลือกในกล่องคอมโบ
@@ -316,7 +316,7 @@
     dataSelect_topic.appendChild(defaultOption1);
 
     // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+    fetch('AddNews/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
             // สร้างตัวเลือกในกล่องคอมโบ
@@ -335,7 +335,7 @@
 <script> //ดึงข้อมูลเข้า combobox section
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
     // Fetch section data and populate the select dropdown
-    fetch('/tags')
+    fetch('AddNews/tags')
         .then(response => response.json())
         .then(data => {
             const tagsSelect = document.getElementById('tags');

@@ -1,5 +1,5 @@
-<%- include('../header') %>
-    <%- include('../nav') %>
+<%- include('../home/header') %>
+    <%- include('../home/nav') %>
     <hr class="mt-0 mb-4">
         <div class="card-body " style="padding-left: 80px;padding-right: 80px;"> 
             <a class="btn btn-info " href="/addUser" >
@@ -38,7 +38,7 @@
                                 <%= users.request_status %>
                             </td>
                             <td>
-                                <a class="btn btn-info" href="/view_user/<%= users.id %>">
+                                <a class="btn btn-info" href="/official_request/<%= users.id %>">
                                     <span class="material-symbols-outlined material-icons">
                                         View
                                     </span>

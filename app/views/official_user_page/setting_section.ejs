@@ -32,8 +32,8 @@
         }
     </style>
 </head>
-<%- include('../header') %>
-    <%- include('../nav') %>
+<%- include('../home/header') %>
+    <%- include('../home/nav') %>
         <hr class="mt-0 mb-4 ">
 
         <body style="background-color:  rgb(15, 19, 32); ">
@@ -60,7 +60,7 @@
                                 <b >เพิ่ม section</b>
                             </div>
                             <div>
-                                <form class="d-flex" method="post" action="add_section">
+                                <form class="d-flex" method="post" action="Section">
                                     <input class="form-control" type="text" placeholder="add news section" name="name"
                                         aria-label="">
                                     <button class="btn btn-warning me-2  ml-3" type="submit">Add</button>
@@ -104,7 +104,7 @@
                 <div class="row gx-3 mb-3 mt-3" style="margin-top: 30px;">
 
                 </div>
-                <%- include('../footer') %>
+                <%- include('../home/footer') %>
         </body>
         <script src="https://kit.fontawesome.com/4c6ee23687.js"></script>
 

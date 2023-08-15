@@ -83,8 +83,8 @@
 </head>
 
 <body>
-  <%- include('../header') %>
-    <%- include('../nav') %>
+  <%- include('../home/header') %>
+    <%- include('../home/nav') %>
       <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
         <div class="container-st h-100 ">
           <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
@@ -155,7 +155,7 @@
                         </div>
                         <script>
                           function addBookmark(newsId) {
-                              fetch(`/addbookmark/${newsId}`, {
+                              fetch(`/bookmark/${newsId}`, {
                                   method: 'POST'
                               })
                               .then(response => response.json())

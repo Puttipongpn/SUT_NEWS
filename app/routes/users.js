@@ -1,7 +1,6 @@
 var express = require('express');
-var app = express();
-const Routes = require('./index');
+var router = express();
 
 /* GET users listing. */
 
-module.exports = app;
+module.exports = router;
