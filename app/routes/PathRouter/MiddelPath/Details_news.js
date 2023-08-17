@@ -38,7 +38,8 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                     const groupData = groupRows.map(group =>({
                         group_id:group.group_id,
                         news_id:group.news_id,
-                        name: group.name
+                        name: group.name,
+                        section_id:group.section_id
                     }));
                      // แปลงวันที่และเวลาจากฐานข้อมูลเป็นรูปแบบที่ต้องการ
                     
@@ -47,6 +48,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                         email: newsData.email,
                         groupData: groupData, // ส่งข้อมูล group_id ไปยัง template
                         formattedDate: newsData.time_stamp, // ส่งวันที่และเวลาที่ถูกแปลงไปยัง template
+                        section_id: newsData.section_id
                     });
                 } else {
                     res.render('center/page1', { 

@@ -2,8 +2,6 @@ var express = require('express');
 const router = express.Router();
 router.use(express.urlencoded({ extended: false }));
 
-
-
 router.get('/centerpage', function (req, res, next) {
     res.render('home/centerpage', {
         name: 'PLEASE LOGIN',
@@ -32,6 +30,9 @@ router.use('/bookmark', Bookmark);
 const Detaails_news = require('./PathRouter/MiddelPath/Details_news')
 router.use('/details', Detaails_news);
 
+const Home_tags = require('./PathRouter/MiddelPath/Home_Tags')
+router.use('/tags', Home_tags);
+
 
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
@@ -51,8 +52,9 @@ router.use('/setting_news', setting_news);
 
 
 //admin part-------------------------------------------------------------
-const Respond_news = require('./PathRouter/AdminPath/respond_news')
-router.use('/respond',Respond_news);
+
+const respond = require('./PathRouter/AdminPath/respond_news')
+router.use('/respond',respond);
 
 const official_request = require('./PathRouter/AdminPath/official_request')
 router.use('/official_request',official_request);

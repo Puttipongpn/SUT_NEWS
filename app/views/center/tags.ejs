@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,43 +17,40 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
     <style>
-
         /*----  Main Style  ----*/
-        #cards_landscape_wrap-2{
-        text-align: start;
-        background: #f0f0f0;
+        #cards_landscape_wrap-2 {
+            text-align: start;
+            background: #f0f0f0;
         }
 
-        #cards_landscape_wrap-2 .container{
-        padding-top: 60px; 
-        padding-bottom: 100px;
-        }
-       
-        #cards_landscape_wrap-2 .card:hover .img{
-        opacity: 0.7;
-        -webkit-transform:scale(1.15);
-        -moz-transform:scale(1.15);
-        -ms-transform:scale(1.15);
-        -o-transform:scale(1.15);
-        transform:scale(1.15);
+        #cards_landscape_wrap-2 .container {
+            padding-top: 60px;
+            padding-bottom: 100px;
         }
 
-        #cards_landscape_wrap-2 .card.text-box{
-        text-align: start;
+        #cards_landscape_wrap-2 .card:hover .img {
+            opacity: 0.7;
+            -webkit-transform: scale(1.15);
+            -moz-transform: scale(1.15);
+            -ms-transform: scale(1.15);
+            -o-transform: scale(1.15);
+            transform: scale(1.15);
         }
 
-        #cards_landscape_wrap-2 .card:hover{
-        background: #fff;
-        box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
-        -webkit-transition: all 0.2s ease-in;
-        -moz-transition: all 0.2s ease-in;
-        -ms-transition: all 0.2s ease-in;
-        -o-transition: all 0.2s ease-in;
-        transition: all 0.2s ease-in;
-        margin-top: 5px;
+        #cards_landscape_wrap-2 .card.text-box {
+            text-align: start;
         }
-      
-        
+
+        #cards_landscape_wrap-2 .card:hover {
+            background: #fff;
+            box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+            -webkit-transition: all 0.2s ease-in;
+            -moz-transition: all 0.2s ease-in;
+            -ms-transition: all 0.2s ease-in;
+            -o-transition: all 0.2s ease-in;
+            transition: all 0.2s ease-in;
+            margin-top: 5px;
+        }
     </style>
 </head>
 
@@ -62,113 +60,64 @@
         <div class="container">
             <div class="heading">
                 <h1 style="margin-bottom: 5%;"><b>มหาวิทยาลัยเทคโนโลยีสุรนารี</b></h1>
-                    <div class="row">
+                <div class="row">
+                    <% tags.forEach(hometags=> { %>
                         <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
                             <a href="" class="text-decoration-none" style="color: black;">
                                 <div class="card h-100 ">
-                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" class="card-img-top" alt="" />
-                                    <!-- <div class="image-box">
+                                    <% if (hometags.card_picture) { %>
+                                        <% const imcard=hometags.card_picture.substring(6) %>
+                                            <!-- bookmark -->
+                                            <i class="fa fa-bookmark" style="font-size: x-large;"
+                                                onclick="addBookmark('<%= hometags.news_id %>')"></i>
+                                            <!-- image -->
+                                            <img class="card-img-top" src="<%= imcard %>" alt="">
+                                            <% } %>
+                                                <!-- <div class="image-box">
                                     </div> -->
-                                    <div class="card-body">                                   
-                                        <div class="card-title">
-                                            <h5><b>Title 01cccccccccccccccccccccccc</b></h5>
-                                        </div>
-                                        <div class="card-text">
-                                            <p >Lorem typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s. text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <small class="text-muted">
-                                          <a>
-                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
-                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
-                                            <i class="fa-regular fa-thumbs-up fa-sm"></i>33
-                                            <!-- ชื่อ -->
-                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
-                                            <!-- อีเมล -->
-                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
-                                            <!-- วันที่ประกาศ -->
-                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
-                                          </a>
-                                        </small>
-                                      </div>
+                                                <div class="card-body">
+                                                    <div class="card-title">
+                                                        <h5><b><%- hometags.title %></b></h5>
+                                                    </div>
+                                                    <div class="card-text">
+                                                        <p><%- hometags.welding %></p>
+                                                    </div>
+                                                </div>
+                                                <div class="card-footer">
+                                                    <small class="text-muted">
+                                                        <a>
+                                                            <p class="card-text"
+                                                                style="font-size: 13; color: palevioletred;">
+                                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12
+                                                                ส.ค. 66 - 19
+                                                                ส.ค. 66
+                                                            </p>
+                                                            <i class="fa-regular fa-thumbs-up fa-sm"></i>33
+                                                            <!-- ชื่อ -->
+                                                            <i class="bi bi-person-circle fa-sm"></i><%- name %>
+                                                                <!-- อีเมล -->
+                                                                <i class="bi bi-envelope fa-sm"></i><%- email %>
+                                                                    <!-- วันที่ประกาศ -->
+                                                                    <p style="font-size: small;">
+                                                                        โพสเมื่อ
+                                                                        <% const date=hometags.time_stamp %>
+                                                                            <% const newDate=new Date(date); %>
+                                                                                <% newDate.setHours(newDate.getHours() + 7); %>
+                                                                                    <% const formattedDate=new Date(newDate).toISOString().substring(0,19).replace('T', ' ' )%>
+                                                                                        <%- formattedDate %>
+                                                                    </p>
+                                                        </a>
+                                                    </small>
+                                                </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <a href="" class="text-decoration-none" style="color: black;">
-                                <div class="card h-100">
-                                    <img src="https://cdn.pixabay.com/photo/2018/03/30/15/11/deer-3275594_960_720.jpg" class="card-img-top" alt="Deer" />
-                                    <div class="card-body">
-                                        <h5 class="card-title"><b>Title 01</b></h5>
-                                        <p class="card-text">Lorem typesetting industry. Lorem Ipsum has be</p>
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                        <small>
-                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
-                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
-                                            <i class="far fa-thumbs-up fa-sm"></i> 33
-                                            <i class="bi bi-person-circle fa-sm"></i> P'Cream
-                                            <i class="bi bi-envelope fa-sm"></i> c@gmail.com
-                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
-                                        </small>
-                                    </div>
-                                </div>                                
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <a href="" class="text-decoration-none" style="color: black;">
-                                <div class="card h-100">
-                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" class="card-img-top"  alt="" />
-                                    <div class="card-body">
-                                        <h5 class="card-title"><b>Title 03</b></h5>
-                                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                        <small>
-                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
-                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
-                                            <i class="far  fa-thumbs-up fa-sm"></i>33
-                                            <!-- ชื่อ -->
-                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
-                                            <!-- อีเมล -->
-                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
-                                            <!-- วันที่ประกาศ -->
-                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
-                                        </small>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                            <a href="" class="text-decoration-none" style="color: black;">
-                                <div class="card h-100">
-                                    <img src="https://cdn.pixabay.com/photo/2018/04/06/13/46/poly-3295856_960_720.png" class="card-img-top"  alt="" />
-                                    <div class="card-body">
-                                        <h5 class="card-title"><b>Title 03</b></h5>
-                                        <p class="card-text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
-                                        
-                                    </div>
-                                    <div class="card-footer text-muted">
-                                        <small>
-                                            <p class="card-text" style="font-size: 13; color: palevioletred;">
-                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
-                                            <i class="far  fa-thumbs-up fa-sm"></i>33
-                                            <!-- ชื่อ -->
-                                            <i class="bi bi-person-circle fa-sm"></i>P'Cream
-                                            <!-- อีเมล -->
-                                            <i class="bi bi-envelope fa-sm"></i>c@gmail.com
-                                            <!-- วันที่ประกาศ -->
-                                            <p style="font-size: small;">โพสเมื่อ: Jan 20, 2023</p>
-                                        </small>
-                                    </div>
-                                </div>  
-                            </a>
-                        </div>
-                    </div>
+                        <% }) %>
+                </div>
             </div>
         </div>
     </div>
-    
+
 </body>
+
 </html>

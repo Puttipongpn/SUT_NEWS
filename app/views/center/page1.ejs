@@ -68,20 +68,21 @@
                     <%- newsData.news_content %>
                 </p>
                 <p class="card-text">
+                    <% console.log(groupData) %>
                 <p style="padding: 10px;">
                     <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
                     <% if (groupData && Array.isArray(groupData)) { %>
                         <% groupData.forEach(group=> { %>
                             <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
                                 <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                    <a href="/totags" type="button" class="btn"
-                                        style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
-                                        <%= group.name %>
-                                    </a>
-                                    <% }); %>
-                                        <% } else { %>
-                                            <p>No Tag data available.</p>
-                                            <% } %>
+                                        <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
+                                            style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                            <%= group.name %>
+                                        </a>
+                                            <% }); %>
+                                                <% } else { %>
+                                                    <p>No Tag data available.</p>
+                                                    <% } %>
                 </p>
                 </p>
             </div>
@@ -117,12 +118,12 @@
                 <div class="card-text" style="text-align: center;color: #000;">
                     <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
                     <% if (newsData.explain) { %>
-                     <p><%- newsData.explain %></p>
-                    <% } else{ %>
-                        <p style="font-size: 15px; text-align: center;">
-                            ไม่มีรายละเอียดเพิ่มเติม
-                        </p>
-                        <%}%>
+                        <p><%- newsData.explain %></p>
+                        <% } else{ %>
+                            <p style="font-size: 15px; text-align: center;">
+                                ไม่มีรายละเอียดเพิ่มเติม
+                            </p>
+                            <%}%>
                 </div>
             </div>
         </div>
