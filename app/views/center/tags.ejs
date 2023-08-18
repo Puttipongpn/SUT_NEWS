@@ -17,40 +17,85 @@
         crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
     <style>
+        .card{
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+      }
+
         /*----  Main Style  ----*/
-        #cards_landscape_wrap-2 {
-            text-align: start;
-            background: #f0f0f0;
+        #cards_landscape_wrap-2{
+        text-align: start;
+        background: #f0f0f0;
         }
 
-        #cards_landscape_wrap-2 .container {
-            padding-top: 60px;
-            padding-bottom: 100px;
+        #cards_landscape_wrap-2 .container{
+        padding-top: 60px; 
+        padding-bottom: 100px;
+        }
+       
+        #cards_landscape_wrap-2 .card:hover .img{
+        opacity: 0.7;
+        -webkit-transform:scale(1.15);
+        -moz-transform:scale(1.15);
+        -ms-transform:scale(1.15);
+        -o-transform:scale(1.15);
+        transform:scale(1.15);
         }
 
-        #cards_landscape_wrap-2 .card:hover .img {
-            opacity: 0.7;
-            -webkit-transform: scale(1.15);
-            -moz-transform: scale(1.15);
-            -ms-transform: scale(1.15);
-            -o-transform: scale(1.15);
-            transform: scale(1.15);
+        #cards_landscape_wrap-2 .card.text-box{
+        text-align: start;
         }
 
-        #cards_landscape_wrap-2 .card.text-box {
-            text-align: start;
+        #cards_landscape_wrap-2 .card:hover{
+        background: #fff;
+        box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+        -webkit-transition: all 0.2s ease-in;
+        -moz-transition: all 0.2s ease-in;
+        -ms-transition: all 0.2s ease-in;
+        -o-transition: all 0.2s ease-in;
+        transition: all 0.2s ease-in;
+        margin-top: 5px;
         }
-
-        #cards_landscape_wrap-2 .card:hover {
-            background: #fff;
-            box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
-            -webkit-transition: all 0.2s ease-in;
-            -moz-transition: all 0.2s ease-in;
-            -ms-transition: all 0.2s ease-in;
-            -o-transition: all 0.2s ease-in;
-            transition: all 0.2s ease-in;
-            margin-top: 5px;
+        .top{
+        border: none;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+  
         }
+        .top:hover i {
+            position: absolute;
+            top: 10px;
+        }
+    
+        .top i {
+            position: absolute;
+            top: -100px;
+            right: 10px;
+            color: rgb(226, 28, 28);
+            transition: all 0.5s;
+        }
+    
+        .top .i-red {
+            color: rgb(226, 13, 13);
+        }
+        @keyframes anim{
+        from{
+            transform:rotate(0deg);
+        }
+        to{
+            transform:rotate(360deg);
+        }
+        }
+    
+        .top img {
+            height: 220px;
+            width: 100%;
+            object-fit: cover;
+            transition: all 2s;
+        }
+      
     </style>
 </head>
 
@@ -60,55 +105,55 @@
         <div class="container">
             <div class="heading">
                 <h1 style="margin-bottom: 5%;"><b>มหาวิทยาลัยเทคโนโลยีสุรนารี</b></h1>
-                <div class="row">
+                <div class="row ">
                     <% tags.forEach(hometags=> { %>
-                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3 pt-3">
                             <a href="" class="text-decoration-none" style="color: black;">
                                 <div class="card h-100 ">
                                     <% if (hometags.card_picture) { %>
                                         <% const imcard=hometags.card_picture.substring(6) %>
+                                        <div class="top">
                                             <!-- bookmark -->
                                             <i class="fa fa-bookmark" style="font-size: x-large;"
                                                 onclick="addBookmark('<%= hometags.news_id %>')"></i>
                                             <!-- image -->
                                             <img class="card-img-top" src="<%= imcard %>" alt="">
-                                            <% } %>
-                                                <!-- <div class="image-box">
-                                    </div> -->
-                                                <div class="card-body">
-                                                    <div class="card-title">
-                                                        <h5><b><%- hometags.title %></b></h5>
-                                                    </div>
-                                                    <div class="card-text">
-                                                        <p><%- hometags.welding %></p>
-                                                    </div>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <small class="text-muted">
-                                                        <a>
-                                                            <p class="card-text"
-                                                                style="font-size: 13; color: palevioletred;">
-                                                                <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12
-                                                                ส.ค. 66 - 19
-                                                                ส.ค. 66
-                                                            </p>
-                                                            <i class="fa-regular fa-thumbs-up fa-sm"></i>33
-                                                            <!-- ชื่อ -->
-                                                            <i class="bi bi-person-circle fa-sm"></i><%- name %>
-                                                                <!-- อีเมล -->
-                                                                <i class="bi bi-envelope fa-sm"></i><%- email %>
-                                                                    <!-- วันที่ประกาศ -->
-                                                                    <p style="font-size: small;">
-                                                                        โพสเมื่อ
-                                                                        <% const date=hometags.time_stamp %>
-                                                                            <% const newDate=new Date(date); %>
-                                                                                <% newDate.setHours(newDate.getHours() + 7); %>
-                                                                                    <% const formattedDate=new Date(newDate).toISOString().substring(0,19).replace('T', ' ' )%>
-                                                                                        <%- formattedDate %>
-                                                                    </p>
-                                                        </a>
-                                                    </small>
-                                                </div>
+                                        </div>
+                                        <% } %>
+                                              
+                                        <div class="card-body">
+                                            <div class="card-title">
+                                                <h5><b><%- hometags.title %></b></h5>
+                                            </div>
+                                            <div class="card-text">
+                                                <p><%- hometags.welding %></p>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer mt-auto">
+                                            <small class="text-muted">
+                                                <a>
+                                                    <p class="card-text" style="font-size: 13; color: palevioletred;">
+                                                        <i class="bi bi-calendar2-week fa-lg"></i> กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66
+                                                    </p>
+                                                    <p>
+                                                        <i class="fa-regular fa-thumbs-up fa-sm"></i>33
+                                                        <!-- ชื่อ -->
+                                                        <i class="bi bi-person-circle fa-sm"></i><%- name %>
+                                                        <!-- อีเมล -->
+                                                        <i class="bi bi-envelope fa-sm"></i><%- email %>
+                                                        <!-- วันที่ประกาศ -->
+                                                    </p>
+                                                    <p style="font-size: small;">
+                                                        โพสเมื่อ
+                                                        <% const date=hometags.time_stamp %>
+                                                        <% const newDate=new Date(date); %>
+                                                        <% newDate.setHours(newDate.getHours() + 7); %>
+                                                        <% const formattedDate=new Date(newDate).toISOString().substring(0,19).replace('T', ' ' )%>
+                                                        <%- formattedDate %>
+                                                    </p>
+                                                </a>
+                                            </small>
+                                        </div>    
                                 </div>
                             </a>
                         </div>

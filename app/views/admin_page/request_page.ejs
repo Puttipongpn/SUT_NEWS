@@ -17,34 +17,44 @@
   <!-- Fonts and icons -->
   <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
   <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
+  <style>
+    .container{
+      background-color: rgb(167, 167, 167);
+      border-radius: 3%;
+      margin-top: 4%;
+    }
+    .fresh-table{
+      margin-top: 2%;
+    }
+    .float-right{
+      padding: 1%;
+    }
+    .page-list{
+      margin-top: 5%;
+    }
+  
+  </style>
 </head>
 <body>
+  <div class="container" >
+    <h2 style="text-align: center; margin-top: 5%;"><b>Request News</b></h2>
     <div class="fresh-table full-color-orange">
-        <!--
-          Available colors for the full background: full-color-blue, full-color-azure, full-color-green, full-color-red, full-color-orange
-          Available colors only for the toolbar: toolbar-color-blue, toolbar-color-azure, toolbar-color-green, toolbar-color-red, toolbar-color-orange
-        -->
-      
-        <div class="toolbar">
-          <button id="alertBtn" class="btn btn-default">Alert</button>
-        </div>
-      
         <table id="fresh-table" class="table">
-          <thead>
+          <thead style="background-color: rgb(0, 0, 0);  color: #ffffff;">
             <th data-field="id">ID</th>
-            <th data-field="name">Name</th>
-            <th data-field="salary">Salary</th>
-            <th data-field="country">Country</th>
-            <th data-field="city">City</th>
+            <th data-field="title">Title</th>
+            <th data-field="welding">Welding</th>
+            <th data-field="username">Username</th>
+            <th data-field="date">Date</th>
             <th data-field="actions" data-formatter="operateFormatter" data-events="operateEvents">Actions</th>
           </thead>
-          <tbody>
+          <tbody style="background-color: rgb(235, 235, 235);">
             <tr>
               <td>1</td>
-              <td>Dakota Rice</td>
-              <td>$36,738</td>
-              <td>Niger</td>
-              <td>Oud-Turnhout</td>
+              <td>มทส. จัดงาน มาตุ้ม มาโฮม ครั้งที่ 2</td>
+              <td>ฟาร์มมหาวิทยาลัย ร่วมกับสำนักวิชาเทคโนโลยีการเกษตร มทส. จัดงาน มาตุ้ม มาโฮม ครั้งที่ 2 สีสันแห่งฟาร์มสุข วันที่ 8 – 10 สิงหาคม นี้</td>
+              <td>P'Cream</td>
+              <td>2023-08-14 15:39:16.149000</td>
               <td></td>
             </tr>
             <tr>
@@ -194,7 +204,7 @@
           </tbody>
         </table>
       </div>
-    
+    </div>
 </body>
 <!-- Javascript -->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
