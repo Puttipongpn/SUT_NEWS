@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,105 +40,28 @@
                     <table class="table table-fixed table-striped table-hover">
                         <thead>
                             <tr>
-                                <th scope="col" class="col-2">Image</th>
-                                <th scope="col" class="col-2">News_type</th>
-                                <th scope="col" class="col-2">Topic</th>
-                                <th scope="col" class="col-2">Headline</th>
-                                <th scope="col" class="col-2" style="text-align: center;">View</th>
+                                <th scope="col" class="col-2">Title</th>
+                                <th scope="col" class="col-2">Welding</th>
+                                <th scope="col" class="col-2">Date Time</th>
+                                <th scope="col" class="col-2">Status</th>
+                                <th scope="col" class="col-2" style="text-align: center;">Comment</th>
                                 <th scope="col" class="col-2" style="text-align: center;">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <% settingnews.forEach((settingnews)=> { %>
                             <tr>
-                                <th scope="row" class="col-2">1</th>
-                                <td class="col-2"> <%- settingnews.news_type_id %></td>
-                                <td class="col-2"><%- settingnews.topic_id %></td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> <%- settingnews.welding_para %></td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
+                                <th  class="col-2"  style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"><%- settingnews.title %></th>
+                                <td class="col-2"  style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"> <%- settingnews.welding_para %></td>
+                                <td class="col-2">12 ส.ค. 2566 </td>
+                                <td class="col-2"><span class="badge badge-success rounded-pill d-inline">approve</span><span class="badge badge-danger rounded-pill d-inline">Disapproved</span></td>
+                                <td class="col-2" style="text-align: center;">comment</td>
                                 <td class="col-2" style="text-align: center;"> 
                                     <a href="/addnews" class="edit" ><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                     <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                                 </td>
                             </tr>
                             <% }); %>
-                            <!-- <tr>
-                                <th scope="row" class="col-2">2</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">3</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">4</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">5</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">6</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">7</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row" class="col-2">8</th>
-                                <td class="col-2">news_type_name</td>
-                                <td class="col-2">topic_name</td>
-                                <td class="col-2" style="width: 400px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">intro_para </td>
-                                <td class="col-2" style="text-align: center;"><i class="fa-solid fa-magnifying-glass fa-lg" style="color: #000000;"></i></td>
-                                <td class="col-2" style="text-align: center;"> 
-                                    <a href="#editNewsModal" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                    <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
                 </div><!-- End -->
