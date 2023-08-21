@@ -31,37 +31,98 @@
       -webkit-box-orient: vertical;
     }
 
+    .card-body-commu {
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      margin-top: 5px;
+      height: 45px;
+    }
+
+    .card-body-commu .icon-container {
+      display: flex;
+      /* กำหนดให้องค์ประกอบภายในแสดงแบบ flex */
+      gap: 10px;
+      /* กำหนดระยะห่างระหว่างไอคอน */
+      justify-content: flex-end;
+      /* จัดตำแหน่งไอคอนที่อยู่ใน container ทางขวา */
+    }
+
+    .card-body-commu .icon-container i:last-child {
+      margin-left: auto;
+      /* ชิดซ้ายเพื่อเลื่อนไอคอนสุดท้ายไปทางขวา */
+    }
+
+    .card-body-commu i {
+      font-size: 20px;
+      width: 20px;
+    }
+
+    .card-body-profile {
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      min-height: 1px;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      height: auto;
+      margin-bottom: 0;
+    }
+
+    .card-footer {
+      margin-top: -40px;
+      padding: 0;
+    }
+
     .container-st {
       width: 85%;
       height: 100%;
       display: grid;
     }
 
-     /*----  Main Style  ----*/
-     #cards_landscape_wrap-2{
-      text-align: start;
-     
-      }
+    .card-text {
+      max-height: 6em;
+      margin-top: -10px;
+      /* กำหนดความสูงสูงสุดของเนื้อหา (ประมาณ 2.5 บรรทัด) */
+      overflow: hidden;
+    }
 
-      #cards_landscape_wrap-2 .container{
-      padding-top: 60px; 
+    .card-title a {
+      text-decoration: none;
+      font-size: 16px;
+      /* ลบขีดเส้นใต้ของลิงก์ */
+      color: #000;
+      /* ใช้สีตามที่ถูกกำหนดในพ่อค้านรอง */
+    }
+
+    .card-title a:hover {
+      text-decoration: none;
+      /* เพิ่มขีดเส้นใต้เมื่อนำเมาส์ไปชี้ */
+    }
+
+    /*----  Main Style  ----*/
+    #cards_landscape_wrap-2 {
+      text-align: start;
+
+    }
+
+    #cards_landscape_wrap-2 .container {
+      padding-top: 60px;
       padding-bottom: 100px;
-      }
-     
-      #cards_landscape_wrap-2 .card:hover .img{
+    }
+
+    #cards_landscape_wrap-2 .card:hover .img {
       opacity: 0.7;
-      -webkit-transform:scale(1.15);
-      -moz-transform:scale(1.15);
-      -ms-transform:scale(1.15);
-      -o-transform:scale(1.15);
-      transform:scale(1.15);
-      }
+      -webkit-transform: scale(1.15);
+      -moz-transform: scale(1.15);
+      -ms-transform: scale(1.15);
+      -o-transform: scale(1.15);
+      transform: scale(1.15);
+    }
 
-      #cards_landscape_wrap-2 .card.text-box{
+    #cards_landscape_wrap-2 .card.text-box {
       text-align: start;
-      }
+    }
 
-      #cards_landscape_wrap-2 .card:hover{
+    #cards_landscape_wrap-2 .card:hover {
       background: #fff;
       box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
       -webkit-transition: all 0.2s ease-in;
@@ -70,7 +131,7 @@
       -o-transition: all 0.2s ease-in;
       transition: all 0.2s ease-in;
       margin-top: 50px;
-      }
+    }
 
     .top {
       border: none;
@@ -114,7 +175,16 @@
       object-fit: cover;
       transition: all 2s;
     }
+    .card-body-commu .icon-container .bi.bi-bookmark.bookmarked {
+      color: red; /* สีสำหรับไอคอนบุคมาร์คที่ถูกบุคมาร์ค */
+  }
+  
+  .card-body-commu .icon-container .bi.bi-bookmark {
+      color: white; /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
+  }
+  
   </style>
+  
 </head>
 
 <body>
@@ -180,37 +250,81 @@
                         <div class="top">
                           <% if (profile.card_picture) { %>
                             <% const imcard=profile.card_picture.substring(7) %>
-                            <!-- bookmark -->
-                            <i class="fa fa-bookmark" style="font-size: x-large;" onclick="addBookmark('<%= profile.news_id %>')"></i>
-                            <a href="/details/<%= profile.news_id %>">
+                              <!-- bookmark -->
+                              <a href="/details/<%= profile.news_id %>">
                                 <!-- image -->
                                 <img class="card-img-top" src="<%= imcard %>" alt="">
                                 <% } %>
-                          </a>
+                              </a>
                         </div>
-                        <script>
+                        <div class="card-body-commu">
+                          <div class="icon-container">
+                            <i class="bi bi-heart"></i>
+                            <i class="bi bi-chat"></i>
+                            <i class="bi bi-send" style="padding-top: 1px;"></i>
+                            <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= profile.news_id %>" onclick="toggleBookmark(this)"></i>
+                          </div>
+                          <div style="margin-top: -5px;">
+                            <p style="font-size: 13px;color:#1e1e1e;">
+                              ถูกใจ 1,523 คน
+                            </p>
+                          </div>
+                        </div>
+                        <!-- <script>
                           function addBookmark(newsId) {
-                              fetch(`/bookmark/${newsId}`, {
-                                  method: 'POST'
-                              })
+                            fetch(`/bookmark/${newsId}`, {
+                              method: 'POST'
+                            })
                               .then(response => response.json())
                               .then(data => {
-                                  // ทำสิ่งที่คุณต้องการหลังจากบันทึกข้อมูล
-                                  console.log(data.message); // เช่นแสดงข้อความเพื่อแจ้งให้ผู้ใช้ทราบ
+                                // ทำสิ่งที่คุณต้องการหลังจากบันทึกข้อมูล
+                                console.log(data.message); // เช่นแสดงข้อความเพื่อแจ้งให้ผู้ใช้ทราบ
                               })
                               .catch(error => {
-                                  console.error('เกิดข้อผิดพลาด:', error);
+                                console.error('เกิดข้อผิดพลาด:', error);
                               });
                           }
+                        </script> -->
+                        <script>
+                          async function toggleBookmark(icon) {
+                              const newsId = icon.getAttribute('data-news-id');
+                      
+                              try {
+                                  const response = await fetch(`/bookmark/${newsId}`, {
+                                      method: 'POST'
+                                  });
+                      
+                                  const data = await response.json();
+                      
+                                  if (data.bookmarked) {
+                                      icon.classList.add('bookmarked');
+                                  } else {
+                                      icon.classList.remove('bookmarked');
+                                  }
+                      
+                                  console.log(data.message);
+                              } catch (error) {
+                                  console.error('เกิดข้อผิดพลาด:', error);
+                              }
+                          }
                       </script>
+                      <style>
+                        .card-body-commu .icon-container .bi.bi-bookmark.bookmarked {
+                            color: red; /* สีสำหรับไอคอนบุคมาร์คที่ถูกบุคมาร์ค */
+                        }
+                    
+                        .card-body-commu .icon-container .bi.bi-bookmark {
+                            color: rgb(10, 10, 10); /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
+                        }
+                    </style>
 
-                        <div class="card-body">
-                          <h5 class="card-title">
+                        <div class="card-body-profile">
+                          <h5 class="card-title ">
                             <a href="/details/<%= profile.news_id %>" class="">
                               <!-- title -->
                               <b><%- profile.title %></b>
                             </a>
-                            
+
                           </h5>
                           <p class="card-text " style="font-size: 16;">
                             <!-- welding -->
@@ -218,19 +332,19 @@
                           </p>
                         </div>
                         <div class="card-footer">
-                          <small class="text-muted">
-                            <a>
-                              <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
-                                  style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
-                              <i class="fa-regular fa-thumbs-up fa-sm"></i>33
-                              <!-- ชื่อ -->
-                              <i class="bi bi-person-circle fa-sm"></i><%- name %>
-                                <!-- อีเมล -->
-                                <i class="bi bi-envelope fa-sm"></i></i><%- email %>
-                                  <!-- วันที่ประกาศ -->
-                                  <p> โพสเมื่อ: Jan 20, 2023</p>
-                            </a>
-                          </small>
+                          <a style="font-size: 12px; color:#6e6e6e;">
+                            <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
+                                style="color: palevioletred; "></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66</p>
+                            <i class="fa-regular fa-thumbs-up fa-sm" style="padding-right: 5px;"></i>33
+                            <!-- ชื่อ -->
+                            <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i><%-
+                              name %>
+                              <!-- อีเมล -->
+                              <i class="bi bi-envelope fa-sm" style="padding-right: 5px;padding-left:10px;"></i></i><%-
+                                email %>
+                                <!-- วันที่ประกาศ -->
+                                <p> โพสเมื่อ: Jan 20, 2023</p>
+                          </a>
                         </div>
                       </div>
                     </div>

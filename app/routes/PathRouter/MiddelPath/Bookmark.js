@@ -50,10 +50,10 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
                 res.render('center/setting_bookmark', {
                     users: rows,
                     bookmark: rows,
-                    name: rows[0].name,
-                    role: rows[0].role,
-                    user_name: rows[0].user_name,
-                    email: rows[0].email,
+                    name: req.session.name,
+                    role: req.session.role,
+                    user_name: req.session.user_name,
+                    email: req.session.email,
                     profile_image: req.session.profile_image,
                 });
             }else {
