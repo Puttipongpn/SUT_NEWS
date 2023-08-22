@@ -1,0 +1,158 @@
+/*--------------------- Hero -----------------------*/
+body {
+    height: 100%;
+    font-family: "Mulish", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background: #0b0c2a;
+    
+}
+.hero {
+    padding-top: 50px;
+}
+.hero__items {
+    padding: 250px 0 42px 50px;
+    border-radius: 5px;
+}
+.hero__text {
+    position: relative;
+    z-index: 9;
+}
+.hero__text .label {
+    font-size: 13px;
+    color: blue;
+    background: white;
+    padding: 5px 14px 3px;
+    display: inline-block;
+    position: relative;
+    top: -100px;
+    
+}
+.hero__text h2 {
+    color: white;
+    font-size: 42px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    line-height: 52px;
+    margin-top: 35px;
+    margin-bottom: 8px;
+    position: relative;
+    top: -100px;
+   
+}
+.hero__text p {
+    color: white;
+    font-size: 16px;
+    margin-bottom: 40px;
+    position: relative;
+    top: -100px;
+    
+}
+.hero__text a {
+    position: relative;
+    top: -100px;
+    margin-left: 15%;
+ 
+}
+.hero__text a span {
+    font-size: 13px;
+    color: white;
+    background: red;
+    display: inline-block;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 20px;
+    border-radius: 4px 0 0 4px;
+    margin-right: 1px;
+}
+.hero__text a i {
+    font-size: 20px;
+    display: inline-block;
+    background: red;
+    padding: 11px 5px 16px 8px;
+    color: white;
+    border-radius: 0 4px 4px 0;
+}
+.hero__slider.owl-carousel .owl-item.active .hero__text .label {
+    top: 0;
+    opacity: 1;
+}
+.hero__slider.owl-carousel .owl-item.active .hero__text h2 {
+    top: 0;
+    opacity: 1;
+}
+.hero__slider.owl-carousel .owl-item.active .hero__text p {
+    top: 0;
+    opacity: 1;
+}
+.hero__slider.owl-carousel .owl-item.active .hero__text a {
+    top: 0;
+    opacity: 1;
+}
+.hero__slider.owl-carousel .owl-dots {
+    position: absolute;
+    left: 0;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+}
+.hero__slider.owl-carousel .owl-dots button {
+    height: 8px;
+    width: 8px;
+    background: #b7b7b7;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.hero__slider.owl-carousel .owl-dots button.active {
+    background: #fff;
+}
+.hero__slider.owl-carousel .owl-dots button:last-child {
+    margin-right: 0;
+}
+.hero__slider.owl-carousel .owl-nav button {
+    font-size: 36px;
+    height: 66px;
+    width: 66px;
+    background: #0b0c2a;
+    line-height: 66px;
+    text-align: center;
+    color: white;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: relative;
+    z-index: 1;
+    position: absolute;
+    left: -33px;
+    top: 50%;
+    margin-top: -47px;
+}
+.hero__slider.owl-carousel .owl-nav button.owl-next {
+    left: auto;
+    right: -33px;
+}
+.hero__slider.owl-carousel .owl-nav button:after {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    right: 0;
+    height: 54px;
+    width: 54px;
+    background: rgba(255, 255, 255, 0.1);
+    content: "";
+    z-index: -1;
+    margin: 0 auto;
+}
+.hero__slider.owl-carousel .owl-nav button span {
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    display: block;
+    z-index: 1;
+}
+
+.set-bg {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top center;
+}
+
+
