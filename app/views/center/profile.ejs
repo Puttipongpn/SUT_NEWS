@@ -176,14 +176,13 @@
       object-fit: cover;
       transition: all 2s;
     }
-
-    .card-body-commu .icon-container .bi.bi-bookmark.bookmarked {
-      color: red;
-      /* สีสำหรับไอคอนบุคมาร์คที่ถูกบุคมาร์ค */
-    }
-
+   
     .card-body-commu .icon-container .bi.bi-bookmark {
-      color: white;
+      color: rgb(0, 0, 0);
+      /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
+    }
+    .card-body-commu .icon-container .bi.bi-bookmark-check-fill {
+      color: rgb(165, 0, 0);
       /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
     }
   </style>
@@ -205,7 +204,8 @@
                         style="width: 150px; z-index: 1" <% const imagePath=profile_image.substring(7); %>
                       src="<%= imagePath %>" alt="">
                         <% } else { %>
-                          <img id="profilePicture" class="img-account-profile rounded-circle mb-2" style="height: 80px;"
+                          <img id="profilePicture" class="img-fluid img-thumbnail mt-4 mb-2"
+                          style="width: 150px; z-index: 1"
                             src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                           <% } %>
                             <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
@@ -268,8 +268,16 @@
                             <i class="bi bi-heart"></i>
                             <i class="bi bi-chat"></i>
                             <i class="bi bi-send" style="padding-top: 1px;"></i>
-                            <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= profile.news_id %>"
-                              onclick="toggleBookmark(this)"></i>
+                            <% const news_id=profile.news_id; %>
+                              <% const isBookmarked=bookmark_id.some(item=> item.news_id === news_id); %>
+                                <% if (isBookmarked) { %>
+                                  <i class="bi bi-bookmark-check-fill" id="bookmarkIcon" data-news-id="<%= news_id %>"
+                                      onclick="removeBookmark(this)"></i>
+                              <% } else { %>
+                                  <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= news_id %>"
+                                      onclick="addBookmark(this)"></i>
+                              <% } %>
+
                           </div>
                           <div style="margin-top: -5px;">
                             <p style="font-size: 13px;color:#1e1e1e;">
@@ -277,56 +285,52 @@
                             </p>
                           </div>
                         </div>
-                        <!-- <script>
-                          function addBookmark(newsId) {
-                            fetch(`/bookmark/${newsId}`, {
-                              method: 'POST'
-                            })
-                              .then(response => response.json())
-                              .then(data => {
-                                // ทำสิ่งที่คุณต้องการหลังจากบันทึกข้อมูล
-                                console.log(data.message); // เช่นแสดงข้อความเพื่อแจ้งให้ผู้ใช้ทราบ
-                              })
-                              .catch(error => {
-                                console.error('เกิดข้อผิดพลาด:', error);
-                              });
-                          }
-                        </script> -->
                         <script>
-                          async function toggleBookmark(icon) {
-                            const newsId = icon.getAttribute('data-news-id');
-
-                            try {
-                              const response = await fetch(`/bookmark/${newsId}`, {
-                                method: 'POST'
-                              });
-
-                              const data = await response.json();
-
-                              if (data.bookmarked) {
-                                icon.classList.add('bookmarked');
-                              } else {
-                                icon.classList.remove('bookmarked');
+                          async function addBookmark(icon) {
+                              const newsId = icon.getAttribute('data-news-id');
+                      
+                              try {
+                                  const response = await fetch(`/bookmark/${newsId}`, {
+                                      method: 'POST'
+                                  });
+                      
+                                  const data = await response.json();
+                      
+                                  if (data.success) {
+                                      bookmark_id.push({ news_id: newsId });
+                                      icon.classList.add('bi-bookmark-check-fill');
+                                      icon.classList.remove('bi-bookmark');
+                                  }window.location.reload();
+                      
+                                  console.log(data.message);
+                              } catch (error) {
+                                  console.error('เกิดข้อผิดพลาด:', error);
                               }
-
-                              console.log(data.message);
-                            } catch (error) {
-                              console.error('เกิดข้อผิดพลาด:', error);
-                            }
                           }
-                        </script>
-                        <style>
-                          .card-body-commu .icon-container .bi.bi-bookmark.bookmarked {
-                            color: red;
-                            /* สีสำหรับไอคอนบุคมาร์คที่ถูกบุคมาร์ค */
+                      
+                          async function removeBookmark(icon) {
+                              const newsId = icon.getAttribute('data-news-id');
+                      
+                              try {
+                                  const response = await fetch(`/bookmark/${newsId}`, {
+                                      method: 'DELETE'
+                                  });
+                                  const data = await response.json();
+                                  if (data.success) {
+                                      const index = bookmark_id.findIndex(item => item.news_id === newsId);
+                                      if (index !== -1) {
+                                          bookmark_id.splice(index, 1);
+                                      }
+                                      icon.classList.add('bi-bookmark');
+                                      icon.classList.remove('bi-bookmark-check-fill');
+                                  }window.location.reload();  
+                      
+                                  console.log(data.message);
+                              } catch (error) {
+                                  console.error('เกิดข้อผิดพลาด:', error);
+                              }
                           }
-
-                          .card-body-commu .icon-container .bi.bi-bookmark {
-                            color: rgb(10, 10, 10);
-                            /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
-                          }
-                        </style>
-
+                      </script>
                         <div class="card-body-profile">
                           <h5 class="card-title ">
                             <a href="/details/<%= profile.news_id %>" class="">
@@ -367,7 +371,6 @@
                                               <% const formattedDate=new Date(newDate).toISOString().substring(0,
                                                 19).replace('T', ' ' )%>
                                                 <p>โพสเมื่อ <%- formattedDate %></p>
-
                           </a>
                         </div>
                       </div>
@@ -379,6 +382,7 @@
           </div>
         </div>
       </section>
+      <%- include('../home/footer') %>
 </body>
 
 <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>

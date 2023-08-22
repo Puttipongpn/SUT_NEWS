@@ -8,17 +8,22 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id WHERE users.id = ?;", [req.session.userID])
         .then(([rows]) => {
+            console.log(req.session.bookmark_id)
             if (rows.length > 0) {
-                res.render('center/profile', {
-                    profile: rows,
-                    users: rows,
-                    card_picture: rows[0].card_picture,
-                    name: rows[0].name,
-                    role: rows[0].role,
-                    user_name: rows[0].user_name,
-                    email: rows[0].email,
-                    profile_image: req.session.profile_image,
-                });
+                dbConnection.execute("SELECT * FROM `bookmark` WHERE users_id = ?",[req.session.userID])
+                .then(([Bookmark]) => {
+                    res.render('center/profile', {
+                        bookmark_id: Bookmark,
+                        profile: rows,
+                        users: rows,
+                        card_picture: rows[0].card_picture,
+                        name: rows[0].name,
+                        role: rows[0].role,
+                        user_name: rows[0].user_name,
+                        email: rows[0].email,
+                        profile_image: req.session.profile_image,
+                    });
+                })
             } else {
                 res.render('404page')
             }

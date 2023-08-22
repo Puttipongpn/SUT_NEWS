@@ -49,9 +49,9 @@ router.get('/tags', (req, res) => {
 });
 
 router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE users.id = ?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM users WHERE users.id = ?", [req.session.userID])
         .then(([rows]) => {
-            if (rows[0].role === "OFFICIAL USER") {
+            if (rows[0].role === "OFFICIAL USER" || rows[0].role === "ADMIN") {
                 res.render('official_user_page/add_news', {
                     users: rows,
                     description: rows[0].description,

@@ -143,6 +143,7 @@
                 width: 100%;
                 border-radius: 25px;
             }
+            
 
             .image-h {
                 padding-left: 15px;
@@ -250,7 +251,7 @@
                 role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('bookmake');
-            if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
+            if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER' ||currentUser.role === 'ADMIN') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -262,7 +263,7 @@
             };
             console.log(currentUser.role)
             var userButton = document.getElementById('AddNEWs');
-            if (currentUser.role === 'OFFICIAL USER') {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม

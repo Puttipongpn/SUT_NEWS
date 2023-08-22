@@ -40,14 +40,23 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 
     dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
         .then(([rows]) => {
-            res.render('home/centerpage', {
+            if (rows) {
+              res.render('home/centerpage', {
                 users: rows,
-                name: rows[0].name,
-                role: rows[0].role,
-                user_name: rows[0].user_name,
-                email: rows[0].email,
+                name: req.session.name,
+                role: req.session.role,
+                user_name: req.session.user_name,
+                email: req.session.email,
                 profile_image: req.session.profile_image,
-            });
+            });  
+            }else{
+                res.render('home/centerpage', {
+                name: "Guest",
+                role: "Guest",
+                user_name: "Guest",
+                email: "Guest",
+            })
+            }
         });
 });
 
@@ -123,11 +132,13 @@ router.post('/', ifLoggedin, [
   const validation_result = validationResult(req);
     const { user_pass, user_email } = req.body;
     if (validation_result.isEmpty()) {
-
         dbConnection.execute("SELECT * FROM `users` WHERE `email`=?", [user_email])
             .then(([rows]) => {
                 bcrypt.compare(user_pass, rows[0].password).then(compare_result => {
                     if (compare_result === true) {
+                        dbConnection.execute("SELECT * FROM `bookmark` WHERE users_id = ?",[rows[0].id])
+                        .then(([Bookmark]) => {
+                        req.session.bookmark_id = Bookmark;
                         req.session.isLoggedIn = true;
                         req.session.userID = rows[0].id;
                         req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
@@ -136,7 +147,7 @@ router.post('/', ifLoggedin, [
                         req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
                         req.session.profile_image = rows[0].profile_image;
                         res.redirect('/');
-                    }
+                    })}
                     else {
                         res.render('login2', {
                             login_errors: ['Invalid Password!']

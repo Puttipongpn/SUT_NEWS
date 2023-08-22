@@ -39,10 +39,6 @@
                                             </h5>
                                             <h6 class="user-email"><%- email %></h6>
                                         </div>
-                                        <div class="about">
-                                            <h5 class="mb-2 text-primary">About</h5>
-                                            <p> <%- description %> </p>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -68,14 +64,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card d-flex " style="margin-top: -5px;">
+                            <div class="card-explain  " style="margin-top: -5px;">
                                 <div class="col-12 d-flex flex-column align-items-center justify-content-center"
                                     style="padding-block-end: 15px;">
                                     <div>
-                                         <p style="padding-top: 10px;">สิ่งที่ผู้เข้าร่วมควรทราบ</p>
+                                        <p style="padding-top: 10px;">สิ่งที่ผู้เข้าร่วมควรทราบ</p>
                                     </div>
                                     <div style="margin-top: -10px;">
-                                    <textarea id="editor" name="explain" ></textarea>
+                                        <textarea id="editor" name="explain"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -199,6 +195,9 @@
                 </div>
             </form>
             <style>
+                /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
+                
+
                 .form-select-ad {
                     color: #000000;
                     background: #ffffff;
@@ -408,7 +407,7 @@
                 'findAndReplace', 'selectAll', '|',
                 'heading', '|',
                 'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
-                
+
                 '|',
                 'outdent', 'indent', '|',
                 'undo', 'redo',
@@ -558,14 +557,12 @@
         // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
         toolbar: {
             items: [
-                
-                'bold', 'italic', 
-                'fontSize', 'fontFamily', 'fontColor', 'highlight','alignment', 
-                'insertTable','numberedList'
+                'bold', 'italic',
+                'fontSize', 'fontFamily', 'fontColor', 'highlight', 'alignment',
+                'insertTable', 'numberedList'
             ],
             shouldNotGroupWhenFull: true
         },
-
 
         // Changing the language of the interface requires loading the language file using the <script> tag.
         // language: 'es',
@@ -626,7 +623,7 @@
         // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
 
         // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
-        
+
         // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
         mention: {
             feeds: [
@@ -642,13 +639,13 @@
                 }
             ]
         },
-
+    
         // The "super-build" contains more premium features that require additional configuration, disable them below.
         // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
         removePlugins: [
             // These two are commercial, but you can try them out without registering to a trial.
-             'ExportPdf',
-             'ExportWord',
+            'ExportPdf',
+            'ExportWord',
             'CKBox',
             'CKFinder',
             'EasyImage',
