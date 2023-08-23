@@ -19,9 +19,6 @@ a {
     margin: 0 10px;
 }
 
-
-
-
 .card:hover {
     box-shadow: 0 8px 16px 0 rgba(255, 255, 255, 0.4);
 }
@@ -29,6 +26,16 @@ a {
 .text-muted i {
     margin: 0 10px;
 }
+
+.card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+    margin-top: 40px;
+  }
 
 .card-text {
     overflow: hidden;

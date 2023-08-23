@@ -14,7 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"> //เลื่อนรูปภาพ
         </script>
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="stylesheets/header.css">
     <!-- --------------------------------------------------------------------------------- -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -31,143 +31,93 @@
 
 <body>
     <header>
-        <div class="toppage">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Asetting_page"
-                        href="/setting_page">แก้ไขเว็ปเพจ</a>
+        <div class="toppage d-flex justify-content-end">
+            <ul class="head ">
+                <li class="head-item ">
+                    <a class="head-link" id="Asetting_page" href="/setting_page">แก้ไขเว็ปเพจ</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Arequest_ADMIN"
-                        href="/respond">รับคำร้องประกาศข่าว</a>
+                <li class="head-item ">
+                    <a class="head-link" id="Arequest_ADMIN" href="/respond">รับคำร้องประกาศข่าว</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="Aallow_Offuser"
-                        href="/manage_users">จัดการสมาชิก</a>
+                <li class="head-item ">
+                    <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการสมาชิก</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="bookmake"
-                        href="Bookmark">BOOKMAKE</a>
+                <li class="head-item ">
+                    <a class="head-link" style="font-size: 13px;" id="bookmake" href="Bookmark">BOOKMAKE</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="news_doom"
-                        href="/news_doom">DOOM</a>
+                <li class="head-item ">
+                    <a class="head-link" id="news_doom" href="/news_doom">DOOM</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/setting_news"
-                        id="setting_news">แก้ไขข่าวสาร</a>
+                <li class="head-item ">
+                    <a class="head-link" href="/setting_news" id="setting_news">แก้ไขข่าวสาร</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/AddNews"
-                        id="AddNEWs">เพิ่มข่าวสาร</a>
+                <li class="head-item ">
+                    <a class="head-link" href="/AddNews" id="AddNEWs">เพิ่มข่าวสาร</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" href="/Section"
-                        id="section_setting">เพิ่ม section</a>
+                <li class="head-item ">
+                    <a class="head-link" href="/Section" id="section_setting">เพิ่ม section</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" style="color: aliceblue;font-size: 15px;margin-top: -5px;" id="LOGOUT"
-                        href="/logout">LOGOUT</a>
-                </li> -->
 
-
-                <li class="nav-item">
-                    <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"
-                        style="color: aliceblue; font-size: 18px; margin-top: -11px;" href="#">
-                        <%= name %>
-                            <!-- Profile picture image-->
-                            <% if (profile_image) { %>
-                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                    style="height: 30px; margin-top:3px" <% const
-                                    imagePath=profile_image.substring(7); %>
-                                src="<%= imagePath %>" alt="">
-                                    <% } else { %>
-                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                            style="height: 30px;"
-                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                        <% } %>
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/profile">
-                        <div class="profile-card-h">
-                            <div class="image-h">
+                <li class="head-item ">
+                        <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                            aria-expanded="false" href="#">
+                            <%= name %>
+                                <!-- Profile picture image-->
                                 <% if (profile_image) { %>
-                                    <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                        style="height: 80px; padding-top: 1px;" <% const
-                                        imagePath=profile_image.substring(7); %>
+                                    <img id="profilePicture" class="img-account-profile rounded-circle "
+                                        style="height: 30px;" <% const imagePath=profile_image.substring(7); %>
                                     src="<%= imagePath %>" alt="">
                                         <% } else { %>
                                             <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                                style="height: 80px;"
+                                                style="height: 30px;"
                                                 src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
                                             <% } %>
-                                                <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
-                            </div>
-                            <div class="data-h">
-                                <%= user_name %>
-                                    <span>
-                                        <%= role %>
-                                    </span>
-                                    <span>
-                                        <%= email %>
-                                    </span>
-                            </div>
-                        </div>
                         </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-item">
+                            <a href="/profile">
+                                <div class="profile-card-h">
+                                    <div class="image-h">
+                                        <% if (profile_image) { %>
+                                            <img id="profilePicture" class="img-account-profile rounded-circle "
+                                                style="height: 80px;" <% const imagePath=profile_image.substring(7); %>
+                                            src="<%= imagePath %>" alt="">
+                                                <% } else { %>
+                                                    <img id="profilePicture" class="img-account-profile rounded-circle "
+                                                        style="height: 80px;"
+                                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                    <% } %>
+                                                        <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
+                                    </div>
+                                    <div class="data-h">
+                                        <%= user_name %>
+                                            <span>
+                                                <%= role %>
+                                            </span>
+                                            <span>
+                                                <%= email %>
+                                            </span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
 
-                        <div>
-                            <a class="dropdown-item" href="/setting_profile" id="setting_profile">
+                        <div class="dropdown-item">
+                            <a href="/setting_profile" id="setting_profile">
                                 <div style="padding-left: 5px;">
                                     setting profile
                                 </div>
                             </a>
                         </div>
-                        <div>
-                            <a class="dropdown-item" id="Logout" href="/logout" style="padding-left: 30px;">logout</a>
+                        <div class="dropdown-item">
+                            <a id="Logout" href="/logout" style="padding-left: 30px;">logout</a>
                         </div>
-                        <div>
-                            <a class="dropdown-item" id="LOGIN" href="/">login</a>
+                        <div class="dropdown-item">
+                            <a id="LOGIN" href="/">login</a>
                         </div>
                     </div>
+                </li>
         </div>
-
-        </li>
-
-        <style>
-            .profile-card-h {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                max-width: 150px;
-                width: 100%;
-                border-radius: 25px;
-            }
-            
-
-            .image-h {
-                padding-left: 15px;
-                position: relative;
-                height: 30px;
-                width: auto;
-            }
-
-            .data-h {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                margin-top: 60px;
-            }
-
-            span {
-                font-size: 10px;
-            }
-
-
-            .row-h .info-h {
-                text-align: center;
-            }
-        </style>
 
         <script>
             var currentUser = {
@@ -251,7 +201,7 @@
                 role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('bookmake');
-            if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER' ||currentUser.role === 'ADMIN') {
+            if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -297,9 +247,7 @@
                 role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('LOGOUT');
-            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.role
-            
-            === 'OFFICIAL USER') {
+            if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.role === 'OFFICIAL USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม

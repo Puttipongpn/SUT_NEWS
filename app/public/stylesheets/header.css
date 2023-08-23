@@ -1,0 +1,72 @@
+.toppage {
+    background-color: #1c1c1d;
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+   
+  }
+  .head { 
+    text-align: center;
+    align-items: center;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.head-item{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+    gap: 5px; /* ระยะห่างระหว่างไอเท็ม */
+}
+
+.head-item a {
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+   
+}
+
+.head-link {
+    color: white;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.dropdown-item a {
+    color: black; /* เปลี่ยนสีข้อความให้เป็นสีดำ */
+    align-items: center;
+    justify-items: center;
+}
+
+.profile-card-h {
+    display: flex;
+    flex-direction: column;
+    max-width: 150px;
+    width: 100%;
+    border-radius: 25px;
+}
+
+.image-h {
+    padding-left: 15px;
+    position: relative;
+    height: 30px;
+    width: auto;
+}
+
+.data-h {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 60px;
+}
+
+span {
+    font-size: 10px;
+}
+
+
+.row-h .info-h {
+    text-align: center;
+}
