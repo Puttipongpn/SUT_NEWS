@@ -8,8 +8,20 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
-
+<style>
+    .card-explain{
+        background: #ffffff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 0;
+        margin-bottom: 1rem;
+        margin-top: 40px;
+        height: inherit;
+      }
+</style>
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
@@ -194,10 +206,9 @@
                     </div>
                 </div>
             </form>
+            <%- include('../home/footer') %>
             <style>
                 /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
-                
-
                 .form-select-ad {
                     color: #000000;
                     background: #ffffff;
@@ -271,7 +282,7 @@
                     color: #000000;
                 }
             </style>
-            <%- include('../home/footer') %>
+            
 </body>
 <script>
     let img = document.getElementById('img');
