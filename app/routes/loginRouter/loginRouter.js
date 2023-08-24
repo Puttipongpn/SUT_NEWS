@@ -37,17 +37,16 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
     console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
     console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
 console.log(req.session.header)
-    dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
+    dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id ")
         .then(([rows]) => {
-            
             if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
                 dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
                     .then(([Bookmark]) => {
                         res.render('home/centerpage', {
                             bookmark_id: Bookmark,
                             center: rows,
+                            Center:rows[0],
                             header: req.session.header,
-
                             newsname: rows[0].name,
                             newsrole:  rows[0].role,
                             newsuser_name:  rows[0].user_name,

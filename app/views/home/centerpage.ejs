@@ -167,11 +167,12 @@
                                                             </p>
                                                             <!-- ชื่อ -->
                                                             <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
-                                                            <% if (newsprofile_image) { %>
+                                                            
+                                                            <% if (profile.profile_image) { %>
                                                                 <img id="profilePicture"
                                                                     class="img-account-profile rounded-circle mb-2"
                                                                     style="height: 30px; padding-right:5px;" <% const
-                                                                    imagePath=newsprofile_image.substring(7); %>
+                                                                    imagePath=profile.profile_image.substring(6); %>
                                                                 src="<%= imagePath %>" alt="">
                                                                     <% } else { %>
                                                                         <img id="profilePicture"
@@ -182,7 +183,7 @@
                                                                         <% } %><%-newsname %>
                                                                                 <!-- อีเมล -->
                                                                                 <i class="bi bi-envelope fa-sm"
-                                                                                    style="padding-right: 5px;padding-left:10px;"></i></i><%-newsemail
+                                                                                    style="padding-right: 5px;padding-left:10px;"></i></i><%-Center.email
                                                                                     %>
                                                                                     <!-- วันที่ประกาศ -->
                                                                                     <% const date=profile.time_stamp %>
