@@ -25,6 +25,8 @@
     }
     .card {
       overflow: hidden;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
     }
     .card-body-commu {
@@ -169,11 +171,13 @@
       <%- include('../home/header') %>
     <%- include('../home/nav') %>
       <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
-        <div class="container-st h-100 w-100" >
+        <div class="container-st h-100 ">
           <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
-            <div class="card card-block mb-2 mb-3 justify-content-center align-items-center" style="border: #fff;">
-              <p class="card-title-h" style="font-size: xx-large;"><b>" BOOKMARK "</b></p><br>
-              <p class="card-text" style="font-size: x-large;">Welcom to bookmark</p>
+            <div class="card card-block mb-2 mb-3 justify-content-center align-items-center">
+              <h4 class="card-title-h"><b>BOOKMARK</b></h4>
+              <p class="card-text">Welcom to bookmark</p>
+              <span><a href="Bookmark/setting_bookmark" class="btn btn-drak mb-3">setting <i
+                    class="fa-sharp fa-solid fa-gears fa-sm" style="color: #030303;"></i></a></span>
             </div>
 
             <div class="row" id="cards_landscape_wrap-2">
