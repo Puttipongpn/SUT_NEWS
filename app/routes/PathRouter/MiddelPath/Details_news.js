@@ -13,6 +13,7 @@ router.get('/details', ifNotLoggedin, (req, res, next) => {
             if (rows[0]) {
                 res.render('user_page/details', {
                     users: rows,
+                    header:req.session.header,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,
@@ -48,7 +49,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                                 role: req.session.role,
                                 user_name: req.session.user_name,
                                 email: req.session.email,
-                                profile_image: req.session.profile_image,
+                                profile_image: newsData.profile_image,
                                 newsData: newsData,
                                 email: newsData.email,
                                 groupData: groupData, // ส่งข้อมูล group_id ไปยัง template

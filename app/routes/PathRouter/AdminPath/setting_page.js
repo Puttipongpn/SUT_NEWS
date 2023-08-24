@@ -12,6 +12,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (rows[0].role === "ADMIN") {
                 res.render('admin_page/setting_page', {
                     users: rows,
+                    header:req.session.header,
                     name: rows[0].name,
                     role: rows[0].role,
                     user_name: rows[0].user_name,

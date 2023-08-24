@@ -12,6 +12,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (req.session.role === "OFFICIAL USER") {
                 res.render('official_user_page/setting_news', {
                     settingnews: rows,
+                    header:req.session.header,
                     users: req.session,
                     description: req.session.description,
                     name: req.session.name,

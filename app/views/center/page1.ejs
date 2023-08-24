@@ -36,7 +36,7 @@
 </head>
 
 <body>
-    
+
     <div class="card">
         <div class="card-body">
             <h2 style="margin-left: 2%; margin-top: 5%; margin-right: 2%;">
@@ -70,21 +70,21 @@
                 </p>
                 <p class="card-text">
                     <% console.log(groupData) %>
-                <p style="padding: 10px;">
-                    <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
-                    <% if (groupData && Array.isArray(groupData)) { %>
-                        <% groupData.forEach(group=> { %>
-                            <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
-                                <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                        <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
-                                            style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
-                                            <%= group.name %>
-                                        </a>
+                        <p style="padding: 10px;">
+                            <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
+                            <% if (groupData && Array.isArray(groupData)) { %>
+                                <% groupData.forEach(group=> { %>
+                                    <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
+                                        <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
+                                            <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
+                                                style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                                <%= group.name %>
+                                            </a>
                                             <% }); %>
                                                 <% } else { %>
                                                     <p>No Tag data available.</p>
                                                     <% } %>
-                </p>
+                        </p>
                 </p>
             </div>
         </div>
@@ -134,10 +134,21 @@
 
     <div class="card mb-3 mt-2" style="max-width: auto;">
         <div class="row g-0">
-            <div class="col-md-4">
-                <img class="img-account-profile rounded-circle mb-2"
-                    style="height: 150px; margin-left: 15%; margin-bottom: 3%; margin-top: 3%;"
-                    src="http://bootdey.com/img/Content/avatar/avatar1.png" class="img-fluid rounded-start" alt="...">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="/profile/<%= newsData.user_id %>" class="">
+                    <% if (profile_image) { %>
+                        <img id="profilePicture" alt="Generic placeholder image"
+                            class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
+                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" <% const
+                            imagePath=profile_image.substring(6); %>
+                        src="<%= imagePath %>" alt="">
+                            <% } else { %>
+                                <img id="profilePicture"
+                                    class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
+                                    style="height: 150px;  margin-bottom: 3%; margin-top: 3%;"
+                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <% } %>
+                </a>
             </div>
             <div class="col-md-8">
                 <div class="card-body">

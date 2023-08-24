@@ -31,31 +31,43 @@ router.use((req, res, next) => {
 });
 // Middleware functions
 
-
 // Root Page
 router.get('/', ifNotLoggedin, (req, res, next) => {
-  // Your code here
-  console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
+    // Your code here
+    console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
     console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
-
-    dbConnection.execute("SELECT * FROM `users` WHERE `id`=?", [req.session.userID])
+console.log(req.session.header)
+    dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
         .then(([rows]) => {
-            if (rows) {
-              res.render('home/centerpage', {
-                users: rows,
-                name: req.session.name,
-                role: req.session.role,
-                user_name: req.session.user_name,
-                email: req.session.email,
-                profile_image: req.session.profile_image,
-            });  
-            }else{
-                res.render('home/centerpage', {
-                name: "Guest",
-                role: "Guest",
-                user_name: "Guest",
-                email: "Guest",
-            })
+            
+            if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
+                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+                    .then(([Bookmark]) => {
+                        res.render('home/centerpage', {
+                            bookmark_id: Bookmark,
+                            center: rows,
+                            header: req.session.header,
+
+                            newsname: rows[0].name,
+                            newsrole:  rows[0].role,
+                            newsuser_name:  rows[0].user_name,
+                            newsemail:  rows[0].email,
+                            newsprofile_image:  rows[0].profile_image,
+
+                        })
+
+                    });
+            } else {
+                dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
+                    .then(([rows]) => {
+                        res.render('home/centerpage', {
+                            center: rows,
+                            name: "Guest",
+                            role: "Guest",
+                            user_name: "Guest",
+                            email: "Guest",
+                        })
+                    })
             }
         });
 });
@@ -126,28 +138,30 @@ router.post('/', ifLoggedin, [
             });
     }),
     body('user_pass', 'Password is empty!').trim().not().isEmpty(),
-  // Validation and authentication logic
+    // Validation and authentication logic
 ], (req, res) => {
-  // Your code here
-  const validation_result = validationResult(req);
+    // Your code here
+    const validation_result = validationResult(req);
     const { user_pass, user_email } = req.body;
     if (validation_result.isEmpty()) {
         dbConnection.execute("SELECT * FROM `users` WHERE `email`=?", [user_email])
             .then(([rows]) => {
                 bcrypt.compare(user_pass, rows[0].password).then(compare_result => {
                     if (compare_result === true) {
-                        dbConnection.execute("SELECT * FROM `bookmark` WHERE users_id = ?",[rows[0].id])
-                        .then(([Bookmark]) => {
-                        req.session.bookmark_id = Bookmark;
-                        req.session.isLoggedIn = true;
-                        req.session.userID = rows[0].id;
-                        req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
-                        req.session.user_name = rows[0].user_name;
-                        req.session.email = rows[0].email;
-                        req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
-                        req.session.profile_image = rows[0].profile_image;
-                        res.redirect('/');
-                    })}
+                        dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [rows[0].id])
+                            .then(([Bookmark]) => {
+                                req.session.bookmark_id = Bookmark;
+                                req.session.isLoggedIn = true;
+                                req.session.header = rows[0];
+                                req.session.userID = rows[0].id;
+                                req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
+                                req.session.user_name = rows[0].user_name;
+                                req.session.email = rows[0].email;
+                                req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
+                                req.session.profile_image = rows[0].profile_image;
+                                res.redirect('/');
+                            })
+                    }
                     else {
                         res.render('login2', {
                             login_errors: ['Invalid Password!']

@@ -34,6 +34,7 @@ router.get('/:id', ifNotLoggedin, (req, res, next) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
             res.render('admin_page/view_user', {
                 users: rows,
+                header:req.session.header,
                 user_name: rows[0].user_name,
                 email: rows[0].email,
                 profile_image: req.session.profile_image,

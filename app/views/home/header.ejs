@@ -43,7 +43,7 @@
                     <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการสมาชิก</a>
                 </li>
                 <li class="head-item ">
-                    <a class="head-link" style="font-size: 13px;" id="bookmake" href="Bookmark">BOOKMAKE</a>
+                    <a class="head-link" style="font-size: 13px;" id="bookmake" href="/bookmark">BOOKMAKE</a>
                 </li>
                 <li class="head-item ">
                     <a class="head-link" id="news_doom" href="/news_doom">DOOM</a>
@@ -59,28 +59,28 @@
                 </li>
 
                 <li class="head-item ">
-                        <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" href="#">
-                            <%= name %>
-                                <!-- Profile picture image-->
-                                <% if (profile_image) { %>
-                                    <img id="profilePicture" class="img-account-profile rounded-circle "
-                                        style="height: 30px;" <% const imagePath=profile_image.substring(7); %>
-                                    src="<%= imagePath %>" alt="">
-                                        <% } else { %>
-                                            <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                                style="height: 30px;"
-                                                src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                            <% } %>
-                        </a>
+                    <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false" href="#">
+                        <%= header.name %>
+                            <!-- Profile picture image-->
+                            <% if (header.profile_image) { %>
+                                <img id="profilePicture" class="img-account-profile rounded-circle "
+                                    style="height: 30px;" <% const imagePath=header.profile_image.substring(7); %>
+                                src="<%= imagePath %>" alt="">
+                                    <% } else { %>
+                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                            style="height: 30px;"
+                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <% } %>
+                    </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="dropdown-item">
-                            <a href="/profile">
+                            <a href="/profile/<%= header.id  %>">
                                 <div class="profile-card-h">
                                     <div class="image-h">
-                                        <% if (profile_image) { %>
+                                        <% if (header.profile_image) { %>
                                             <img id="profilePicture" class="img-account-profile rounded-circle "
-                                                style="height: 80px;" <% const imagePath=profile_image.substring(7); %>
+                                                style="height: 80px;" <% const imagePath=header.profile_image.substring(7); %>
                                             src="<%= imagePath %>" alt="">
                                                 <% } else { %>
                                                     <img id="profilePicture" class="img-account-profile rounded-circle "
@@ -90,12 +90,12 @@
                                                         <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
                                     </div>
                                     <div class="data-h">
-                                        <%= user_name %>
+                                        <%= header.user_name %>
                                             <span>
-                                                <%= role %>
+                                                <%= header.role %>
                                             </span>
                                             <span>
-                                                <%= email %>
+                                                <%= header.email %>
                                             </span>
                                     </div>
                                 </div>
@@ -121,7 +121,7 @@
 
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var setting_page = document.getElementById('Asetting_page');
             if (currentUser.role === 'ADMIN') {
@@ -132,7 +132,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var setting_page = document.getElementById('section_setting');
             if (currentUser.role === 'OFFICIAL USER') {
@@ -143,7 +143,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var request_ADMIN = document.getElementById('Arequest_ADMIN');
             if (currentUser.role === 'ADMIN') {
@@ -154,7 +154,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var allow_Offuser = document.getElementById('Aallow_Offuser');
             if (currentUser.role === 'ADMIN') {
@@ -165,7 +165,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var allow_Offuser = document.getElementById('setting_profile');
             if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
@@ -176,7 +176,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var allow_Offuser = document.getElementById('Logout');
             if (currentUser.role === 'ADMIN' || currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER') {
@@ -187,7 +187,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('news_doom');
             if (currentUser.role === 'USER') {
@@ -198,7 +198,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('bookmake');
             if (currentUser.role === 'USER' || currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
@@ -209,7 +209,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             console.log(currentUser.role)
             var userButton = document.getElementById('AddNEWs');
@@ -221,7 +221,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             console.log(currentUser.role)
             var userButton = document.getElementById('setting_news');
@@ -233,7 +233,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('LOGIN');
             if (currentUser.role === 'GUEST') {
@@ -244,7 +244,7 @@
         </script>
         <script>
             var currentUser = {
-                role: '<%= role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('LOGOUT');
             if (currentUser.role === 'USER' || currentUser.role === 'ADMIN' || currentUser.role === 'OFFICIAL USER') {
@@ -256,3 +256,4 @@
         </ul>
         </div>
     </header>
+</body>

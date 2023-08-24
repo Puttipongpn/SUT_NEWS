@@ -15,6 +15,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (isAdmin) {
                 res.render('admin_page/manage_account', {
                     users: rows,
+                    header:req.session.header,
                     name: req.session.name,
                     role: req.session.role,
                     profile_image: req.session.profile_image,

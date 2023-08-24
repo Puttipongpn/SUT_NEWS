@@ -14,6 +14,7 @@ router.get('/:section_id', ifNotLoggedin, (req, res, next) => {
             if (rows) {
                 res.render('center/tags', {
                     tags: rows,
+                    header:req.session.header,
                     name: req.session.name,
                     role: req.session.role,
                     user_name: req.session.user_name,

@@ -13,6 +13,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
                 res.render('official_user_page/setting_section', {
                     section: rows,
+                    header:req.session.header,
                     name: req.session.name,
                     role: req.session.role,
                     user_name: req.session.user_name,

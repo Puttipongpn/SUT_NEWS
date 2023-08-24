@@ -8,15 +8,17 @@ const { ifNotLoggedin } = require('../../loginRouter/ifNotLoggedin');
 router.use(express.urlencoded({ extended: false }));
 //SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
 router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.users_id LEFT JOIN news ON bookmark.news_id = news.news_id  LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
+    dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ?;", [req.session.userID])
         .then(([rows]) => {
             console.log(req.session.role);
             if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
-                dbConnection.execute("SELECT * FROM `bookmark` WHERE users_id = ?", [req.session.userID])
+                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
                     .then(([Bookmark]) => {
                         res.render('center/bookmake', {
                             bookmark_id:Bookmark,
                             users: rows,
+                            header:req.session.header,
+
                             bookmark: rows,
                             name: req.session.name,
                             role: req.session.role,
@@ -33,8 +35,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 
 router.post('/:id', ifNotLoggedin, (req, res, next) => {
     const newsDataWithUserId = {
-        news_id: req.params.id,
-        users_id: req.session.userID
+        b_news_id: req.params.id,
+        b_users_id: req.session.userID
     };
     dbConnection.query("INSERT INTO bookmark SET ?", [newsDataWithUserId])
         .then(([rows]) => {
@@ -52,7 +54,7 @@ router.delete('/:id', ifNotLoggedin, (req, res, next) => {
         users_id: req.session.userID
     };
 
-    dbConnection.query("DELETE FROM `bookmark` WHERE news_id = ? AND users_id = ?", [deleteData.news_id, deleteData.users_id])
+    dbConnection.query("DELETE FROM `bookmark` WHERE b_news_id = ? AND b_users_id = ?", [deleteData.news_id, deleteData.users_id])
         .then(([rows]) => {
             res.json({ message: 'ลบสำเร็จ' });
         })

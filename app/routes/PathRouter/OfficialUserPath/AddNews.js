@@ -54,6 +54,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (rows[0].role === "OFFICIAL USER" || rows[0].role === "ADMIN") {
                 res.render('official_user_page/add_news', {
                     users: rows,
+                    header:req.session.header,
                     description: rows[0].description,
                     name: rows[0].name,
                     role: rows[0].role,

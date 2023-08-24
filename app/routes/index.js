@@ -16,6 +16,9 @@ router.get('/centerpage', function (req, res, next) {
 const loginRouter = require('./loginRouter/loginRouter');
 router.use('/', loginRouter);
 
+//middel part-----------------------------------------------------------------
+const header = require('./PathRouter/MiddelPath/Header')
+router.use('header',header);
 
 //center part----------------------------------------------------------
 const SetProfileRouter = require('./PathRouter/MiddelPath/SetProfileRouter');
