@@ -9,10 +9,13 @@ router.use(express.urlencoded({ extended: false }));
 
 router.get('/:section_id', ifNotLoggedin, (req, res, next) => {
     const section_id = req.params.section_id;
-    dbConnection.execute("SELECT * FROM `group_section` LEFT JOIN news ON group_section.news_id = news.news_id WHERE section_id = ?", [section_id])
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id WHERE section.section_id = ?", [section_id])
         .then(([rows]) => {
             if (rows) {
-                res.render('center/tags', {
+                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+                .then(([Bookmark]) => {
+                    res.render('center/tags', {
+                    bookmark_id:Bookmark,
                     tags: rows,
                     header:req.session.header,
                     name: req.session.name,
@@ -20,7 +23,9 @@ router.get('/:section_id', ifNotLoggedin, (req, res, next) => {
                     user_name: req.session.user_name,
                     email: req.session.email,
                     profile_image: req.session.profile_image,
-                });
+                });   
+                })
+                
             } else {
                 console.error(error);
             }

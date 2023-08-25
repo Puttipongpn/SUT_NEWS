@@ -1,161 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
-
+    <title>Document</title>
     <!-- Add icon library -->
+  
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <style>
+        .card {
+            margin-left: 14.5%;
+            height: 100%;
+            width: 70%;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+            color: #4c4b4b;
+        }
+
+        .btn {
+            font-size: large;
+            border: #ffffff;
+            color: #ffffff;
+            padding: 5px;
+        }
+    </style>
+
 </head>
 
-<%- include('../home/header') %>
-    <%- include('../home/nav') %>
-
 <body>
-      <div class="container" style="margin-bottom: 3%;" >
-            <div style="text-align: end; margin-top: 3%; margin-bottom: -7%;">
-              <i class="bi bi-journal-bookmark-fill " style="color: rgb(2, 2, 2); font-size: xx-large;"></i>
+    <%- include('../home/header') %>
+    <%- include('../home/nav') %>
+    <div class="card">
+        <div class="card-body">
+            <h2 style="margin-left: 2%; margin-top: 5%; margin-right: 2%;">
+                <%- newsData.title %>
+            </h2>
+            <div style="margin-left: 2%; margin-right: 2%;">
+                <button type="button" class="btn" style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
+                            newsData.topic_name %></b></button>
+                <button type="button" class="btn"
+                    style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%- newsData.news_type_name
+                            %></b></button>
+                <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
+                    <% const date=newsData.time_stamp %>
+                        <% const newDate=new Date(date); %>
+                            <% newDate.setHours(newDate.getHours() + 7); %>
+                                <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' '
+                                    )%>
+                                    <b><%- formattedDate %></b>
+                </button>
+                <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
+                        class="bi bi-eye"></i><b>363 view</b></button>
+                <button type="button" class="btn">
+                    <p><%- newsData.section %></p>
+                </button>
             </div>
-            <!-- title -->
-            <h1 style="text-align: start; margin-top: 3%; ">
-              <b>แห่แชร์ รีแอคชั่นก้าวไกล</b>
-            </h1>
-            <div style="margin-left: 30px;">
-              <a class="nav-link" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false"
-                        style="color: rgb(101, 102, 104);font-size: 18px;margin-top: -8px; font-size: small;" href="#">
-                        <%= name%>
-                            <!-- Profile picture image-->
-                            <% if (profile_image) { %>
-                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                    style="height: 30px; padding-top: 1px;" <% const
-                                    imagePath=profile_image.substring(7); %>
-                                src="<%= imagePath %>" alt="">
-                                    <% } else { %>
-                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                            style="height: 30px;"
-                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                        <% } %>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item">
-                                                    <div class="profile-card-h">
-                                                        <div class="image-h">
-                                                            <% if (profile_image) { %>
-                                                                <img id="profilePicture"
-                                                                    class="img-account-profile rounded-circle mb-2"
-                                                                    style="height: 80px; padding-top: 1px;" <% const
-                                                                    imagePath=profile_image.substring(7); %>
-                                                                src="<%= imagePath %>" alt="">
-                                                                    <% } else { %>
-                                                                        <img id="profilePicture"
-                                                                            class="img-account-profile rounded-circle mb-2"
-                                                                            style="height: 80px;"
-                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png"
-                                                                            alt="">
-                                                                        <% } %>
-                                                                            <!--<img src="images/profile.jpg" alt="" class="profile-pic">-->
-                                                        </div>
-                                                      </div>
-                                                    </a>
-                                              </div>
-              </a>
+            <hr>
+            <div class="card-title">
+                <p style="font-size: larger; margin-left: 2%; margin-right: 2%; "><%- newsData.welding_para %></p>
+                <p style="text-align: start; margin-bottom: 2%; margin-top: 3%; ">
+                    <%- newsData.news_content %>
+                </p>
+                <p class="card-text">
+                    <% console.log(groupData) %>
+                        <p style="padding: 10px;">
+                            <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
+                            <% if (groupData && Array.isArray(groupData)) { %>
+                                <% groupData.forEach(group=> { %>
+                                    <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
+                                        <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
+                                            <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
+                                                style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                                <%= group.name %>
+                                            </a>
+                                            <% }); %>
+                                                <% } else { %>
+                                                    <p>No Tag data available.</p>
+                                                    <% } %>
+                        </p>
+                </p>
             </div>
-            <div class="container" style="height: 550px; width: 900px;  background-color: rgb(255, 255, 255);">
-              <img src="https://s.isanook.com/ns/0/ud/1786/8931738/tagline-template-update-april.jpg?ip/crop/w728h437/q80/webp" alt="" width="100%">
-            </div>
-            <!-- intro_para -->
-            <h5 style="text-align: center; margin-bottom: 5%; margin-top: 3%;">
-              <b> แห่แชร์ รีแอคชั่นพิธา-ส.ส.ก้าวไกล ตอน ชาดา ไทยเศรษฐ์ พูดเรื่อง ยิงคนหมิ่นไม่ติดคุก</b></h5>
-            <div >
-              <div class="text-start" style="margin-bottom: 3%;">
-                <div class="row">
-                  <div class="col-6">
-                    <!-- welding_para -->
-                    <p><b>หนึ่งในสีสันที่ถูกคนพูดถึงมากที่สุดจากการเปิดประชุมรัฐสภาเพื่อเลือกนายกรัฐมนตรี คือกรณีการอภิปรายของ นายชาดา ไทยเศรษฐ์ จากพรรคภูมิใจไทย ที่มีบางท่อนรุนแรงระบุว่า</b></p>
-                    <!-- main_para -->
-                    <p>
-                      "ผมบอกท่านเลยนะครับว่า ใครก็รักพ่อรักแม่ตัวเอง ถ้าท่านปล่อยให้คนด่า แล้วไม่มีกฎหมายคุ้มครองสถาบัน ยิงกันระเบิดแน่นอนเมืองนี้ ประเทศไทยนี่ล่ะครับ ยิงกันชิบหายวายป่วงหมด ผมอาจจะขอเขาว่า 
-                      ขอออกกฎหมายใหม่ ยิงไอ้คนที่หมิ่นสถาบัน แล้วไม่ติดคุก ดีไหม?"
-                      ประโยคดังกล่าว ถึงกับทำให้บรรยากาศสมาชิกสภา ตกอกตกใจกับสิ่งที่นายชาดาพูดออกมา โดยคนในโลกออนไลน์ 
-                      ต่างก็แคปภาพ นายพิธา นายวิโรจน์ น.ส.ศิริกัญญา และ นายโรม ที่แสดงสีหน้าตกใจแรง และหันไปมองหน้ากันไปมา
-                      ซึ่งหลังจากการอภิปรายของนายชาดา นายพิธาก็ได้ลุกขึ้นเพื่อตอบกลับ โดยมีบางช่วงระบุว่า 
-                      "ผมพยายามที่จะพัฒนา คุณลักษณะการเป็นผู้นำของผมครับ ถึงผมจะไม่เห็นด้วยกับทุกเรื่องที่ท่านชาดาพูดมา แต่ผมเห็นว่าท่านมีเสรีภาพในการพูด นี่คือหน้าที่ของสภา 
-                      ท่านชาดามีประสบการณ์มาแบบหนึ่ง และผมก็มีชุดความคิดแบบหนึ่ง ประสบการณ์แบบหนึ่ง นี่คือสิ่งที่ผมอยากเห็นตั้งแต่สมัยที่แล้วแล้วครับ 
-                      ที่ท่านชาดาได้พูดถึงเรื่องของการลดโทษ(ม.112)ก็ดี การคุ้มครองก็ดี ซึ่งเวทีนี้เป็นเวทีเลือกนายกรัฐมนตรี ไม่ใช่เวทีในการแก้ไขกฎหมายใดๆ"</p>
-                  </div>
-                  <div class="col-6">
-                    <form>
-                    <div  class="container fomr-groub" style="height: 400px; width: 550px;">
-                        <section id="slider_bl">
-                            <div class="wrapper">
-                              <input checked="" type="radio" name="slider" id="slide1">
-                              <input type="radio" name="slider" id="slide2">
-                              <input type="radio" name="slider" id="slide3">
-                              <input type="radio" name="slider" id="slide4">
-                              <div class="slider-wrapper">
-                                <div class="inner">
-                                  <article>
-                                    <div class="info top-left">
-                                      <h3></h3></div>
-                                    <img src="https://s.isanook.com/ns/0/ui/1786/8931738/gal-8931738-20230713035213-1122c65.jpeg">
-                                  </article>
-                                  <article>
-                                    <div class="info bottom-right">
-                                      <h3></h3></div>
-                                    <img src="https://s.isanook.com/ns/0/ui/1786/8931738/gal-8931738-20230713035212-629038e.jpeg">
-                                  </article>
-                                  <article>
-                                    <div class="info bottom-left">
-                                      <h3></h3></div>
-                                    <img src="https://s.isanook.com/ns/0/ui/1786/8931738/gal-8931738-20230713035212-7c66311.jpeg">
-                                  </article>
-                                  <article>
-                                    <div class="info top-right">
-                                      <h3></h3></div>
-                                    <img src="https://s.isanook.com/ns/0/ui/1786/8931738/gal-8931738-20230713035211-f408595.jpeg">
-                                  </article>
-                                </div>
-                              </div>
-                              <div class="slider-prev-next-control">
-                                <label for="slide1"></label>
-                                <label for="slide2"></label>
-                                <label for="slide3"></label>
-                                <label for="slide4"></label>
-                              </div>
-                              <div class="slider-dot-control">
-                                <label for="slide1"></label>
-                                <label for="slide2"></label>
-                                <label for="slide3"></label>
-                                <label for="slide4"></label>
-                              </div>
-                            </div>
-                        </section>
-                    </div>
-                </form></div>
+        </div>
+    </div>
+    <div class="card mb-3 mt-2" style="max-width: auto;">
+        <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
+        <div class="row g-0">
+            <div class="col-md-6">
+                <div class="card-text">
+                    <p style="text-align: center;">
+                        <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
+                    </p>
+                    <% if (newsData.start || newsData.end) { %>
+                        <% const Sstart=newsData.start %>
+                            <% const Send=newsData.end %>
+                                <% Sstart.setDate(Sstart.getDate() + 1); %>
+                                    <% Send.setDate(Send.getDate() + 1); %>
+                                        <% const newsStart=Sstart.toISOString().substring(0, 10) %>
+                                            <% const newsEnd=Send.toISOString().substring(0, 10) %>
+                                                <p style="font-size: 15px; text-align: center;">
+                                                    <b><%- newsStart %> - <%- newsEnd %></b>
+                                                </p>
+                                                <% } else { %>
+                                                    <p style="font-size: 15px; text-align: center;">
+                                                        <b>ไม่มีรายละเอียดเพิ่มเติม</b>
+                                                    </p>
+                                                    <% } %>
+
                 </div>
-              </div>
-          </div>
-        <div >
-          <!-- end_para -->
-          <p><b>และอีกส่วนที่บอกว่า</b> <br>
-           "ถ้าเราเข้าใจว่าพระองค์ท่านอยู่เหนือการเมือง และท่านทรงใช้อำนาจผ่าน ครม. อยู่แล้ว ตรงนี้ไม่ได้เป็นประเด็นที่ท่านได้กล่าวหาเลย 
-            และสิ่งที่ผมไม่ได้เห็นด้วยอย่างแรง คือสิ่งที่น่ากลัวที่สุด คือการพูดว่า ใครหมิ่นสถาบันพระมหากษัตริย์ให้เอาปืนไปยิงมันเลย อันนี้ผมไม่แน่ใจว่า 
-            คนที่สูญเสียไปเมื่อหลายปีก่อน 99 ศพที่ราชประสงค์ โดยที่ไม่รู้ว่าใครเป็นคนยิงเลย เป็นต้น ย้อนหลังไปถึง 6 ตุลา 14 ตุลา เป็นต้น 
-            ที่ยังไม่รู้ว่าวัฒนธรรมรับผิดรับชอบเป็นอย่างไรในวันนี้ เขาจะรู้สึกอย่างไร ที่มีการอภิปรายสิ่งนี้ในสภา อันนี้คือสิ่งที่ผมไม่เห็นด้วย และขอใช้สิทธิ์พาดพิงครับ"</p>
-            <p><a class="link-offset-2 link-underline link-underline-opacity-50" href="https://www.sanook.com/news/8931738/"><u>อ่านเพิ่มเติม</u></a></p>
-        </div>  
-      </div>
-        <%- include('../footer') %>
+            </div>
+            <div class="col-md-6">
+                <div class="card-text" style="text-align: center;color: #000;">
+                    <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
+                    <% if (newsData.explain) { %>
+                        <p><%- newsData.explain %></p>
+                        <% } else{ %>
+                            <p style="font-size: 15px; text-align: center;">
+                                ไม่มีรายละเอียดเพิ่มเติม
+                            </p>
+                            <%}%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="card mb-3 mt-2" style="max-width: auto;">
+        <div class="row g-0">
+            <div class="col-md-4 d-flex justify-content-center align-items-center">
+                <a href="/profile/<%= newsData.user_id %>" class="">
+                    <% if (profile_image) { %>
+                        <img id="profilePicture" alt="Generic placeholder image"
+                            class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
+                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" <% const
+                            imagePath=profile_image.substring(6); %>
+                        src="<%= imagePath %>" alt="">
+                            <% } else { %>
+                                <img id="profilePicture"
+                                    class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
+                                    style="height: 150px;  margin-bottom: 3%; margin-top: 3%;"
+                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                <% } %>
+                </a>
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <small>
+                        <h5 class="card-title">
+                            <%= newsData.user_name %>
+                        </h5>
+                        <p class="card-text"><i class="bi bi-person"></i>: <%= newsData.name %>
+                        </p>
+                        <p class="card-text"><i class="bi bi-envelope"></i>: <%= email%>
+                        </p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <%- include('../home/footer') %>
 </body>
-<script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
-
-    <style>
-
-    </style>
 
 </html>

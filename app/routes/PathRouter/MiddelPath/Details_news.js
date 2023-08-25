@@ -44,7 +44,8 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                             }));
                             // แปลงวันที่และเวลาจากฐานข้อมูลเป็นรูปแบบที่ต้องการ
 
-                            res.render('center/page1', {
+                            res.render('center/details', {
+                                header:req.session.header,
                                 name: req.session.name,
                                 role: req.session.role,
                                 user_name: req.session.user_name,
@@ -57,7 +58,8 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                                 section_id: newsData.section_id
                             });
                         } else {
-                            res.render('center/page1', {
+                            res.render('center/details', {
+                                header:req.session.header,
                                 newsData: newsData,
                                 email: newsData.email,
                                 groupData: null // ไม่พบข้อมูล group_id
