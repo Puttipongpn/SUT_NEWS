@@ -73,7 +73,7 @@
                             <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
                             <% if (groupData && Array.isArray(groupData)) { %>
                                 <% groupData.forEach(group=> { %>
-                                    <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#00008B' ]; %>
+                                    <% const colors=['#FF5733', '#004d00' , '#3367FF' , '#750029' , '#7FFFD4' ]; %>
                                         <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
                                             <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
                                                 style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
@@ -132,6 +132,11 @@
 
 
     <div class="card mb-3 mt-2" style="max-width: auto;">
+        <div class="container" style="padding-top: 5px;">
+            <div class="d-flex justify-content-center align-items-center ">
+                <b style="font-size: 18px;">ผู้เขียนบทความ / Writer</b>  
+            </div>
+        </div>
         <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <a href="/profile/<%= newsData.user_id %>" class="">
