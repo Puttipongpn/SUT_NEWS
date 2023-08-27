@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+
+            <form method="post" action="/addnews/<%= approve[0].id %>" id="news" enctype="multipart/form-data" class="">
+                <div class="container">
+                    <div class=" row gutters">
+                        <div class="col-12 col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="d-flex justify-content-center">
+                                            <b style="font-size: 18px;">News Card </b>
+                                        </div>
+
+                                        <div class="card h-100"
+                                            style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;margin-top:10px">
+                                            <div class="top">
+
+                                                <% if (approve[0].card_picture) { %>
+                                                    <% const imcard=approve[0].card_picture.substring(6) %>
+                                                        <img class="card-img-top" src="<%= imcard %>" alt="">
+                                                        <% } %>
+                                            </div>
+                                            <div class="card-body-commu">
+                                                <div class="icon-container">
+                                                    <i class="bi bi-heart"></i>
+                                                    <i class="bi bi-chat"></i>
+                                                    <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                                    <i class="bi bi-bookmark-check-fill"></i>
+                                                </div>
+                                                <div style="margin-top: -5px;">
+                                                    <p style="font-size: 13px;color:#1e1e1e;">
+                                                        ถูกใจ 1,523 คน
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div class="card-body-profile">
+                                                <h5 class="card-title ">
+                                                    <!-- title -->
+                                                    <b><%- approve[0].title %></b>
+                                                </h5>
+                                                <p class="card-text " style="font-size: 16;">
+                                                    <!-- welding -->
+                                                    <%- approve[0].welding_para %>
+                                                </p>
+                                            </div>
+                                            <div class="card-footer" style="margin-top: 20px;">
+                                                <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
+                                                        style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
+                                                    12 ส.ค. 66 - 19 ส.ค. 66
+                                                </p>
+                                                <!-- ชื่อ -->
+                                                <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
+                                                <% if (approve[0].profile_image) { %>
+                                                    <img id="profilePicture"
+                                                        class="img-account-profile rounded-circle mb-2"
+                                                        style="height: 30px;" <% const
+                                                        imagePath=approve[0].profile_image.substring(6); %>
+                                                    src="<%= imagePath %>" alt="">
+                                                        <% } else { %>
+                                                            <img id="profilePicture"
+                                                                class="img-account-profile rounded-circle mb-2"
+                                                                style="height: 30px;"
+                                                                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                alt="">
+                                                            <% } %><%-approve[0].name %>
+                                                                    <!-- อีเมล -->
+                                                                    <i class="bi bi-envelope fa-sm"
+                                                                        style="padding-right: 5px;padding-left:10px;"></i></i><%-approve[0].email%>
+                                                                        <!-- วันที่ประกาศ -->
+                                                                        <% const date=approve[0].time_stamp %>
+                                                                            <% const newDate=new Date(date); %>
+                                                                                <% newDate.setHours(newDate.getHours() +
+                                                                                    7); %>
+                                                                                    <% const formattedDate=new
+                                                                                        Date(newDate).toISOString().substring(0,
+                                                                                        19).replace('T', ' ' )%>
+                                                                                        <p>โพสเมื่อ <%- formattedDate %>
+                                                                                        </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+                                            <b style="font-size: 18px;">Approver</b>
+                                            <div class="user-avatar" style="padding-top: 5px;">
+                                                <% console.log(profile_image) %>
+                                                    <% if (profile_image) { %>
+                                                        <img id="profilePicture-s"
+                                                            class="img-account-profile rounded-circle mb-2" <% const
+                                                            imagePath=profile_image.substring(6); %>
+                                                        src="<%= imagePath %>" alt="">
+                                                            <% } else { %>
+                                                                <img id="profilePicture-s"
+                                                                    class="img-account-profile rounded-circle mb-2"
+                                                                    src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                    alt="">
+                                                                <% } %>
+                                            </div>
+                                            <h5 class="user-name">
+                                                <%= user_name %>
+                                            </h5>
+                                            <h6 class="user-email"><%- email %></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="account-settings">
+                                        <div class="user-profile">
+                                            <b style="font-size: 18px;">Writer</b>
+                                            <div class="user-avatar" style="padding-top: 5px;">
+                                                <% if (approve[0].profile_image) { %>
+                                                    <img id="profilePicture-s"
+                                                        class="img-account-profile rounded-circle mb-2" <% const
+                                                        imagePath=approve[0].profile_image.substring(6); %>
+                                                    src="<%= imagePath %>" alt="">
+                                                        <% } else { %>
+                                                            <img id="profilePicture-s"
+                                                                class="img-account-profile rounded-circle mb-2"
+                                                                src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                alt="">
+                                                            <% } %>
+                                            </div>
+                                            <h5 class="user-name">
+                                                <%= approve[0].user_name %>
+                                            </h5>
+                                            <h6 class="user-email"><%- approve[0].email %></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-md-4">
+                            <div class="card" style="padding-block-end: 5.5%;">
+                                <div class="card-body">
+                                    <div class="row gutters">
+                                        <div class="col-12">
+                                            <b style="font-size: 18px;">Approve System</b>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="form-group">
+                                                <div>
+                                                    <label for="news_type_select">Approve Status </label>
+                                                </div>
+                                                <div>
+                                                    <select class="form-select-ad form-select-lg" id="news_type_select"
+                                                        name="news_type_id" aria-label="Default select example">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 ">
+                                            <div class="">
+                                                <div>
+                                                    <label for="">Special Location Post</label>
+                                                </div>
+                                                <div>
+                                                    <select class="form-select-ad form-select-sm" id="news_topic_select"
+                                                        name="topic_id" placeholder="Enter email ID"
+                                                        aria-label="Default select example">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 " style="padding-top: 20px;">
+                                            <div class="">
+                                                <label for="title">Comments</label>
+                                                <textarea id="editor" name="explain"></textarea>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+            <%- include('../home/footer') %>
+                <style>
+                    /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
+                    .account-settings {
+                        padding: 0px;
+                        margin: 0px;
+                        height: auto;
+                    }
+
+                    .form-select-ad {
+                        color: #000000;
+                        background: #ffffff;
+                        width: 100%;
+                        height: 40px;
+                    }
+
+                    .card {
+                        background: #fcfcff;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        border-radius: 5px;
+                        border: 0;
+                        margin-bottom: 1rem;
+                        margin-top: 40px;
+                    }
+
+                    body {
+                        background: #1A233A;
+                    }
+
+                    table {
+                        border-collapse: collapse;
+                    }
+
+                    table,
+                    th,
+                    td {
+                        border: 1px solid black;
+                    }
+
+                    th,
+                    td {
+                        padding: 10px;
+                    }
+
+                    .image-button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                        text-decoration: underline;
+                        color: blue;
+                    }
+
+                    .modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 9999;
+                    }
+
+                    .modal-image {
+                        max-width: 80%;
+                        max-height: 80%;
+                    }
+
+                    .form-control {
+                        border: 1px solid #fefefe;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        border-radius: 2px;
+                        font-size: .825rem;
+                        background: #ffffff;
+                        border-color: #000000;
+                        color: #000000;
+                    }
+                </style>
+
+</body>
+<script>
+    // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+    CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+        toolbar: {
+            items: [
+                'bold', 'italic',
+                'fontSize', 'fontFamily', 'fontColor', 'highlight', 'alignment',
+                'insertTable', 'numberedList'
+            ],
+            shouldNotGroupWhenFull: true
+        },
+
+        // Changing the language of the interface requires loading the language file using the <script> tag.
+        // language: 'es',
+        list: {
+            properties: {
+                styles: true,
+                startIndex: true,
+                reversed: true
+            }
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+        heading: {
+            options: [
+                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+            ]
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+        placeholder: 'กรุณาระบุ ในกรณีที่ไม่อนุญาต',
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+        fontFamily: {
+            options: [
+                'default',
+                'Arial, Helvetica, sans-serif',
+                'Courier New, Courier, monospace',
+                'Georgia, serif',
+                'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                'Tahoma, Geneva, sans-serif',
+                'Times New Roman, Times, serif',
+                'Trebuchet MS, Helvetica, sans-serif',
+                'Verdana, Geneva, sans-serif'
+            ],
+            supportAllValues: true
+        },
+        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+        fontSize: {
+            options: [10, 12, 14, 'default', 18, 20, 22],
+            supportAllValues: true
+        },
+        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+        htmlSupport: {
+            allow: [
+                {
+                    name: /.*/,
+                    attributes: true,
+                    classes: true,
+                    styles: true
+                }
+            ]
+        },
+        // Be careful with enabling previews
+        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+
+        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+
+        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+        mention: {
+            feeds: [
+                {
+                    marker: '@',
+                    feed: [
+                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                        '@sugar', '@sweet', '@topping', '@wafer'
+                    ],
+                    minimumCharacters: 1
+                }
+            ]
+        },
+
+        // The "super-build" contains more premium features that require additional configuration, disable them below.
+        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+        removePlugins: [
+            // These two are commercial, but you can try them out without registering to a trial.
+            'ExportPdf',
+            'ExportWord',
+            'CKBox',
+            'CKFinder',
+            'EasyImage',
+            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+            // Storing images as Base64 is usually a very bad idea.
+            // Replace it on production website with other solutions:
+            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+            // 'Base64UploadAdapter',
+            'RealTimeCollaborativeComments',
+            'RealTimeCollaborativeTrackChanges',
+            'RealTimeCollaborativeRevisionHistory',
+            'PresenceList',
+            'Comments',
+            'TrackChanges',
+            'TrackChangesData',
+            'RevisionHistory',
+            'Pagination',
+            'WProofreader',
+            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+            // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+            'MathType',
+            // The following features are part of the Productivity Pack and require additional license.
+            'SlashCommand',
+            'Template',
+            'DocumentOutline',
+            'FormatPainter',
+            'TableOfContents'
+        ]
+    });
+</script>
+
+
+</html>

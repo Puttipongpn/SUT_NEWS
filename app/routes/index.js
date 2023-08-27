@@ -56,8 +56,8 @@ router.use('/setting_news', setting_news);
 
 //admin part-------------------------------------------------------------
 
-const respond = require('./PathRouter/AdminPath/respond_news')
-router.use('/respond',respond);
+const approve_news = require('./PathRouter/AdminPath/approve_news')
+router.use('/approve',approve_news);
 
 const official_request = require('./PathRouter/AdminPath/official_request')
 router.use('/official_request',official_request);
