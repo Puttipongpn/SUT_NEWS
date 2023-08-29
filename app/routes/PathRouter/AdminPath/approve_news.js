@@ -39,25 +39,63 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
         });
 });
 
+router.get('/status_combobox', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM status")
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
+
+router.get('/location_combobox', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM location_post")
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
 
 router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
     const news_id = req.params.news_id;
-    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE news.news_id  = ?", [news_id])
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id LEFT JOIN user_request ON news.user_id = user_request.user_id WHERE news.news_id  = ?", [news_id])
         .then(([rows]) => {
             if (rows) {
-                    res.render('admin_page/approve', {
+                res.render('admin_page/approve', {
                     approve: rows,
-                    header:req.session.header,
+                    header: req.session.header,
                     name: req.session.name,
                     role: req.session.role,
                     user_name: req.session.user_name,
                     email: req.session.email,
                     profile_image: req.session.profile_image,
-                });   
-                
+                });
+
             } else {
                 console.error(error);
             }
+        });
+});
+
+
+router.post('/:news_id', ifNotLoggedin, (req, res, next) => {
+    const news_id = req.params.id || null;
+    const status_id = req.body['status_id'];
+    const response = req.body['response'] || null;
+    const location_post_id = req.body['location_post_id'] || null;
+    const admin_id = req.session.userID || null;
+    const approve_id = req.body['approve_id']|| null;
+
+    dbConnection.execute("UPDATE approve_news SET news_id= ?,status_id = ?,response = ?,location_post_id = ?,admin_id = ?  WHERE approve_id = ?", [news_id, status_id, response, location_post_id, admin_id,approve_id  ])
+        .then(() => {
+            res.redirect('/approve');
         });
 });
 
