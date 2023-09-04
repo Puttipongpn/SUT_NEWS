@@ -14,7 +14,6 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-
             <div class="container">
                 <div class=" row gutters">
                     <div class="col-12 col-md-4">
@@ -157,8 +156,7 @@
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <form method="post" action="/approve/<%= approve[0].news_id %>" 
-                            enctype="multipart/form-data" class="">
+                        <form method="post" action="/approve/<%= approve[0].news_id %>" class="">
                             <div class="card" style="padding-block-end: 5.5%;">
                                 <div class="card-body ">
                                     <div class="row gutters">
@@ -178,7 +176,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12 ">
-                                            <div class="">
+                                             <div class="">
                                                 <div>
                                                     <label for="location_post_id">Special Location Post</label>
                                                 </div>
