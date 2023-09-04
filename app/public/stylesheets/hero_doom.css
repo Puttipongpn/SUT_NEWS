@@ -4,10 +4,9 @@ body {
     font-family: "Mulish", sans-serif;
     -webkit-font-smoothing: antialiased;
     background: #0b0c2a;
-    
 }
 .hero {
-    padding-top: 50px;
+    padding-top: 20px;
 }
 .hero__items {
     padding: 250px 0 42px 50px;

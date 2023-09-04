@@ -7,13 +7,112 @@
     <title>Document</title>
     <link rel="stylesheet" href="/stylesheets/card.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="stylesheets/hero_doom.css">
+    <style>
+        #navbar-b .navbar-brand {
+        margin-right: 0;
+        }
+        #navbar-b .navbar-brand img {
+        width: 80px;
+        }
+        @media screen and (min-width: 768px) {
+        #navbar-b .navbar-brand img {
+            width: 100px;
+        }
+        #navbar-b .container-fluid {
+            flex-direction: column;
+        }
+        #navbar-b .navbar-nav .nav-item {
+            padding: 0.5em 1em;
+        }
+        #navbar-b .navbar-nav {
+            border-bottom: 2px solid #000000;
+        }
+        }
+        #navbar-b .navbar-nav .nav-link {
+        color: #000000;
+        font-size: 1.1em;
+        }
+        #navbar-b .navbar-nav {
+        border-top: 2px solid #000000;
+        margin-top: 0.5em;
+        }
+    </style>
 </head>
 
 <%- include('../home/header') %>
     <%- include('../home/nav') %>
 
         <body>
-            <section>
+            <h1 class="header" style="margin-left: 4%; margin-top: 2%;"><b>Highlights</b></h1>
+            <section class="hero">
+              
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <div class="hero__items set-bg" data-setbg="https://static.thairath.co.th/media/dFQROr7oWzulq5Fa5KwRwlsmWihAn1J9i7HQnviuIYFBCDPpb0gRzCbFVVFRto1B4sE.jpg"
+                            style="height: 650px;background-image: url(&quot;https://static.thairath.co.th/media/dFQROr7oWzulq5Fa5KwRwlsmWihAn1J9i7HQnviuIYFBCDPpb0gRzCbFVVFRto1B4sE.jpg&quot;);">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="hero__text">
+                                            <h2>ลือสนั่น “อัมราบัต” เลือกทีมใหม่แล้ว</h2>
+                                            <p>หลังมีข่าวกับ "แมนยูฯ-ลิเวอร์พูล"</p>
+                                            <a href="https://www.thairath.co.th/sport/eurofootball/premierleague/2718165"><span>อ่านต่อ</span><i class="fa fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                  
+                          </div>
+                          <div class="carousel-item">
+                            <div class="hero__items set-bg" data-setbg="http://www.sut.ac.th/2012/images/upload/news/2224/2224/news.jpg"
+                            style="background-image: url(&quot;http://www.sut.ac.th/2012/images/upload/news/2224/2224/news.jpg&quot;);">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="hero__text">
+                                            <h2>ทรงพระเจริญ เนื่องในโอกาสวันเฉลิมพระชนมพรรษา</h2>
+                                            <p>สมเด็จพระนางเจ้าสิริกิติ์ พระบรมราชินีนาถ พระบรมราชชนนีพันปีหลวง ๑๒ สิงหาคม ๒๕๖๖</p>
+                                            <a href="#"><span>อ่านต่อ</span><i class="fa fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                  
+                          </div>
+                          <div class="carousel-item">
+                            <div class="hero__items set-bg" data-setbg="http://www.sut.ac.th/2012/images/upload/news/2227/2227/news.jpg"
+                            style="background-image: url(&quot;http://www.sut.ac.th/2012/images/upload/news/2227/2227/news.jpg&quot;);">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="hero__text">
+                                            <h2>มทส. ร่วมกับ สภาอุตสาหกรรมจังหวัดนครราชสีมา และ TCEB </h2>
+                                            <p>จัดประชุมสัมมนา ขับเคลื่อนโคราชเข้าสู่เมืองเป็นกลางทางคาร์บอน</p>
+                                            <a href="#"><span>อ่านต่อ</span><i class="fa fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="sr-only">Next</span>
+                        </a>
+                      </div>
+                    </div>
+                
+            </section>
+
+
+
+            <!-- <section>
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -38,21 +137,48 @@
                         <span class="sr-only">Next</span>
                     </button>
                 </div>
-            </section>
+            </section> -->
 
             <article>
-                <!-- Card List Section -->
-                <div class="menu-c">
-                    <button class="btn_menu" style="margin: 5px;" type="submit">รอบรั้ว มทส.</button>
+
+                <nav id="navbar-b" class="navbar navbar-expand-md navbar-dark mt-3" style="background-color:#ffffff">
+                    <div class="container-fluid">
+                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                      </button>
+                      <div class="collapse navbar-collapse" id="navbarNav">
+                        <ul class="navbar-nav mx-auto">
+                          <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#"><b>ร้อนแรงในขณะนี้</b></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#"><b>รอบรั้ว มทส.</b></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#"><b>Pricing</b></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#"><b>Pricing</b></a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#"><b>Pricing</b></a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                </nav>
+                 
+                <!-- <div class="menu-c mt-5" style="text-align: center; ">
                     <button class="btn_menu" style="margin: 5px;" type="submit">ร้อนแรงในขณะนี้</button>
+                    <button class="btn_menu" style="margin: 5px;" type="submit">รอบรั้ว มทส.</button>
                     <button class="btn_menu" style="margin: 5px;" type="submit">Dorm</button>
                     <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
                     <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
                     <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
                     <button class="btn_menu" style="margin: 5px;" type="submit">Button</button>
-                </div>
+                </div> -->
 
-                <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
+                <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
                     <div class="container-st h-100 ">
                         <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
                             <div class="row" id="cards_landscape_wrap-2">
