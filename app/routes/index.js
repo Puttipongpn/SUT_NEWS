@@ -36,6 +36,9 @@ router.use('/details', Detaails_news);
 const Home_tags = require('./PathRouter/MiddelPath/Home_Tags')
 router.use('/tags', Home_tags);
 
+const subscriber = require('./PathRouter/MiddelPath/subscriber')
+router.use('/subscriber', subscriber);
+
 
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
