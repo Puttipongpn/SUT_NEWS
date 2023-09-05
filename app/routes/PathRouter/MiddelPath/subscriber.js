@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', (req, res) => {
     // ดึงข้อมูลจากฐานข้อมูล
     dbConnection.execute("SELECT * FROM news")
-        .then(([rows]) => {
+        .then(([rows]) => { 
             res.render('center/subscriber',{
                 sub: rows[0],
                 header:req.session.header
