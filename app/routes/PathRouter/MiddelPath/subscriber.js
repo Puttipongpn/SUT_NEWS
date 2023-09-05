@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
     dbConnection.execute("SELECT * FROM news")
         .then(([rows]) => {
             res.render('center/subscriber',{
-                sub: rows[0]
+                sub: rows[0],
+                header:req.session.header
             })
         })
         .catch(err => {
