@@ -97,7 +97,7 @@ router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res
         .then(result => {
             req.session.card_picture = imagePath;
             const newsId = result[0].insertId;
-            console.log(section_id);
+            dbConnection.query("INSERT INTO approve_news SET news_id = ?, status_id = ?",[newsId,'1'])
             if (section_id) {
                 const sectionIds = JSON.parse(section_id); // แปลง JSON string กลับเป็น Array
                 const groupSectionData = sectionIds.map(id => ({

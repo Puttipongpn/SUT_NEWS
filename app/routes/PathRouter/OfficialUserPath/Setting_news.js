@@ -7,7 +7,7 @@ const { ifNotLoggedin } = require('../../loginRouter/ifNotLoggedin');
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM news WHERE user_id = ?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM news LEFT JOIN approve_news ON news.news_id = approve_news.news_id WHERE user_id = ?", [req.session.userID])
         .then(([rows]) => {
             if (req.session.role === "OFFICIAL USER") {
                 res.render('official_user_page/setting_news', {
