@@ -45,6 +45,9 @@ router.use('/sut_map', sut_map);
 const calendar = require('./PathRouter/MiddelPath/calendar')
 router.use('/calendar', calendar);
 
+const scholarship = require('./PathRouter/MiddelPath/scholarship')
+router.use('/scholarship', scholarship);
+
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
 router.use('/request_official', Official_request);
