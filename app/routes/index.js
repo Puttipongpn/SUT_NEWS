@@ -39,6 +39,11 @@ router.use('/tags', Home_tags);
 const subscriber = require('./PathRouter/MiddelPath/subscriber')
 router.use('/subscriber', subscriber);
 
+const sut_map = require('./PathRouter/MiddelPath/sut_map')
+router.use('/sut_map', sut_map);
+
+const calendar = require('./PathRouter/MiddelPath/calendar')
+router.use('/calendar', calendar);
 
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
