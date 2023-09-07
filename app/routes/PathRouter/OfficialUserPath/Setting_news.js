@@ -9,9 +9,19 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM news LEFT JOIN approve_news ON news.news_id = approve_news.news_id WHERE user_id = ?", [req.session.userID])
         .then(([rows]) => {
-            if (req.session.role === "OFFICIAL USER") {
+            if (req.session.role === "OFFICIAL USER"||req.session.role === "ADMIN") {
+                const Rows = rows.map(row => {
+                    const date = row.time_stamp;
+                    const newDate = new Date(date);
+                    newDate.setHours(newDate.getHours() + 7);
+                    const Rows = new Date(newDate).toISOString().substring(0, 19).replace('T', ' ');
+                    return {
+                        ...row,
+                        formattedDate: Rows
+                    };
+                });
                 res.render('official_user_page/setting_news', {
-                    settingnews: rows,
+                    settingnews: Rows,
                     header:req.session.header,
                     users: req.session,
                     description: req.session.description,

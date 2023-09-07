@@ -47,6 +47,7 @@
                                         <th scope="col" width="15%">Status</th>
                                         <th scope="col" width="15%">Date Time</th>
                                         <th scope="col" width="20%">Comment</th>
+                                        <th scope="col" width="20%">Approver</th>
                                         <th scope="col" class="text-end" width="10%">Actions</th>
                                     </tr>
                                 </thead>
@@ -62,16 +63,17 @@
                                                         <i class="fa fa-dot-circle-o text-danger"></i> Disapproved
                                                         <% }
                                                          else if (settingnews.status_id === 3) { %> 
-                                                            <i class="fa fa-dot-circle-o text-warning"></i> แก้ไข
+                                                            <i class="fa fa-dot-circle-o " style="color: #ff5c33;"></i> แก้ไข
                                                             <% }
                                                          else if (settingnews.status_id === 1) { %>
-                                                            รอการพิจารณา
+                                                            <i class="fa fa-dot-circle-o" style="color: #ffd500;"></i> รอการพิจารณา
                                                          <% } %>
                                                        
                                                         
                                             </td>
-                                            <td>12 ส.ค. 2566</td>
+                                            <td><%- settingnews.formattedDate %></td>
                                             <td><%- settingnews.response %></td>
+                                            <td><%- settingnews.admin_id %></td>
                                             <td class="text-end">
                                                 <a href="/addnews" class="edit"><i class="material-icons"
                                                         data-toggle="tooltip" title="Edit">&#xE254;</i></a>

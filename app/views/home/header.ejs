@@ -231,7 +231,7 @@
             };
             console.log(currentUser.role)
             var userButton = document.getElementById('setting_news');
-            if (currentUser.role === 'OFFICIAL USER') {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
