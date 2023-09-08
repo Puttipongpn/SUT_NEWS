@@ -54,7 +54,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
             if (rows[0].role === "OFFICIAL USER" || rows[0].role === "ADMIN") {
                 res.render('official_user_page/add_news', {
                     users: rows,
-                    header:req.session.header,
+                    header: req.session.header,
                     description: rows[0].description,
                     name: rows[0].name,
                     role: rows[0].role,
@@ -73,14 +73,14 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 
 const upload_card = multer({
     storage: multer.diskStorage({
-      destination: (req, file, cb) => {
-        cb(null, 'public/images/card_picture');
-      },
-      filename: (req, file, cb) => {
-        cb(null, file.originalname);
-      }
+        destination: (req, file, cb) => {
+            cb(null, 'public/images/card_picture');
+        },
+        filename: (req, file, cb) => {
+            cb(null, file.originalname);
+        }
     })
-  });
+});
 
 
 router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res) => {
@@ -91,13 +91,13 @@ router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res
         time_stamp: DateTime.local().setZone('Asia/Bangkok'),
         card_picture: req.file.path,
         ...newsData
-    }; 
-        imagePath = req.file.path;
+    };
+    imagePath = req.file.path;
     dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
         .then(result => {
             req.session.card_picture = imagePath;
             const newsId = result[0].insertId;
-            dbConnection.query("INSERT INTO approve_news SET news_id = ?, status_id = ?",[newsId,'1'])
+            dbConnection.query("INSERT INTO approve_news SET news_id = ?, status_id = ?", [newsId, '1'])
             if (section_id) {
                 const sectionIds = JSON.parse(section_id); // แปลง JSON string กลับเป็น Array
                 const groupSectionData = sectionIds.map(id => ({
@@ -116,6 +116,31 @@ router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res
         .catch(err => {
             console.log(err);
             res.redirect('404page');
+        });
+
+});
+
+router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
+    news_id = req.params.news_id;
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON  news.news_type_id = news_type.news_type_id LEFT JOIN group_section ON news.news_id = group_section.news_id LEFT JOIN section ON group_section.section_id = section.section_id WHERE news.news_id = ?", [news_id])
+        .then(([rows]) => {
+            if (rows) {
+                res.render('official_user_page/edit_news', {
+                    users: rows,
+                    header: req.session.header,
+                    description: rows[0].description,
+                    name: rows[0].name,
+                    role: rows[0].role,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
+                    profile_image: req.session.profile_image,
+                });
+            } else if (rows[0].role === "ADMIN") {
+                res.render('404page')
+            }
+            else {
+                res.render('404page')
+            }
         });
 });
 module.exports = router;
