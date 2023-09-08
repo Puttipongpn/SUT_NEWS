@@ -48,6 +48,12 @@ router.use('/calendar', calendar);
 const scholarship = require('./PathRouter/MiddelPath/scholarship')
 router.use('/scholarship', scholarship);
 
+const elective_subject = require('./PathRouter/MiddelPath/elective_subject')
+router.use('/elective_subject', elective_subject);
+
+const general_education_program = require('./PathRouter/MiddelPath/general_education_program')
+router.use('/general_education_program', general_education_program);
+
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
 router.use('/request_official', Official_request);
