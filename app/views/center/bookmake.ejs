@@ -16,159 +16,181 @@
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>
 </head>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
-    * {
-      margin: 0;
-      padding: 0;
-    }
-    .card {
-      overflow: hidden;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-    }
-    .card-body-commu {
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      margin-top: 5px;
-      height: 45px;
-    }
-    .card-body-commu .icon-container {
-      display: flex;
-      /* กำหนดให้องค์ประกอบภายในแสดงแบบ flex */
-      gap: 10px;
-      /* กำหนดระยะห่างระหว่างไอคอน */
-      justify-content: flex-end;
-      /* จัดตำแหน่งไอคอนที่อยู่ใน container ทางขวา */
-    }
-    .card-body-commu .icon-container i:last-child {
-      margin-left: auto;
-      /* ชิดซ้ายเพื่อเลื่อนไอคอนสุดท้ายไปทางขวา */
-    }
-    .card-body-commu i {
-      font-size: 20px;
-      width: 20px;
-    }
-    .card-body-profile {
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto;
-      min-height: 1px;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      height: auto;
-      margin-bottom: 0;
-    }
-    .card-footer {
-      margin-top: -40px;
-      padding: 0;
-      height: 120px;
-    }
-    .container-st {
-      width: 85%;
-      height: 100%;
-      display: grid;
-    }
-    .card-text {
-      max-height: 6em;
-      margin-top: -10px;
-      /* กำหนดความสูงสูงสุดของเนื้อหา (ประมาณ 2.5 บรรทัด) */
-      overflow: hidden;
-    }
-    .card-title a {
-      text-decoration: none;
-      font-size: 16px;
-      /* ลบขีดเส้นใต้ของลิงก์ */
-      color: #000;
-      /* ใช้สีตามที่ถูกกำหนดในพ่อค้านรอง */
-    }
-    .card-title a:hover {
-      text-decoration: none;
-      /* เพิ่มขีดเส้นใต้เมื่อนำเมาส์ไปชี้ */
-    }
-    /*----  Main Style  ----*/
-    #cards_landscape_wrap-2 {
-      text-align: start;
+  * {
+    margin: 0;
+    padding: 0;
+  }
 
-    }
-    #cards_landscape_wrap-2 .container {
-      padding-top: 60px;
-      padding-bottom: 100px;
-    }
-    #cards_landscape_wrap-2 .card:hover .img {
-      opacity: 0.7;
-      -webkit-transform: scale(1.15);
-      -moz-transform: scale(1.15);
-      -ms-transform: scale(1.15);
-      -o-transform: scale(1.15);
-      transform: scale(1.15);
-    }
-    #cards_landscape_wrap-2 .card.text-box {
-      text-align: start;
-    }
-    #cards_landscape_wrap-2 .card:hover {
-      background: #fff;
-      box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
-      -webkit-transition: all 0.2s ease-in;
-      -moz-transition: all 0.2s ease-in;
-      -ms-transition: all 0.2s ease-in;
-      -o-transition: all 0.2s ease-in;
-      transition: all 0.2s ease-in;
-      margin-top: 50px;
-    }
-    .top {
-      border: none;
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+  .card {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
 
-    }
-    .top:hover i {
-      position: absolute;
-      top: 10px;
-    }
-    .top i {
-      position: absolute;
-      top: -100px;
-      right: 10px;
-      color: rgb(226, 28, 28);
-      transition: all 0.5s;
-    }
-    .top .i-red {
-      color: rgb(226, 13, 13);
+  .card-body-commu {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    margin-top: 5px;
+    height: 45px;
+  }
+
+  .card-body-commu .icon-container {
+    display: flex;
+    /* กำหนดให้องค์ประกอบภายในแสดงแบบ flex */
+    gap: 10px;
+    /* กำหนดระยะห่างระหว่างไอคอน */
+    justify-content: flex-end;
+    /* จัดตำแหน่งไอคอนที่อยู่ใน container ทางขวา */
+  }
+
+  .card-body-commu .icon-container i:last-child {
+    margin-left: auto;
+    /* ชิดซ้ายเพื่อเลื่อนไอคอนสุดท้ายไปทางขวา */
+  }
+
+  .card-body-commu i {
+    font-size: 20px;
+    width: 20px;
+  }
+
+  .card-body-profile {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    min-height: 1px;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    height: auto;
+    margin-bottom: 0;
+  }
+
+  .card-footer {
+    margin-top: -40px;
+    padding: 0;
+    height: 120px;
+  }
+
+  .container-st {
+    width: 85%;
+    height: 100%;
+    display: grid;
+  }
+
+  .card-text {
+    max-height: 6em;
+    margin-top: -10px;
+    /* กำหนดความสูงสูงสุดของเนื้อหา (ประมาณ 2.5 บรรทัด) */
+    overflow: hidden;
+  }
+
+  .card-title a {
+    text-decoration: none;
+    font-size: 16px;
+    /* ลบขีดเส้นใต้ของลิงก์ */
+    color: #000;
+    /* ใช้สีตามที่ถูกกำหนดในพ่อค้านรอง */
+  }
+
+  .card-title a:hover {
+    text-decoration: none;
+    /* เพิ่มขีดเส้นใต้เมื่อนำเมาส์ไปชี้ */
+  }
+
+  /*----  Main Style  ----*/
+  #cards_landscape_wrap-2 {
+    text-align: start;
+
+  }
+
+  #cards_landscape_wrap-2 .container {
+    padding-top: 60px;
+    padding-bottom: 100px;
+  }
+
+  #cards_landscape_wrap-2 .card:hover .img {
+    opacity: 0.7;
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    transform: scale(1.15);
+  }
+
+  #cards_landscape_wrap-2 .card.text-box {
+    text-align: start;
+  }
+
+  #cards_landscape_wrap-2 .card:hover {
+    background: #fff;
+    box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+    -webkit-transition: all 0.2s ease-in;
+    -moz-transition: all 0.2s ease-in;
+    -ms-transition: all 0.2s ease-in;
+    -o-transition: all 0.2s ease-in;
+    transition: all 0.2s ease-in;
+    margin-top: 50px;
+  }
+
+  .top {
+    border: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .top:hover i {
+    position: absolute;
+    top: 10px;
+  }
+
+  .top i {
+    position: absolute;
+    top: -100px;
+    right: 10px;
+    color: rgb(226, 28, 28);
+    transition: all 0.5s;
+  }
+
+  .top .i-red {
+    color: rgb(226, 13, 13);
+  }
+
+  @keyframes anim {
+    from {
+      transform: rotate(0deg);
     }
 
-    @keyframes anim {
-      from {
-        transform: rotate(0deg);
-      }
+    to {
+      transform: rotate(360deg);
+    }
+  }
 
-      to {
-        transform: rotate(360deg);
-      }
-    }
+  .top img {
+    height: 220px;
+    width: 100%;
+    object-fit: cover;
+    transition: all 2s;
+  }
 
-    .top img {
-      height: 220px;
-      width: 100%;
-      object-fit: cover;
-      transition: all 2s;
-    }
-   
-    .card-body-commu .icon-container .bi.bi-bookmark {
-      color: rgb(0, 0, 0);
-      /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
-    }
-    .card-body-commu .icon-container .bi.bi-bookmark-check-fill {
-      color: rgb(165, 0, 0);
-      /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
-    }
-  </style>
-    <body>
-      
-      <%- include('../home/header') %>
+  .card-body-commu .icon-container .bi.bi-bookmark {
+    color: rgb(0, 0, 0);
+    /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
+  }
+
+  .card-body-commu .icon-container .bi.bi-bookmark-check-fill {
+    color: rgb(165, 0, 0);
+    /* สีสำหรับไอคอนบุคมาร์คที่ไม่ถูกบุคมาร์ค */
+  }
+</style>
+
+<body>
+
+  <%- include('../home/header') %>
     <%- include('../home/nav') %>
       <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center ">
         <div class="container-st h-100 ">
@@ -183,132 +205,235 @@
                 <div class="row pt-3">
                   <% if (bookmark && bookmark.length> 0) { %>
                     <% bookmark.forEach((bookmark)=> { %>
-                      <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์ค) ... -->
-                      <div class="col-lg-3 col-md-6 mb-3">
-                        <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
-                          <div class="top">
-                            <% if (bookmark.card_picture) { %>
-                              <% const imcard=bookmark.card_picture.substring(7) %>
-                                <!-- bookmark -->
-                                <a href="/details/<%= bookmark.news_id %>">
-                                  <!-- image -->
-                                  <img class="card-img-top" src="<%= imcard %>" alt="">
-                                  <% } %>
+                      <% if (bookmark.news_id) { %>
+
+
+                        <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์ค) ... -->
+                        <div class="col-lg-3 col-md-6 mb-3">
+                          <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                            <div class="top">
+                              <% if (bookmark.card_picture) { %>
+                                <% const imcard=bookmark.card_picture.substring(7) %>
+                                  <!-- bookmark -->
+                                  <a href="/details/<%= bookmark.news_id %>">
+                                    <!-- image -->
+                                    <img class="card-img-top" src="<%= imcard %>" alt="">
+                                    <% } %>
+                                  </a>
+                            </div>
+                            <div class="card-body-commu">
+                              <div class="icon-container">
+                                <i class="bi bi-heart"></i>
+                                <i class="bi bi-chat"></i>
+                                <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                <% const news_id=bookmark.b_news_id; %>
+                                  <% const isBookmarked=bookmark_id.some(item=> item.b_news_id === news_id); %>
+                                    <% if (isBookmarked) { %>
+                                      <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
+                                        data-news-id="<%= news_id %>" onclick="removeBookmark(this)"></i>
+                                      <% } else { %>
+                                        <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= news_id %>"
+                                          onclick="addBookmark(this)"></i>
+                                        <% } %>
+
+                              </div>
+                              <div style="margin-top: -5px;">
+                                <p style="font-size: 13px;color:#1e1e1e;">
+                                  ถูกใจ 1,523 คน
+                                </p>
+                              </div>
+                            </div>
+                            <script>
+                              async function addBookmark(icon) {
+                                const newsId = icon.getAttribute('data-news-id');
+
+                                try {
+                                  const response = await fetch(`/bookmark/${newsId}`, {
+                                    method: 'POST'
+                                  });
+
+                                  const data = await response.json();
+
+                                  if (data.success) {
+                                    bookmark_id.push({ b_news_id: newsId });
+                                    icon.classList.add('bi-bookmark-check-fill');
+                                    icon.classList.remove('bi-bookmark');
+                                  } window.location.reload();
+
+                                  console.log(data.message);
+                                } catch (error) {
+                                  console.error('เกิดข้อผิดพลาด:', error);
+                                }
+                              }
+
+                              async function removeBookmark(icon) {
+                                const newsId = icon.getAttribute('data-news-id');
+
+                                try {
+                                  const response = await fetch(`/bookmark/${newsId}`, {
+                                    method: 'DELETE'
+                                  });
+                                  const data = await response.json();
+                                  if (data.success) {
+                                    const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                                    if (index !== -1) {
+                                      bookmark_id.splice(index, 1);
+                                    }
+                                    icon.classList.add('bi-bookmark');
+                                    icon.classList.remove('bi-bookmark-check-fill');
+                                  } window.location.reload();
+
+                                  console.log(data.message);
+                                } catch (error) {
+                                  console.error('เกิดข้อผิดพลาด:', error);
+                                }
+                              }
+                            </script>
+                            <div class="card-body-profile">
+                              <h5 class="card-title ">
+                                <a href="/details/<%= bookmark.news_id %>" class="">
+                                  <!-- title -->
+                                  <b><%- bookmark.title %></b>
                                 </a>
-                          </div>
-                          <div class="card-body-commu">
-                            <div class="icon-container">
-                              <i class="bi bi-heart"></i>
-                              <i class="bi bi-chat"></i>
-                              <i class="bi bi-send" style="padding-top: 1px;"></i>
-                              <% const news_id=bookmark.b_news_id; %>
-                                <% const isBookmarked=bookmark_id.some(item=> item.b_news_id === news_id); %>
-                                  <% if (isBookmarked) { %>
-                                    <i class="bi bi-bookmark-check-fill" id="bookmarkIcon" data-news-id="<%= news_id %>"
-                                      onclick="removeBookmark(this)"></i>
+
+                              </h5>
+                              <p class="card-text " style="font-size: 16;">
+                                <!-- welding -->
+                                <%- bookmark.welding_para %>
+                              </p>
+                            </div>
+
+                            <div class="card-footer">
+                              <a style="font-size: 12px; color:#6e6e6e;">
+                                <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
+                                    style="color: palevioletred; padding-right:5px"></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค.
+                                  66
+                                </p>
+                                <!-- ชื่อ -->
+                                <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
+                                <% if (bookmark.profile_image) { %>
+                                  <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                    style="height: 30px; padding-right:5px;" <% const
+                                    imagePath=bookmark.profile_image.substring(7); %>
+                                  src="<%= imagePath %>" alt="">
                                     <% } else { %>
-                                      <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= news_id %>"
-                                        onclick="addBookmark(this)"></i>
-                                      <% } %>
-
-                            </div>
-                            <div style="margin-top: -5px;">
-                              <p style="font-size: 13px;color:#1e1e1e;">
-                                ถูกใจ 1,523 คน
-                              </p>
-                            </div>
-                          </div>
-                          <script>
-                            async function addBookmark(icon) {
-                              const newsId = icon.getAttribute('data-news-id');
-
-                              try {
-                                const response = await fetch(`/bookmark/${newsId}`, {
-                                  method: 'POST'
-                                });
-
-                                const data = await response.json();
-
-                                if (data.success) {
-                                  bookmark_id.push({ b_news_id: newsId });
-                                  icon.classList.add('bi-bookmark-check-fill');
-                                  icon.classList.remove('bi-bookmark');
-                                } window.location.reload();
-
-                                console.log(data.message);
-                              } catch (error) {
-                                console.error('เกิดข้อผิดพลาด:', error);
-                              }
-                            }
-
-                            async function removeBookmark(icon) {
-                              const newsId = icon.getAttribute('data-news-id');
-
-                              try {
-                                const response = await fetch(`/bookmark/${newsId}`, {
-                                  method: 'DELETE'
-                                });
-                                const data = await response.json();
-                                if (data.success) {
-                                  const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
-                                  if (index !== -1) {
-                                    bookmark_id.splice(index, 1);
-                                  }
-                                  icon.classList.add('bi-bookmark');
-                                  icon.classList.remove('bi-bookmark-check-fill');
-                                } window.location.reload();
-
-                                console.log(data.message);
-                              } catch (error) {
-                                console.error('เกิดข้อผิดพลาด:', error);
-                              }
-                            }
-                          </script>
-                          <div class="card-body-profile">
-                            <h5 class="card-title ">
-                              <a href="/details/<%= bookmark.news_id %>" class="">
-                                <!-- title -->
-                                <b><%- bookmark.title %></b>
+                                      <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                        style="height: 30px;padding-right:5px;"
+                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                      <% } %><%-bookmark.user_name %>
+                                          <!-- อีเมล -->
+                                          <i class="bi bi-envelope fa-sm"
+                                            style="padding-right: 5px;padding-left:10px;"></i></i><%-bookmark.email %>
+                                            <!-- วันที่ประกาศ -->
+                                            <% const date=bookmark.time_stamp %>
+                                              <% const newDate=new Date(date); %>
+                                                <% newDate.setHours(newDate.getHours() + 7); %>
+                                                  <% const formattedDate=new Date(newDate).toISOString().substring(0,
+                                                    19).replace('T', ' ' )%>
+                                                    <p>โพสเมื่อ <%- formattedDate %></p>
                               </a>
-
-                            </h5>
-                            <p class="card-text " style="font-size: 16;">
-                              <!-- welding -->
-                              <%- bookmark.welding_para %>
-                            </p>
-                          </div>
-                          <div class="card-footer">
-                            <a style="font-size: 12px; color:#6e6e6e;">
-                              <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
-                                  style="color: palevioletred; padding-right:5px"></i>กำหนดการ: 12 ส.ค. 66 - 19 ส.ค. 66
-                              </p>
-                              <!-- ชื่อ -->
-                              <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
-                              <% if (bookmark.profile_image) { %>
-                                <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                  style="height: 30px; padding-right:5px;" <% const
-                                  imagePath=bookmark.profile_image.substring(7); %>
-                                src="<%= imagePath %>" alt="">
-                                  <% } else { %>
-                                    <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                      style="height: 30px;padding-right:5px;"
-                                      src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                    <% } %><%-bookmark.user_name %>
-                                        <!-- อีเมล -->
-                                        <i class="bi bi-envelope fa-sm"
-                                          style="padding-right: 5px;padding-left:10px;"></i></i><%-bookmark.email %>
-                                          <!-- วันที่ประกาศ -->
-                                          <% const date=bookmark.time_stamp %>
-                                            <% const newDate=new Date(date); %>
-                                              <% newDate.setHours(newDate.getHours() + 7); %>
-                                                <% const formattedDate=new Date(newDate).toISOString().substring(0,
-                                                  19).replace('T', ' ' )%>
-                                                  <p>โพสเมื่อ <%- formattedDate %></p>
-                            </a>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <% }); %>
+                        <% } else { %>
+                          <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์ค) ... -->
+                          <div class="col-lg-3 col-md-6 mb-3">
+                            <div class="card h-100"
+                              style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                              <div class="top">
+                                <img class="card-img-top"
+                                  src="\images\sorry-wrong-information.jpg"
+                                  alt="">
+                              </div>
+                              <div class="card-body-commu">
+                                <div class="icon-container">
+                                  <i class="bi bi-heart"></i>
+                                  <i class="bi bi-chat"></i>
+                                  <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                  <% const news_id=bookmark.b_news_id; %>
+                                    <% const isBookmarked=bookmark_id.some(item=> item.b_news_id === news_id); %>
+                                      <% if (isBookmarked) { %>
+                                        <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
+                                          data-news-id="<%= news_id %>" onclick="removeBookmark(this)"></i>
+                                        <% } else { %>
+                                          <i class="bi bi-bookmark" id="bookmarkIcon" data-news-id="<%= news_id %>"
+                                            onclick="addBookmark(this)"></i>
+                                          <% } %>
+
+                                </div>
+                                <div style="margin-top: -5px;">
+                                  <p style="font-size: 13px;color:#1e1e1e;">
+
+                                  </p>
+                                </div>
+                              </div>
+                              <script>
+                                async function addBookmark(icon) {
+                                  const newsId = icon.getAttribute('data-news-id');
+
+                                  try {
+                                    const response = await fetch(`/bookmark/${newsId}`, {
+                                      method: 'POST'
+                                    });
+
+                                    const data = await response.json();
+
+                                    if (data.success) {
+                                      bookmark_id.push({ b_news_id: newsId });
+                                      icon.classList.add('bi-bookmark-check-fill');
+                                      icon.classList.remove('bi-bookmark');
+                                    } window.location.reload();
+
+                                    console.log(data.message);
+                                  } catch (error) {
+                                    console.error('เกิดข้อผิดพลาด:', error);
+                                  }
+                                }
+
+                                async function removeBookmark(icon) {
+                                  const newsId = icon.getAttribute('data-news-id');
+
+                                  try {
+                                    const response = await fetch(`/bookmark/${newsId}`, {
+                                      method: 'DELETE'
+                                    });
+                                    const data = await response.json();
+                                    if (data.success) {
+                                      const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                                      if (index !== -1) {
+                                        bookmark_id.splice(index, 1);
+                                      }
+                                      icon.classList.add('bi-bookmark');
+                                      icon.classList.remove('bi-bookmark-check-fill');
+                                    } window.location.reload();
+
+                                    console.log(data.message);
+                                  } catch (error) {
+                                    console.error('เกิดข้อผิดพลาด:', error);
+                                  }
+                                }
+                              </script>
+                              <div class="card-body-profile">
+                                <h5 class="card-title ">
+                                  <a href="/details/<%= bookmark.news_id %>" class="">
+                                    <!-- title -->
+                                    <b><%- bookmark.title %></b>
+                                  </a>
+
+                                </h5>
+                                <p class="card-text " style="font-size: 16;">
+                                  <!-- welding -->
+                                  <%- bookmark.welding_para %>
+                                </p>
+                              </div>
+
+                              <div class="card-footer">
+                               
+                              </div>
+                            </div>
+                          </div>
+                          <% } %>
+                            <% }); %>
                 </div>
               </div>
             </div>
@@ -323,9 +448,9 @@
           <p class="align-items-center"> คุณยังไม่ได้บันทึก BOOKMARK</p>
         </div>
         <% } %>
-      
-    </body>
-    <%- include('../home/footer') %>
-    <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
+</body>
+<%- include('../home/footer') %>
+  <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
 
 </html>

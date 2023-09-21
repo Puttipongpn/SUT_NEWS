@@ -65,7 +65,7 @@ router.delete('/:id', ifNotLoggedin, (req, res, next) => {
 });
 
 router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.b_users_id LEFT JOIN news ON bookmark.b_news_id = news.news_id  LEFT JOIN news_type ON bookmark.b_news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.users_id = ?", [req.session.userID])
+    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.b_users_id LEFT JOIN news ON bookmark.b_news_id = news.news_id  LEFT JOIN news_type ON bookmark.b_news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.b_users_id = ?", [req.session.userID])
         .then(([rows]) => {
             if (req.session.role === "USER" || req.session.role === "OFFICIAL USER" || req.session.role === "ADMIN") {
                 res.render('center/setting_bookmark', {
