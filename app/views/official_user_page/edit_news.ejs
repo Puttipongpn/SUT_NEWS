@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <style>
-    .card-explain{
+    .card-explain {
         background: #ffffff;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
@@ -20,12 +20,14 @@
         margin-bottom: 1rem;
         margin-top: 40px;
         height: inherit;
-      }
+    }
 </style>
+
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="">
+            <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="editnews" enctype="multipart/form-data"
+                class="">
                 <div class="container">
                     <div class=" row gutters">
                         <div class="col-12 col-md-3">
@@ -37,7 +39,7 @@
                                                 <% if (users[0].profile_image) { %>
                                                     <img id="profilePicture-s"
                                                         class="img-account-profile rounded-circle mb-2" <% const
-                                                        imagePath=users[0].profile_image.substring(7); %>
+                                                        imagePath=users[0].profile_image.substring(6); %>
                                                     src="<%= imagePath %>" alt="">
                                                         <% } else { %>
                                                             <img id="profilePicture-s"
@@ -47,9 +49,9 @@
                                                             <% } %>
                                             </div>
                                             <h5 class="user-name">
-                                                <%= user_name %>
+                                                <%- users[0].user_name %>
                                             </h5>
-                                            <h6 class="user-email"><%- email %></h6>
+                                            <h6 class="user-email"><%- users[0].email %></h6>
                                         </div>
                                     </div>
                                 </div>
@@ -63,7 +65,12 @@
                                             <p>เริ่มกิจกรรม</p>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <input type="date" name="start"  value="<%- users[0].start %>">
+                                            <% if (users[0].start) { %>
+                                                <input type="date" name="start"
+                                                    value="<%= users[0].start.toISOString().split('T')[0] %>">
+                                                <% } else { %>
+                                                    <input type="date" name="start">
+                                                    <% } %>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-center justify-content-between">
@@ -71,8 +78,12 @@
                                             <p>สิ้นสุด</p>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <% console.log(users) %>
-                                            <input type="date" name="end" value="<%- users[0].end %>">
+                                            <% if (users[0].end) { %>
+                                                <input type="date" name="end"
+                                                    value="<%= users[0].end.toISOString().split('T')[0] %>">
+                                                <% } else { %>
+                                                    <input type="date" name="end">
+                                                    <% } %>
                                         </div>
                                     </div>
                                 </div>
@@ -84,7 +95,7 @@
                                         <p style="padding-top: 10px;">สิ่งที่ผู้เข้าร่วมควรทราบ</p>
                                     </div>
                                     <div style="margin-top: -10px;">
-                                        <textarea id="editor" name="explain" value="<%- users[0].explainโ %>"></textarea>
+                                        <textarea id="editor" name="explain" value="<%- users[0].explain %>"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +115,8 @@
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                        name="news_type_id" aria-label="Default select example"value="<%- users[0].news_type_name %>">
+                                                        name="news_type_id" aria-label="Default select example"
+                                                        value="<%- users[0].news_type_name %>">
                                                     </select>
                                                 </div>
                                             </div>
@@ -126,7 +138,8 @@
                                             <div class="">
                                                 <label for="title">Title</label>
                                                 <input type="text" class="form-control form-control-lg" id="title"
-                                                    name="title" placeholder="เพิ่มหัวข้อข่าว" value="<%- users[0].title %>">
+                                                    name="title" placeholder="เพิ่มหัวข้อข่าว"
+                                                    value="<%- users[0].title %>">
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
@@ -143,8 +156,8 @@
                                                     <label for="street">Card Picture</label>
                                                 </div>
                                                 <div>
-                                                    <img id="img"
-                                                        src="https://kodfun.github.io/Reels/ImagePreview/choose.png"
+                                                    <img id="img" <% const image=users[0].card_picture.substring(6); %>
+                                                    src="<%= image %>"
                                                         height="200">
                                                 </div>
                                                 <div style="padding-top: 10px;">
@@ -189,7 +202,7 @@
                                         <div class="col-12" style="padding-top:20px">
                                             <h1>Edit News Paragrap </h1>
                                             <textarea rows="20" cols="70" id="newseditor"
-                                                name="news_content" value="<%- users[0].news_content %>"></textarea>
+                                                name="news_content"></textarea>
                                         </div>
                                     </div>
                                     <div class="row gutters">
@@ -197,7 +210,7 @@
                                             <div class="d-flex justify-content-between">
                                                 <button type="" id="submit" name="submit"
                                                     class="btn btn-danger">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Sent</button>
+                                                <button type="submit" class="btn btn-primary">Sent Update</button>
                                             </div>
                                         </div>
                                     </div>
@@ -208,82 +221,82 @@
                 </div>
             </form>
             <%- include('../home/footer') %>
-            <style>
-                /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
-                .form-select-ad {
-                    color: #000000;
-                    background: #ffffff;
-                    width: 100%;
-                    height: 40px;
-                }
+                <style>
+                    /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
+                    .form-select-ad {
+                        color: #000000;
+                        background: #ffffff;
+                        width: 100%;
+                        height: 40px;
+                    }
 
-                .card {
-                    background: #fcfcff;
-                    -webkit-border-radius: 5px;
-                    -moz-border-radius: 5px;
-                    border-radius: 5px;
-                    border: 0;
-                    margin-bottom: 1rem;
-                    margin-top: 40px;
-                }
+                    .card {
+                        background: #fcfcff;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        border-radius: 5px;
+                        border: 0;
+                        margin-bottom: 1rem;
+                        margin-top: 40px;
+                    }
 
-                body {
-                    background: #1A233A;
-                }
+                    body {
+                        background: #1A233A;
+                    }
 
-                table {
-                    border-collapse: collapse;
-                }
+                    table {
+                        border-collapse: collapse;
+                    }
 
-                table,
-                th,
-                td {
-                    border: 1px solid black;
-                }
+                    table,
+                    th,
+                    td {
+                        border: 1px solid black;
+                    }
 
-                th,
-                td {
-                    padding: 10px;
-                }
+                    th,
+                    td {
+                        padding: 10px;
+                    }
 
-                .image-button {
-                    background-color: transparent;
-                    border: none;
-                    cursor: pointer;
-                    text-decoration: underline;
-                    color: blue;
-                }
+                    .image-button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                        text-decoration: underline;
+                        color: blue;
+                    }
 
-                .modal {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0, 0, 0, 0.7);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 9999;
-                }
+                    .modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 9999;
+                    }
 
-                .modal-image {
-                    max-width: 80%;
-                    max-height: 80%;
-                }
+                    .modal-image {
+                        max-width: 80%;
+                        max-height: 80%;
+                    }
 
-                .form-control {
-                    border: 1px solid #fefefe;
-                    -webkit-border-radius: 2px;
-                    -moz-border-radius: 2px;
-                    border-radius: 2px;
-                    font-size: .825rem;
-                    background: #ffffff;
-                    border-color: #000000;
-                    color: #000000;
-                }
-            </style>
-            
+                    .form-control {
+                        border: 1px solid #fefefe;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        border-radius: 2px;
+                        font-size: .825rem;
+                        background: #ffffff;
+                        border-color: #000000;
+                        color: #000000;
+                    }
+                </style>
+
 </body>
 <script>
     let img = document.getElementById('img');
@@ -298,11 +311,11 @@
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
     const dataSelect_news_type = document.getElementById('news_type_select');
     const defaultOption2 = document.createElement('option');
-    defaultOption2.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-    defaultOption2.textContent = 'กรุณาเลือก';
+    defaultOption2.value = "<%= users[0].news_type_id %>"; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+    defaultOption2.textContent = "<%= users[0].news_type_name %>";
     dataSelect_news_type.appendChild(defaultOption2);
     // ดึงข้อมูลจากฐานข้อมูล
-    fetch('AddNews/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+    fetch('/AddNews/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
             // สร้างตัวเลือกในกล่องคอมโบ
@@ -322,12 +335,12 @@
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
     const dataSelect_topic = document.getElementById('news_topic_select');
     const defaultOption1 = document.createElement('option');
-    defaultOption1.value = ''; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-    defaultOption1.textContent = 'กรุณาเลือก';
+    defaultOption1.value = '<%= users[0].topic_id  %>'; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+    defaultOption1.textContent = '<%= users[0].topic_name  %>';
     dataSelect_topic.appendChild(defaultOption1);
 
     // ดึงข้อมูลจากฐานข้อมูล
-    fetch('AddNews/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+    fetch('/AddNews/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
             // สร้างตัวเลือกในกล่องคอมโบ
@@ -346,14 +359,14 @@
 <script> //ดึงข้อมูลเข้า combobox section
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
     // Fetch section data and populate the select dropdown
-    fetch('AddNews/tags')
+    fetch('/AddNews/tags')
         .then(response => response.json())
         .then(data => {
             const tagsSelect = document.getElementById('tags');
             data.forEach(tag => {
                 const option = document.createElement('option');
                 option.value = tag.section_id;
-                option.textContent = tag.name;
+                option.textContent = tag.section_name;
                 tagsSelect.appendChild(option);
             });
         })
@@ -364,32 +377,74 @@
 
 <!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
 <script>
-    const tagsSelect = document.getElementById('tags');
-    const selectedTagsTable = document.getElementById('selectedTagsTable');
-    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+    // Fetch section data and populate the select dropdown when the page loads
+    document.addEventListener('DOMContentLoaded', function () {
+        const tagsSelect = document.getElementById('tags');
+        const selectedTagsTable = document.getElementById('selectedTagsTable');
+        const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
 
-    tagsSelect.addEventListener('change', function () {
-        const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
-        const selectedId = tagsSelect.value;
-
-        if (selectedTag) {
-            const newRow = selectedTagsTableBody.insertRow();
-            const idCell = newRow.insertCell();
-            idCell.textContent = selectedId;
-            const nameCell = newRow.insertCell();
-            nameCell.textContent = selectedTag;
-            const actionCell = newRow.insertCell();
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.addEventListener('click', function () {
-                selectedTagsTableBody.removeChild(newRow);
+        // Fetch section data and populate the select dropdown when the page loads
+        fetch('/AddNews/section/<%= users[0].news_id %>')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+                data.forEach(tag => {
+                    const option = document.createElement('option');
+                    const newRow = selectedTagsTableBody.insertRow();
+                    selectedId = tag.section_id;
+                    selectedTag = tag.section_name;
+                    const idCell = newRow.insertCell();
+                    idCell.textContent = selectedId;
+                    const nameCell = newRow.insertCell();
+                    nameCell.textContent = selectedTag;
+                    const actionCell = newRow.insertCell();
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete';
+                    deleteButton.addEventListener('click', function () {
+                        selectedTagsTableBody.removeChild(newRow);
+                    });
+                    actionCell.appendChild(deleteButton);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching section data:', error);
             });
-            actionCell.appendChild(deleteButton);
-        }
-    });
 
-    // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
-    const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
+        // Event listener for adding selected items to the table
+        // Event listener for adding selected items to the table
+        tagsSelect.addEventListener('change', function () {
+            const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
+            const selectedId = tagsSelect.value;
+
+            // Check if the selectedId already exists in the table
+            const rows = selectedTagsTableBody.querySelectorAll('tr');
+            let alreadyExists = false;
+            rows.forEach(row => {
+                const idCell = row.querySelector('td:nth-child(1)');
+                const sectionId = idCell.textContent.trim();
+                if (sectionId === selectedId) {
+                    alreadyExists = true;
+                }
+            });
+
+            if (!alreadyExists && selectedTag) {
+                const newRow = selectedTagsTableBody.insertRow();
+                const idCell = newRow.insertCell();
+                idCell.textContent = selectedId;
+                const nameCell = newRow.insertCell();
+                nameCell.textContent = selectedTag;
+                const actionCell = newRow.insertCell();
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.addEventListener('click', function () {
+                    selectedTagsTableBody.removeChild(newRow);
+                });
+                actionCell.appendChild(deleteButton);
+            }
+        });
+});
+
+    const form = document.getElementById('editnews'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
     form.addEventListener('submit', function () {
         const rows = selectedTagsTableBody.querySelectorAll('tr');
         const sectionIds = [];
@@ -398,13 +453,14 @@
             const sectionId = idCell.textContent.trim();
             sectionIds.push(sectionId);
         });
-
         const hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = 'section_id';
         hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
         form.appendChild(hiddenInput);
+        form.submit();
     });
+
 </script>
 
 
@@ -560,6 +616,11 @@
             'FormatPainter',
             'TableOfContents'
         ]
+    }).then(editor => {
+        // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
+        editor.setData('<%- users[0].news_content %>');
+    }).catch(error => {
+        console.error(error);
     });
 </script>
 <script>
@@ -651,7 +712,7 @@
                 }
             ]
         },
-    
+
         // The "super-build" contains more premium features that require additional configuration, disable them below.
         // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
         removePlugins: [
@@ -687,7 +748,14 @@
             'FormatPainter',
             'TableOfContents'
         ]
+    }).then(editor => {
+        // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
+        editor.setData('<%- users[0].explain %>');
+    }).catch(error => {
+        console.error(error);
     });
 </script>
 
 </html>
+
+

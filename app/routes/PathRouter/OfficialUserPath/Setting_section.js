@@ -46,4 +46,19 @@ router.post('/', ifNotLoggedin, (req, res) => {
         });
 });
 
+// สร้างเส้นทาง DELETE สำหรับลบ section
+router.post('/delete/:id', ifNotLoggedin, (req, res) => {
+    let sectionId = req.params.id; // ใช้ req.params ไม่ใช่ req.body
+    dbConnection.query("DELETE FROM `section` WHERE section_id = ?", [sectionId])
+        .then(() => {
+            req.session.message = 'บันทึกสำเร็จ';
+            res.redirect('/section');
+        })
+        .catch(err => {
+            console.log(err);
+            res.redirect('/404page');
+        });
+});
+
+
 module.exports = router;

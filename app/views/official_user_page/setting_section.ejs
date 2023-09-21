@@ -43,7 +43,7 @@
                 </div>
                 <div class="container" style="height: auto;padding:10px;padding-left:40px;padding-right:40px">
                     <div class="row gx-3 mb-3 mt-3" style="margin-top: 30px;">
-                        <div class="col-md-4 mt-3 " >
+                        <div class="col-md-4 mt-3 ">
                             <div style="margin-top: -10px;">
                                 <b>ค้นหา section</b>
                             </div>
@@ -56,12 +56,12 @@
                         </div>
                         <div class="col-md-4"></div>
                         <div class="col-md-4 mt-3  justify-content-end">
-                            <div  style="margin-top: -10px">
-                                <b >เพิ่ม section</b>
+                            <div style="margin-top: -10px">
+                                <b>เพิ่ม section</b>
                             </div>
                             <div>
                                 <form class="d-flex" method="post" action="Section">
-                                    <input class="form-control" type="text" placeholder="add news section" name="name"
+                                    <input class="form-control" type="text" placeholder="add news section" name="section_name"
                                         aria-label="">
                                     <button class="btn btn-warning me-2  ml-3" type="submit">Add</button>
                             </div>
@@ -88,12 +88,16 @@
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">
-                                            <%- section.name %>
+                                            <%- section.section_name %>
                                         </p>
                                     </td>
                                     <td>
                                         <p class="fw-normal mb-1">
-                                            <i class="fa-solid fa-trash fa-lg" style="color: #d01616; "></i>
+                                            <form method="POST" action="/section/delete/<%- section.section_id %>">
+                                                <button type="submit" style="background: none; border: none;">
+                                                    <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
+                                                </button>
+                                            </form>
                                         </p>
                                     </td>
                                 </tr>

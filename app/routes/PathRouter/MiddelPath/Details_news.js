@@ -39,7 +39,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                             const groupData = groupRows.map(group => ({
                                 group_id: group.group_id,
                                 news_id: group.news_id,
-                                name: group.name,
+                                section_name: group.section_name,
                                 section_id: group.section_id
                             }));
                             // แปลงวันที่และเวลาจากฐานข้อมูลเป็นรูปแบบที่ต้องการ

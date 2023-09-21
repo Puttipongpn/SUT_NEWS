@@ -77,7 +77,7 @@
                                         <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
                                             <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
                                                 style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
-                                                <%= group.name %>
+                                                <%= group.section_name %>
                                             </a>
                                             <% }); %>
                                                 <% } else { %>
@@ -140,11 +140,11 @@
         <div class="row g-0">
             <div class="col-md-4 d-flex justify-content-center align-items-center">
                 <a href="/profile/<%= newsData.user_id %>" class="">
-                    <% if (profile_image) { %>
+                    <% if (newsData.profile_image) { %>
                         <img id="profilePicture" alt="Generic placeholder image"
                             class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
-                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" <% const
-                            imagePath=profile_image.substring(6); %>
+                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" 
+                            <% const imagePath=newsData.profile_image.substring(6); %>
                         src="<%= imagePath %>" alt="">
                             <% } else { %>
                                 <img id="profilePicture"

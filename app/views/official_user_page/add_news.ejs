@@ -352,7 +352,7 @@
             data.forEach(tag => {
                 const option = document.createElement('option');
                 option.value = tag.section_id;
-                option.textContent = tag.name;
+                option.textContent = tag.section_name;
                 tagsSelect.appendChild(option);
             });
         })
@@ -403,6 +403,7 @@
         hiddenInput.name = 'section_id';
         hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
         form.appendChild(hiddenInput);
+        
     });
 </script>
 
