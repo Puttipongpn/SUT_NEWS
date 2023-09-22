@@ -28,22 +28,37 @@
 
     <title>CenterPage</title>
 </head>
+<style>
+    /* CSS */
+    .head-item:not(:last-child) {
+        border-right: 1px solid #ccc;
+        /* เพิ่มเส้นแบบแนวตั้งระหว่างปุ่มที่ไม่ใช่ปุ่มสุดท้าย */
+        padding-right: 10px;
+        /* ปรับระยะห่างของเส้นแบบแนวตั้ง */
+    }
+
+    /* เพิ่มคุณสมบัติ hover เมื่อเมาส์ชี้ไปยังปุ่ม */
+    .head-item:not(:last-child):hover {
+        background-color: #b34801;
+        /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+    }
+</style>
 
 <body>
     <header>
         <div class="toppage d-flex justify-content-end">
             <ul class="head ">
-                <li class="head-item ">
+                <li class="head-item head-dropdown" style="padding-left: 5px;">
                     <a class="head-link" id="Asetting_page" href="/setting_page">แก้ไขเว็ปเพจ</a>
                 </li>
-                <li class="head-item ">
+                <li class="head-item head-dropdown" style="padding-left: 8px;">
                     <a class="head-link" id="Arequest_ADMIN" href="/approve">รับคำร้องประกาศข่าว</a>
                 </li>
-                <li class="head-item ">
-                    <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการสมาชิก</a>
+                <li class="head-item head-dropdown" style="padding-left: 8px;">
+                    <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการคำร้องสมาชิกทางการ</a>
                 </li>
-                <li class="head-item ">
-                    <a class="head-link" style="font-size: 13px;" id="bookmake" href="/bookmark">BOOKMAKE</a>
+                <li class="head-item " style="padding-left: 8px;">
+                    <a class="head-link"  id="bookmake" href="/bookmark">ข่าวที่บันทึกไว้</a>
                 </li>
                 <li class="head-item ">
                     <a class="head-link" id="news_doom" href="/news_doom">DOOM</a>
@@ -51,23 +66,17 @@
                 <li class="head-item ">
                     <a class="head-link" href="/setting_news" id="setting_news">จัดการข่าวสาร</a>
                 </li>
-                <!-- <li class="head-item ">
-                    <a class="head-link" href="/setting_news" id="Edit_news">จัดการข่าวสาร</a>
-                </li> -->
-                <!-- <li class="head-item ">
-                    <a class="head-link" href="/AddNews" id="AddNEWs">เพิ่มข่าวสาร</a>
-                </li> -->
                 <li class="head-item ">
                     <a class="head-link" href="/Section" id="section_setting">เพิ่ม section</a>
                 </li>
                 <li class="head-item ">
-                    <a class="head-link" href="/subscriber" >กำลังติดตาม</a>
+                    <a class="head-link" href="/subscriber">กำลังติดตาม</a>
                 </li>
 
                 <li class="head-item ">
                     <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" href="#">
-                        <%= header.name %>
+                        Profile
                             <!-- Profile picture image-->
                             <% if (header.profile_image) { %>
                                 <img id="profilePicture" class="img-account-profile rounded-circle "
@@ -86,7 +95,8 @@
                                     <div class="image-h">
                                         <% if (header.profile_image) { %>
                                             <img id="profilePicture" class="img-account-profile rounded-circle "
-                                                style="height: 80px;" <% const imagePath=header.profile_image.substring(6); %>
+                                                style="height: 80px;" <% const
+                                                imagePath=header.profile_image.substring(6); %>
                                             src="<%= imagePath %>" alt="">
                                                 <% } else { %>
                                                     <img id="profilePicture" class="img-account-profile rounded-circle "
