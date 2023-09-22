@@ -31,45 +31,84 @@ router.use((req, res, next) => {
 });
 // Middleware functions
 
-// Root Page
-router.get('/', ifNotLoggedin, (req, res, next) => {
-    // Your code here
-    console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
-    console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
-console.log(req.session.header)
-    dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id ")
-        .then(([rows]) => {
-            if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
-                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
-                    .then(([Bookmark]) => {
-                        res.render('home/centerpage', {
-                            bookmark_id: Bookmark,
-                            center: rows,
-                            Center:rows[0],
-                            header: req.session.header,
-                            newsname: rows[0].name,
-                            newsrole:  rows[0].role,
-                            newsuser_name:  rows[0].user_name,
-                            newsemail:  rows[0].email,
-                            newsprofile_image:  rows[0].profile_image,
+// // Root Page
+// router.get('/', ifNotLoggedin, (req, res, next) => {
+//     // Your code here
+//     console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
+//     console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
+//     console.log(req.session.header)
+//     dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2")
+//         .then(([rows]) => {
+//             const otherRows = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1");
+//             if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
+//                 dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+//                     .then(([Bookmark]) => {
+//                         res.render('home/centerpage', {
+//                             bookmark_id: Bookmark,
+//                             center: rows,
+//                             Center: rows[0],
+//                             header: req.session.header,
+//                             // newsname: rows[0].name,
+//                             // newsrole:  rows[0].role,
+//                             // newsuser_name:  rows[0].user_name,
+//                             // newsemail:  rows[0].email,
+//                             // newsprofile_image:  rows[0].profile_image,
+//                         })
 
-                        })
+//                     });
+//             } else {
+//                 dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
+//                     .then(([rows]) => {
+//                         res.render('home/centerpage', {
+//                             center: rows,
+//                             name: "Guest",
+//                             role: "Guest",
+//                             user_name: "Guest",
+//                             email: "Guest",
+//                         })
+//                     })
+//             }
+//         });
+// });
 
-                    });
-            } else {
-                dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
-                    .then(([rows]) => {
-                        res.render('home/centerpage', {
-                            center: rows,
-                            name: "Guest",
-                            role: "Guest",
-                            user_name: "Guest",
-                            email: "Guest",
-                        })
-                    })
-            }
-        });
+router.get('/', ifNotLoggedin, async (req, res, next) => {
+    try {
+        console.log('Session expires at:', req.session.cookie.expires);
+        console.log('Session max age:', req.session.cookie.maxAge);
+        console.log(req.session.header);
+
+        // ดึงข้อมูลจาก SQL และดึงข้อมูลการ์ด
+        const rows = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2");
+        // ทำคำสั่ง SQL ดึงข้อมูลสไลด์บาร์ข่าวหลัก
+        const top_slidebar = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1");
+
+        if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
+            const Bookmark = await dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID]);
+            res.render('home/centerpage', {
+                bookmark_id: Bookmark[0],
+                center: rows,
+                Center: rows[0],
+                Top_slidebar:top_slidebar,
+                top_slidebar: top_slidebar[0],
+                header: req.session.header,
+            });
+        } else {
+            const [rows] = await dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;");
+            res.render('home/centerpage', {
+                center: rows,
+                name: "Guest",
+                role: "Guest",
+                user_name: "Guest",
+                email: "Guest",
+            });
+        }
+    } catch (error) {
+        // จัดการข้อผิดพลาดที่เกิดขึ้น
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
+
 
 // REGISTER PAGE
 router.post('/register', ifLoggedin,

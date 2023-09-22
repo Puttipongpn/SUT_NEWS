@@ -124,7 +124,7 @@ router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res
             }
         })
         .then(() => {
-            res.redirect('/addnews');
+            res.redirect('/setting_news');
             req.session.message = 'บันทึกสำเร็จ';
         })
         .catch(err => {

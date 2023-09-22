@@ -20,6 +20,11 @@ router.use('/', loginRouter);
 const header = require('./PathRouter/MiddelPath/Header')
 router.use('header',header);
 
+//center component
+
+
+
+
 //center part----------------------------------------------------------
 const SetProfileRouter = require('./PathRouter/MiddelPath/SetProfileRouter');
 router.use('/setting_profile', SetProfileRouter);
