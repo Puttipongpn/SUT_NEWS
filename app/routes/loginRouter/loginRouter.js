@@ -94,7 +94,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         return acc;
                     }, {});
                     
-                   
                     // ส่งข้อมูลจำนวนการกดไลค์ไปยัง template
                     res.render('home/centerpage', {
                         // อื่น ๆ ของข่าว...
