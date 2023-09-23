@@ -90,7 +90,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                 .then(([likeRows]) => {
                     const likeCounts = likeRows.reduce((acc, like) => {
                         acc[like.like_news_id] = like.like_count;
-                        console.log(acc)
                         return acc;
                     }, {});
                     
@@ -99,7 +98,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         // อื่น ๆ ของข่าว...
                         bookmark_id: Bookmark[0],
                         like: Like[0],
-                        count_like: Count_Like[0],
+            
                         center: rows,
                         Center: rows[0],
                         Top_slidebar: top_slidebar,

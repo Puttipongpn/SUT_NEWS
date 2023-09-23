@@ -6,31 +6,49 @@ const dbConnection = require('../../connect');
 const { ifLoggedin } = require('../../loginRouter/ifLoggedin');
 const { ifNotLoggedin } = require('../../loginRouter/ifNotLoggedin');
 router.use(express.urlencoded({ extended: false }));
-//SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
-router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ?;", [req.session.userID])
-        .then(([rows]) => {
-            console.log(req.session.role);
-            if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
-                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
-                    .then(([Bookmark]) => {
-                        res.render('center/bookmake', {
-                            bookmark_id:Bookmark,
-                            users: rows,
-                            header:req.session.header,
 
-                            bookmark: rows,
-                            name: req.session.name,
-                            role: req.session.role,
-                            user_name: req.session.user_name,
-                            email: req.session.email,
-                            profile_image: req.session.profile_image,
-                        });
-                    })
-            } else {
-                console.error(error);
-            }
-        });
+//SELECT * FROM bookmark LEFT JOIN news_type ON bookmark.news_id = news_type.news_type_id WHERE bookmark.users_id = ?
+
+router.get('/', ifNotLoggedin, async (req, res, next) => {
+    try {
+        const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+        dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ?;", [req.session.userID])
+            .then(([rows]) => {
+                if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
+                    dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+                        .then(([Bookmark]) => {
+                            dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")
+                                .then(([likeRows]) => {
+                                    const likeCounts = likeRows.reduce((acc, like) => {
+                                        acc[like.like_news_id] = like.like_count;
+                                        console.log(acc)
+                                        return acc;
+                                    }, {});
+                                    res.render('center/bookmake', {
+                                        bookmark_id: Bookmark,
+                                        users: rows,
+                                        header: req.session.header,
+
+                                        bookmark: rows,
+                                        name: req.session.name,
+                                        role: req.session.role,
+                                        user_name: req.session.user_name,
+                                        email: req.session.email,
+                                        profile_image: req.session.profile_image,
+                                        like: Like[0],
+                                        likeCounts: likeCounts
+                                    });
+                                });
+                        })
+                } else {
+                    console.error(error);
+                }
+            });
+    } catch (error) {
+        // จัดการข้อผิดพลาดที่เกิดขึ้น
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
 });
 
 router.post('/:id', ifNotLoggedin, (req, res, next) => {
