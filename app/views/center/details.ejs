@@ -56,7 +56,7 @@
                                     <b><%- formattedDate %></b>
                 </button>
                 <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
-                        class="bi bi-eye"></i><b>363 view</b></button>
+                        class="bi bi-eye"></i><b><%- newsData.view_count %> view</b></button>
                 <button type="button" class="btn">
                     <p><%- newsData.section %></p>
                 </button>
@@ -68,7 +68,6 @@
                     <%- newsData.news_content %>
                 </p>
                 <p class="card-text">
-                    <% console.log(groupData) %>
                         <p style="padding: 10px;">
                             <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
                             <% if (groupData && Array.isArray(groupData)) { %>
@@ -144,7 +143,8 @@
                         <img id="profilePicture" alt="Generic placeholder image"
                             class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
                             style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" 
-                            <% const imagePath=newsData.profile_image.substring(6); %>
+                            <% const imagePath=newsData.
+                            profile_image.substring(6); %>
                         src="<%= imagePath %>" alt="">
                             <% } else { %>
                                 <img id="profilePicture"

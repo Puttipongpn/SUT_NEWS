@@ -74,9 +74,7 @@
                                                         <div class="top">
                                                             <% if (profile.card_picture) { %>
                                                                 <% const imcard=profile.card_picture.substring(7) %>
-                                                                    <!-- bookmark -->
                                                                     <a href="/details/<%= profile.news_id %>">
-                                                                        <!-- image -->
                                                                         <img class="card-img-top" src="<%= imcard %>"
                                                                             alt="">
                                                                         <% } %>
@@ -84,30 +82,61 @@
                                                         </div>
                                                         <div class="card-body-commu">
                                                             <div class="icon-container">
-                                                                <i class="bi bi-heart"></i>
-                                                                <i class="bi bi-chat"></i>
-                                                                <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                                                <!-- ส่วนของปุ่มกดหัวใจ -->
                                                                 <% const news_id=profile.news_id; %>
-                                                                    <% const isBookmarked=bookmark_id.some(item=>
-                                                                        item.b_news_id === news_id); %>
-                                                                        <% if (isBookmarked) { %>
-                                                                            <i class="bi bi-bookmark-check-fill"
-                                                                                id="bookmarkIcon"
+                                                                    <% const isLike=like.some(item=>
+                                                                        item.like_news_id === news_id); %>
+                                                                        <% if (isLike) { %>
+                                                                            <i class="bi bi-heart-fill"
+                                                                                style="color: rgb(143, 1, 1);"
+                                                                                id="likeIcon"
                                                                                 data-news-id="<%= news_id %>"
-                                                                                onclick="removeBookmark(this)"></i>
+                                                                                onclick="removeLike(this)"></i>
                                                                             <% } else { %>
-                                                                                <i class="bi bi-bookmark"
-                                                                                    id="bookmarkIcon"
+                                                                                <i class="bi bi-heart" id="likeIcon"
                                                                                     data-news-id="<%= news_id %>"
-                                                                                    onclick="addBookmark(this)"></i>
+                                                                                    onclick="addLike(this)"></i>
                                                                                 <% } %>
 
+                                                                                    <!-- ส่วนของปุ่มคอมเม้น -->
+                                                                                    <i class="bi bi-chat"></i>
+                                                                                    <!-- ปุ่มของส่วนกดแชร์ -->
+                                                                                    <i class="bi bi-send"
+                                                                                        style="padding-top: 1px;"></i>
+                                                                                    <!-- ส่วนของปุ่มกดบุคมาร์ค -->
+
+                                                                                    <% const
+                                                                                        isBookmarked=bookmark_id.some(item=>
+                                                                                        item.b_news_id === news_id); %>
+                                                                                        <% if (isBookmarked) { %>
+                                                                                            <i class="bi bi-bookmark-check-fill"
+                                                                                                id="bookmarkIcon"
+                                                                                                data-news-id="<%= news_id %>"
+                                                                                                onclick="removeBookmark(this)"></i>
+                                                                                            <% } else { %>
+                                                                                                <i class="bi bi-bookmark"
+                                                                                                    id="bookmarkIcon"
+                                                                                                    data-news-id="<%= news_id %>"
+                                                                                                    onclick="addBookmark(this)"></i>
+                                                                                                <% } %>
+
                                                             </div>
-                                                            <div style="margin-top: -5px;">
-                                                                <p style="font-size: 13px;color:#1e1e1e;">
-                                                                    ถูกใจ 1,523 คน
-                                                                </p>
-                                                            </div>
+                                                         
+                                                           
+                                                            <% if (likeCounts[profile.news_id] !== undefined) { %>
+                                                                <div style="margin-top: -5px;">
+                                                                    <p style="font-size: 13px;color:#1e1e1e;">
+                                                                        จำนวนไลค์: <%= likeCounts[profile.news_id] %> ครั้ง
+                                                                    </p>
+                                                                </div>
+                                                            <% } else { %>
+                                                                <div style="margin-top: -5px;">
+                                                                    <p style="font-size: 13px;color:#1e1e1e;">
+                                                                        ยังไม่มีการกดไลค์
+                                                                    </p>
+                                                                </div>
+                                                            <% } %>
+                                                            
                                                         </div>
                                                         <script>
                                                             async function addBookmark(icon) {
@@ -147,6 +176,52 @@
                                                                         }
                                                                         icon.classList.add('bi-bookmark');
                                                                         icon.classList.remove('bi-bookmark-check-fill');
+                                                                    } window.location.reload();
+
+                                                                    console.log(data.message);
+                                                                } catch (error) {
+                                                                    console.error('เกิดข้อผิดพลาด:', error);
+                                                                }
+                                                            }
+                                                        </script>
+                                                        <script>
+                                                            async function addLike(icon) {
+                                                                const newsId = icon.getAttribute('data-news-id');
+
+                                                                try {
+                                                                    const response = await fetch(`/like/${newsId}`, {
+                                                                        method: 'POST'
+                                                                    });
+
+                                                                    const data = await response.json();
+
+                                                                    if (data.success) {
+                                                                        like_id.push({ like_news_id: newsId });
+                                                                        icon.classList.add('bi-bookmark-check-fill');
+                                                                        icon.classList.remove('bi-heart');
+                                                                    } window.location.reload();
+
+                                                                    console.log(data.message);
+                                                                } catch (error) {
+                                                                    console.error('เกิดข้อผิดพลาด:', error);
+                                                                }
+                                                            }
+
+                                                            async function removeLike(icon) {
+                                                                const newsId = icon.getAttribute('data-news-id');
+
+                                                                try {
+                                                                    const response = await fetch(`/like/${newsId}`, {
+                                                                        method: 'DELETE'
+                                                                    });
+                                                                    const data = await response.json();
+                                                                    if (data.success) {
+                                                                        const index = like.findIndex(item => item.like_news_id === newsId);
+                                                                        if (index !== -1) {
+                                                                            like_id.splice(index, 1);
+                                                                        }
+                                                                        icon.classList.add('bi-heart');
+                                                                        icon.classList.remove('bi-heart-check-fill');
                                                                     } window.location.reload();
 
                                                                     console.log(data.message);
@@ -195,13 +270,24 @@
                                                                             <% } %><%-profile.name %>
                                                                                     <!-- อีเมล -->
                                                                                     <i class="bi bi-envelope fa-lg"
-                                                                                        style="padding-right: 5px;padding-left:10px;"></i></i><%-Center.email %>
+                                                                                        style="padding-right: 5px;padding-left:10px;"></i></i><%-Center.email
+                                                                                        %>
                                                                                         <!-- วันที่ประกาศ -->
-                                                                                        <% const date=profile.time_stamp%>
-                                                                                            <% const newDate=new Date(date); %>
-                                                                                                <% newDate.setHours(newDate.getHours()+ 7); %>
-                                                                                                    <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' ')%>
-                                                                                                        <p>โพสเมื่อ <%-profile.time_stamp %></p>                        
+                                                                                        <% const
+                                                                                            date=profile.time_stamp%>
+                                                                                            <% const newDate=new
+                                                                                                Date(date); %>
+                                                                                                <% newDate.setHours(newDate.getHours()+
+                                                                                                    7); %>
+                                                                                                    <% const
+                                                                                                        formattedDate=new
+                                                                                                        Date(newDate).toISOString().substring(0,
+                                                                                                        19).replace('T', ' '
+                                                                                                        )%>
+                                                                                                        <p>โพสเมื่อ
+                                                                                                            <%-profile.time_stamp
+                                                                                                                %>
+                                                                                                        </p>
                                                             </a>
                                                         </div>
                                                     </div>

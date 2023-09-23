@@ -84,14 +84,31 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
 
         if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
             const Bookmark = await dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID]);
-            res.render('home/centerpage', {
-                bookmark_id: Bookmark[0],
-                center: rows,
-                Center: rows[0],
-                Top_slidebar:top_slidebar,
-                top_slidebar: top_slidebar[0],
-                header: req.session.header,
-            });
+            const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+            const Count_Like = await dbConnection.execute("SELECT * FROM `like` ");
+            dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")
+                .then(([likeRows]) => {
+                    const likeCounts = likeRows.reduce((acc, like) => {
+                        acc[like.like_news_id] = like.like_count;
+                        console.log(acc)
+                        return acc;
+                    }, {});
+                    
+                   
+                    // ส่งข้อมูลจำนวนการกดไลค์ไปยัง template
+                    res.render('home/centerpage', {
+                        // อื่น ๆ ของข่าว...
+                        bookmark_id: Bookmark[0],
+                        like: Like[0],
+                        count_like: Count_Like[0],
+                        center: rows,
+                        Center: rows[0],
+                        Top_slidebar: top_slidebar,
+                        top_slidebar: top_slidebar[0],
+                        header: req.session.header,
+                        likeCounts: likeCounts
+                    });
+                })
         } else {
             const [rows] = await dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;");
             res.render('home/centerpage', {

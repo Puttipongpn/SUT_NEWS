@@ -7,24 +7,25 @@ const { ifNotLoggedin } = require('../../loginRouter/ifNotLoggedin');
 router.use(express.urlencoded({ extended: false }));
 
 
-router.get('/details', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
-        .then(([rows]) => {
-            if (rows[0]) {
-                res.render('user_page/details', {
-                    users: rows,
-                    header:req.session.header,
-                    name: rows[0].name,
-                    role: rows[0].role,
-                    user_name: rows[0].user_name,
-                    email: rows[0].email,
-                    profile_image: req.session.profile_image,
-                });
-            } else {
-                res.render('404page')
-            }
-        });
-});
+// router.get('/details', ifNotLoggedin, (req, res, next) => {
+//     dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
+//         .then(([rows]) => {
+//             if (rows[0]) {
+//                 res.render('user_page/details', {
+//                     users: rows,
+//                     header: req.session.header,
+//                     name: rows[0].name,
+//                     role: rows[0].role,
+//                     user_name: rows[0].user_name,
+//                     email: rows[0].email,
+//                     profile_image: req.session.profile_image,
+//                 });
+//             } else {
+//                 res.render('404page')
+//             }
+//         });
+// });
+
 
 router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
     const newsId = req.params.news_id;
@@ -32,6 +33,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
         .then(([newsRows]) => {
             if (newsRows.length > 0) {
                 const newsData = newsRows[0];
+                const view_count = dbConnection.execute("UPDATE news SET view_count = view_count + 1 WHERE news_id = ?", [newsId]);
                 dbConnection.execute("SELECT * FROM `group_section` LEFT JOIN section ON group_section.section_id = section.section_id WHERE news_id = ?", [newsId])
                     .then(([groupRows]) => {
                         // ตรวจสอบว่ามีข้อมูล group_id หรือไม่
@@ -45,7 +47,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                             // แปลงวันที่และเวลาจากฐานข้อมูลเป็นรูปแบบที่ต้องการ
 
                             res.render('center/details', {
-                                header:req.session.header,
+                                header: req.session.header,
                                 name: req.session.name,
                                 role: req.session.role,
                                 user_name: req.session.user_name,
@@ -55,14 +57,16 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                                 email: newsData.email,
                                 groupData: groupData, // ส่งข้อมูล group_id ไปยัง template
                                 formattedDate: newsData.time_stamp, // ส่งวันที่และเวลาที่ถูกแปลงไปยัง template
-                                section_id: newsData.section_id
+                                section_id: newsData.section_id,
+                                view_count: newsData.view_count[0]
                             });
                         } else {
                             res.render('center/details', {
-                                header:req.session.header,
+                                header: req.session.header,
                                 newsData: newsData,
                                 email: newsData.email,
-                                groupData: null // ไม่พบข้อมูล group_id
+                                groupData: null, // ไม่พบข้อมูล group_id
+                                view_count: newsData.view_count[0]
                             });
                         }
                     })

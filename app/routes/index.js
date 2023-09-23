@@ -35,6 +35,9 @@ router.use('/profile', Profile);
 const Bookmark = require('./PathRouter/MiddelPath/Bookmark')
 router.use('/bookmark', Bookmark);
 
+const Like = require('./PathRouter/MiddelPath/Like')
+router.use('/like', Like);
+
 const Detaails_news = require('./PathRouter/MiddelPath/Details_news')
 router.use('/details', Detaails_news);
 
