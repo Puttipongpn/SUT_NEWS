@@ -62,28 +62,60 @@
                         <% const sub_user=profile.id; %>
                           <% const isSubscribe=subscribe.some(item=> item.sub_user_id === sub_user); %>
                             <% if (isSubscribe) { %>
-                              <form action="/subscriber/unsubscribe/<%= sub_user %>" method="POST">
-                                <button type="submit" class="btn btn-dark" data-mdb-ripple-color="dark"
-                                  style="z-index: 1;" >
-                                  เลิกติดตาม
-                                </button>
-                              </form>
+                              <button type="submit" class="btn btn-dark"
+                                data-mdb-ripple-color="dark" style="z-index: 1;" data-sub-id="<%= sub_user %>" onclick="unsubscribe(this)">
+                                เลิกติดตาม
+                              </button>
                               <% } else { %>
-                                <form action="/subscriber/addsubscribe/<%= sub_user %>" method="POST">
-                                  <button type="submit" class="btn btn-dark" data-mdb-ripple-color="dark"
-                                    style="z-index: 1;">
-                                    ติดตาม
-                                  </button>
-                                </form>
+                                <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark"
+                                  style="z-index: 1;" data-sub-id="<%= sub_user %>" onclick="addsubscribe(this)">
+                                  ติดตาม
+                                </button>
                                 <% } %>
 
                                   <% } else { %>
-                                    <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark"
+                                    <button type="submit" class="btn btn-dark" data-mdb-ripple-color="dark"
                                       style="z-index: 1;" disabled>
                                       ติดตาม
                                     </button>
                                     <% } %>
                     </div>
+                    <script>
+                      async function addsubscribe(icon) {
+                        const Sub_user = icon.getAttribute('data-sub-id');
+                        try {
+                          const response = await fetch(`/subscriber/${Sub_user}`, {
+                            method: 'POST'
+                          });
+                          const data = await response.json();
+
+                          if (data.success) {
+                            
+                          }window.location.reload();
+
+                          console.log(data.message);
+                        } catch (error) {
+                          console.error('เกิดข้อผิดพลาด:', error);
+                        }
+                      }
+
+                      async function unsubscribe(icon) {
+                        console.log("addsubscribe is called"); // เพิ่มบรรทัดนี้
+                        const Sub_user = icon.getAttribute('data-sub-id');
+                        try {
+                          const response = await fetch(`/subscriber/${Sub_user}`, {
+                            method: 'DELETE'
+                          });
+                          const data = await response.json();
+                          if (data.success) {
+                            
+                          }window.location.reload();
+                          console.log(data.message);
+                        } catch (error) {
+                          console.error('เกิดข้อผิดพลาด:', error);
+                        }
+                      }
+                    </script>
                   </div>
                 </div>
                 <div class="p-4 text-black" style="background-color: #ffffff;">

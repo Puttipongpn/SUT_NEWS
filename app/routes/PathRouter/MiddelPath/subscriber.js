@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
         });
 });
 
-router.post('/addsubscribe/:id', ifNotLoggedin, (req, res, next) => {
+router.post('/:id', ifNotLoggedin, (req, res, next) => {
     const newsDataWithUserId = {
         sub_user_id: req.params.id,
         user_id: req.session.userID
@@ -36,7 +36,7 @@ router.post('/addsubscribe/:id', ifNotLoggedin, (req, res, next) => {
         });
 });
 
-router.post('/unsubscribe/:id', ifNotLoggedin, (req, res, next) => {
+router.delete('/:id', ifNotLoggedin, (req, res, next) => {
     const newsDataWithUserId = {
         sub_user_id: req.params.id,
         user_id: req.session.userID
