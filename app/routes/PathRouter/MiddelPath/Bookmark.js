@@ -12,7 +12,7 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', ifNotLoggedin, async (req, res, next) => {
     try {
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
-        dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ?;", [req.session.userID])
+        dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ? ORDER BY news.news_id DESC;", [req.session.userID])
             .then(([rows]) => {
                 if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])

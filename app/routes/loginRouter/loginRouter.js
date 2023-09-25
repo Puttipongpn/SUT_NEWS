@@ -78,9 +78,9 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
         console.log(req.session.header);
 
         // ดึงข้อมูลจาก SQL และดึงข้อมูลการ์ด
-        const rows = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2");
+        const rows = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 ORDER BY news.news_id DESC");
         // ทำคำสั่ง SQL ดึงข้อมูลสไลด์บาร์ข่าวหลัก
-        const top_slidebar = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1");
+        const top_slidebar = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1 ORDER BY news.news_id DESC");
 
         if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
             const Bookmark = await dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID]);
