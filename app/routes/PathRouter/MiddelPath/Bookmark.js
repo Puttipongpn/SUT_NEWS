@@ -58,6 +58,7 @@ router.post('/:id', ifNotLoggedin, (req, res, next) => {
     };
     dbConnection.query("INSERT INTO bookmark SET ?", [newsDataWithUserId])
         .then(([rows]) => {
+            res.redirect
             res.json({ message: 'บันทึกสำเร็จ' });
         })
         .catch(err => {

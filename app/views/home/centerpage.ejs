@@ -135,12 +135,25 @@
 
 
                                                             <% if (likeCounts[profile.news_id] !==undefined) { %>
+
+
+                                                            <% if (likeCounts[profile.news_id] !==undefined) { %>
                                                                 <div style="margin-top: -5px;">
                                                                     <p style="font-size: 13px;color:#1e1e1e;">
                                                                         จำนวนไลค์: <%= likeCounts[profile.news_id] %>
                                                                             ครั้ง
+                                                                        จำนวนไลค์: <%= likeCounts[profile.news_id] %>
+                                                                            ครั้ง
                                                                     </p>
                                                                 </div>
+                                                                <% } else { %>
+                                                                    <div style="margin-top: -5px;">
+                                                                        <p style="font-size: 13px;color:#1e1e1e;">
+                                                                            ยังไม่มีการกดไลค์
+                                                                        </p>
+                                                                    </div>
+                                                                    <% } %>
+
                                                                 <% } else { %>
                                                                     <div style="margin-top: -5px;">
                                                                         <p style="font-size: 13px;color:#1e1e1e;">
@@ -260,9 +273,21 @@
                                                                 style="font-size: 12px; color:#6e6e6e; margin-bottom: 3%;">
                                                                 <p style="font-size: small; "><i
                                                                         class="bi bi-calendar2-week fa-xl"
-                                                                        style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
-                                                                    12
-                                                                    ส.ค. 66 - 19 ส.ค. 66
+                                                                        style="color: palevioletred; padding-right:5px"></i>
+                                                                        <% if (profile.start) { %>
+                                                                            <% const start=profile.start%>
+                                                                            <% const newStart=new Date(start); %>
+                                                                            <% newStart.setHours(newStart.getHours()+7); %>
+                                                                            <% const formattedStart=new Date(newStart).toISOString().substring(0,10)%>
+                                                                            <% const end=profile.end%>
+                                                                            <% const newEnd=new Date(end); %>
+                                                                            <% newEnd.setHours(newEnd.getHours()+7); %>
+                                                                            <% const formattedEnd=new Date(newEnd).toISOString().substring(0,10)%>  
+                                                                            <%= formattedStart %> - <%= formattedEnd %>
+                                                                        <% }  else { %>
+                                                                            ไม่มีกำหนดการ
+                                                                        <% }  %>
+                                                                    
                                                                 </p>
                                                                 <!-- ชื่อ -->
                                                                 <% if (profile.profile_image) { %>
@@ -282,6 +307,7 @@
                                                                                     <!-- อีเมล -->
                                                                                     <i class="bi bi-envelope fa-lg"
                                                                                         style="padding-right: 5px;padding-left:10px;"></i></i><%-profile.email
+                                                                                        style="padding-right: 5px;padding-left:10px;"></i></i><%-profile.email
                                                                                         %>
                                                                                         <!-- วันที่ประกาศ -->
                                                                                         <% const
@@ -298,7 +324,7 @@
                                                                                                         <p
                                                                                                             style=" color: #6f0505;">
                                                                                                             โพสเมื่อ
-                                                                                                            <%-profile.time_stamp
+                                                                                                            <%-formattedDate
                                                                                                                 %>
                                                                                                         </p>
                                                             </a>
