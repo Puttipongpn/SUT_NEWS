@@ -35,26 +35,37 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 router.get('/:id', ifNotLoggedin, async (req, res, next) => {
     try {
         const user_id = req.params.id;
-        const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ?",[req.session.userID])
-        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id WHERE users.id = ?;", [user_id])
-        .then(([rows]) => {
-            if (rows.length > 0) {
-                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
-                .then(([Bookmark]) => {
-                            res.render('center/profile', {
-                                header: req.session.header,
-                                bookmark_id: Bookmark,
-                                _user_id: req.session.userID,
-                                Profile: rows,
-                                profile: rows[0],
-                                card_picture: rows[0].card_picture,
-                                newsname: rows[0].name,
-                                newsrole: rows[0].role,
-                                newsuser_name: rows[0].user_name,
-                                newsemail: rows[0].email,
-                                newsprofile_image: rows[0].profile_image,
-                                subscribe: sub[0]
-                            });
+        const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ?", [req.session.userID]);
+        const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2;", [user_id])
+            .then(([rows]) => {
+                if (rows.length > 0) {
+                    dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+                        .then(([Bookmark]) => {
+                            dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")
+                                .then(([likeRows]) => {
+                                    const likeCounts = likeRows.reduce((acc, like) => {
+                                        acc[like.like_news_id] = like.like_count;
+                                        console.log(acc)
+                                        return acc;
+                                    }, {});
+                                    res.render('center/profile', {
+                                        header: req.session.header,
+                                        bookmark_id: Bookmark,
+                                        _user_id: req.session.userID,
+                                        Profile: rows,
+                                        profile: rows[0],
+                                        card_picture: rows[0].card_picture,
+                                        newsname: rows[0].name,
+                                        newsrole: rows[0].role,
+                                        newsuser_name: rows[0].user_name,
+                                        newsemail: rows[0].email,
+                                        newsprofile_image: rows[0].profile_image,
+                                        subscribe: sub[0],
+                                        like: Like[0],
+                                        likeCounts: likeCounts
+                                    });
+                                });
                         })
                 } else {
                     res.render('404page')
