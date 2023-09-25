@@ -6,7 +6,7 @@ const { ifNotLoggedin } = require('../../loginRouter/ifNotLoggedin');
 router.use(express.urlencoded({ extended: false }));
 
 router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id WHERE users.id = ?;", [req.session.userID])
+    dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id WHERE users.id = ? ORDER BY news.news_id DESC;", [req.session.userID])
         .then(([rows]) => {
             console.log(req.session.bookmark_id)
             if (rows.length > 0) {
@@ -35,9 +35,9 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 router.get('/:id', ifNotLoggedin, async (req, res, next) => {
     try {
         const user_id = req.params.id;
-        const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ?", [req.session.userID]);
+        const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ? ", [req.session.userID]);
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
-        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2;", [user_id])
+        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [user_id])
             .then(([rows]) => {
                 if (rows.length > 0) {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
