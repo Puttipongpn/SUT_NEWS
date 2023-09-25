@@ -152,7 +152,16 @@
                         </div>
                         <div class="card-body-commu">
                           <div class="icon-container">
-                            <i class="bi bi-heart"></i>
+                            <% const news_like_id=profile.news_id; %>
+                                    <% const isLike=like.some(item=>
+                                      item.like_news_id === news_like_id); %>
+                                      <% if (isLike) { %>
+                                        <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
+                                          data-news-id="<%= news_like_id %>" onclick="removeLike(this)"></i>
+                                        <% } else { %>
+                                          <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_like_id %>"
+                                            onclick="addLike(this)"></i>
+                                          <% } %>
                             <i class="bi bi-chat"></i>
                             <i class="bi bi-send" style="padding-top: 1px;"></i>
                             <% const news_id=profile.news_id; %>
@@ -167,9 +176,19 @@
 
                           </div>
                           <div style="margin-top: -5px;">
-                            <p style="font-size: 13px;color:#1e1e1e;">
-                              ถูกใจ 1,523 คน
-                            </p>
+                            <% if (likeCounts[profile.news_id] !== undefined) { %>
+                              <div style="margin-top: -5px;">
+                                  <p style="font-size: 13px;color:#1e1e1e;">
+                                      จำนวนไลค์: <%= likeCounts[profile.news_id] %> ครั้ง
+                                  </p>
+                              </div>
+                          <% } else { %>
+                              <div style="margin-top: -5px;">
+                                  <p style="font-size: 13px;color:#1e1e1e;">
+                                      ยังไม่มีการกดไลค์
+                                  </p>
+                              </div>
+                          <% } %>
                           </div>
                         </div>
                         <script>
@@ -218,6 +237,53 @@
                             }
                           }
                         </script>
+                        <script>
+                          async function addLike(icon) {
+                            const newsId = icon.getAttribute('data-news-id');
+
+                            try {
+                              const response = await fetch(`/like/${newsId}`, {
+                                method: 'POST'
+                              });
+
+                              const data = await response.json();
+
+                              if (data.success) {
+                                like_id.push({ like_news_id: newsId });
+                                icon.classList.add('bi-bookmark-check-fill');
+                                icon.classList.remove('bi-heart');
+                              } window.location.reload();
+
+                              console.log(data.message);
+                            } catch (error) {
+                              console.error('เกิดข้อผิดพลาด:', error);
+                            }
+                          }
+
+                          async function removeLike(icon) {
+                            const newsId = icon.getAttribute('data-news-id');
+
+                            try {
+                              const response = await fetch(`/like/${newsId}`, {
+                                method: 'DELETE'
+                              });
+                              const data = await response.json();
+                              if (data.success) {
+                                const index = like.findIndex(item => item.like_news_id === newsId);
+                                if (index !== -1) {
+                                  like_id.splice(index, 1);
+                                }
+                                icon.classList.add('bi-heart');
+                                icon.classList.remove('bi-heart-check-fill');
+                              } window.location.reload();
+
+                              console.log(data.message);
+                            } catch (error) {
+                              console.error('เกิดข้อผิดพลาด:', error);
+                            }
+                          }
+                        </script>
+
                         <div class="card-body-profile">
                           <h5 class="card-title ">
                             <a href="/details/<%= profile.news_id %>" class="">
