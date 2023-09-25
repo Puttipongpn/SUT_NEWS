@@ -10,14 +10,29 @@ router.get('/', async (req, res) => {
     try {
         // ดึงข้อมูลจากฐานข้อมูล
         user_id = req.session.userID
-        news = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN subscribe ON subscribe.sub_user_id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND subscribe.user_id = ?",[user_id])
+        news = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN subscribe ON subscribe.sub_user_id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND subscribe.user_id = ?",[user_id]);
+        const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
         dbConnection.execute("SELECT * FROM `subscribe` LEFT JOIN users ON subscribe.sub_user_id = users.id WHERE user_id = ?", [user_id])
             .then(([rows]) => {
-                res.render('center/subscriber', {
-                    news : news[0],
-                    subHome: rows,
-                    header: req.session.header
-                })
+                dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
+                        .then(([Bookmark]) => {
+                            dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")
+                                .then(([likeRows]) => {
+                                    const likeCounts = likeRows.reduce((acc, like) => {
+                                        acc[like.like_news_id] = like.like_count;
+                                        console.log(acc)
+                                        return acc;
+                                    }, {});
+                                    res.render('center/subscriber', {
+                                        news : news[0],
+                                        bookmark_id: Bookmark,
+                                        subHome: rows,
+                                        header: req.session.header,
+                                        like: Like[0],
+                                        likeCounts: likeCounts
+                                    });
+                                });
+                        })
             })
             .catch(err => {
                 console.error(err);
