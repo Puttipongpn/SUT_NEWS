@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- Add icon library -->
-  
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -35,41 +36,43 @@
 
 <body>
     <%- include('../home/header') %>
-    <%- include('../home/nav') %>
-    <div class="card">
-        <div class="card-body">
-            <h2 style="margin-left: 2%; margin-top: 5%; margin-right: 2%;">
-                <%- newsData.title %>
-            </h2>
-            <div style="margin-left: 2%; margin-right: 2%;">
-                <a href="/news_type/<%- newsData.news_type_id %>">
-                <button type="button" class="btn" style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
-                            newsData.news_type_name  %></b></button></a>
-                <a href="/news_topic/<%- newsData.topic_id %>">
-                <button type="button" class="btn"
-                    style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%- newsData.topic_name
-                            %></b></button></a>
-                <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
-                    <% const date=newsData.time_stamp %>
-                        <% const newDate=new Date(date); %>
-                            <% newDate.setHours(newDate.getHours() + 7); %>
-                                <% const formattedDate=new Date(newDate).toISOString().substring(0, 19).replace('T', ' '
-                                    )%>
-                                    <b><%- formattedDate %></b>
-                </button>
-                <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
-                        class="bi bi-eye"></i><b><%- newsData.view_count %> view</b></button>
-                <button type="button" class="btn">
-                    <p><%- newsData.section %></p>
-                </button>
-            </div>
-            <hr>
-            <div class="card-title">
-                <p style="font-size: larger; margin-left: 2%; margin-right: 2%; "><%- newsData.welding_para %></p>
-                <p style="text-align: start; margin-bottom: 2%; margin-top: 3%; ">
-                    <%- newsData.news_content %>
-                </p>
-                <p class="card-text">
+        <%- include('../home/nav') %>
+            <div class="card">
+                <div class="card-body">
+                    <h2 style="margin-left: 2%; margin-top: 5%; margin-right: 2%;">
+                        <%- newsData.title %>
+                    </h2>
+                    <div style="margin-left: 2%; margin-right: 2%;">
+                        <a href="/news_type/<%- newsData.news_type_id %>">
+                            <button type="button" class="btn"
+                                style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
+                                        newsData.news_type_name %></b></button></a>
+                        <a href="/news_topic/<%- newsData.topic_id %>">
+                            <button type="button" class="btn"
+                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%-
+                                        newsData.topic_name %></b></button></a>
+                        <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
+                            <% const date=newsData.time_stamp %>
+                                <% const newDate=new Date(date); %>
+                                    <% newDate.setHours(newDate.getHours() + 7); %>
+                                        <% const formattedDate=new Date(newDate).toISOString().substring(0,
+                                            19).replace('T', ' ' )%>
+                                            <b><%- formattedDate %></b>
+                        </button>
+                        <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
+                                class="bi bi-eye"></i><b><%- newsData.view_count %> view</b></button>
+                        <button type="button" class="btn">
+                            <p><%- newsData.section %></p>
+                        </button>
+                    </div>
+                    <hr>
+                    <div class="card-title">
+                        <p style="font-size: larger; margin-left: 2%; margin-right: 2%; "><%- newsData.welding_para %>
+                        </p>
+                        <p style="text-align: start; margin-bottom: 2%; margin-top: 3%; ">
+                            <%- newsData.news_content %>
+                        </p>
+                        <p class="card-text">
                         <p style="padding: 10px;">
                             <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
                             <% if (groupData && Array.isArray(groupData)) { %>
@@ -85,93 +88,217 @@
                                                     <p>No Tag data available.</p>
                                                     <% } %>
                         </p>
-                </p>
-            </div>
-        </div>
-    </div>
-    <div class="card mb-3 mt-2" style="max-width: auto;">
-        <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
-        <div class="row g-0">
-            <div class="col-md-6">
-                <div class="card-text">
-                    <p style="text-align: center;">
-                        <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
-                    </p>
-                    <% if (newsData.start || newsData.end) { %>
-                        <% const Sstart=newsData.start %>
-                            <% const Send=newsData.end %>
-                                <% Sstart.setDate(Sstart.getDate() + 1); %>
-                                    <% Send.setDate(Send.getDate() + 1); %>
-                                        <% const newsStart=Sstart.toISOString().substring(0, 10) %>
-                                            <% const newsEnd=Send.toISOString().substring(0, 10) %>
-                                                <p style="font-size: 15px; text-align: center;">
-                                                    <b><%- newsStart %> - <%- newsEnd %></b>
-                                                </p>
-                                                <% } else { %>
-                                                    <p style="font-size: 15px; text-align: center;">
-                                                        <b>ไม่มีรายละเอียดเพิ่มเติม</b>
-                                                    </p>
-                                                    <% } %>
-
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card-text" style="text-align: center;color: #000;">
-                    <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
-                    <% if (newsData.explain) { %>
-                        <p><%- newsData.explain %></p>
-                        <% } else{ %>
-                            <p style="font-size: 15px; text-align: center;">
-                                ไม่มีรายละเอียดเพิ่มเติม
+            <div class="card mb-3 mt-2" style="max-width: auto;">
+                <h5 style="margin-left: 5%; margin-top: 2%;"><b>รายละเอียดเพิ่มเติม</b></h5>
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <div class="card-text">
+                            <p style="text-align: center;">
+                                <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
                             </p>
-                            <%}%>
+                            <% if (newsData.start || newsData.end) { %>
+                                <% const Sstart=newsData.start %>
+                                    <% const Send=newsData.end %>
+                                        <% Sstart.setDate(Sstart.getDate() + 1); %>
+                                            <% Send.setDate(Send.getDate() + 1); %>
+                                                <% const newsStart=Sstart.toISOString().substring(0, 10) %>
+                                                    <% const newsEnd=Send.toISOString().substring(0, 10) %>
+                                                        <p style="font-size: 15px; text-align: center;">
+                                                            <b><%- newsStart %> - <%- newsEnd %></b>
+                                                        </p>
+                                                        <% } else { %>
+                                                            <p style="font-size: 15px; text-align: center;">
+                                                                <b>ไม่มีรายละเอียดเพิ่มเติม</b>
+                                                            </p>
+                                                            <% } %>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card-text" style="text-align: center;color: #000;">
+                            <h5 style=" color: #f32929;"><b>สิ่งที่ผู้เข้าร่วมควรทราบ</b></h5>
+                            <% if (newsData.explain) { %>
+                                <p><%- newsData.explain %></p>
+                                <% } else{ %>
+                                    <p style="font-size: 15px; text-align: center;">
+                                        ไม่มีรายละเอียดเพิ่มเติม
+                                    </p>
+                                    <%}%>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
 
 
-    <div class="card mb-3 mt-2" style="max-width: auto;">
-        <div class="container" style="padding-top: 5px;">
-            <div class="d-flex justify-content-center align-items-center ">
-                <b style="font-size: 18px;">ผู้เขียนบทความ / Writer</b>  
-            </div>
-        </div>
-        <div class="row g-0">
-            <div class="col-md-4 d-flex justify-content-center align-items-center">
-                <a href="/profile/<%= newsData.user_id %>" class="">
-                    <% if (newsData.profile_image) { %>
-                        <img id="profilePicture" alt="Generic placeholder image"
-                            class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
-                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" 
-                            <% const imagePath=newsData.
-                            profile_image.substring(6); %>
-                        src="<%= imagePath %>" alt="">
-                            <% } else { %>
-                                <img id="profilePicture"
-                                    class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
-                                    style="height: 150px;  margin-bottom: 3%; margin-top: 3%;"
-                                    src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                <% } %>
-                </a>
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <small>
-                        <h5 class="card-title">
-                            <%= newsData.user_name %>
-                        </h5>
-                        <p class="card-text"><i class="bi bi-person"></i>: <%= newsData.name %>
-                        </p>
-                        <p class="card-text"><i class="bi bi-envelope"></i>: <%= email%>
-                        </p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+            <div class="card mb-3 mt-2" style="max-width: auto;">
+                <div class="container" style="padding-top: 5px;">
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <b style="font-size: 18px;">ผู้เขียนบทความ / Writer</b>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col-md-4 d-flex justify-content-center align-items-center">
+                        <a href="/profile/<%= newsData.user_id %>" class="">
+                            <% if (newsData.profile_image) { %>
+                                <img id="profilePicture" alt="Generic placeholder image"
+                                    class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
+                                    style="height: 150px;  margin-bottom: 3%; margin-top: 3%;" <% const
+                                    imagePath=newsData. profile_image.substring(6); %>
+                                src="<%= imagePath %>" alt="">
+                                    <% } else { %>
+                                        <img id="profilePicture"
+                                            class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
+                                            style="height: 150px;  margin-bottom: 3%; margin-top: 3%;"
+                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                        <% } %>
+                        </a>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <small>
+                                <h5 class="card-title">
+                                    <%= newsData.user_name %>
+                                </h5>
+                                <p class="card-text"><i class="bi bi-person"></i>: <%= newsData.name %>
+                                </p>
+                                <p class="card-text"><i class="bi bi-envelope"></i>: <%= email%>
+                                </p>
+                                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <%- include('../home/footer') %>
+            <div class="card mb-3 mt-2" style="max-width: auto;">
+                <div class="container" style="padding-top: 5px;">
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <b style="font-size: 18px;">Comment</b>
+                    </div>
+                </div>
+                <div class="row g-0 d-flex justify-content-center align-items-center">
+                    <div class="col-md-12 ">
+                        <div class="card-body">
+                            <div id="editor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" d-flex justify-content-end align-items-center"
+                    style="padding: 10px;padding-right:20px;margin-top:-10px">
+                    <button class="btn btn-primary" onclick="saveComment()">Comment</button>
+                </div>
+            </div>
+            <% comment.forEach(comment=> { %>
+                <div class="card mb-3 mt-2" style="max-width: auto;">
+                    <div class="row g-0 ">
+                        <div class="col-md-12">
+                            <div class="d-flex mt-2" style="margin-left: 20px;">
+                                <div>
+                                    <% if (comment.profile_image) { %>
+                                        <a href="/profile/<%= comment.c_user_id %>">
+                                            <img id="profilePicture" alt="Generic placeholder image"
+                                                class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
+                                                style="height: 40px;  margin-bottom: 3%; margin-top: 3%;" <% const
+                                                imagePath=comment.profile_image.substring(6); %>
+                                            src="<%= imagePath %>" alt="">
+                                        </a>
+                                        <% } else { %>
+                                            <img id="profilePicture"
+                                                class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
+                                                style="height: 40px;  margin-bottom: 3%; margin-top: 3%;"
+                                                src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                            <% } %>
+                                </div>
+                                <% const date=comment.c_timestamp %>
+                                    <% const newDate=new Date(date); %>
+                                        <% newDate.setHours(newDate.getHours() + 7); %>
+                                            <% const formattedDate=new Date(newDate).toISOString().substring(0,
+                                                19).replace('T', ' ' )%>
+                                                <div style="margin-left: 10px;">
+                                                    <div class="d-flex">
+                                                        <%- comment.user_name %> •
+                                                            <p> <%- comment.role %>•</p>
+                                                    </div>
+                                                    <p style="margin-top:-20px">โพสต์เมื่อ <%- formattedDate %></p>
+                                                </div>
+
+                            </div>
+                            <div class="d-flex" style="margin-left: 70px;margin-top:-10px">
+                                <div style="">
+                                    <i class="bi bi-chat-left-dots-fill" style="font-size: 16px;"></i>
+                                    <% if (comment.c_user_id===id || role==='ADMIN' ) { %>
+                                        <a href="" style="color: #ad0000;">
+                                            <i class="bi bi-trash-fill" data-comment-id="<%= comment.comment_id %>"
+                                                style="font-size: 16px;" onclick="deleteComment(this)"></i>
+                                        </a>
+                                        <% } %>
+                                            <%- comment.comment %>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+
+                    <script>
+                        var quill = new Quill('#editor', {
+                            theme: 'snow'
+                        });
+                    </script>
+                    <script>
+                        function saveComment() {
+                            var commentdata = quill.root.innerHTML; // ดึงข้อมูลจาก Quill editor
+                            // ตรวจสอบว่า commentdata ไม่ใช่สตริงว่าง
+                            if (commentdata.trim() !== "") {
+                                // ส่งข้อมูลไปยังเซิร์ฟเวอร์ (ใช้ Fetch API เป็นตัวอย่าง)
+                                fetch('/comment/<%= newsData.news_id %>', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ content: commentdata })
+
+                                })
+                                    .then(response => {
+                                        alert('ข้อความถูกโพสต์แล้ว');
+                                        // รีโหลดหน้า
+                                        window.location.reload();
+                                    })
+                                    .catch(error => {
+                                        // จัดการข้อผิดพลาด
+                                    });
+                            } else {
+                                // แสดงข้อความหรือทำการจัดการเมื่อ commentdata ว่างเปล่า
+                                console.log("กรุณากรอกความคิดเห็นก่อนบันทึก");
+                            }
+                        }
+                    </script>
+                    <script>
+                        function deleteComment(icon) {
+                            const comment_id = icon.getAttribute('data-comment-id');
+                            fetch(`/comment/${comment_id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                                .then(response => {
+                                    alert('ข้อความถูกลบแล้ว');
+                                    // รีโหลดหน้า
+                                    window.location.reload();
+                                })
+                                .catch(error => {
+                                    // จัดการข้อผิดพลาด
+                                });
+                        }
+                    </script>
+                    </div>
+                    <%- include('../home/footer') %>
 </body>
 
 </html>
