@@ -30,7 +30,7 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/:news_id', ifNotLoggedin, async (req, res, next) => {
     try {
         const newsId = req.params.news_id;
-        const comment = await dbConnection.execute("SELECT * FROM `comment` LEFT JOIN users ON users.id = comment.c_user_id WHERE c_news_id = ?", [newsId]);
+        const comment = await dbConnection.execute("SELECT * FROM `comment` LEFT JOIN users ON users.id = comment.c_user_id WHERE c_news_id = ? ORDER BY comment.comment_id DESC;", [newsId]);
         dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON news.user_id=users.id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN topic ON news.topic_id = topic.topic_id WHERE news.news_id = ?", [newsId])
             .then(([newsRows]) => {
                 if (newsRows.length > 0) {

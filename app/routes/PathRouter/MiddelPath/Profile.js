@@ -37,6 +37,11 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
         const user_id = req.params.id;
         const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ? ", [req.session.userID]);
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+        const Count_comment = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
+        const CommentCounts = Count_comment[0].reduce((bcc, comment) => {
+            bcc[comment.c_news_id] = comment.comment_count;
+            return bcc;
+        }, {});
         dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [user_id])
             .then(([rows]) => {
                 if (rows.length > 0) {
@@ -63,7 +68,8 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
                                         newsprofile_image: rows[0].profile_image,
                                         subscribe: sub[0],
                                         like: Like[0],
-                                        likeCounts: likeCounts
+                                        likeCounts: likeCounts,
+                                        CommentCounts: CommentCounts
                                     });
                                 });
                         })

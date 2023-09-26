@@ -12,6 +12,11 @@ router.get('/', async (req, res) => {
         user_id = req.session.userID
         news = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN subscribe ON subscribe.sub_user_id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND subscribe.user_id = ? ORDER BY news.news_id DESC;",[user_id]);
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+        const Count_comment = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
+        const CommentCounts = Count_comment[0].reduce((bcc, comment) => {
+            bcc[comment.c_news_id] = comment.comment_count;
+            return bcc;
+        }, {});
         dbConnection.execute("SELECT * FROM `subscribe` LEFT JOIN users ON subscribe.sub_user_id = users.id WHERE user_id = ?", [user_id])
             .then(([rows]) => {
                 dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
@@ -29,7 +34,8 @@ router.get('/', async (req, res) => {
                                         subHome: rows,
                                         header: req.session.header,
                                         like: Like[0],
-                                        likeCounts: likeCounts
+                                        likeCounts: likeCounts,
+                                        CommentCounts: CommentCounts
                                     });
                                 });
                         })

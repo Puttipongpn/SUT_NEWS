@@ -223,102 +223,122 @@
                             </div>
                             <div class="card-body-commu">
                               <div class="icon-container">
-                                
-                                  <% const news_like_id=bookmark.news_id; %>
-                                    <% const isLike=like.some(item=>
-                                      item.like_news_id === news_like_id); %>
-                                      <% if (isLike) { %>
-                                        <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
-                                          data-news-id="<%= news_like_id %>" onclick="removeLike(this)"></i>
-                                        <% } else { %>
-                                          <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_like_id %>"
-                                            onclick="addLike(this)"></i>
-                                          <% } %>
+
+                                <% const news_like_id=bookmark.news_id; %>
+                                  <% const isLike=like.some(item=>
+                                    item.like_news_id === news_like_id); %>
+                                    <% if (isLike) { %>
+                                      <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
+                                        data-news-id="<%= news_like_id %>" onclick="removeLike(this)"></i>
+                                      <% } else { %>
+                                        <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_like_id %>"
+                                          onclick="addLike(this)"></i>
+                                        <% } %>
+
+                                          <!-- ส่วนของคอมเม้น -->
+                                          <% if (CommentCounts[bookmark.news_id] !==undefined) { %>
                                             <i class="bi bi-chat"></i>
-                                            <i class="bi bi-send" style="padding-top: 1px;"></i>
-                                            <% const news_id=bookmark.b_news_id; %>
-                                              <% const isBookmarked=bookmark_id.some(item=> item.b_news_id === news_id);
-                                                %>
-                                                <% if (isBookmarked) { %>
-                                                  <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
-                                                    data-news-id="<%= news_id %>" onclick="removeBookmark(this)"></i>
-                                                  <% } else { %>
-                                                    <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                      data-news-id="<%= news_id %>" onclick="addBookmark(this)"></i>
-                                                    <% } %>
-
+                                            <p style="font-size: 14px;margin-left:-5px;margin-top:6px">
+                                              <%= CommentCounts[bookmark.news_id] %>
+                                            </p>
+                                            <% } else { %>
+                                              <i class="bi bi-chat"></i>
+                                              <% } %>
+                                                <!--------------->
+                                                <!-- ส่วนของแชร์ -->
+                                                <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                                <!------------>
+                                                <!-- ส่วนของบุคมาร์ค -->
+                                                <% const news_id=bookmark.b_news_id; %>
+                                                  <% const isBookmarked=bookmark_id.some(item=> item.b_news_id ===
+                                                    news_id);
+                                                    %>
+                                                    <% if (isBookmarked) { %>
+                                                      <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
+                                                        data-news-id="<%= news_id %>"
+                                                        onclick="removeBookmark(this)"></i>
+                                                      <% } else { %>
+                                                        <i class="bi bi-bookmark" id="bookmarkIcon"
+                                                          data-news-id="<%= news_id %>" onclick="addBookmark(this)"></i>
+                                                        <% } %>
+                                                          <!---------------->
                               </div>
-                              <% if (likeCounts[bookmark.news_id] !== undefined) { %>
-                                <div style="margin-top: -5px;">
-                                    <p style="font-size: 13px;color:#1e1e1e;">
-                                        จำนวนไลค์: <%= likeCounts[bookmark.news_id] %> ครั้ง
-                                    </p>
-                                </div>
-                            <% } else { %>
-                                <div style="margin-top: -5px;">
-                                    <p style="font-size: 13px;color:#1e1e1e;">
-                                        ยังไม่มีการกดไลค์
-                                    </p>
-                                </div>
-                            <% } %>
                             </div>
-
-                            <div class="card-body-profile">
-                              <h5 class="card-title ">
-                                <a href="/details/<%= bookmark.news_id %>" class="">
-                                  <!-- title -->
-                                  <b><%- bookmark.title %></b>
-                                </a>
-
-                              </h5>
-                              <p class="card-text " style="font-size: 16;">
-                                <!-- welding -->
-                                <%- bookmark.welding_para %>
-                              </p>
-                            </div>
-
-                            <div class="card-footer">
-                              <a style="font-size: 12px; color:#6e6e6e;">
-                                <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
-                                    style="color: palevioletred; padding-right:5px"></i>
-                                    <% if (bookmark.start) { %>
-                                      <% const start=bookmark.start%>
-                                      <% const newStart=new Date(start); %>
-                                      <% newStart.setHours(newStart.getHours()+7); %>
-                                      <% const formattedStart=new Date(newStart).toISOString().substring(0,10)%>
-                                      <% const end=bookmark.end%>
-                                      <% const newEnd=new Date(end); %>
-                                      <% newEnd.setHours(newEnd.getHours()+7); %>
-                                      <% const formattedEnd=new Date(newEnd).toISOString().substring(0,10)%>  
-                                      <%= formattedStart %> - <%= formattedEnd %>
-                                  <% }  else { %>
-                                      ไม่มีกำหนดการ
-                                  <% }  %>
+                            <% if (likeCounts[bookmark.news_id] !==undefined) { %>
+                              <div style="margin-top: -15px;margin-left:20px">
+                                <p style="font-size: 13px;color:#1e1e1e;">
+                                  จำนวนไลค์: <%= likeCounts[bookmark.news_id] %> ครั้ง
                                 </p>
-                                <!-- ชื่อ -->
-                                <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
-                                <% if (bookmark.profile_image) { %>
-                                  <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                    style="height: 30px; padding-right:5px;" <% const
-                                    imagePath=bookmark.profile_image.substring(7); %>
-                                  src="<%= imagePath %>" alt="">
-                                    <% } else { %>
-                                      <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                        style="height: 30px;padding-right:5px;"
-                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                      <% } %><%-bookmark.user_name %>
-                                          <!-- อีเมล -->
-                                          <i class="bi bi-envelope fa-sm"
-                                            style="padding-right: 5px;padding-left:10px;"></i></i><%-bookmark.email %>
-                                            <!-- วันที่ประกาศ -->
-                                            <% const date=bookmark.time_stamp %>
-                                              <% const newDate=new Date(date); %>
-                                                <% newDate.setHours(newDate.getHours() + 7); %>
-                                                  <% const formattedDate=new Date(newDate).toISOString().substring(0,
-                                                    19).replace('T', ' ' )%>
-                                                    <p>โพสเมื่อ <%- formattedDate %></p>
-                              </a>
-                            </div>
+                              </div>
+                              <% } else { %>
+                                <div style="margin-top: -15px;margin-left:20px">
+                                  <p style="font-size: 13px;color:#1e1e1e;">
+                                    ยังไม่มีการกดไลค์
+                                  </p>
+                                </div>
+                                <% } %>
+
+
+                                  <div class="card-body-profile" style="margin-top: -20px;">
+                                    <h5 class="card-title ">
+                                      <a href="/details/<%= bookmark.news_id %>" class="">
+                                        <!-- title -->
+                                        <b><%- bookmark.title %></b>
+                                      </a>
+
+                                    </h5>
+                                    <p class="card-text " style="font-size: 16;">
+                                      <!-- welding -->
+                                      <%- bookmark.welding_para %>
+                                    </p>
+                                  </div>
+
+                                  <div class="card-footer">
+                                    <a style="font-size: 12px; color:#6e6e6e;">
+                                      <p style="font-size: small; "><i class="bi bi-calendar2-week fa-xl"
+                                          style="color: palevioletred; padding-right:5px"></i>
+                                        <% if (bookmark.start) { %>
+                                          <% const start=bookmark.start%>
+                                            <% const newStart=new Date(start); %>
+                                              <% newStart.setHours(newStart.getHours()+7); %>
+                                                <% const formattedStart=new
+                                                  Date(newStart).toISOString().substring(0,10)%>
+                                                  <% const end=bookmark.end%>
+                                                    <% const newEnd=new Date(end); %>
+                                                      <% newEnd.setHours(newEnd.getHours()+7); %>
+                                                        <% const formattedEnd=new
+                                                          Date(newEnd).toISOString().substring(0,10)%>
+                                                          <%= formattedStart %> - <%= formattedEnd %>
+                                                              <% } else { %>
+                                                                ไม่มีกำหนดการ
+                                                                <% } %>
+                                      </p>
+                                      <!-- ชื่อ -->
+                                      <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
+                                      <% if (bookmark.profile_image) { %>
+                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                          style="height: 30px; padding-right:5px;" <% const
+                                          imagePath=bookmark.profile_image.substring(7); %>
+                                        src="<%= imagePath %>" alt="">
+                                          <% } else { %>
+                                            <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                              style="height: 30px;padding-right:5px;"
+                                              src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                            <% } %><%-bookmark.user_name %>
+                                                <!-- อีเมล -->
+                                                <i class="bi bi-envelope fa-sm"
+                                                  style="padding-right: 5px;padding-left:10px;"></i></i><%-bookmark.email
+                                                  %>
+                                                  <!-- วันที่ประกาศ -->
+                                                  <% const date=bookmark.time_stamp %>
+                                                    <% const newDate=new Date(date); %>
+                                                      <% newDate.setHours(newDate.getHours() + 7); %>
+                                                        <% const formattedDate=new
+                                                          Date(newDate).toISOString().substring(0, 19).replace('T', ' '
+                                                          )%>
+                                                          <p>โพสเมื่อ <%- formattedDate %></p>
+                                    </a>
+                                  </div>
                           </div>
                         </div>
                         <script>

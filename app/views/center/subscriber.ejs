@@ -134,7 +134,16 @@
                                                                         onclick="addLike(this)"></i>
                                                                     <% } %>
 
-                                                        <i class="bi bi-chat"></i>
+                                                         <!-- ส่วนของคอมเม้น -->
+                                          <% if (CommentCounts[sub.news_id] !==undefined) { %>
+                                            <i class="bi bi-chat"></i>
+                                            <p style="font-size: 14px;margin-left:-5px;margin-top:6px">
+                                              <%= CommentCounts[sub.news_id] %>
+                                            </p>
+                                            <% } else { %>
+                                              <i class="bi bi-chat"></i>
+                                              <% } %>
+                                                <!--------------->
                                                         <i class="bi bi-send" style="padding-top: 1px;"></i>
                                                         <!-- ส่วนของปุ่มกดบุคมาร์ค -->
                                                         <% const isBookmarked=bookmark_id.some(item=>
@@ -150,21 +159,22 @@
                                                                     data-news-id="<%= news_id %>"
                                                                     onclick="addBookmark(this)"></i>
                                                                 <% } %>
-                                                    </div>
-                                                    <% if (likeCounts[sub.news_id] !==undefined) { %>
-                                                        <div style="margin-top: -5px;">
-                                                            <p style="font-size: 13px;color:#1e1e1e;">
-                                                                จำนวนไลค์: <%= likeCounts[sub.news_id] %> ครั้ง
-                                                            </p>
-                                                        </div>
-                                                        <% } else { %>
-                                                            <div style="margin-top: -5px;">
-                                                                <p style="font-size: 13px;color:#1e1e1e;">
-                                                                    ยังไม่มีการกดไลค์
-                                                                </p>
-                                                            </div>
-                                                            <% } %>
+                                                    </div> 
                                                 </div>
+                                                <% if (likeCounts[sub.news_id] !==undefined) { %>
+                                                    <div style="margin-top: -15px;margin-left:20px">
+                                                      <p style="font-size: 13px;color:#1e1e1e;">
+                                                        จำนวนไลค์: <%= likeCounts[sub.news_id] %> ครั้ง
+                                                      </p>
+                                                    </div>
+                                                    <% } else { %>
+                                                      <div style="margin-top: -15px;margin-left:20px">
+                                                        <p style="font-size: 13px;color:#1e1e1e;">
+                                                          ยังไม่มีการกดไลค์
+                                                        </p>
+                                                      </div>
+                                                      <% } %>
+                                                    
                                                 <script>
                                                     async function addBookmark(icon) {
                                                         const newsId = icon.getAttribute('data-news-id');
@@ -257,7 +267,7 @@
                                                         }
                                                     }
                                                 </script>
-                                                <div class="card-body-profile">
+                                                <div class="card-body-profile"style="margin-top: -20px;">
                                                     <h5 class="card-title ">
                                                         <a href="/subscriber/<%= sub.news_id %>" class="">
                                                             <!-- title -->
