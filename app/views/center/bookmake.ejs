@@ -237,16 +237,31 @@
 
                                           <!-- ส่วนของคอมเม้น -->
                                           <% if (CommentCounts[bookmark.news_id] !==undefined) { %>
-                                            <i class="bi bi-chat"></i>
+                                            <i class="bi bi-chat" id="commentIcon"
+                                              onclick="goToNewsDetailAndScroll('<%= bookmark.news_id %>')"></i>
                                             <p style="font-size: 14px;margin-left:-5px;margin-top:6px">
                                               <%= CommentCounts[bookmark.news_id] %>
                                             </p>
                                             <% } else { %>
-                                              <i class="bi bi-chat"></i>
+                                              <i class="bi bi-chat" id="commentIcon"
+                                                onclick="goToNewsDetailAndScroll('<%= bookmark.news_id %>')"></i>
                                               <% } %>
+                                                <script>
+                                                  // JavaScript ของหน้าการ์ดข่าว
+                                                  function goToNewsDetailAndScroll(newsId) {
+                                                    // สร้าง URL ของหน้ารายละเอียดข่าว
+                                                    var newsDetailURL = "http://localhost:3000/details/" + newsId + "#comments"; // เปลี่ยน URL ตามความเหมาะสม
+
+                                                    // นำผู้ใช้ไปยัง URL ของหน้ารายละเอียดข่าวนั้นๆ
+                                                    window.location.href = newsDetailURL ;
+                                                  }
+
+                                                </script>
                                                 <!--------------->
                                                 <!-- ส่วนของแชร์ -->
-                                                <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                                <i class="bi bi-send" id="shareIcon" onclick="shareButton(this)"
+                                                  style="padding-top: 1px;"></i>
+
                                                 <!------------>
                                                 <!-- ส่วนของบุคมาร์ค -->
                                                 <% const news_id=bookmark.b_news_id; %>
@@ -277,8 +292,6 @@
                                   </p>
                                 </div>
                                 <% } %>
-
-
                                   <div class="card-body-profile" style="margin-top: -20px;">
                                     <h5 class="card-title ">
                                       <a href="/details/<%= bookmark.news_id %>" class="">
@@ -341,6 +354,16 @@
                                   </div>
                           </div>
                         </div>
+                        <script>
+                          function shareButton(iconElement) {
+                            // รับข้อมูล news_id จาก data attribute ของไอคอนที่ถูกคลิก
+                            var newsId = iconElement.getAttribute("data-news-id");
+                            // สร้าง URL ให้ใช้จาก ngrok
+                            var urlToShare = "https://3a18-2405-9800-bc20-9f6a-52-9d8a-9c9a-b24.ngrok-free.app/details/<%= bookmark.news_id %>";
+                            // เปิดหน้าแชร์ลิงก์บน Facebook
+                            window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(urlToShare), "_blank");
+                          }
+                        </script>
                         <script>
                           async function addBookmark(icon) {
                             const newsId = icon.getAttribute('data-news-id');

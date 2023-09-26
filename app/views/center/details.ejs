@@ -77,7 +77,8 @@
                             <i class="bi bi-tags" style="font-size: 25px; color: cornflowerblue;"></i>
                             <% if (groupData && Array.isArray(groupData)) { %>
                                 <% groupData.forEach(group=> { %>
-                                    <% const colors=['#FAD7A0', '#82E0AA' , '#AED6F1' , '#CCD1D1' , '#D1F2EB' , '#E6B0AA' , '#D7BDE2' ]; %>
+                                    <% const colors=['#FAD7A0', '#82E0AA' , '#AED6F1' , '#CCD1D1' , '#D1F2EB'
+                                        , '#E6B0AA' , '#D7BDE2' ]; %>
                                         <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
                                             <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
                                                 style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
@@ -173,7 +174,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card mb-3 mt-2" style="max-width: auto;">
+            
+            <div id="commentsContainer"  class="card mb-3 mt-2" style="max-width: auto;">
                 <div class="container" style="padding-top: 5px;">
                     <div class="d-flex justify-content-center align-items-center ">
                         <b style="font-size: 18px;">Comment</b>
@@ -228,7 +230,7 @@
 
                             </div>
                             <div class="d-flex" style="margin-left: 70px;margin-top:-10px">
-                                <div style="">
+                                <div>
                                     <i class="bi bi-chat-left-dots-fill" style="font-size: 16px;"></i>
                                     <% if (comment.c_user_id===id || role==='ADMIN' ) { %>
                                         <a href="" style="color: #ad0000;">
@@ -300,5 +302,39 @@
                     </div>
                     <%- include('../home/footer') %>
 </body>
+<script>
+    // JavaScript ของหน้ารายละเอียดข่าว
+    document.addEventListener("DOMContentLoaded", function () {
+        // แก้ไขเพิ่ม ID ของไอคอนคอมเม้นเพื่อให้ JavaScript รู้ว่าต้องการไปยังข่าวนั้น
+        var newsCommentIcon = document.getElementById("newsCommentIcon");
+        if (newsCommentIcon) {
+            newsCommentIcon.addEventListener("click", function () {
+                goToComments();
+            });
+        }
+
+        // เช็คว่า URL มี #comments หรือไม่
+        if (window.location.hash === "#comments") {
+            // หา DOM ของส่วนคอมเม้นและเลื่อนหน้าจอไปยังส่วนนั้น
+            var commentsContainer = document.getElementById("commentsContainer");
+            if (commentsContainer) {
+                commentsContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+
+    // JavaScript สำหรับเลื่อนหน้าจอไปยังส่วนของคอมเม้น
+    function goToComments() {
+        // เลื่อนหน้าจอไปยังส่วนคอมเม้น
+        var commentsContainer = document.getElementById("commentsContainer");
+        if (commentsContainer) {
+            commentsContainer.scrollIntoView({ behavior: 'smooth' });
+
+            // เปลี่ยน URL เพื่อให้มี #comments ใน URL
+            window.location.hash = "#comments";
+        }
+    }
+
+</script>
 
 </html>

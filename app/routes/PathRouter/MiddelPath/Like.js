@@ -38,6 +38,7 @@ router.delete('/:id', ifNotLoggedin, (req, res, next) => {
             res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบ' });
         });
 });
+
 router.get('/:id', (req, res) => {
     // ดึงข้อมูลจากฐานข้อมูล
     dbConnection.execute("SELECT COUNT(*) AS likeCount FROM `like` WHERE like_news_id = ?")
