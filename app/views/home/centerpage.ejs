@@ -87,18 +87,16 @@
                                                                     <% const isLike=like.some(item=>
                                                                         item.like_news_id === news_id); %>
                                                                         <% if (isLike) { %>
-                                                                            <a href="" style="color: #000000;">
-                                                                                <i class="bi bi-heart-fill"
-                                                                                    style="color: rgb(143, 1, 1);"
-                                                                                    id="likeIcon"
-                                                                                    data-news-id="<%= news_id %>"
-                                                                                    onclick="removeLike(this)"></i></a>
+                                                                            <i class="bi bi-heart-fill"
+                                                                                style="color: rgb(143, 1, 1);"
+                                                                                id="likeIcon"
+                                                                                data-news-id="<%= news_id %>"
+                                                                                onclick="removeLike(this)"></i>
                                                                             <% } else { %>
-                                                                                <a href="" style="color: #000000;">
-                                                                                    <i class="bi bi-heart" id="likeIcon"
-                                                                                        data-news-id="<%= news_id %>"
-                                                                                        onclick="addLike(this)"></i>
-                                                                                </a>
+                                                                                <i class="bi bi-heart" id="likeIcon"
+                                                                                    data-news-id="<%= news_id %>"
+                                                                                    onclick="addLike(this)"></i>
+
                                                                                 <% } %>
 
                                                                                     <!-- ส่วนของปุ่มคอมเม้น -->
@@ -106,7 +104,7 @@
                                                                                         (CommentCounts[profile.news_id]
                                                                                         !==undefined) { %>
                                                                                         <i class="bi bi-chat"></i>
-                                                                                        <p 
+                                                                                        <p
                                                                                             style="font-size: 14px;margin-left:-5px;margin-top:6px">
                                                                                             <%= CommentCounts[profile.news_id]
                                                                                                 %>
@@ -142,7 +140,7 @@
                                                             <div style="margin-top: -15px;margin-left:20px">
                                                                 <p style="font-size: 13px;color:#1e1e1e;">
                                                                     จำนวนไลค์: <%= likeCounts[profile.news_id] %> ครั้ง
-                                                                        
+
                                                                 </p>
                                                             </div>
                                                             <% } else { %>
@@ -245,7 +243,8 @@
                                                                             }
                                                                         }
                                                                     </script>
-                                                                    <div class="card-body-profile" style="margin-top: -20px;">
+                                                                    <div class="card-body-profile"
+                                                                        style="margin-top: -20px;">
                                                                         <h5 class="card-title ">
                                                                             <a href="/details/<%= profile.news_id %>"
                                                                                 class="">

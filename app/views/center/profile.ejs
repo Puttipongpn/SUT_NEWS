@@ -164,7 +164,7 @@
                                     <% } %>
                                       <!-- ส่วนของคอมเม้น -->
                                       <% if (CommentCounts[profile.news_id] !==undefined) { %>
-                                        <i class="bi bi-chat"></i>
+                                        <i class="bi bi-chat" id="commentIcon"></i>
                                         <p style="font-size: 14px;margin-left:-5px;margin-top:6px">
                                           <%= CommentCounts[profile.news_id] %>
                                         </p>
@@ -298,6 +298,7 @@
                                     <!-- title -->
                                     <b><%- profile.title %></b>
                                   </a>
+                                  
 
                                 </h5>
                                 <p class="card-text " style="font-size: 16;">
