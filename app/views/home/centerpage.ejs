@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sut News</title>
     <link rel="stylesheet" href="/stylesheets/card.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link rel="stylesheet" href="stylesheets/hero_doom.css">
@@ -132,7 +132,7 @@
                                                                                                         // รับข้อมูล news_id จาก data attribute ของไอคอนที่ถูกคลิก
                                                                                                         var newsId = iconElement.getAttribute("data-news-id");
                                                                                                         // สร้าง URL ให้ใช้จาก ngrok
-                                                                                                        var urlToShare = "https://3a18-2405-9800-bc20-9f6a-52-9d8a-9c9a-b24.ngrok-free.app/details/<%= profile.news_id %>";
+                                                                                                        var urlToShare = "https://716a-203-158-2-196.ngrok-free.app/details/<%= profile.news_id %>";
                                                                                                         // เปิดหน้าแชร์ลิงก์บน Facebook
                                                                                                         window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(urlToShare), "_blank");
                                                                                                     }
