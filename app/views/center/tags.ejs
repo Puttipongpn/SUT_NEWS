@@ -27,164 +27,179 @@
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
             <!-- Topic Cards -->
-            <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
-                <div class="container-st h-100 ">
-                    <div class="heading">
-                        <h1 style="margin-bottom: 5%;"><b><%- tags[0].section_name  %></b></h1>
-                    </div>
-                    <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
-                        <div class="row" id="cards_landscape_wrap-2">
-                            <div class="col-lg-12 my-2">
-                                <div class="row pt-3">
-                                    <% tags.forEach((hometags)=> { %>
-                                        <div class="col-lg-3 col-md-6 mb-3">
-                                            <div class="card h-100"
-                                                style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
-                                                <div class="top">
-                                                    <% if (hometags.card_picture) { %>
-                                                        <% const imcard=hometags.card_picture.substring(6) %>
-                                                            <!-- bookmark -->
-                                                            <a href="/details/<%= hometags.news_id %>">
-                                                                <!-- image -->
-                                                                <img class="card-img-top" src="<%= imcard %>" alt="">
-                                                                <% } %>
-                                                            </a>
-                                                </div>
-                                                <div class="card-body-commu">
-                                                    <div class="icon-container">
-                                                        <i class="bi bi-heart"></i>
-                                                        <i class="bi bi-chat"></i>
-                                                        <i class="bi bi-send" style="padding-top: 1px;"></i>
-                                                        <% const news_id=hometags.news_id; %>
-                                                            <% const isBookmarked=bookmark_id.some(item=>item.b_news_id
-                                                                === news_id); %>
-                                                                <% if (isBookmarked) { %>
-                                                                    <i class="bi bi-bookmark-check-fill"
-                                                                        id="bookmarkIcon" data-news-id="<%= news_id %>"
-                                                                        onclick="removeBookmark(this)"></i>
-                                                                    <% } else { %>
-                                                                        <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                                            data-news-id="<%= news_id %>"
-                                                                            onclick="addBookmark(this)"></i>
-                                                                        <% } %>
-
-                                                    </div>
-                                                    <div style="margin-top: -5px;">
-                                                        <p style="font-size: 13px;color:#1e1e1e;">
-                                                            ถูกใจ 1,523 คน
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <script>
-                                                    async function addBookmark(icon) {
-                                                        const newsId = icon.getAttribute('data-news-id');
-
-                                                        try {
-                                                            const response = await fetch(`/bookmark/${newsId}`, {
-                                                                method: 'POST'
-                                                            });
-
-                                                            const data = await response.json();
-
-                                                            if (data.success) {
-                                                                bookmark_id.push({ b_news_id: newsId });
-                                                                icon.classList.add('bi-bookmark-check-fill');
-                                                                icon.classList.remove('bi-bookmark');
-                                                            } window.location.reload();
-
-                                                            console.log(data.message);
-                                                        } catch (error) {
-                                                            console.error('เกิดข้อผิดพลาด:', error);
-                                                        }
-                                                    }
-
-                                                    async function removeBookmark(icon) {
-                                                        const newsId = icon.getAttribute('data-news-id');
-
-                                                        try {
-                                                            const response = await fetch(`/bookmark/${newsId}`, {
-                                                                method: 'DELETE'
-                                                            });
-                                                            const data = await response.json();
-                                                            if (data.success) {
-                                                                const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
-                                                                if (index !== -1) {
-                                                                    bookmark_id.splice(index, 1);
-                                                                }
-                                                                icon.classList.add('bi-bookmark');
-                                                                icon.classList.remove('bi-bookmark-check-fill');
-                                                            } window.location.reload();
-
-                                                            console.log(data.message);
-                                                        } catch (error) {
-                                                            console.error('เกิดข้อผิดพลาด:', error);
-                                                        }
-                                                    }
-                                                </script>
-                                                <div class="card-body-profile">
-                                                    <h5 class="card-title ">
-                                                        <a href="/details/<%= hometags.b_news_id %>" class="">
-                                                            <!-- title -->
-                                                            <b><%- hometags.title %></b>
-                                                        </a>
-
-                                                    </h5>
-                                                    <p class="card-text " style="font-size: 16;">
-                                                        <!-- welding -->
-                                                        <%- hometags.welding_para %>
-                                                    </p>
-                                                </div>
-                                                <div class="card-footer">
-                                                    <a style="font-size: 12px; color:#6e6e6e;">
-                                                        <p style="font-size: small; "><i
-                                                                class="bi bi-calendar2-week fa-xl"
-                                                                style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
-                                                            12
-                                                            ส.ค. 66 - 19 ส.ค. 66
-                                                        </p>
-                                                        <!-- ชื่อ -->
-                                                        <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
-                                                        <% if (hometags.profile_image) { %>
-                                                            <img id="profilePicture"
-                                                                class="img-account-profile rounded-circle mb-2"
-                                                                style="height: 30px; padding-right:5px;" <% const
-                                                                imagePath=hometags.profile_image.substring(6); %>
-                                                            src="<%= imagePath %>" alt="">
-                                                                <% } else { %>
-                                                                    <img id="profilePicture"
-                                                                        class="img-account-profile rounded-circle mb-2"
-                                                                        style="height: 30px;padding-right:5px;"
-                                                                        src="http://bootdey.com/img/Content/avatar/avatar1.png"
+            <% if (tags[0]) { %>
+                <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
+                    <div class="container-st h-100 ">
+                        <div class="heading">
+                            <h1 style="margin-bottom: 5%;"><b><%- tags[0].section_name %></b></h1>
+                        </div>
+                        <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
+                            <div class="row" id="cards_landscape_wrap-2">
+                                <div class="col-lg-12 my-2">
+                                    <div class="row pt-3">
+                                        <% tags.forEach((hometags)=> { %>
+                                            <div class="col-lg-3 col-md-6 mb-3">
+                                                <div class="card h-100"
+                                                    style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                                                    <div class="top">
+                                                        <% if (hometags.card_picture) { %>
+                                                            <% const imcard=hometags.card_picture.substring(6) %>
+                                                                <!-- bookmark -->
+                                                                <a href="/details/<%= hometags.news_id %>">
+                                                                    <!-- image -->
+                                                                    <img class="card-img-top" src="<%= imcard %>"
                                                                         alt="">
-                                                                    <% } %><%-hometags.user_name %>
-                                                                            <!-- อีเมล -->
-                                                                            <i class="bi bi-envelope fa-sm"
-                                                                                style="padding-right: 5px;padding-left:10px;"></i></i><%-hometags.email
-                                                                                %>
-                                                                                <!-- วันที่ประกาศ -->
-                                                                                <% const date=hometags.time_stamp %>
-                                                                                    <% const newDate=new Date(date); %>
-                                                                                        <% newDate.setHours(newDate.getHours()
-                                                                                            + 7); %>
-                                                                                            <% const formattedDate=new
-                                                                                                Date(newDate).toISOString().substring(0,
-                                                                                                19).replace('T', ' ' )%>
-                                                                                                <p>โพสเมื่อ <%-
-                                                                                                        formattedDate %>
-                                                                                                </p>
-                                                    </a>
+                                                                    <% } %>
+                                                                </a>
+                                                    </div>
+                                                    <div class="card-body-commu">
+                                                        <div class="icon-container">
+                                                            <i class="bi bi-heart"></i>
+                                                            <i class="bi bi-chat"></i>
+                                                            <i class="bi bi-send" style="padding-top: 1px;"></i>
+                                                            <% const news_id=hometags.news_id; %>
+                                                                <% const isBookmarked=bookmark_id.some(item=>
+                                                                    item.b_news_id
+                                                                    === news_id); %>
+                                                                    <% if (isBookmarked) { %>
+                                                                        <i class="bi bi-bookmark-check-fill"
+                                                                            id="bookmarkIcon"
+                                                                            data-news-id="<%= news_id %>"
+                                                                            onclick="removeBookmark(this)"></i>
+                                                                        <% } else { %>
+                                                                            <i class="bi bi-bookmark" id="bookmarkIcon"
+                                                                                data-news-id="<%= news_id %>"
+                                                                                onclick="addBookmark(this)"></i>
+                                                                            <% } %>
+
+                                                        </div>
+                                                        <div style="margin-top: -5px;">
+                                                            <p style="font-size: 13px;color:#1e1e1e;">
+                                                                ถูกใจ 1,523 คน
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <script>
+                                                        async function addBookmark(icon) {
+                                                            const newsId = icon.getAttribute('data-news-id');
+
+                                                            try {
+                                                                const response = await fetch(`/bookmark/${newsId}`, {
+                                                                    method: 'POST'
+                                                                });
+
+                                                                const data = await response.json();
+
+                                                                if (data.success) {
+                                                                    bookmark_id.push({ b_news_id: newsId });
+                                                                    icon.classList.add('bi-bookmark-check-fill');
+                                                                    icon.classList.remove('bi-bookmark');
+                                                                } window.location.reload();
+
+                                                                console.log(data.message);
+                                                            } catch (error) {
+                                                                console.error('เกิดข้อผิดพลาด:', error);
+                                                            }
+                                                        }
+
+                                                        async function removeBookmark(icon) {
+                                                            const newsId = icon.getAttribute('data-news-id');
+
+                                                            try {
+                                                                const response = await fetch(`/bookmark/${newsId}`, {
+                                                                    method: 'DELETE'
+                                                                });
+                                                                const data = await response.json();
+                                                                if (data.success) {
+                                                                    const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                                                                    if (index !== -1) {
+                                                                        bookmark_id.splice(index, 1);
+                                                                    }
+                                                                    icon.classList.add('bi-bookmark');
+                                                                    icon.classList.remove('bi-bookmark-check-fill');
+                                                                } window.location.reload();
+
+                                                                console.log(data.message);
+                                                            } catch (error) {
+                                                                console.error('เกิดข้อผิดพลาด:', error);
+                                                            }
+                                                        }
+                                                    </script>
+                                                    <div class="card-body-profile">
+                                                        <h5 class="card-title ">
+                                                            <a href="/details/<%= hometags.b_news_id %>" class="">
+                                                                <!-- title -->
+                                                                <b><%- hometags.title %></b>
+                                                            </a>
+
+                                                        </h5>
+                                                        <p class="card-text " style="font-size: 16;">
+                                                            <!-- welding -->
+                                                            <%- hometags.welding_para %>
+                                                        </p>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <a style="font-size: 12px; color:#6e6e6e;">
+                                                            <p style="font-size: small; "><i
+                                                                    class="bi bi-calendar2-week fa-xl"
+                                                                    style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
+                                                                12
+                                                                ส.ค. 66 - 19 ส.ค. 66
+                                                            </p>
+                                                            <!-- ชื่อ -->
+                                                            <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
+                                                            <% if (hometags.profile_image) { %>
+                                                                <img id="profilePicture"
+                                                                    class="img-account-profile rounded-circle mb-2"
+                                                                    style="height: 30px; padding-right:5px;" <% const
+                                                                    imagePath=hometags.profile_image.substring(6); %>
+                                                                src="<%= imagePath %>" alt="">
+                                                                    <% } else { %>
+                                                                        <img id="profilePicture"
+                                                                            class="img-account-profile rounded-circle mb-2"
+                                                                            style="height: 30px;padding-right:5px;"
+                                                                            src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                            alt="">
+                                                                        <% } %><%-hometags.user_name %>
+                                                                                <!-- อีเมล -->
+                                                                                <i class="bi bi-envelope fa-sm"
+                                                                                    style="padding-right: 5px;padding-left:10px;"></i></i><%-hometags.email
+                                                                                    %>
+                                                                                    <!-- วันที่ประกาศ -->
+                                                                                    <% const date=hometags.time_stamp %>
+                                                                                        <% const newDate=new Date(date);
+                                                                                            %>
+                                                                                            <% newDate.setHours(newDate.getHours()
+                                                                                                + 7); %>
+                                                                                                <% const
+                                                                                                    formattedDate=new
+                                                                                                    Date(newDate).toISOString().substring(0,
+                                                                                                    19).replace('T', ' '
+                                                                                                    )%>
+                                                                                                    <p>โพสเมื่อ <%-
+                                                                                                            formattedDate
+                                                                                                            %>
+                                                                                                    </p>
+                                                        </a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <% }); %>
+                                            <% }); %>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+                <% } else { %>
+                    <div class="container">
+                        <div class="heading d-flex justify-content-center align-items-center" style="padding: 30px;padding-top:50px">
+                            <h4 style="margin-bottom: 5%;"><b>ยังไม่มีข่าวไหนใช้แท็กนี้</b></h4>
+                        </div>
+                    </div>
+                    <% } %>
 
-            <%- include('../home/footer') %>
+                        <%- include('../home/footer') %>
 </body>
 
 </html>

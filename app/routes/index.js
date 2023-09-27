@@ -71,6 +71,9 @@ router.use('/news_topic', news_topic);
 const comment = require('./PathRouter/MiddelPath/comment')
 router.use('/comment', comment);
 
+const save_tags = require('./PathRouter/MiddelPath/user_save_tags')
+router.use('/save_tags', save_tags);
+
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
 router.use('/request_official', Official_request);
