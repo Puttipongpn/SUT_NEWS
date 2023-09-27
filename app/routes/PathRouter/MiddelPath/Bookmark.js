@@ -12,6 +12,11 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', ifNotLoggedin, async (req, res, next) => {
     try {
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
+        const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
+            const CommentCounts = Count_Like[0].reduce((bcc, comment) => {
+                bcc[comment.c_news_id] = comment.comment_count;
+                return bcc;
+            }, {});
         dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ? ORDER BY news.news_id DESC;", [req.session.userID])
             .then(([rows]) => {
                 if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
@@ -21,7 +26,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                 .then(([likeRows]) => {
                                     const likeCounts = likeRows.reduce((acc, like) => {
                                         acc[like.like_news_id] = like.like_count;
-                                        console.log(acc)
                                         return acc;
                                     }, {});
                                     res.render('center/bookmake', {
@@ -36,7 +40,8 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         email: req.session.email,
                                         profile_image: req.session.profile_image,
                                         like: Like[0],
-                                        likeCounts: likeCounts
+                                        likeCounts: likeCounts,
+                                        CommentCounts: CommentCounts
                                     });
                                 });
                         })

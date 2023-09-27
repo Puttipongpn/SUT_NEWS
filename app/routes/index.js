@@ -68,6 +68,9 @@ router.use('/news_type', news_type);
 const news_topic = require('./PathRouter/MiddelPath/Home_Topic')
 router.use('/news_topic', news_topic);
 
+const comment = require('./PathRouter/MiddelPath/comment')
+router.use('/comment', comment);
+
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
 router.use('/request_official', Official_request);
