@@ -18,7 +18,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
             }, {});
-        dbConnection.execute("SELECT * FROM `news` LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id LEFT JOIN save_section ON save_section.tags_id = group_section.section_id LEFT JOIN users ON users.id = news.user_id WHERE save_section.t_user_id = ? ORDER BY news.news_id DESC;", [req.session.userID])
+        dbConnection.execute("SELECT DISTINCT news.* FROM news LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id LEFT JOIN save_section ON save_section.tags_id = group_section.section_id LEFT JOIN users ON users.id = news.user_id WHERE save_section.t_user_id = ? ORDER BY news.news_id DESC;", [req.session.userID])
             .then(([rows]) => {
                 if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
@@ -57,56 +57,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
     }
 });
 
-router.post('/:id', ifNotLoggedin, (req, res, next) => {
-    const newsDataWithUserId = {
-        b_news_id: req.params.id,
-        b_users_id: req.session.userID
-    };
-    dbConnection.query("INSERT INTO bookmark SET ?", [newsDataWithUserId])
-        .then(([rows]) => {
-            res.redirect
-            res.json({ message: 'บันทึกสำเร็จ' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'เกิดข้อผิดพลาดในการบันทึก' });
-        });
-});
-
-router.delete('/:id', ifNotLoggedin, (req, res, next) => {
-    const deleteData = {
-        news_id: req.params.id, // แก้ไขตรงนี้
-        users_id: req.session.userID
-    };
-
-    dbConnection.query("DELETE FROM `bookmark` WHERE b_news_id = ? AND b_users_id = ?", [deleteData.news_id, deleteData.users_id])
-        .then(([rows]) => {
-            res.json({ message: 'ลบสำเร็จ' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบ' });
-        });
-});
-
-router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.b_users_id LEFT JOIN news ON bookmark.b_news_id = news.news_id  LEFT JOIN news_type ON bookmark.b_news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.b_users_id = ?", [req.session.userID])
-        .then(([rows]) => {
-            if (req.session.role === "USER" || req.session.role === "OFFICIAL USER" || req.session.role === "ADMIN") {
-                res.render('center/setting_bookmark', {
-                    users: rows,
-                    bookmark: rows,
-                    name: req.session.name,
-                    role: req.session.role,
-                    user_name: req.session.user_name,
-                    email: req.session.email,
-                    profile_image: req.session.profile_image,
-                });
-            } else {
-                res.render('home/404page')
-            }
-        });
-});
 
 // Export router
 module.exports = router;
