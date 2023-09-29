@@ -116,25 +116,7 @@
                                                                 <% } %>
                                                             </a>
                                                 </div>
-                                                <div class="card-body-commu">
-                                                    <div class="icon-container">
-                                                        <!-- ส่วนของปุ่มกดหัวใจ -->
-                                                        <% const news_id=sub.news_id; %>
-                                                        <% const isLike=like.some(item=>
-                                                            item.like_news_id === news_id); %>
-                                                            <% if (isLike) { %>
-                                                                <i class="bi bi-heart-fill"
-                                                                    style="color: rgb(143, 1, 1);"
-                                                                    id="likeIcon"
-                                                                    data-news-id="<%= news_id %>"
-                                                                    onclick="removeLike(this)"></i>
-                                                                <% } else { %>
-                                                                    <i class="bi bi-heart" id="likeIcon"
-                                                                        data-news-id="<%= news_id %>"
-                                                                        onclick="addLike(this)"></i>
-                                                                    <% } %>
-                                                                </a>
-                                                    </div>
+                                                
                                                     <div class="card-body-commu">
                                                         <div class="icon-container">
                                                             <!-- ส่วนของปุ่มกดหัวใจ -->
