@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details</title>
+    <!-- Add icon library -->
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <style>
+        .card {
+            margin-left: 14.5%;
+            height: 100%;
+            width: 70%;
+            background-color: rgb(255, 255, 255);
+            box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2);
+            color: #4c4b4b;
+        }
+
+        .btn {
+            font-size: large;
+            border: #ffffff;
+            color: #ffffff;
+            padding: 5px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+            <div class="card">
+                <div class="card-body">
+                    <h2 style="margin-left: 2%; margin-top: 5%; margin-right: 2%;">
+                       Introduction Subject <%= subject[0].subject_id %> - <%= subject[0].subject_name %>
+                    </h2>
+                
+                    <hr>
+                    <div class="card-title">
+                        <p style="text-align: start; margin-bottom: 2%; margin-top: 3%; ">
+                            <%- subject[0].subject_introduction %>
+                        </p>
+                    </div>
+                </div>
+            </div>
+           
+            <div id="commentsContainer"  class="card mb-3 mt-2" style="max-width: auto;">
+                <div class="container" style="padding-top: 5px;">
+                    <div class="d-flex justify-content-center align-items-center ">
+                        <b style="font-size: 18px;">Reviews</b>
+                    </div>
+                </div>
+                <div class="row g-0 d-flex justify-content-center align-items-center">
+                    <div class="col-md-12 ">
+                        <div class="card-body">
+                            <div id="editor">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class=" d-flex justify-content-end align-items-center"
+                    style="padding: 10px;padding-right:20px;margin-top:-10px">
+                    <button class="btn btn-primary" onclick="saveComment()">Comment</button>
+                </div>
+            </div>
+            <% comment.forEach(comment=> { %>
+                <div class="card mb-3 mt-2" style="max-width: auto;">
+                    <div class="row g-0 ">
+                        <div class="col-md-12">
+                            <div class="d-flex mt-2" style="margin-left: 20px;">
+                                <div>
+                                    <% if (comment.profile_image) { %>
+                                        <a href="/profile/<%= comment.c_user_id %>">
+                                            <img id="profilePicture" alt="Generic placeholder image"
+                                                class="img-account-profile rounded-circle mb-2 d-flex justify-items-center align-items-center"
+                                                style="height: 40px;  margin-bottom: 3%; margin-top: 3%;" <% const
+                                                imagePath=comment.profile_image.substring(6); %>
+                                            src="<%= imagePath %>" alt="">
+                                        </a>
+                                        <% } else { %>
+                                            <img id="profilePicture"
+                                                class="img-account-profile rounded-circle mb-2 justify-items-center align-items-center "
+                                                style="height: 40px;  margin-bottom: 3%; margin-top: 3%;"
+                                                src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                            <% } %>
+                                </div>
+                                <% const date=comment.review_timestamp %>
+                                    <% const newDate=new Date(date); %>
+                                        <% newDate.setHours(newDate.getHours() + 7); %>
+                                            <% const formattedDate=new Date(newDate).toISOString().substring(0,
+                                                19).replace('T', ' ' )%>
+                                                <div style="margin-left: 10px;">
+                                                    <div class="d-flex">
+                                                        <%- comment.user_name %> •
+                                                            <p> <%- comment.role %>•</p>
+                                                    </div>
+                                                    <p style="margin-top:-20px">โพสต์เมื่อ <%- formattedDate %></p>
+                                                </div>
+
+                            </div>
+                            <div class="d-flex" style="margin-left: 70px;margin-top:-10px">
+                                <div>
+                                    <i class="bi bi-chat-left-dots-fill" style="font-size: 16px;"></i>
+                                    <% if (comment.r_user_id === id || role==='ADMIN' ) { %>
+                                        <a href="" style="color: #ad0000;">
+                                            <i class="bi bi-trash-fill" data-comment-id="<%= comment.review_id %>"
+                                                style="font-size: 16px;" onclick="deleteComment(this)"></i>
+                                        </a>
+                                        <% } %>
+                                            <%- comment.review %>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+
+                    <script>
+                        var quill = new Quill('#editor', {
+                            theme: 'snow'
+                        });
+                    </script>
+                    <script>
+                        function saveComment() {
+                            var commentdata = quill.root.innerHTML; // ดึงข้อมูลจาก Quill editor
+                            // ตรวจสอบว่า commentdata ไม่ใช่สตริงว่าง
+                            if (commentdata.trim() !== "") {
+                                // ส่งข้อมูลไปยังเซิร์ฟเวอร์ (ใช้ Fetch API เป็นตัวอย่าง)
+                                fetch('/review_subject/<%= subject[0].s_id %>', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({ content: commentdata })
+
+                                })
+                                    .then(response => {
+                                        alert('ข้อความถูกโพสต์แล้ว');
+                                        // รีโหลดหน้า
+                                        window.location.reload();
+                                    })
+                                    .catch(error => {
+                                        // จัดการข้อผิดพลาด
+                                    });
+                            } else {
+                                // แสดงข้อความหรือทำการจัดการเมื่อ commentdata ว่างเปล่า
+                                console.log("กรุณากรอกความคิดเห็นก่อนบันทึก");
+                            }
+                        }
+                    </script>
+                    <script>
+                        function deleteComment(icon) {
+                            const comment_id = icon.getAttribute('data-comment-id');
+                            fetch(`/review_subject/${comment_id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                                .then(response => {
+                                    alert('ข้อความถูกลบแล้ว');
+                                    // รีโหลดหน้า
+                                    window.location.reload();
+                                })
+                                .catch(error => {
+                                    // จัดการข้อผิดพลาด
+                                });
+                        }
+                    </script>
+                    </div>
+                    <%- include('../home/footer') %>
+</body>
+<script>
+    // JavaScript ของหน้ารายละเอียดข่าว
+    document.addEventListener("DOMContentLoaded", function () {
+        // แก้ไขเพิ่ม ID ของไอคอนคอมเม้นเพื่อให้ JavaScript รู้ว่าต้องการไปยังข่าวนั้น
+        var newsCommentIcon = document.getElementById("newsCommentIcon");
+        if (newsCommentIcon) {
+            newsCommentIcon.addEventListener("click", function () {
+                goToComments();
+            });
+        }
+
+        // เช็คว่า URL มี #comments หรือไม่
+        if (window.location.hash === "#comments") {
+            // หา DOM ของส่วนคอมเม้นและเลื่อนหน้าจอไปยังส่วนนั้น
+            var commentsContainer = document.getElementById("commentsContainer");
+            if (commentsContainer) {
+                commentsContainer.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+    });
+
+    // JavaScript สำหรับเลื่อนหน้าจอไปยังส่วนของคอมเม้น
+    function goToComments() {
+        // เลื่อนหน้าจอไปยังส่วนคอมเม้น
+        var commentsContainer = document.getElementById("commentsContainer");
+        if (commentsContainer) {
+            commentsContainer.scrollIntoView({ behavior: 'smooth' });
+
+            // เปลี่ยน URL เพื่อให้มี #comments ใน URL
+            window.location.hash = "#comments";
+        }
+    }
+
+</script>
+
+</html>

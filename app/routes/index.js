@@ -94,6 +94,7 @@ const setting_news = require('./PathRouter/OfficialUserPath/Setting_news')
 router.use('/setting_news', setting_news);
 
 
+
 //admin part-------------------------------------------------------------
 
 const approve_news = require('./PathRouter/AdminPath/approve_news')
@@ -108,6 +109,11 @@ router.use('/manage_users',manage_users);
 const setting_page = require('./PathRouter/AdminPath/setting_page')
 router.use('/setting_page',setting_page)
 
+const subject = require('./PathRouter/AdminPath/subject')
+router.use('/subject', subject);
+
+const review_subject = require('./PathRouter/MiddelPath/review_subject')
+router.use('/review_subject', review_subject);
 
 module.exports = router;
 

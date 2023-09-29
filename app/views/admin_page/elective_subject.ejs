@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>setting tags</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    </head>
+    <style>
+        .form-control-tags {
+            border: 1px solid #596280;
+            -webkit-border-radius: 2px;
+            -moz-border-radius: 2px;
+            border-radius: 2px;
+            font-size: .825rem;
+            background: #1A233A;
+            color: #bcd0f7;
+        }
+
+        .small-column {
+            width: 80px;
+        }
+
+        #deleteIcon:hover {
+            cursor: pointer;
+            /* เปลี่ยนรูปร่างเป็นรูปมือ */
+            /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
+        }
+
+        #viewIcon:hover {
+            cursor: pointer;
+            /* เปลี่ยนรูปร่างเป็นรูปมือ */
+            /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
+        }
+    </style>
+
+    <body>
+        <%- include('../home/header') %>
+            <%- include('../home/nav') %>
+                <section class="h-100  gradient-custom-5 py-5 d-flex justify-content-center ">
+                    <div class="container">
+                        <div class="row gutters ">
+                            <div class="col-12 col-md-6 mt-2">
+                                <div class="card">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">No.</th>
+                                                <th scope="col">subject id</th>
+                                                <th scope="col">Subject name</th>
+                                                <th scope="col" class="small-column">view</th>
+                                                <th scope="col" class="small-column">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <% tags.forEach((tags , index)=> { %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%= index+1 %>
+                                                        </th>
+                                                        <td>
+                                                            <%= tags.subject_id %>
+                                                        </td>
+                                                        <td>
+                                                            <%= tags.subject_name %>
+                                                        </td>
+                                                        <td class="small-column "><a
+                                                                href="/tags/<%- tags.section_id  %>"
+                                                                style="color: rgb(33, 33, 33);"><i
+                                                                    class="bi bi-info-circle-fill " id="viewIcon"
+                                                                    style="margin-left: 9px;"></i></a></td>
+                                                        <td class="small-column"><i class="bi bi-archive-fill"
+                                                                id="deleteIcon" data-tags-id="<%= tags.s_id %>"
+                                                                style="margin-left: 13px;"
+                                                                onclick="deletetags(this)"></i>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="col-12 col-md-6 card d-flex mt-2 align-items-end">
+                                <div class="row gutters mt-2">
+                                    <div class="col-12 col-md-12">
+                                        <label>ADD STATUS SUBJECT</label>
+                                    </div>
+                                    <div class="col-12 col-md-8 d-flex justify-content-center mt-2">
+                                        <input list="europe-countries" class="form-control"
+                                            placeholder="Start typing..." name="tags_id" id="selected-tags">
+                                        <datalist id="europe-countries">
+                                        </datalist>
+                                    </div>
+                                    <div class="col-12 col-md-4 mt-2" style="padding-block-end: 10px;">
+                                        <button type="submit" class="btn btn-success" id="saveButton">SAVE</button>
+                                    </div>
+                                    <div class="col-12  mt-2 d-flex justify-content-between align-items-end"
+                                        style="padding-block-end: 10px;">
+                                        <a href="/subject/home_elective_subject">
+                                            <button type="submit" class="btn btn-warning" id="saveButton">BACK</button>
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="d-flex justify-content-end align-items-end mt-2" style="margin-right: -10px;">
+                            <a href="/subject/add_subject">
+                                <button type="submit" class="btn btn-info" id="saveButton">ADD
+                                    SUBJECT</button>
+                            </a>
+                        </div>
+                    </div>
+
+                </section>
+
+                <script>
+                    // เมื่อคลิกที่ปุ่ม "SAVE"
+                    const saveButton = document.getElementById('saveButton');
+                    saveButton.addEventListener('click', async function () {
+                        const selectedTag = document.getElementById('selected-tags').value;
+                        const selectedOption = datalist.querySelector(`[value="${selectedTag}"]`); // ค้นหาตัวเลือกที่มีค่าเท่ากับ selectedTag
+
+                        if (selectedOption) {
+                            const selectedId = selectedOption.getAttribute('data-id'); // ดึงค่า ID จาก attribute data-id
+                            console.log('คุณเลือก: ' + selectedTag + ' (ID: ' + selectedId + ')');
+
+                            try {
+                                // ส่งค่า ID ไปบันทึก
+                                const response = await fetch(`/subject/elective_subject/${selectedId}`, {
+                                    method: 'POST'
+                                    // ตรวจสอบว่าคุณต้องการใส่ headers, body หรืออื่น ๆ ตามที่เหมาะสม
+                                })
+                                    .then(response => {
+                                        alert('เพิ่มในรายวิชาที่เปิดสอนแล้ว');
+                                        // รีโหลดหน้า
+                                        window.location.reload();
+                                    })
+                                    .catch(error => {
+                                        // จัดการข้อผิดพลาด
+                                    });
+                            } catch (error) {
+                                console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+                            }
+                        } else {
+                            console.error('ไม่พบตัวเลือกที่เลือก');
+                        }
+                    });
+
+                </script>
+                <script>
+                    function deletetags(icon) {
+                        const tags_id = icon.getAttribute('data-tags-id');
+                        fetch(`/subject/close_elective_subject/${tags_id}`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                        })
+                            .then(response => {
+                                alert('นำออกจากรายวิชาที่เปิดสอนแล้ว');
+                                // รีโหลดหน้า
+                                window.location.reload();
+                            })
+                            .catch(error => {
+                                // จัดการข้อผิดพลาด
+                            });
+                    }
+                </script>
+
+                <script>
+                    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+                    const searchInput = document.getElementById('tags_search_input');
+                    const datalist = document.getElementById('europe-countries');
+
+                    const dataSelect_tags = document.getElementById('news_type_select');
+
+                    // ดึงข้อมูลจากฐานข้อมูล
+                    fetch('/subject/elective_subject') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+                        .then(response => response.json())
+                        .then(data => {
+                            // สร้างตัวเลือกใน datalist
+                            data.forEach(item => {
+                                const option = document.createElement('option');
+                                option.value = item.subject_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
+                                option.setAttribute('data-id', item.s_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
+                                datalist.appendChild(option);
+                            });
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+
+                    // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
+                    searchInput.addEventListener('input', function () {
+                        const searchText = searchInput.value.toLowerCase();
+                        const options = datalist.options;
+
+                        for (let i = 0; i < options.length; i++) {
+                            const option = options[i];
+                            const optionText = option.value.toLowerCase();
+
+                            // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
+                            if (optionText.includes(searchText)) {
+                                option.style.display = 'block'; // แสดงตัวเลือก
+                            } else {
+                                option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
+                            }
+                        }
+                    });
+                </script>
+                <%- include('../home/footer') %>
+    </body>
+
+    </html>
+</body>
+
+</html>

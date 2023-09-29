@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: false }));
 router.get('/', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM `save_section`LEFT JOIN section ON section.section_id = save_section.tags_id WHERE save_section.t_user_id = ? ;", [req.session.userID])
         .then(([rows]) => {
-            if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
+            if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
                 res.render('center/setting_save_tags', {
                     tags: rows,
                     header: req.session.header,
@@ -18,8 +18,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                 res.render('404page');
             }
             else {
-                req.session.isLoggedIn === true;
-                res.render('home/page1', {
+                res.render('404page', {
                     name: 'PLEASE LOGIN',
                     role: 'GUEST'
                 })
