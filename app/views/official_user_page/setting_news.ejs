@@ -13,6 +13,29 @@
     <!-- Add icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/splide.min.css">
+    <link rel="stylesheet" href="/stylesheets/card.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap 5 CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Data Table CSS -->
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+
 </head>
 
 <%- include('../home/header') %>
@@ -38,20 +61,20 @@
                     </div>
                     <div class="container px-2">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table id="example" class="table table-striped" style="width:100%">
                                 <thead>
-                                    <tr class="bg-light">
-
-                                        <th scope="col" width="15%">Title</th>
-                                        <th scope="col" width="35%">Welding</th>
-                                        <th scope="col" width="15%">Status</th>
-                                        <th scope="col" width="15%">Date Time</th>
-                                        <th scope="col" width="20%">Comment</th>
-                                        <th scope="col" width="20%">Approver</th>
-                                        <th scope="col" class="text-end" width="10%">Actions</th>
+                                    <tr>
+                                        <th data-field="Title">Title</th>
+                                        <th data-field="Welding">Welding</th>
+                                        <th data-field="Status">Status</th>
+                                        <th data-field="Date_Time">Date Time</th>
+                                        <th data-field="Comment">Comment</th>
+                                        <th data-field="Approver">Approver</th>
+                                        <th data-field="Actions">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <% console.log(settingnews) %>
                                     <% settingnews.forEach((settingnews)=> { %>
                                         <tr>
                                             <td><%- settingnews.title %></td>
@@ -74,24 +97,53 @@
                                             <td><%- settingnews.formattedDate %></td>
                                             <td><%- settingnews.response %></td>
                                             <td><%- settingnews.admin_id %></td>
-                                            <td class="text-end">
-                                                <a href="/details/<%= settingnews.news_id %>" class="view"><i
-                                                        class="material-icons" data-toggle="view"
-                                                        title="view">&#xe8ff;</i></a>
-                                                <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i
-                                                        class="material-icons" data-toggle="tooltip"
-                                                        title="Edit">&#xE254;</i></a>
-                                                <form action="/setting_news/delete_news/<%= settingnews.news_id %>"
-                                                    method="POST">
+                                            <td class="text-start" style="display: flex; justify-content: space-between; border: none;">
+                                                <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a>
+                                                <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                <form action="/setting_news/delete_news/<%= settingnews.news_id %>" method="POST">
                                                     <button type="submit" style="background: none; border: none;">
                                                         <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
                                                     </button>
                                                 </form>
                                             </td>
+                                            
                                         </tr>
                                         <% }); %>
                                 </tbody>
                             </table>
+                            <!-- jQuery -->
+                            <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+                            <!-- Data Table JS -->
+                            <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+                            <script
+                                src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+                            <script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+                            <script>
+                                $(document).ready(function () {
+                                    $('#example').DataTable({
+                                        //disable sorting on last column
+                                        "columnDefs": [
+                                            { "orderable": false, "targets": 6 }
+                                        ],
+                                        language: {
+                                            //customize pagination prev and next buttons: use arrows instead of words
+                                            'paginate': {
+                                                'previous': '<span class="fa fa-chevron-left"></span>',
+                                                'next': '<span class="fa fa-chevron-right"></span>'
+                                            },
+                                            //customize number of elements to be displayed
+                                            "lengthMenu": 'Display <select class="form-control input-sm">' +
+                                                '<option value="10">10</option>' +
+                                                '<option value="20">20</option>' +
+                                                '<option value="30">30</option>' +
+                                                '<option value="40">40</option>' +
+                                                '<option value="50">50</option>' +
+                                                '<option value="-1">All</option>' +
+                                                '</select> results'
+                                        }
+                                    })
+                                });
+                            </script>
                         </div>
                     </div>
                 </div>
@@ -110,6 +162,122 @@
         <script src="https://kit.fontawesome.com/4c6ee23687.js"></script>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+            .wrapper {
+                margin-top: 5vh;
+            }
+
+            .dataTables_filter {
+                float: right;
+            }
+
+            .table-hover>tbody>tr:hover {
+                background-color: #ccffff;
+            }
+
+            @media only screen and (min-width: 768px) {
+                .table {
+                    table-layout: fixed;
+                    max-width: 100% !important;
+                }
+            }
+
+            thead {
+                background: #ddd;
+            }
+
+            .table td:nth-child(2) {
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .highlight {
+                background: #ffff99;
+            }
+
+            @media only screen and (max-width: 767px) {
+
+                /* Force table to not be like tables anymore */
+                table,
+                thead,
+                tbody,
+                th,
+                td,
+                tr {
+                    display: block;
+                }
+
+                /* Hide table headers (but not display: none;, for accessibility) */
+                thead tr,
+                tfoot tr {
+                    position: absolute;
+                    top: -9999px;
+                    left: -9999px;
+                }
+
+                td {
+                    /* Behave  like a "row" */
+                    border: none;
+                    border-bottom: 1px solid #eee;
+                    position: relative;
+                    padding-left: 50% !important;
+                }
+
+                td:before {
+                    /* Now like a table header */
+                    position: absolute;
+                    /* Top/left values mimic padding */
+                    top: 6px;
+                    left: 6px;
+                    width: 45%;
+                    padding-right: 10px;
+                    white-space: nowrap;
+                }
+
+                .table td:nth-child(1) {
+                    background: #ccc;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    font-weight: bold;
+                }
+
+                /*
+  Label the data
+  */
+                td:nth-of-type(1):before {
+                    content: "Title";
+                }
+
+                td:nth-of-type(2):before {
+                    content: "Welding";
+                }
+
+                td:nth-of-type(3):before {
+                    content: "Status";
+                }
+
+                td:nth-of-type(4):before {
+                    content: "Date_Time";
+                }
+
+                td:nth-of-type(5):before {
+                    content: "Comment";
+                }
+
+                td:nth-of-type(6):before {
+                    content: "Approver";
+                }
+
+                td:nth-of-type(7):before {
+                    content: "Actions";
+                }
+
+                .dataTables_length {
+                    display: none;
+                }
+
+            }
 
             .green {
 
@@ -146,7 +314,6 @@
                 text-align: left;
                 padding: 8px;
             }
-
         </style>
 
 </html>
