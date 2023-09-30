@@ -9,7 +9,7 @@ router.use(express.urlencoded({ extended: false }));
 
 router.get('/:section_id', ifNotLoggedin, (req, res, next) => {
     const section_id = req.params.section_id;
-    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id WHERE section.section_id = ? ORDER BY news.news_id DESC", [section_id])
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE section.section_id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC", [section_id])
         .then(([rows]) => {
             if (rows) {
                 dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
