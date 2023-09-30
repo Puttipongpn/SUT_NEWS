@@ -183,9 +183,10 @@ router.get('/subject_id_search/:id', (req, res) => {
 
 router.post('/', ifNotLoggedin, (req, res, next) => {
     data = req.body
+    data.subject_status_id = 2;
     dbConnection.query("INSERT INTO `subject` SET ?", [data])
         .then(result => {
-            res.send('<script>alert("บันทึกสำเร็จ"); window.location="/subject/elective";</script>');
+            res.send('<script>alert("บันทึกสำเร็จ"); window.location="/subject/add_subject";</script>');
            // res.json({ message: 'บันทึกสำเร็จ' });
         })
         .catch(err => {
