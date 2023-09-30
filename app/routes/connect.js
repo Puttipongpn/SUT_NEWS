@@ -3,7 +3,7 @@ const dbConnection = mysql.createPool({
     host     : 'localhost', // MYSQL HOST NAME
     user     : 'root', // MYSQL USERNAME
     password : '', // MYSQL PASSWORD
-    database : 'new_schema' // MYSQL DB NAME
+    database : 'sut_news' // MYSQL DB NAME
 }).promise();
 
 module.exports = dbConnection;

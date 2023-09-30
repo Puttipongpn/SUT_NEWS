@@ -10,22 +10,31 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
     <!-- Bootstrap 5 CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
-<!-- Data Table CSS -->
-<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
-<!-- Font Awesome CSS -->
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <!-- Data Table CSS -->
+    <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+    <!-- Font Awesome CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
 </head>
 <style>
     #DeleteIcon:hover {
-        cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+        cursor: pointer;
+        /* เปลี่ยนรูปร่างเป็นรูปมือ */
         /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
     }
+
     /* CSS เพื่อปรับขนาดของคอลัมน์ "ลบ" */
-.small-column {
-    width: 50px; /* ปรับขนาดตามที่คุณต้องการ */
-    /* อื่น ๆ ที่คุณต้องการปรับแต่ง */
-}
+    .small-column {
+        width: 50px;
+        /* ปรับขนาดตามที่คุณต้องการ */
+        /* อื่น ๆ ที่คุณต้องการปรับแต่ง */
+    }
+
+    .small-columns {
+        width: 70px;
+        /* ปรับขนาดตามที่คุณต้องการ */
+        /* อื่น ๆ ที่คุณต้องการปรับแต่ง */
+    }
 
     .card-explain {
         background: #ffffff;
@@ -196,90 +205,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-md-12" style="margin-top: -40px;">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="row gutters">
-                                    <div class="col-12 mt-4">
-                                        <table id="example" class="table table-striped" style="width:100%">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col">No.</th>
-                                                    <th scope="col">Suject ID</th>
-                                                    <th scope="col">Suject name</th>
-                                                    <th scope="col">Suject Type</th>
-                                                    <th scope="col" class="small-column">Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <% tags.forEach((subject,index)=> { %>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <%= index+1 %>
-                                                        </th>
-                                                        <td>
-                                                            <%= subject.subject_id %>
-                                                        </td>
-                                                        <td>
-                                                            <%= subject.subject_name %>
-                                                        </td>
-                                                        <td>
-                                                            <%= subject.subject_type_name %>
-                                                        </td>
-                                                        <td class="small-column "><i class="bi bi-archive-fill"
-                                                                id="DeleteIcon" dalete-new-id="<%= subject.s_id %>"
-                                                                onclick="deletenewid(this)"
-                                                                style="margin-left: 2px; color:#ff0b0b"></i>
-                                                        </td>
-                                                    </tr>
-                                                    <% }) %>
-                                            </tbody>
-
-                                        </table>
-                                        <!-- jQuery -->
-                                        <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
-                                        <!-- Data Table JS -->
-                                        <script
-                                            src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
-                                        <script
-                                            src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
-                                        <script
-                                            src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
-                                        <script>
-                                            $(document).ready(function () {
-                                                $('#example').DataTable({
-                                                    //disable sorting on last column
-                                                    "columnDefs": [
-                                                        { "orderable": false, "targets": 4 }
-                                                    ],
-                                                    language: {
-                                                        //customize pagination prev and next buttons: use arrows instead of words
-                                                        'paginate': {
-                                                            'previous': '<span class="fa fa-chevron-left"></span>',
-                                                            'next': '<span class="fa fa-chevron-right"></span>'
-                                                        },
-                                                        //customize number of elements to be displayed
-                                                        "lengthMenu": 'Display <select class="form-control input-sm">' +
-                                                            '<option value="5">5</option>' +
-                                                            '<option value="10">10</option>' +
-                                                            '<option value="15">15</option>' +
-                                                            '<option value="20">20</option>' +
-                                                            '<option value="25">25</option>' +
-                                                            '<option value="-1">All</option>' +
-                                                            '</select> results'
-                                                    }
-                                                })
-                                            });
-                                        </script>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
 
-                    <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
-                        <div class=" row gutters">
+
+                    <div class=" row gutters" style="margin-top: -40px;padding-block-end: 20px;">
+                        <div class="col-12 col-lg-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="col-12">
@@ -298,6 +228,92 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card" style="margin-top: -20px;">
+                        <div class="card-body">
+                            <div class="row gutters">
+                                <div class="col-12 mt-4">
+                                    <table id="example" class="table table-striped" style="width:100%">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col" class="small-column">No.</th>
+                                                <th scope="col" class="small-columns">Suject ID</th>
+                                                <th scope="col">Suject name</th>
+                                                <th scope="col" style="width: 150px;">Suject Type</th>
+                                                <th scope="col" style="width: 50px;">View</th>
+                                                <th scope="col" class="small-column">Delete</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% tags.forEach((subject,index)=> { %>
+                                                <tr>
+                                                    <th scope="row" class="small-column">
+                                                        <%= index+1 %>
+                                                    </th>
+                                                    <td class="small-columns">
+                                                        <%= subject.subject_id %>
+                                                    </td>
+                                                    <td>
+                                                        <%= subject.subject_name %>
+                                                    </td>
+                                                    <td style="width: 150px;">
+                                                        <%= subject.subject_type_name %>
+                                                    </td>
+                                                    <td class="small-column "><a
+                                                                href="/subject/subject_details/<%- subject.s_id  %>"
+                                                                style="color: rgb(33, 33, 33);"><i
+                                                                    class="bi bi-info-circle-fill " id="viewIcon"
+                                                                    style="margin-left: 9px;"></i></a></td>
+                                                    <td class="small-column "><i class="bi bi-archive-fill"
+                                                            id="DeleteIcon" dalete-new-id="<%= subject.s_id %>"
+                                                            onclick="deletenewid(this)"
+                                                            style="margin-left: 2px; color:#ff0b0b"></i>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+
+                                    </table>
+                                    <!-- jQuery -->
+                                    <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+                                    <!-- Data Table JS -->
+                                    <script
+                                        src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+                                    <script
+                                        src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+                                    <script
+                                        src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            $('#example').DataTable({
+                                                //disable sorting on last column
+                                                "columnDefs": [
+                                                    { "orderable": false, "targets": 4,},
+                                                    { "orderable": false, "targets": 5,}
+                                                ],
+                                                
+                                                language: {
+                                                    //customize pagination prev and next buttons: use arrows instead of words
+                                                    'paginate': {
+                                                        'previous': '<span class="fa fa-chevron-left"></span>',
+                                                        'next': '<span class="fa fa-chevron-right"></span>'
+                                                    },
+                                                    //customize number of elements to be displayed
+                                                    "lengthMenu": 'Display <select class="form-control input-sm">' +
+                                                        '<option value="5">5</option>' +
+                                                        '<option value="10">10</option>' +
+                                                        '<option value="15">15</option>' +
+                                                        '<option value="20">20</option>' +
+                                                        '<option value="25">25</option>' +
+                                                        '<option value="-1">All</option>' +
+                                                        '</select> results'
+                                                }
+                                            })
+                                        });
+                                    </script>
                                 </div>
                             </div>
                         </div>
