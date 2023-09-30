@@ -122,7 +122,7 @@ router.get('/add_subject', ifNotLoggedin, (req, res, next) => {
         dbConnection.execute("SELECT * FROM `subject` LEFT JOIN subject_type ON subject.subject_type_id = subject_type.s_type_id ORDER BY subject.s_id DESC;")
             .then(([rows]) => {
                 if (req.session.role === "ADMIN") {
-                    res.render('admin_page/elective_setting', {
+                    res.render('admin_page/subject_setting', {
                         tags: rows,
                         header: req.session.header
                     });
@@ -208,6 +208,65 @@ router.delete('/:id', ifNotLoggedin, (req, res, next) => {
         .catch(err => {
             console.log(err);
             res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบ' });
+        });
+});
+//-----------------------------------------------------------------------------------------------
+
+router.get('/home_general_subject', ifNotLoggedin, (req, res, next) => {
+    try {
+        dbConnection.execute("SELECT * FROM `subject` WHERE subject_type_id = 2 ORDER BY subject_status_id = 1 DESC;")
+            .then(([rows]) => {
+                if (rows) {
+                    res.render('center/general_subject', {
+                        tags: rows,
+                        role: req.session.role,
+                        header: req.session.header
+                    });
+                } else {
+                    res.render('404page', {
+                        name: 'PLEASE LOGIN',
+                        role: 'GUEST'
+                    })
+                }
+            });
+    } catch (error) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
+router.get('/general', ifNotLoggedin, (req, res, next) => {
+    try {
+        dbConnection.execute("SELECT * FROM `subject` WHERE subject_type_id = 2 and subject_status_id = 1;")
+            .then(([rows]) => {
+                if (req.session.role === "ADMIN") {
+                    res.render('admin_page/general_subject', {
+                        tags: rows,
+                        header: req.session.header
+                    });
+                } else {
+                    res.render('404page', {
+                        name: 'PLEASE LOGIN',
+                        role: 'GUEST'
+                    })
+                }
+            });
+    } catch (error) {
+        console.error(err);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+router.get('/general_subject', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    dbConnection.execute("SELECT * FROM `subject` WHERE subject_type_id = 2 AND subject_status_id = 2")
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
         });
 });
 

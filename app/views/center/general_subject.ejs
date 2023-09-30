@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elective Subject</title>
+    <style>
+        .card {
+            width: 250px;
+            /* ปรับขนาดของการ์ดตามที่ต้องการ */
+            border: 1px solid #ccc;
+            /* เส้นขอบ */
+            border-radius: 5px;
+            /* ขอบมนเวียน */
+            overflow: hidden;
+            /* ป้องกันเนื้อหาที่เกินการ์ด */
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            /* เงาขอบการ์ด */
+        }
+
+        .card-text {
+            position: absolute;
+            width: 200px;
+            height: auto;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            /* สีข้อความทับ */
+            text-align: center;
+        }
+
+        .card-text p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+
+            <div class="container">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="">
+                        <h1 style="margin-top: 2%; margin-bottom: 2%;"><b>รายวิชาศึกษาทั่วไป</b></h1>
+                    </div>
+                </div>
+                <% if (role == "ADMIN") { %>
+                 <div style="margin-left: 90%; margin-top: 1%; margin-bottom: 2%;"><a href="/subject/general">
+                        <button type="button" class="btn btn-info">เพิ่มรายวิชา</button>
+                    </a>
+                </div>
+                <% } %>
+                
+                <div class="row" id="cards_landscape_wrap-2">
+                    <div class="col-lg-12 my-2">
+                        <div class="row mb-5">
+                            <% tags.forEach(subject=> { %>
+                                <div class="col-lg-3 col-md-6 mb-3">
+                                    <div class="card h-100"
+                                        style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                                        <a href="/subject/subject_details/<%= subject.s_id %>">
+                                            <div class="card"
+                                                style="background-color: rgb(253, 253, 253); position: relative;">
+                                                <img src="https://e0.pxfuel.com/wallpapers/589/481/desktop-wallpaper-dark-orange.jpg"
+                                                    alt="Your Image" style="width: 100%;">
+                                                <div class="card-text">
+                                                    <h3><b>
+                                                            <%= subject.subject_id %>
+                                                        </b></h3><br>
+                                                    <h5>
+                                                        <%= subject.subject_name %>
+                                                    </h5>
+                                                    <p>by <%= subject.subject_teacher %>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <div class="card-body-profile">
+                                            <h5 class="card-title mt-2" style="margin-left: 2%;">
+                                                <% if (subject.subject_status_id==1) { %>
+                                                    <span
+                                                        class="badge badge-success rounded-pill d-inline">เปิดสอน</span>
+                                                    <% } else if (subject.subject_status_id==2) { %>
+                                                        <span
+                                                            class="badge badge-danger rounded-pill d-inline">ยังไม่เปิดสอน</span>
+                                                        <% } else { %>
+                                                            <p>ยังไม่มีรายละเอียด</p>
+                                                            <% }%>
+
+                                            </h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%- include('../home/footer') %>
+</body>
+
+</html>
