@@ -1,147 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History Approve</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
   <link rel="stylesheet" href="/stylesheets/splide.min.css">
   <link rel="stylesheet" href="/stylesheets/card.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-  <link href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" rel="stylesheet">
-  <link href="http://fonts.googleapis.com/css?family=Roboto:400,700,300" rel="stylesheet" type="text/css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <style>
-    .container {
-      background-color: rgb(167, 167, 167);
-      border-radius: 3%;
-      margin-top: 4%;
-    }
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
 
-    .fresh-table {
-      margin-top: 2%;
-    }
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+  <!-- Data Table CSS -->
+  <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+  <!-- Font Awesome CSS -->
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
 
-    .float-right {
-      padding: 1%;
-    }
 
-    .page-list {
-      margin-top: 5%;
-    }
-  </style>
-    <title>Document</title>
 </head>
+
 <body>
-    <%- include('../home/header') %>
+  <%- include('../home/header') %>
     <%- include('../home/nav') %>
-    
-      <div class="container">
-        <h2 style="text-align: center; margin-top: 5%;"><b>History Approve</b></h2>
-        <div class="fresh-table full-color-orange">
-            <a class="btn btn-primary" href="/approve" role="button">Approve</a>
-          <div class="table-responsive">
-            <table id="fresh-table" class="table">
-              <thead style="background-color: rgb(0, 0, 0);  color: #ffffff;">
-                <th data-field="id">ID</th>
-                <th data-field="newsid">News_ID</th>
-                <th data-field="title">Title</th>
-                <th data-field="welding">Welding</th>
-                <th data-field="username">Writer</th>
-                <th data-field="date">Post_Date</th>
-                <th data-field="view" data-formatter="operateFormatter" data-events="operateEvents">View</th>
-                <th data-field="decide" data-formatter="Formatter" data-events="operateEvents">Decide</th>
-              </thead>
-              <tbody style="background-color: rgb(235, 235, 235);">
-                <% index=0 %>
-                  <% approve.forEach((approve,index)=> { %>
-                    <tr>
-                      <td> <%- index+1 %></td>
-                      <td><%- approve.news_id %></td>
-                      <td><%- approve.title %></td>
-                      <td><%- approve.welding_para %></td>
-                      <td><%- approve.user_name %></td>
-                      <td><%- approve.formattedDate %></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                    <% }) %>
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div class="container mt-3">
+        <h2 style="text-align: center; margin-top: 5%; margin-bottom: 3%;"><b>History Approve</b></h2>
+        <a href="/approve"><button type="button" class="btn btn-primary mb-3">Approve</button></a>
+        <div class="table-responsive">
+        <table id="example" class="table table-striped" style="width:100%">
+          <thead>
+            <tr>
+              <th data-field="id">ID</th>
+              <th data-field="newsid">News_ID</th>
+              <th data-field="title">Title</th>
+              <th data-field="welding">Welding</th>
+              <th data-field="writer">Writer</th>
+              <th data-field="date">Post_Date</th>
+              <th data-field="view" data-formatter="operateFormatter" data-events="operateEvents">View
+              </th>
+              <th data-field="decide" data-formatter="Formatter" data-events="operateEvents">Decide</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% index=0 %>
+              <% approve.forEach((approve,index)=> { %>
+                <tr>
+                  <td> <%- index+1 %></td>
+                  <td><%- approve.news_id %></td>
+                  <td><%- approve.title %></td>
+                  <td><%- approve.welding_para %></td>
+                  <td><%- approve.user_name %></td>
+                  <td><%- approve.formattedDate %></td>
+                  <td><a href="/details/<%= approve.news_id %>"><i class="bi bi-arrow-up-circle fa-xl" style="margin-left: 25%;"></i></a></td>
+                  <td><a href="/approve/<%= approve.news_id %>"><i class="bi bi-plus-circle fa-xl" style="margin-left: 35%;"></i></a></td>
+                </tr>
+                <% }) %>
+          </tbody>
+        </table>
       </div>
+      </div>
+      <!-- jQuery -->
+      <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+      <!-- Data Table JS -->
+      <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+      <script src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+      <script src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+      <script>
+        $(document).ready(function () {
+          $('#example').DataTable({
+            //disable sorting on last column
+            "columnDefs": [
+              { "orderable": false, "targets": 5 }
+            ],
+            language: {
+              //customize pagination prev and next buttons: use arrows instead of words
+              'paginate': {
+                'previous': '<span class="fa fa-chevron-left"></span>',
+                'next': '<span class="fa fa-chevron-right"></span>'
+              },
+              //customize number of elements to be displayed
+              "lengthMenu": 'Display <select class="form-control input-sm">' +
+                '<option value="10">10</option>' +
+                '<option value="20">20</option>' +
+                '<option value="30">30</option>' +
+                '<option value="40">40</option>' +
+                '<option value="50">50</option>' +
+                '<option value="-1">All</option>' +
+                '</select> results'
+            }
+          })
+        });
+      </script>
+
       <%- include('../home/footer') %>
+
 </body>
+<style>
+  .wrapper {
+    margin-top: 5vh;
+  }
 
-<!-- Javascript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table/dist/bootstrap-table.min.js"></script>
+  .dataTables_filter {
+    float: right;
+  }
 
-<script type="text/javascript">
-  var $table = $('#fresh-table')
-  var $alertBtn = $('#alertBtn')
+  .table-hover>tbody>tr:hover {
+    background-color: #ccffff;
+  }
 
-  window.operateEvents = {
-    'click .like': function (e, value, row, index) {
-      alert('You click like icon, row: ' + JSON.stringify(row))
-      console.log(value, row, index)
-    },
-    'click .view': function (e, value, row, index) {
-      const newsId = row.newsid;
-      window.location.href = `/details/${newsId}`;
-    },
-    'click .decide': function (e, value, row, index) {
-      const newsId = row.newsid;
-      window.location.href = `/approve/${newsId}`;
+  @media only screen and (min-width: 768px) {
+    .table {
+      table-layout: fixed;
+      max-width: 100% !important;
     }
   }
 
-  function operateFormatter(value, row, index) {
-    return [
-      '<a rel="tooltip" title="View" class="table-action view" href="javascript:void(0)" title="View">',
-      '<i class="bi bi-arrow-up-right-circle"style="font-size: 30px";></i>',
-      '</a>',
-      '<a rel="tooltip" title="Decide" class="table-action decide" href="javascript:void(0)" title="Decide">',
-      '',
-      '</a>'
-    ].join('')
-  }
-  function Formatter(value, row, index) {
-    return [
-      '<a rel="tooltip" title="Decide" class="table-action decide" href="javascript:void(0)" title="Decide">',
-      '<i class="bi bi-arrow-up-circle"style="font-size: 30px";></i>',
-      '</a>'
-    ].join('')
+  thead {
+    background: #ddd;
   }
 
-  $(function () {
-    $table.bootstrapTable({
-      classes: 'table table-hover table-striped',
-      toolbar: '.toolbar',
+  .table td:nth-child(2) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
-      search: true,
-      showRefresh: true,
-      showToggle: true,
-      showColumns: true,
-      pagination: true,
-      striped: true,
-      sortable: true,
-      pageSize: 8,
-      pageList: [8, 10, 25, 50, 100],
+  .highlight {
+    background: #ffff99;
+  }
 
-      formatShowingRows: function (pageFrom, pageTo, totalRows) {
-        return ''
-      },
-      formatRecordsPerPage: function (pageNumber) {
-        return pageNumber + ' rows visible'
-      }
-    })
+  @media only screen and (max-width: 767px) {
 
-    $alertBtn.click(function () {
-      alert('You pressed on Alert')
-    })
-  })
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+    }
 
-</script>
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr,
+    tfoot tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50% !important;
+    }
+
+    td:before {
+      /* Now like a table header */
+      position: absolute;
+      /* Top/left values mimic padding */
+      top: 6px;
+      left: 6px;
+      width: 45%;
+      padding-right: 10px;
+      white-space: nowrap;
+    }
+
+    .table td:nth-child(1) {
+      background: #ccc;
+      height: 100%;
+      top: 0;
+      left: 0;
+      font-weight: bold;
+    }
+
+    /*
+  Label the data
+  */
+    td:nth-of-type(1):before {
+      content: "Name";
+    }
+
+    td:nth-of-type(2):before {
+      content: "Position";
+    }
+
+    td:nth-of-type(3):before {
+      content: "Office";
+    }
+
+    td:nth-of-type(4):before {
+      content: "Age";
+    }
+
+    td:nth-of-type(5):before {
+      content: "Start date";
+    }
+
+    td:nth-of-type(6):before {
+      content: "Salary";
+    }
+
+    .dataTables_length {
+      display: none;
+    }
+  
+  }
+</style>
+
 </html>

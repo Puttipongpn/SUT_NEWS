@@ -43,57 +43,35 @@
                                 <li class="nav-item">
                                     <a class="nav-link active"
                                         style="color: black; margin-bottom: 13%; margin-top: 5%;">
-                                        <i class="bi bi-circle-fill"
-                                            style="color: green; margin-right: 5px;"></i><b>กำลังติดตาม</b>
+                                       <b>การติดตาม</b>
                                     </a>
                                 </li>
-                                <% subHome.forEach(subscribe=> { %>
-                                    <li class="nav-item">
-                                        <% const Profile_image=subscribe.profile_image.substring(7) %>
-                                            <a href="/profile/<%= subscribe.sub_user_id %>">
-                                                <img class="img-account-profile rounded-circle mb-2"
-                                                    src="<%- Profile_image %>" width="25" style="margin-right: 10px">
-                                                <%= subscribe.name %>
-                                            </a>
+                                <% subHome.forEach((subscribe, index) => { %>
+                                    <li class="nav-item" id="subscribe-item-<%= index %>" <% if (index > 5) { %>style="display: none;"<% } %>>
+                                        <% const Profile_image = subscribe.profile_image.substring(7) %>
+                                        <a href="/profile/<%= subscribe.sub_user_id %>">
+                                            <img class="img-account-profile rounded-circle mb-2"
+                                                src="<%- Profile_image %>" width="25" style="margin-right: 10px">
+                                            <%= subscribe.name %>
+                                        </a>
                                     </li>
-                                    <% }) %>
-                                        <li class="nav-item" id="show-more-link">
-                                            <a class="nav-link" href="#" style="color: rgb(10, 0, 203);">
-                                                ดูเพิ่มเติม...
-                                            </a>
-                                        </li>
-
+                                <% }) %>
+                                <li class="nav-item" id="show-more-link">
+                                    <a class="nav-link" href="#" style="color: rgb(0, 0, 0);" onclick="showMoreSubscriptions()">
+                                        <i class="bi bi-chevron-down me-2"></i> แสดงเพิ่มเติม...
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </nav>
                     <script>
-                        // รายการทั้งหมด
-                        const allItems = document.querySelectorAll('.nav-item');
-
-                        // จำนวนรายการที่ต้องการแสดงเริ่มต้น
-                        const initialItemsToShow = 3;
-
-                        // รายการที่ควรแสดงเริ่มต้น
-                        const itemsToShow = Array.from(allItems).slice(0, initialItemsToShow);
-
-                        // รายการที่ยังไม่ได้แสดง
-                        const itemsToHide = Array.from(allItems).slice(initialItemsToShow);
-
-                        // ลิงค์ "ดูเพิ่มเติม"
-                        const showMoreLink = document.getElementById('show-more-link');
-
-                        // ฟังก์ชันสำหรับแสดงรายการที่ซ่อนไว้
-                        function showHiddenItems() {
-                            itemsToHide.forEach(item => {
-                                item.classList.remove('hidden');
-                            });
-                            showMoreLink.style.display = 'none'; // ซ่อนลิงค์ "ดูเพิ่มเติม"
+                        function showMoreSubscriptions() {
+                            // แสดง subscribe index = 1 และซ่อนรายการอื่นๆ
+                            document.getElementById('subscribe-item-1').style.display = 'block';
+                            document.getElementById('show-more-link').style.display = 'none';
                         }
-
-                        // เพิ่มการฟังก์ชันสำหรับการคลิกลิงค์ "ดูเพิ่มเติม"
-                        showMoreLink.addEventListener('click', showHiddenItems);
-
                     </script>
+                    
                     <!-- End Sidebar -->
 
                     <!-- Main Content -->
