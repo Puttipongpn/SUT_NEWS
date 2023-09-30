@@ -119,7 +119,7 @@ router.post('/close_elective_subject/:id', ifNotLoggedin, (req, res, next) => {
 
 router.get('/add_subject', ifNotLoggedin, (req, res, next) => {
     try {
-        dbConnection.execute("SELECT * FROM `subject`;")
+        dbConnection.execute("SELECT * FROM `subject` LEFT JOIN subject_type ON subject.subject_type_id = subject_type.s_type_id ORDER BY subject.s_id DESC;")
             .then(([rows]) => {
                 if (req.session.role === "ADMIN") {
                     res.render('admin_page/elective_setting', {
@@ -152,11 +152,40 @@ router.get('/subject_type', (req, res) => {
         });
 });
 
+router.get('/subject_type_search/:id', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูลตามคำค้นหาหรือประเภทวิชาที่เลือก
+    const searchSubjectId = req.params.id;
+    
+    dbConnection.execute("SELECT * FROM `subject` LEFT JOIN subject_type ON subject.subject_type_id = subject_type.s_type_id WHERE subject_type_id LIKE ?",[searchSubjectId])
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
+
+router.get('/subject_id_search/:id', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูลตามคำค้นหาหรือประเภทวิชาที่เลือก
+    const searchSubjectId = req.params.id;
+    
+    dbConnection.execute("SELECT * FROM `subject` LEFT JOIN subject_type ON subject.subject_type_id = subject_type.s_type_id WHERE subject_id LIKE ?",[searchSubjectId])
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
+});
+
+
 router.post('/', ifNotLoggedin, (req, res, next) => {
     data = req.body
     dbConnection.query("INSERT INTO `subject` SET ?", [data])
         .then(result => {
-            res.send('<script>alert("บันทึกสำเร็จ"); window.location="/elective";</script>');
+            res.send('<script>alert("บันทึกสำเร็จ"); window.location="/subject/elective";</script>');
            // res.json({ message: 'บันทึกสำเร็จ' });
         })
         .catch(err => {
@@ -169,9 +198,9 @@ router.post('/', ifNotLoggedin, (req, res, next) => {
 // สร้างเส้นทาง DELETE สำหรับลบ section
 router.delete('/:id', ifNotLoggedin, (req, res, next) => {
 
-    const tags_id = req.params.id // แก้ไขตรงนี้
+    const s_id = req.params.id // แก้ไขตรงนี้
 
-    dbConnection.query("DELETE FROM `save_section` WHERE save_tags_id = ?", [tags_id])
+    dbConnection.query("DELETE FROM `subject` WHERE s_id = ?", [s_id])
         .then(result => {
             res.json({ message: 'ลบสำเร็จ' });
         })

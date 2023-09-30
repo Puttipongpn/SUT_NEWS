@@ -9,8 +9,24 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <script src="https://cdn.ckeditor.com/ckeditor5/39.0.0/super-build/ckeditor.js"></script>
     <link rel="stylesheet" href="/stylesheets/style.css">
+    <!-- Bootstrap 5 CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<!-- Data Table CSS -->
+<link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
+<!-- Font Awesome CSS -->
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
 </head>
 <style>
+    #DeleteIcon:hover {
+        cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+        /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
+    }
+    /* CSS เพื่อปรับขนาดของคอลัมน์ "ลบ" */
+.small-column {
+    width: 50px; /* ปรับขนาดตามที่คุณต้องการ */
+    /* อื่น ๆ ที่คุณต้องการปรับแต่ง */
+}
+
     .card-explain {
         background: #ffffff;
         -webkit-border-radius: 5px;
@@ -21,6 +37,109 @@
         margin-top: 40px;
         height: inherit;
     }
+
+    .wrapper {
+        margin-top: 5vh;
+    }
+
+    .dataTables_filter {
+        float: right;
+    }
+
+    .table-hover>tbody>tr:hover {
+        background-color: #ccffff;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .table {
+            table-layout: fixed;
+            max-width: 100% !important;
+        }
+    }
+
+    thead {
+        background: #ddd;
+    }
+
+    .table td:nth-child(2) {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .highlight {
+        background: #ffff99;
+    }
+
+    @media only screen and (max-width: 767px) {
+
+        /* Force table to not be like tables anymore */
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+
+        /* Hide table headers (but not display: none;, for accessibility) */
+        thead tr,
+        tfoot tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        td {
+            /* Behave  like a "row" */
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50% !important;
+        }
+
+        td:before {
+            /* Now like a table header */
+            position: absolute;
+            /* Top/left values mimic padding */
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+        }
+
+        .table td:nth-child(1) {
+            background: #ccc;
+            height: 100%;
+            top: 0;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /*
+        Label the data
+        */
+        td:nth-of-type(1):before {
+            content: "No.";
+        }
+
+        td:nth-of-type(2):before {
+            content: "Subject id";
+        }
+
+        td:nth-of-type(3):before {
+            content: "Subject name";
+        }
+
+        td:nth-of-type(4):before {
+            content: "Subjecrt type";
+        }
+
+        td:nth-of-type(5):before {
+            content: "Delete";
+        }
+    }
 </style>
 
 <body>
@@ -29,43 +148,7 @@
             <form method="post" action="/subject" id="news" class="">
                 <div class="container">
                     <div class=" row gutters">
-                        <div class="col-12 col-lg-5">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="account-settings">
-                                        <div class="user-profile">
-                                            <table class="table table-hover">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Suject ID</th>
-                                                        <th scope="col">Suject name</th>
-                                                        <th scope="col" class="small-column">Delete</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <% tags.forEach((subject,index)=> { %>
-                                                        <tr>
-                                                            <th scope="row">
-                                                                <%= index+1 %>
-                                                            </th>
-                                                            <td>
-                                                                <%= subject.subject_name %>
-                                                            </td>
-                                                            <td class="small-column"><i class="bi bi-archive-fill"
-                                                                    id="deleteIcon"
-                                                                    style="margin-left: 2px; color:#ff0b0b"></i>
-                                                            </td>
-                                                        </tr>
-                                                        <% }) %>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-7">
+                        <div class="col-12 col-lg-12">
                             <div class="card" style="padding-block-end: 5.5%;">
                                 <div class="card-body">
                                     <div class="row gutters">
@@ -113,6 +196,88 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-12 col-md-12" style="margin-top: -40px;">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row gutters">
+                                    <div class="col-12 mt-4">
+                                        <table id="example" class="table table-striped" style="width:100%">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">No.</th>
+                                                    <th scope="col">Suject ID</th>
+                                                    <th scope="col">Suject name</th>
+                                                    <th scope="col">Suject Type</th>
+                                                    <th scope="col" class="small-column">Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <% tags.forEach((subject,index)=> { %>
+                                                    <tr>
+                                                        <th scope="row">
+                                                            <%= index+1 %>
+                                                        </th>
+                                                        <td>
+                                                            <%= subject.subject_id %>
+                                                        </td>
+                                                        <td>
+                                                            <%= subject.subject_name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= subject.subject_type_name %>
+                                                        </td>
+                                                        <td class="small-column "><i class="bi bi-archive-fill"
+                                                                id="DeleteIcon" dalete-new-id="<%= subject.s_id %>"
+                                                                onclick="deletenewid(this)"
+                                                                style="margin-left: 2px; color:#ff0b0b"></i>
+                                                        </td>
+                                                    </tr>
+                                                    <% }) %>
+                                            </tbody>
+
+                                        </table>
+                                        <!-- jQuery -->
+                                        <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+                                        <!-- Data Table JS -->
+                                        <script
+                                            src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+                                        <script
+                                            src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+                                        <script
+                                            src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+                                        <script>
+                                            $(document).ready(function () {
+                                                $('#example').DataTable({
+                                                    //disable sorting on last column
+                                                    "columnDefs": [
+                                                        { "orderable": false, "targets": 4 }
+                                                    ],
+                                                    language: {
+                                                        //customize pagination prev and next buttons: use arrows instead of words
+                                                        'paginate': {
+                                                            'previous': '<span class="fa fa-chevron-left"></span>',
+                                                            'next': '<span class="fa fa-chevron-right"></span>'
+                                                        },
+                                                        //customize number of elements to be displayed
+                                                        "lengthMenu": 'Display <select class="form-control input-sm">' +
+                                                            '<option value="5">5</option>' +
+                                                            '<option value="10">10</option>' +
+                                                            '<option value="15">15</option>' +
+                                                            '<option value="20">20</option>' +
+                                                            '<option value="25">25</option>' +
+                                                            '<option value="-1">All</option>' +
+                                                            '</select> results'
+                                                    }
+                                                })
+                                            });
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
                         <div class=" row gutters">
                             <div class="card">
@@ -217,7 +382,25 @@
                 </style>
 
 </body>
-
+<script>
+    function deletenewid(icon) {
+        const s_id = icon.getAttribute('dalete-new-id');
+        fetch(`/subject/${s_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                alert('รายวิชาถูกลบแล้ว');
+                // รีโหลดหน้า
+                window.location.reload();
+            })
+            .catch(error => {
+                // จัดการข้อผิดพลาด
+            });
+    }
+</script>
 <script> //ดึงข้อมูลเข้า combobox news_type
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
     const dataSelect_topic = document.getElementById('subject_type_select');
@@ -242,6 +425,7 @@
             console.error('Error:', error);
         });
 </script>
+
 
 <script>
     // This sample still does not showcase all CKEditor&nbsp;5 features (!)
