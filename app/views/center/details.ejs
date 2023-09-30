@@ -80,14 +80,16 @@
                                     <% const colors=['#FAD7A0', '#82E0AA' , '#AED6F1' , '#CCD1D1' , '#D1F2EB'
                                         , '#E6B0AA' , '#D7BDE2' ]; %>
                                         <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
-                                            <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
-                                                style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
-                                                <%= group.section_name %>
-                                            </a>
-                                            <% }); %>
-                                                <% } else { %>
-                                                    <p>No Tag data available.</p>
-                                                    <% } %>
+                                            <% if (group.section_id) { %>
+                                                <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
+                                                    style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                                    <%= group.section_name %>
+                                                </a>
+                                                <% } %>
+                                                    <% }); %>
+                                                        <% } else { %>
+                                                            <p>No Tag data available.</p>
+                                                            <% } %>
                         </p>
                         </p>
                     </div>
@@ -101,7 +103,8 @@
                             <p style="text-align: center;">
                                 <i class="bi bi-calendar2-week" style="color: palevioletred; font-size: 45px;"></i>
                             </p>
-                            <% if (newsData.start || newsData.end) { %>
+                            <% console.log(newsData.start) %>
+                            <% if (newsData.star && newsData.end ) { %>
                                 <% const Sstart=newsData.start %>
                                     <% const Send=newsData.end %>
                                         <% Sstart.setDate(Sstart.getDate() + 1); %>
@@ -174,8 +177,8 @@
                     </div>
                 </div>
             </div>
-            
-            <div id="commentsContainer"  class="card mb-3 mt-2" style="max-width: auto;">
+
+            <div id="commentsContainer" class="card mb-3 mt-2" style="max-width: auto;">
                 <div class="container" style="padding-top: 5px;">
                     <div class="d-flex justify-content-center align-items-center ">
                         <b style="font-size: 18px;">Comment</b>

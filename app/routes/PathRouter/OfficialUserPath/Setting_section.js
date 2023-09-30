@@ -8,11 +8,12 @@ router.use(express.urlencoded({ extended: false }));
 
 
 router.get('/', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM `section`", [req.session.userID])
+    dbConnection.execute("SELECT * FROM `section` LEFT JOIN users ON users.id = section.section_user_id")
         .then(([rows]) => {
-            if (req.session.role === "OFFICIAL USER" || rows[0].role === "USER" || rows[0].role === "ADMIN") {
+            if (req.session.role === "OFFICIAL USER" || req.session.role === "ADMIN") {
                 res.render('official_user_page/setting_section', {
                     section: rows,
+                    id:req.session.userID,
                     header:req.session.header,
                     name: req.session.name,
                     role: req.session.role,
@@ -35,6 +36,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 
 router.post('/', ifNotLoggedin, (req, res) => {
     let params = req.body;
+    params.section_user_id = req.session.userID;
     dbConnection.query("INSERT INTO section SET ?", [params])
         .then(() => {
             res.redirect('/section');

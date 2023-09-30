@@ -154,7 +154,7 @@
                 role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var setting_page = document.getElementById('section_setting');
-            if (currentUser.role === 'OFFICIAL USER') {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
                 setting_page.style.display = 'block'; // แสดงปุ่ม
             } else {
                 setting_page.style.display = 'none'; // ซ่อนปุ่ม

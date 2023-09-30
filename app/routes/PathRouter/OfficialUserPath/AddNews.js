@@ -169,16 +169,10 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
     const welding_para = req.body['welding_para'] || null;
     const news_content = req.body['news_content'] || null;
     const explain = req.body['explain'] || null;
-    const start = req.body['start'] || null;
-    const end = req.body['end'] || null;
+    const start = req.body['start'] ? req.body['start'] : null;
+    const end = req.body['end'] ? req.body['end'] : null;
     const time_stamp = DateTime.local().setZone('Asia/Bangkok').toString() || null;
     const news_id = req.params.id;
-    // const newsDataWithUserId = {
-    //     news_id: req.params.id,
-    //     time_stamp: DateTime.local().setZone('Asia/Bangkok') || null,
-    //     card_picture: req.file.path || null,
-    //     ...newsData
-    // };
     if (req.file) {
         const card_picture = req.file.path;
         console.log('Cardddddddddd');

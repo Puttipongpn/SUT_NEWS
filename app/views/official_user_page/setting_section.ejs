@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>sitting_section</title>
-    
+
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -61,8 +61,8 @@
                         </div>
                         <div>
                             <form class="d-flex" method="post" action="Section">
-                                <input class="form-control" type="text" placeholder="add news section" name="section_name"
-                                    aria-label="">
+                                <input class="form-control" type="text" placeholder="add news section"
+                                    name="section_name" aria-label="">
                                 <button class="btn btn-warning me-2  ml-3" type="submit">Add</button>
                         </div>
                     </div>
@@ -71,8 +71,9 @@
                             <table id="example" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th data-field="Section_id" style="width:10%">Section_id</th>
-                                        <th data-field="Section_name" style="width: 60%;">Section_name</th>
+                                        <th data-field="Section_id" style="width:10%">Tags id</th>
+                                        <th data-field="Section_name" style="width: 55%;">Tags name</th>
+                                        <th data-field="Section_name" style="width: 15%;">Tag author</th>
                                         <th data-field="Delete" style="width: 10%; text-align: center;">Delete</th>
                                     </tr>
                                 </thead>
@@ -89,14 +90,31 @@
                                                     <%- section.section_name %>
                                                 </p>
                                             </td>
+                                            <td>
+                                                <p class="fw-normal mb-1">
+                                                    <%- section.user_name %>
+                                                </p>
+                                            </td>
                                             <td style="text-align: center;">
-                                                <p class="fw-normal mb-1" >
-                                                    <form method="POST" action="/section/delete/<%- section.section_id %>">
+                                                <% if (section.section_user_id==id) { %>
+                                                    <p class="fw-normal mb-1">
+                                                    <form method="POST"
+                                                        action="/section/delete/<%- section.section_id %>">
                                                         <button type="submit" style="background: none; border: none;">
-                                                            <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
+                                                            <i class="fa-solid fa-trash fa-lg"
+                                                                style="color: #d01616;"></i>
                                                         </button>
                                                     </form>
-                                                </p>
+                                                    </p>
+                                                    <% } else { %>
+                                                        <p class="fw-normal mb-1">
+                                                            <button type="submit" disabled
+                                                                style="background: none; border: none;">
+                                                                <i class="fa-solid fa-trash fa-lg"
+                                                                    style="color: #707070;"></i>
+                                                            </button>
+                                                        </p>
+                                                        <% } %>
                                             </td>
                                         </tr>
                                         <% }); %>
