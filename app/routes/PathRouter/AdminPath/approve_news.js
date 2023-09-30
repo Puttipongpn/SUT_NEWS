@@ -39,7 +39,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
 });
 
 router.get('/his_approve', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 || approve_news.status_id = 3 || approve_news.status_id = 4")
+    dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id LEFT JOIN status ON approve_news.status_id = status.status_id WHERE approve_news.status_id = 2 || approve_news.status_id = 3 || approve_news.status_id = 4")
         .then(([rows]) => {
             if (req.session.role === "ADMIN") {
                 const formattedRows = rows.map(row => {

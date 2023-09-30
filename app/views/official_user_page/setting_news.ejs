@@ -64,19 +64,21 @@
                             <table id="example" class="table table-striped" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th data-field="Title">Title</th>
-                                        <th data-field="Welding">Welding</th>
-                                        <th data-field="Status">Status</th>
-                                        <th data-field="Date_Time">Date Time</th>
-                                        <th data-field="Comment">Comment</th>
-                                        <th data-field="Approver">Approver</th>
-                                        <th data-field="Actions">Actions</th>
+                                        <th data-field="No." style="width: 3%;">No.</th>
+                                        <th data-field="Title"style="width: 20%;">Title</th>
+                                        <th data-field="Welding"style="width: 22%;">Welding</th>
+                                        <th data-field="Status"style="width: 5%;">Status</th>
+                                        <th data-field="Date_Time"style="width: 8%;">Date Time</th>
+                                        <th data-field="Comment"style="width: 12%;">Comment</th>
+                                        <th data-field="Actions"style="width:10%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <% console.log(settingnews) %>
-                                    <% settingnews.forEach((settingnews)=> { %>
+                                    <% settingnews.forEach((settingnews,index)=> { %>
                                         <tr>
+                                            <th scope="row" class="small-column">
+                                                <%= index+1 %>
+                                            </th>
                                             <td><%- settingnews.title %></td>
                                             <td><%- settingnews.welding_para %></td>
                                             <td>
@@ -96,7 +98,6 @@
                                             </td>
                                             <td><%- settingnews.formattedDate %></td>
                                             <td><%- settingnews.response %></td>
-                                            <td><%- settingnews.admin_id %></td>
                                             <td class="text-start" style="display: flex; justify-content: space-between; border: none;">
                                                 <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a>
                                                 <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
