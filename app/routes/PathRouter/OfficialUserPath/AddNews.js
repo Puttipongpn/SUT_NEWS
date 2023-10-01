@@ -182,17 +182,7 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
                 req.session.card_picture = imagePath;
                 const newsId = req.params.id;
                 dbConnection.query("UPDATE approve_news SET status_id = ? WHERE news_id = ?", ['1', newsId])
-                if (section_id) {
-                    console.log("section")
-                    const sectionIds = JSON.parse(section_id); // แปลง JSON string กลับเป็น Array
-                    const groupSectionData = sectionIds.map(id => ({
-                        news_id: newsId,
-                        section_id: id
-                    }));
-                    return Promise.all(groupSectionData.map(data =>
-                        dbConnection.query("UPDATE group_section SET ?", data)
-                    ));
-                }
+                
             })
             .then(() => {
                 res.redirect('/setting_news');
@@ -216,7 +206,7 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
                         section_id: id
                     }));
                     return Promise.all(groupSectionData.map(data =>
-                        dbConnection.query("UPDATE group_section SET ?", data)
+                        dbConnection.query("INSERT INTO group_section SET ?", data)
                     ));
                 }
             })
@@ -229,6 +219,19 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
                 res.redirect('404page');
             });
     }
+});
+
+router.delete('/delete_section/:id', (req, res) => {
+    // ดึงข้อมูลจากฐานข้อมูล
+    group_id = req.params.id;
+    dbConnection.execute("DELETE FROM `group_section` WHERE group_id = ?", [group_id])
+        .then(([rows]) => {
+            res.json(rows); // ส่งข้อมูลเป็น JSON
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal Server Error' });
+        });
 });
 
 
