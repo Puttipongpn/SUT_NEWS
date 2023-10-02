@@ -403,37 +403,32 @@
                                                                             <p style="font-size: small; "><i
                                                                                     class="bi bi-calendar2-week fa-xl"
                                                                                     style="color: palevioletred; padding-right:5px"></i>
-                                                                                <% if (bookmark.start) { %>
-                                                                                    <% const start=bookmark.start%>
-                                                                                        <% const newStart=new
-                                                                                            Date(start); %>
-                                                                                            <% newStart.setHours(newStart.getHours()+7);
-                                                                                                %>
-                                                                                                <% const
-                                                                                                    formattedStart=new
-                                                                                                    Date(newStart).toISOString().substring(0,10)%>
+
+
+                                                                                <% if (bookmark.start && bookmark.end )
+                                                                                    { %>
+                                                                                    <% const Sstart=bookmark.start %>
+                                                                                        <% const Send=bookmark.end %>
+                                                                                            <% Sstart.setDate(Sstart.getDate()
+                                                                                                + 1); %>
+                                                                                                <% Send.setDate(Send.getDate()
+                                                                                                    + 1); %>
                                                                                                     <% const
-                                                                                                        end=bookmark.end%>
+                                                                                                        newsStart=Sstart.toISOString().substring(0,
+                                                                                                        10) %>
                                                                                                         <% const
-                                                                                                            newEnd=new
-                                                                                                            Date(end);
-                                                                                                            %>
-                                                                                                            <% newEnd.setHours(newEnd.getHours()+7);
-                                                                                                                %>
-                                                                                                                <% const
-                                                                                                                    formattedEnd=new
-                                                                                                                    Date(newEnd).toISOString().substring(0,10)%>
-                                                                                                                    <%= formattedStart
+                                                                                                            newsEnd=Send.toISOString().substring(0,
+                                                                                                            10) %>
+                                                                                                            <%- newsStart
+                                                                                                                %> - <%-
+                                                                                                                    newsEnd
+                                                                                                                    %>
+                                                                                                                    <% } else
+                                                                                                                        {
                                                                                                                         %>
-                                                                                                                        -
-                                                                                                                        <%= formattedEnd
+                                                                                                                        ไม่มีกำหนดการ
+                                                                                                                        <% }
                                                                                                                             %>
-                                                                                                                            <% } else
-                                                                                                                                {
-                                                                                                                                %>
-                                                                                                                                ไม่มีกำหนดการ
-                                                                                                                                <% }
-                                                                                                                                    %>
                                                                             </p>
                                                                             <!-- ชื่อ -->
                                                                             <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
