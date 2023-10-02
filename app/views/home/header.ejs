@@ -64,9 +64,6 @@
                     <a class="head-link"  id="" href="/save_tags">แท็กที่บันทึกไว้</a>
                 </li>
                 <li class="head-item ">
-                    <a class="head-link" id="news_doom" href="/news_doom">DOOM</a>
-                </li>
-                <li class="head-item ">
                     <a class="head-link" href="/setting_news" id="setting_news">จัดการข่าวสาร</a>
                 </li>
                 <li class="head-item ">
@@ -75,7 +72,6 @@
                 <li class="head-item ">
                     <a class="head-link" href="/subscriber">กำลังติดตาม</a>
                 </li>
-
                 <li class="head-item ">
                     <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" href="#">
@@ -202,17 +198,6 @@
                 allow_Offuser.style.display = 'block'; // แสดงปุ่ม
             } else {
                 allow_Offuser.style.display = 'none'; // ซ่อนปุ่ม
-            }
-        </script>
-        <script>
-            var currentUser = {
-                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
-            };
-            var userButton = document.getElementById('news_doom');
-            if (currentUser.role === 'USER') {
-                userButton.style.display = 'block'; // แสดงปุ่ม
-            } else {
-                userButton.style.display = 'none'; // ซ่อนปุ่ม
             }
         </script>
         <script>
