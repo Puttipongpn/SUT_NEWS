@@ -65,8 +65,8 @@
                                 <thead>
                                     <tr>
                                         <th data-field="No." style="width: 3%;">No.</th>
-                                        <th data-field="Title"style="width: 20%;">Title</th>
-                                        <th data-field="Welding"style="width: 22%;">Welding</th>
+                                        <th data-field="Title"style="width: 15%;">Title</th>
+                                        <th data-field="Welding"style="width: 27%;">Welding</th>
                                         <th data-field="Status"style="width: 5%;">Status</th>
                                         <th data-field="Date_Time"style="width: 8%;">Date Time</th>
                                         <th data-field="Comment"style="width: 12%;">Comment</th>
@@ -80,7 +80,10 @@
                                                 <%= index+1 %>
                                             </th>
                                             <td><%- settingnews.title %></td>
-                                            <td><%- settingnews.welding_para %></td>
+                                            <td>
+                                                <%- settingnews.welding_para %>
+                                              </td>
+                                              
                                             <td>
                                                 <% if (settingnews.status_id===2) { %>
                                                     <i class="fa fa-check-circle-o green"></i> approve
@@ -97,7 +100,7 @@
 
                                             </td>
                                             <td><%- settingnews.formattedDate %></td>
-                                            <td><%- settingnews.response %></td>
+                                            <td style="width: 10px; max-width: 10px; word-wrap: break-word; white-space: normal;"><%- settingnews.response %></td>
                                             <td class="text-start" style="display: flex; justify-content: space-between; border: none;">
                                                 <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a>
                                                 <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
@@ -247,30 +250,34 @@
   Label the data
   */
                 td:nth-of-type(1):before {
-                    content: "Title";
+                    content: "No.";
                 }
 
                 td:nth-of-type(2):before {
-                    content: "Welding";
+                    content: "Title";
                 }
 
                 td:nth-of-type(3):before {
-                    content: "Status";
+                    content: "Welding";
                 }
 
                 td:nth-of-type(4):before {
-                    content: "Date_Time";
+                    content: "Status";
                 }
 
                 td:nth-of-type(5):before {
-                    content: "Comment";
+                    content: "Date_Time";
                 }
 
                 td:nth-of-type(6):before {
-                    content: "Approver";
+                    content: "Comment";
                 }
 
                 td:nth-of-type(7):before {
+                    content: "Approver";
+                }
+
+                td:nth-of-type(8):before {
                     content: "Actions";
                 }
 
