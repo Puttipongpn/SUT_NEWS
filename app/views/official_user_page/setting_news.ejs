@@ -66,8 +66,8 @@
                                     <tr>
                                         <th data-field="No." style="width: 3%;">No.</th>
                                         <th data-field="Title"style="width: 15%;">Title</th>
-                                        <th data-field="Welding"style="width: 27%;">Welding</th>
-                                        <th data-field="Status"style="width: 5%;">Status</th>
+                                        <th data-field="Welding"style="width: 25%;">Welding</th>
+                                        <th data-field="Status"style="width: 7%;">Status</th>
                                         <th data-field="Date_Time"style="width: 8%;">Date Time</th>
                                         <th data-field="Comment"style="width: 12%;">Comment</th>
                                         <th data-field="Actions"style="width:10%;">Actions</th>
@@ -79,8 +79,8 @@
                                             <th scope="row" class="small-column">
                                                 <%= index+1 %>
                                             </th>
-                                            <td><%- settingnews.title %></td>
-                                            <td>
+                                            <td style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;"><%- settingnews.title %></td>
+                                            <td style="width: 25px; max-width: 25px; word-wrap: break-word; white-space: normal;">
                                                 <%- settingnews.welding_para %>
                                               </td>
                                               
@@ -100,10 +100,10 @@
 
                                             </td>
                                             <td><%- settingnews.formattedDate %></td>
-                                            <td style="width: 10px; max-width: 10px; word-wrap: break-word; white-space: normal;"><%- settingnews.response %></td>
-                                            <td class="text-start" style="display: flex; justify-content: space-between; border: none;">
-                                                <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a>
-                                                <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                            <td style="width: 12px; max-width: 12px; word-wrap: break-word; white-space: normal;"><%- settingnews.response %></td>
+                                            <td class="text-start" style=" justify-content: space-between;">
+                                                <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a><br>
+                                                <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a><br>
                                                 <form action="/setting_news/delete_news/<%= settingnews.news_id %>" method="POST">
                                                     <button type="submit" style="background: none; border: none;">
                                                         <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
