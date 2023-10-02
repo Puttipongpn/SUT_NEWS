@@ -16,6 +16,7 @@ router.get('/:type_id', ifNotLoggedin, (req, res, next) => {
                 .then(([Bookmark]) => {
                     res.render('center/Home_type', {
                     bookmark_id:Bookmark,
+                    profile_image: req.session.profile_image,
                     type: rows,
                     header:req.session.header,
                     

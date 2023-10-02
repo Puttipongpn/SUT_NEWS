@@ -99,15 +99,20 @@ const upload_card = multer({
 
 router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res) => {
     const { section_id, ...newsData } = req.body;
-
-    const newsDataWithUserId = {
-        user_id: req.params.id,
-        time_stamp: DateTime.local().setZone('Asia/Bangkok'),
-        card_picture: req.file.path,
-        ...newsData
-    };
+     const news_type_id = req.body['news_type_id'] || null;
+    const topic_id = req.body['topic_id'] || null;
+    const title = req.body['title'] || null;
+    const welding_para = req.body['welding_para'] || null;
+    const news_content = req.body['news_content'] || null;
+    const explain = req.body['explain'] || null;
+    const start = req.body['start'] ? req.body['start'] : null;
+    const end = req.body['end'] ? req.body['end'] : null;
+    card_picture = req.file.path;
+    const time_stamp = DateTime.local().setZone('Asia/Bangkok').toString() || null;
+    const user_id = req.params.id;
+   
     imagePath = req.file.path;
-    dbConnection.query("INSERT INTO news SET ?", newsDataWithUserId)
+    dbConnection.query("INSERT INTO `news`( `news_type_id`, `user_id`, `topic_id`, `title`, `welding_para`, `card_picture`, `news_content`, `explain`, `start`, `end`, `time_stamp`) VALUES (?,?,?,?,?,?,?,?,?,?,?)", [news_type_id,user_id, topic_id, title, welding_para, card_picture, news_content, explain, start, end, time_stamp,])
         .then(result => {
             req.session.card_picture = imagePath;
             const newsId = result[0].insertId;
@@ -123,7 +128,7 @@ router.post('/:id', upload_card.single('card_picture'), ifNotLoggedin, (req, res
                 ));
             }
         })
-        
+
         .then(() => {
             res.redirect('/setting_news');
             req.session.message = 'บันทึกสำเร็จ';
@@ -182,7 +187,7 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
                 req.session.card_picture = imagePath;
                 const newsId = req.params.id;
                 dbConnection.query("UPDATE approve_news SET status_id = ? WHERE news_id = ?", ['1', newsId])
-                
+
             })
             .then(() => {
                 res.redirect('/setting_news');
@@ -192,7 +197,7 @@ router.post('/update/:id', upload_card.single('card_picture'), ifNotLoggedin, (r
                 console.log(err);
                 res.redirect('404page');
             });
-    }else{
+    } else {
         dbConnection.query("UPDATE `news` SET `news_type_id`=?, `topic_id`=?, `title`=?, `welding_para`=?, `news_content`=?, `explain`=?, `start`=?, `end`=?, `time_stamp`=? WHERE `news_id` = ?", [news_type_id, topic_id, title, welding_para, news_content, explain, start, end, time_stamp, news_id])
             .then(result => {
                 const newsId = req.params.id;

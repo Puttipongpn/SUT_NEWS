@@ -13,6 +13,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                 res.render('center/setting_save_tags', {
                     tags: rows,
                     header: req.session.header,
+                    profile_image:req.session.profile_image,
                 });
             } else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
                 res.render('404page');

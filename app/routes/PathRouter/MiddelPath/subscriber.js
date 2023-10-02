@@ -31,6 +31,7 @@ router.get('/', async (req, res) => {
                                     res.render('center/subscriber', {
                                         news : news[0],
                                         bookmark_id: Bookmark,
+                                        profile_image: req.session.profile_image,
                                         subHome: rows,
                                         header: req.session.header,
                                         like: Like[0],
