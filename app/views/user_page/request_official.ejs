@@ -12,12 +12,11 @@
         crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/stylesheets/view_user.css">
 </head>
-
+<%- include('../home/header') %>
+    <%- include('../home/nav') %>
 <body>
-    <%- include %>
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
-            <hr class="mt-0 mb-4">
             <div class="row">
                 <div class="col-xl-4">
                     <!-- Profile picture card-->
@@ -110,12 +109,12 @@
                                 <div style="display: flex; justify-content: space-between;">
                                     <!-- justify-content: space-betweenกำหนดให้ Flex Items (องค์ประกอบภายใน Flex Container) กระจายตัวอย่างเท่าที่จำเป็นเพื่อเต็มพื้นที่ของ Flex Container -->
                                     <a class="btn btn-info" href="/setting_profile">
-                                        <span class="material-symbols-outlined material-icons">
+                                        <span class="material-symbols-outlined material-icons" style="font-size: medium;">
                                             Black
                                         </span>
                                     </a>
                                     <button type="submit" class="btn btn-danger ">
-                                        REQUEST
+                                        Request
                                     </button>
                                 </div>
                             </form>
@@ -124,6 +123,7 @@
                 </div>
             </div>
         </div>
+        <%- include('../home/footer') %>
 </body>
 
 </html>

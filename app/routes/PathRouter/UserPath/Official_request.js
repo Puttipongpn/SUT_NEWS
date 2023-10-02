@@ -14,6 +14,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     users: rows,
                     name: rows[0].name,
                     role: rows[0].role,
+                    header:req.session.header,
                     user_name: rows[0].user_name,
                     email: rows[0].email,
                     profile_image: req.session.profile_image,

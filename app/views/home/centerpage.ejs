@@ -284,7 +284,8 @@
                                                                             }
                                                                         }
                                                                     </script>
-                                                                    <div class="card-body-profile" style="margin-top: -15px;">
+                                                                    <div class="card-body-profile"
+                                                                        style="margin-top: -15px;">
                                                                         <h5 class="card-title ">
                                                                             <a href="/details/<%= profile.news_id %>"
                                                                                 class="">
@@ -389,7 +390,7 @@
                             <!--Section: News of the day-->
                             <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
                                 <div>
-                                    <h2 style="margin-bottom: 2%;"><b>Sudarat</b></h2>
+                                    <h2 style="margin-bottom: 2%; margin-top: 2%;"><b>Sudarat</b></h2>
                                 </div>
                                 <div class="carousel-inner border p-1">
                                     <% Center.forEach((profile, index)=> { %>
@@ -559,8 +560,7 @@
                                                             </script>
                                                         </div>
                                                     </div>
-
-                                                    <div class="col-md-6 mb-4 mt-2">
+                                                    <div class="col-md-6 mt-2 position-relative">
                                                         <span class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">
                                                             News of the day
                                                         </span>
@@ -858,10 +858,9 @@
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="col-md-6 mb-4 mt-2">
+                                                                        <div class="col-md-6 mt-2 position-relative">
                                                                             <span
-                                                                                class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News
-                                                                                of the day
+                                                                                class="badge bg-danger px-2 py-1 shadow-1-strong mb-3">News of the day
                                                                             </span>
                                                                             <div class="card-body-profile">
                                                                                 <h4><strong>
@@ -1295,13 +1294,20 @@
                             </script>
                         </div>
                     </section>
-
-
-
-
-
-
                     <%- include('../home/footer') %>
         </body>
+        <style>
+    .position-relative {
+        position: relative;
+    }
+
+    .position-relative .card-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+    
+</style>
 
 </html>
