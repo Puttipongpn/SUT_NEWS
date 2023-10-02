@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 <style>
-    .card-explain{
+    .card-explain {
         background: #ffffff;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
@@ -20,8 +20,9 @@
         margin-bottom: 1rem;
         margin-top: 40px;
         height: inherit;
-      }
+    }
 </style>
+
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
@@ -156,11 +157,12 @@
                                             <div>
                                                 <label for="tags">Tags Select</label>
                                             </div>
-                                            <div>
-                                                <select class="form-select-ad form-select-lg" id="tags"
-                                                    aria-label="Default select example">
-                                                </select>
-                                            </div>
+
+                                            <input list="europe-countries" class="form-control"
+                                                placeholder="Start typing..." id="tags">
+                                            <datalist id="europe-countries">
+                                            </datalist>
+
                                             <div style="padding-top: 10px;">
                                                 <table id="selectedTagsTable">
                                                     <thead>
@@ -180,24 +182,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
-                        <div class=" row gutters">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">
-                                        <div class="col-12" style="padding-top:20px">
-                                            <h1>Edit News Paragrap </h1>
-                                            <textarea rows="20" cols="70" id="newseditor"
-                                                name="news_content"></textarea>
-                                        </div>
+                </div>
+                <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
+                    <div class=" row gutters">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="col-12">
+                                    <div class="col-12" style="padding-top:20px">
+                                        <h1>Edit News Paragrap </h1>
+                                        <textarea rows="20" cols="70" id="newseditor" name="news_content"></textarea>
                                     </div>
-                                    <div class="row gutters">
-                                        <div class="col-12" style="padding-top: 20px;">
-                                            <div class="d-flex justify-content-between">
-                                                <button type="" id="submit" name="submit"
-                                                    class="btn btn-danger">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Sent</button>
-                                            </div>
+                                </div>
+                                <div class="row gutters">
+                                    <div class="col-12" style="padding-top: 20px;">
+                                        <div class="d-flex justify-content-between">
+                                            <button type="" id="submit" name="submit"
+                                                class="btn btn-danger">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Sent</button>
                                         </div>
                                     </div>
                                 </div>
@@ -205,84 +206,85 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </form>
             <%- include('../home/footer') %>
-            <style>
-                /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
-                .form-select-ad {
-                    color: #000000;
-                    background: #ffffff;
-                    width: 100%;
-                    height: 40px;
-                }
+                <style>
+                    /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
+                    .form-select-ad {
+                        color: #000000;
+                        background: #ffffff;
+                        width: 100%;
+                        height: 40px;
+                    }
 
-                .card {
-                    background: #fcfcff;
-                    -webkit-border-radius: 5px;
-                    -moz-border-radius: 5px;
-                    border-radius: 5px;
-                    border: 0;
-                    margin-bottom: 1rem;
-                    margin-top: 40px;
-                }
+                    .card {
+                        background: #fcfcff;
+                        -webkit-border-radius: 5px;
+                        -moz-border-radius: 5px;
+                        border-radius: 5px;
+                        border: 0;
+                        margin-bottom: 1rem;
+                        margin-top: 40px;
+                    }
 
-                body {
-                    background: #1A233A;
-                }
+                    body {
+                        background: #1A233A;
+                    }
 
-                table {
-                    border-collapse: collapse;
-                }
+                    table {
+                        border-collapse: collapse;
+                    }
 
-                table,
-                th,
-                td {
-                    border: 1px solid black;
-                }
+                    table,
+                    th,
+                    td {
+                        border: 1px solid black;
+                    }
 
-                th,
-                td {
-                    padding: 10px;
-                }
+                    th,
+                    td {
+                        padding: 10px;
+                    }
 
-                .image-button {
-                    background-color: transparent;
-                    border: none;
-                    cursor: pointer;
-                    text-decoration: underline;
-                    color: blue;
-                }
+                    .image-button {
+                        background-color: transparent;
+                        border: none;
+                        cursor: pointer;
+                        text-decoration: underline;
+                        color: blue;
+                    }
 
-                .modal {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background-color: rgba(0, 0, 0, 0.7);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    z-index: 9999;
-                }
+                    .modal {
+                        position: fixed;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: rgba(0, 0, 0, 0.7);
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        z-index: 9999;
+                    }
 
-                .modal-image {
-                    max-width: 80%;
-                    max-height: 80%;
-                }
+                    .modal-image {
+                        max-width: 80%;
+                        max-height: 80%;
+                    }
 
-                .form-control {
-                    border: 1px solid #fefefe;
-                    -webkit-border-radius: 2px;
-                    -moz-border-radius: 2px;
-                    border-radius: 2px;
-                    font-size: .825rem;
-                    background: #ffffff;
-                    border-color: #000000;
-                    color: #000000;
-                }
-            </style>
-            
+                    .form-control {
+                        border: 1px solid #fefefe;
+                        -webkit-border-radius: 2px;
+                        -moz-border-radius: 2px;
+                        border-radius: 2px;
+                        font-size: .825rem;
+                        background: #ffffff;
+                        border-color: #000000;
+                        color: #000000;
+                    }
+                </style>
+
 </body>
 <script>
     let img = document.getElementById('img');
@@ -342,23 +344,46 @@
         });
 </script>
 
-<script> //ดึงข้อมูลเข้า combobox section
+<script>
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    // Fetch section data and populate the select dropdown
-    fetch('AddNews/tags')
+    const searchInput = document.getElementById('tags');
+    const datalist = document.getElementById('europe-countries');
+
+    const dataSelect_tags = document.getElementById('news_type_select');
+
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/AddNews/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
-            const tagsSelect = document.getElementById('tags');
-            data.forEach(tag => {
+            // สร้างตัวเลือกใน datalist
+            data.forEach(item => {
                 const option = document.createElement('option');
-                option.value = tag.section_id;
-                option.textContent = tag.section_name;
-                tagsSelect.appendChild(option);
+                option.value = item.section_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
+                option.setAttribute('data-id', item.section_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
+                datalist.appendChild(option);
             });
         })
         .catch(error => {
-            console.error('Error fetching section data:', error);
+            console.error('Error:', error);
         });
+
+    // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
+    searchInput.addEventListener('input', function () {
+        const searchText = searchInput.value.toLowerCase();
+        const options = datalist.options;
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const optionText = option.value.toLowerCase();
+
+            // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
+            if (optionText.includes(searchText)) {
+                option.style.display = 'block'; // แสดงตัวเลือก
+            } else {
+                option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
+            }
+        }
+    });
 </script>
 
 <!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
@@ -367,11 +392,11 @@
     const selectedTagsTable = document.getElementById('selectedTagsTable');
     const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
 
-    tagsSelect.addEventListener('change', function () {
-        const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
-        const selectedId = tagsSelect.value;
+    searchInput.addEventListener('change', function () {
+        const selectedTag = searchInput.value;
+        const selectedId = datalist.querySelector(`option[value="${selectedTag}"]`).getAttribute('data-id');
 
-        if (selectedTag) {
+        if (selectedTag && selectedId) {
             const newRow = selectedTagsTableBody.insertRow();
             const idCell = newRow.insertCell();
             idCell.textContent = selectedId;
@@ -403,7 +428,6 @@
         hiddenInput.name = 'section_id';
         hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
         form.appendChild(hiddenInput);
-        
     });
 </script>
 
@@ -651,7 +675,7 @@
                 }
             ]
         },
-    
+
         // The "super-build" contains more premium features that require additional configuration, disable them below.
         // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
         removePlugins: [

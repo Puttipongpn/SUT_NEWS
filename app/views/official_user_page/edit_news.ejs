@@ -26,7 +26,7 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="editnews"
+            <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="news"
                 enctype="multipart/form-data" class="">
                 <div class="container">
                     <div class=" row gutters">
@@ -65,7 +65,7 @@
                                             <p>เริ่มกิจกรรม</p>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <% console.log(users[0].start) %>
+
                                             <% if (isNaN(new Date(users[0].start))) { %>
                                                 <input type="date" name="start">
                                                 <% } else if (users[0].start) { %>
@@ -81,7 +81,7 @@
                                             <p>สิ้นสุด</p>
                                         </div>
                                         <div style="padding-left: 10px;">
-                                            <% console.log(users[0].end) %>
+
                                             <% if (isNaN(new Date(users[0].end))) { %>
                                                 <input type="date" name="end">
                                                 <% } else if (users[0].end) { %>
@@ -177,10 +177,12 @@
                                                 <label for="tags">Tags Select</label>
                                             </div>
                                             <div>
-                                                <select class="form-select-ad form-select-lg" id="tags"
-                                                    aria-label="Default select example">
-                                                </select>
+                                                <input list="europe-countries" class="form-control"
+                                                    placeholder="Start typing..." id="tags">
+                                                <datalist id="europe-countries">
+                                                </datalist>
                                             </div>
+
                                             <div style="padding-top: 10px;">
                                                 <table id="selectedTagsTable">
                                                     <thead>
@@ -362,24 +364,48 @@
         });
 </script>
 
-<script> //ดึงข้อมูลเข้า combobox section
+<script>
     // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    // Fetch section data and populate the select dropdown
-    fetch('/AddNews/tags')
+    const searchInput = document.getElementById('tags');
+    const datalist = document.getElementById('europe-countries');
+
+    const dataSelect_tags = document.getElementById('news_type_select');
+
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/AddNews/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
         .then(response => response.json())
         .then(data => {
-            const tagsSelect = document.getElementById('tags');
-            data.forEach(tag => {
+            // สร้างตัวเลือกใน datalist
+            data.forEach(item => {
                 const option = document.createElement('option');
-                option.value = tag.section_id;
-                option.textContent = tag.section_name;
-                tagsSelect.appendChild(option);
+                option.value = item.section_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
+                option.setAttribute('data-id', item.section_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
+                datalist.appendChild(option);
             });
         })
         .catch(error => {
-            console.error('Error fetching section data:', error);
+            console.error('Error:', error);
         });
+
+    // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
+    searchInput.addEventListener('input', function () {
+        const searchText = searchInput.value.toLowerCase();
+        const options = datalist.options;
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const optionText = option.value.toLowerCase();
+
+            // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
+            if (optionText.includes(searchText)) {
+                option.style.display = 'block'; // แสดงตัวเลือก
+            } else {
+                option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
+            }
+        }
+    });
 </script>
+
 
 <!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
 <script>
@@ -393,8 +419,8 @@
         fetch('/AddNews/section/<%= users[0].news_id %>')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 data.forEach(tag => {
+                    console.log(tag);
                     const option = document.createElement('option');
                     const newRow = selectedTagsTableBody.insertRow();
                     selectedId = tag.section_id;
@@ -407,7 +433,29 @@
                     const deleteButton = document.createElement('button');
                     deleteButton.textContent = 'Delete';
                     deleteButton.addEventListener('click', function () {
-                        selectedTagsTableBody.removeChild(newRow);
+                        event.preventDefault();
+                        // ดึงข้อมูล ID ของข้อมูลที่ต้องการลบ
+                        const idCell = newRow.querySelector('td:nth-child(1)');
+                        const group_id = tag.group_id;
+
+                        // ส่งคำขอลบไปยังเซิร์ฟเวอร์
+                        fetch(`/AddNews/delete_section/${group_id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        })
+                            .then(response => {
+                                if (response.ok) {
+                                    // ลบแถวที่เลือกออกจากตาราง
+                                    selectedTagsTableBody.removeChild(newRow);
+                                } else {
+                                    console.error('Failed to delete section');
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                            });
                     });
                     actionCell.appendChild(deleteButton);
                 });
@@ -416,57 +464,54 @@
                 console.error('Error fetching section data:', error);
             });
 
-        // Event listener for adding selected items to the table
-        // Event listener for adding selected items to the table
-        tagsSelect.addEventListener('change', function () {
-            const selectedTag = tagsSelect.options[tagsSelect.selectedIndex].text;
-            const selectedId = tagsSelect.value;
-
-            // Check if the selectedId already exists in the table
-            const rows = selectedTagsTableBody.querySelectorAll('tr');
-            let alreadyExists = false;
-            rows.forEach(row => {
-                const idCell = row.querySelector('td:nth-child(1)');
-                const sectionId = idCell.textContent.trim();
-                if (sectionId === selectedId) {
-                    alreadyExists = true;
-                }
-            });
-
-            if (!alreadyExists && selectedTag) {
-                const newRow = selectedTagsTableBody.insertRow();
-                const idCell = newRow.insertCell();
-                idCell.textContent = selectedId;
-                const nameCell = newRow.insertCell();
-                nameCell.textContent = selectedTag;
-                const actionCell = newRow.insertCell();
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.addEventListener('click', function () {
-                    selectedTagsTableBody.removeChild(newRow);
-                });
-                actionCell.appendChild(deleteButton);
-            }
-        });
     });
 
-    const form = document.getElementById('editnews'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
+</script>
+
+<script>
+    const tagsSelect = document.getElementById('tags');
+    const selectedTagsTable = document.getElementById('selectedTagsTable');
+    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+
+    searchInput.addEventListener('change', function () {
+        const selectedTag = searchInput.value;
+        const selectedId = datalist.querySelector(`option[value="${selectedTag}"]`).getAttribute('data-id');
+
+        if (selectedTag && selectedId) {
+            const newRow = selectedTagsTableBody.insertRow();
+            const idCell = newRow.insertCell();
+            idCell.textContent = selectedId;
+            const nameCell = newRow.insertCell();
+            nameCell.textContent = selectedTag;
+            const actionCell = newRow.insertCell();
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', function () {
+                selectedTagsTableBody.removeChild(newRow);
+            });
+            actionCell.appendChild(deleteButton);
+        }
+    });
+
+    // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
+    const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
     form.addEventListener('submit', function () {
         const rows = selectedTagsTableBody.querySelectorAll('tr');
+        console.log(rows);
         const sectionIds = [];
         rows.forEach(row => {
             const idCell = row.querySelector('td:nth-child(1)');
             const sectionId = idCell.textContent.trim();
+            
             sectionIds.push(sectionId);
         });
+
         const hiddenInput = document.createElement('input');
         hiddenInput.type = 'hidden';
         hiddenInput.name = 'section_id';
         hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
         form.appendChild(hiddenInput);
-        form.submit();
     });
-
 </script>
 
 
