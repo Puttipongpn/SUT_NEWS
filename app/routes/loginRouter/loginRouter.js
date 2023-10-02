@@ -107,6 +107,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         Top_slidebar: top_slidebar,
                         top_slidebar: top_slidebar[0],
                         header: req.session.header,
+                        profile_image:req.session.profile_image,
                         likeCounts: likeCounts,
                         CommentCounts:CommentCounts,
                     });

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/splide.min.css">
+    <link rel="stylesheet" href="/stylesheets/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+            <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center align-items-center">
+                <div class="container-st h-100 ">
+                    <div class="row d-flex justify-content-center align-items-center" style="margin-top: -40px;">
+                        <div class="col">
+                            <div class="card"
+                                style="height: 100%; width: 100%;box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);">
+                                <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height: 200px;">
+                                    <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; padding-top: 40px">
+                                     
+                                      <% if (profile_image) { %>
+                                        <% const imagePath = profile_image.substring(6); %>
+                                        <img id="profilePicture" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                          style="width: 150px; z-index: 1" src="<%= imagePath %>" alt="">
+                                      <% } else { %>
+                                        <img id="profilePicture" class="img-fluid img-thumbnail mt-4 mb-2"
+                                          style="width: 150px; z-index: 1"
+                                          src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                      <% } %>
+                                      <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        <a href="/setting_profile" style="color: #000;">Edit profile</a>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  
+                                <div class="p-4 text-black" style="background-color: #f8f9fa;">
+                                    <div class="row gutters">
+                                        <div class="col-12 ">
+                                            <h4 style="color: #000000; margin-left:170px;margin-top:-20px">
+                                                <%= user_name%>
+                                            </h4>
+                                            <p style="color: #000000;margin-left:170px;margin-top:-10px">
+                                                <%= email %>
+                                            </p>
+                                        </div>
+
+                                        <div class="col-12 text-md-right" style="padding-left: 200px;">
+                                            <button type="submit" class="btn btn-dark" data-mdb-ripple-color="dark"
+                                                style="z-index: 1;" disabled>
+                                                ติดตาม
+                                            </button>
+                                        </div>
+                                        <script>
+                                            async function addsubscribe(icon) {
+                                                const Sub_user = icon.getAttribute('data-sub-id');
+                                                try {
+                                                    const response = await fetch(`/subscriber/${Sub_user}`, {
+                                                        method: 'POST'
+                                                    });
+                                                    const data = await response.json();
+
+                                                    if (data.success) {
+
+                                                    } window.location.reload();
+
+                                                    console.log(data.message);
+                                                } catch (error) {
+                                                    console.error('เกิดข้อผิดพลาด:', error);
+                                                }
+                                            }
+
+                                            async function unsubscribe(icon) {
+                                                console.log("addsubscribe is called"); // เพิ่มบรรทัดนี้
+                                                const Sub_user = icon.getAttribute('data-sub-id');
+                                                try {
+                                                    const response = await fetch(`/subscriber/${Sub_user}`, {
+                                                        method: 'DELETE'
+                                                    });
+                                                    const data = await response.json();
+                                                    if (data.success) {
+
+                                                    } window.location.reload();
+                                                    console.log(data.message);
+                                                } catch (error) {
+                                                    console.error('เกิดข้อผิดพลาด:', error);
+                                                }
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div class="p-4 text-black" style="background-color: #ffffff;">
+                                    <div class="mb-5">
+                                        <p class="lead fw-normal mb-1">About</p>
+                                        <div class="p-4" style="background-color: #f8f9fa;">
+                                            <p class="font-italic mb-1">Web Developer</p>
+                                            <p class="font-italic mb-1">Lives in Thailand</p>
+                                            <p class="font-italic mb-0">Photographer</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center mb-4">
+                                        <p class="lead fw-normal mb-0">All news</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row" id="cards_landscape_wrap-2">
+                            <div class="col-lg-12 my-2">
+                                <div class="row pt-3">
+                                    <% Profile.forEach((profile)=> { %>
+                                        <div class="col-lg-3 col-md-6 mb-3">
+                                            <div class="card h-100"
+                                                style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
+                                                <div class="top">
+                                                    <% if (profile.card_picture) { %>
+                                                        <% const imcard=profile.card_picture.substring(6) %>
+                                                            <!-- bookmark -->
+                                                            <a href="/details/<%= profile.news_id %>">
+                                                                <!-- image -->
+                                                                <img class="card-img-top" src="<%= imcard %>" alt="">
+                                                                <% } %>
+                                                            </a>
+                                                </div>
+                                                <div class="card-body-commu">
+                                                    <div class="icon-container">
+                                                        <% const news_like_id=profile.news_id; %>
+                                                            <% const isLike=like.some(item=>
+                                                                item.like_news_id === news_like_id); %>
+                                                                <% if (isLike) { %>
+                                                                    <i class="bi bi-heart-fill"
+                                                                        style="color: rgb(143, 1, 1);" id="likeIcon"
+                                                                        data-news-id="<%= news_like_id %>"
+                                                                        onclick="removeLike(this)"></i>
+                                                                    <% } else { %>
+                                                                        <i class="bi bi-heart" id="likeIcon"
+                                                                            data-news-id="<%= news_like_id %>"
+                                                                            onclick="addLike(this)"></i>
+                                                                        <% } %>
+                                                                            <!-- ส่วนของคอมเม้น -->
+                                                                            <% if (CommentCounts[profile.news_id]
+                                                                                !==undefined) { %>
+                                                                                <i class="bi bi-chat" id="commentIcon"
+                                                                                    onclick="goToNewsDetailAndScroll('<%= profile.news_id %>')"></i>
+                                                                                <p
+                                                                                    style="font-size: 14px;margin-left:-5px;margin-top:6px">
+                                                                                    <%= CommentCounts[profile.news_id]
+                                                                                        %>
+                                                                                </p>
+                                                                                <% } else { %>
+                                                                                    <i class="bi bi-chat"
+                                                                                        id="commentIcon"
+                                                                                        onclick="goToNewsDetailAndScroll('<%= profile.news_id %>')"></i>
+                                                                                    <% } %>
+                                                                                        <script>
+                                                                                            // JavaScript ของหน้าการ์ดข่าว
+                                                                                            function goToNewsDetailAndScroll(newsId) {
+                                                                                                // สร้าง URL ของหน้ารายละเอียดข่าว
+                                                                                                var newsDetailURL = "http://localhost:3000/details/" + newsId + "#comments"; // เปลี่ยน URL ตามความเหมาะสม
+                                                                                                // นำผู้ใช้ไปยัง URL ของหน้ารายละเอียดข่าวนั้นๆ
+                                                                                                window.location.href = newsDetailURL;
+                                                                                            }
+                                                                                        </script>
+                                                                                        <!--------------->
+                                                                                        <!-- ปุ่มของส่วนกดแชร์ -->
+                                                                                        <i class="bi bi-send"
+                                                                                            id="shareIcon"
+                                                                                            onclick="shareButton(this)"
+                                                                                            style="padding-top: 1px;"></i>
+                                                                                        <script>
+                                                                                            function shareButton(iconElement) {
+                                                                                                // รับข้อมูล news_id จาก data attribute ของไอคอนที่ถูกคลิก
+                                                                                                var newsId = iconElement.getAttribute("data-news-id");
+                                                                                                // สร้าง URL ให้ใช้จาก ngrok
+                                                                                                var urlToShare = "https://bd48-2405-9800-bc20-9f6a-c189-cdec-ead2-67de.ngrok-free.app/details/<%= profile.news_id %>";
+                                                                                                // เปิดหน้าแชร์ลิงก์บน Facebook
+                                                                                                window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(urlToShare), "_blank");
+                                                                                            }
+                                                                                        </script>
+                                                                                        <!-- ส่วนของปุ่มกดบุคมาร์ค -->
+                                                                                        <% const
+                                                                                            news_id=profile.news_id; %>
+                                                                                            <% const
+                                                                                                isBookmarked=bookmark_id.some(item=>
+                                                                                                item.b_news_id ===
+                                                                                                news_id);
+                                                                                                %>
+                                                                                                <% if (isBookmarked) {
+                                                                                                    %>
+                                                                                                    <i class="bi bi-bookmark-check-fill"
+                                                                                                        id="bookmarkIcon"
+                                                                                                        data-news-id="<%= news_id %>"
+                                                                                                        onclick="removeBookmark(this)"></i>
+                                                                                                    <% } else { %>
+                                                                                                        <i class="bi bi-bookmark"
+                                                                                                            id="bookmarkIcon"
+                                                                                                            data-news-id="<%= news_id %>"
+                                                                                                            onclick="addBookmark(this)"></i>
+                                                                                                        <% } %>
+
+                                                    </div>
+                                                </div>
+                                                <% if (likeCounts[profile.news_id] !==undefined) { %>
+                                                    <div style="margin-top: -15px;margin-left:20px">
+                                                        <p style="font-size: 13px;color:#1e1e1e;">
+                                                            จำนวนไลค์: <%= likeCounts[profile.news_id] %> ครั้ง
+                                                        </p>
+                                                    </div>
+                                                    <% } else { %>
+                                                        <div style="margin-top: -15px;margin-left:20px">
+                                                            <p style="font-size: 13px;color:#1e1e1e;">
+                                                                ยังไม่มีการกดไลค์
+                                                            </p>
+                                                        </div>
+                                                        <% } %>
+                                                            <script>
+                                                                async function addBookmark(icon) {
+                                                                    const newsId = icon.getAttribute('data-news-id');
+
+                                                                    try {
+                                                                        const response = await fetch(`/bookmark/${newsId}`, {
+                                                                            method: 'POST'
+                                                                        });
+
+                                                                        const data = await response.json();
+
+                                                                        if (data.success) {
+                                                                            bookmark_id.push({ b_news_id: newsId });
+                                                                            icon.classList.add('bi-bookmark-check-fill');
+                                                                            icon.classList.remove('bi-bookmark');
+                                                                        } window.location.reload();
+
+                                                                        console.log(data.message);
+                                                                    } catch (error) {
+                                                                        console.error('เกิดข้อผิดพลาด:', error);
+                                                                    }
+                                                                }
+
+                                                                async function removeBookmark(icon) {
+                                                                    const newsId = icon.getAttribute('data-news-id');
+
+                                                                    try {
+                                                                        const response = await fetch(`/bookmark/${newsId}`, {
+                                                                            method: 'DELETE'
+                                                                        });
+                                                                        const data = await response.json();
+                                                                        if (data.success) {
+                                                                            const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                                                                            if (index !== -1) {
+                                                                                bookmark_id.splice(index, 1);
+                                                                            }
+                                                                            icon.classList.add('bi-bookmark');
+                                                                            icon.classList.remove('bi-bookmark-check-fill');
+                                                                        } window.location.reload();
+
+                                                                        console.log(data.message);
+                                                                    } catch (error) {
+                                                                        console.error('เกิดข้อผิดพลาด:', error);
+                                                                    }
+                                                                }
+                                                            </script>
+                                                            <script>
+                                                                async function addLike(icon) {
+                                                                    const newsId = icon.getAttribute('data-news-id');
+
+                                                                    try {
+                                                                        const response = await fetch(`/like/${newsId}`, {
+                                                                            method: 'POST'
+                                                                        });
+
+                                                                        const data = await response.json();
+
+                                                                        if (data.success) {
+                                                                            like_id.push({ like_news_id: newsId });
+                                                                            icon.classList.add('bi-bookmark-check-fill');
+                                                                            icon.classList.remove('bi-heart');
+                                                                        } window.location.reload();
+
+                                                                        console.log(data.message);
+                                                                    } catch (error) {
+                                                                        console.error('เกิดข้อผิดพลาด:', error);
+                                                                    }
+                                                                }
+
+                                                                async function removeLike(icon) {
+                                                                    const newsId = icon.getAttribute('data-news-id');
+
+                                                                    try {
+                                                                        const response = await fetch(`/like/${newsId}`, {
+                                                                            method: 'DELETE'
+                                                                        });
+                                                                        const data = await response.json();
+                                                                        if (data.success) {
+                                                                            const index = like.findIndex(item => item.like_news_id === newsId);
+                                                                            if (index !== -1) {
+                                                                                like_id.splice(index, 1);
+                                                                            }
+                                                                            icon.classList.add('bi-heart');
+                                                                            icon.classList.remove('bi-heart-check-fill');
+                                                                        } window.location.reload();
+
+                                                                        console.log(data.message);
+                                                                    } catch (error) {
+                                                                        console.error('เกิดข้อผิดพลาด:', error);
+                                                                    }
+                                                                }
+                                                            </script>
+
+                                                            <div class="card-body-profile" style="margin-top: -15px;">
+                                                                <h5 class="card-title ">
+                                                                    <a href="/details/<%= profile.news_id %>" class="">
+                                                                        <!-- title -->
+                                                                        <b><%- profile.title %></b>
+                                                                    </a>
+
+
+                                                                </h5>
+                                                                <p class="card-text " style="font-size: 16;">
+                                                                    <!-- welding -->
+                                                                    <%- profile.welding_para %>
+                                                                </p>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <a style="font-size: 12px; color:#6e6e6e;">
+                                                                    <p style="font-size: small; "><i
+                                                                            class="bi bi-calendar2-week fa-xl"
+                                                                            style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
+                                                                        12 ส.ค. 66 - 19 ส.ค.
+                                                                        66
+                                                                    </p>
+                                                                    <!-- ชื่อ -->
+                                                                    <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
+                                                                    <% if (profile.profile_image) { %>
+                                                                        <img id="profilePicture"
+                                                                            class="img-account-profile rounded-circle mb-2"
+                                                                            style="height: 30px; padding-right:5px;" <%
+                                                                            const
+                                                                            imagePath=profile.profile_image.substring(6);
+                                                                            %>
+                                                                        src="<%= imagePath %>" alt="">
+                                                                            <% } else { %>
+                                                                                <img id="profilePicture"
+                                                                                    class="img-account-profile rounded-circle mb-2"
+                                                                                    style="height: 30px;padding-right:5px;"
+                                                                                    src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                                    alt="">
+                                                                                <% } %><%-profile.name %>
+                                                                                        <!-- อีเมล -->
+                                                                                        <i class="bi bi-envelope fa-sm"
+                                                                                            style="padding-right: 5px;padding-left:10px;"></i></i><%-profile.email
+                                                                                            %>
+                                                                                            <!-- วันที่ประกาศ -->
+                                                                                            <% const
+                                                                                                date=profile.time_stamp
+                                                                                                %>
+                                                                                                <% const newDate=new
+                                                                                                    Date(date); %>
+                                                                                                    <% newDate.setHours(newDate.getHours()
+                                                                                                        + 7); %>
+                                                                                                        <% const
+                                                                                                            formattedDate=new
+                                                                                                            Date(newDate).toISOString().substring(0,
+                                                                                                            19).replace('T', ' '
+                                                                                                            )%>
+                                                                                                            <p>โพสเมื่อ
+                                                                                                                <%- formattedDate
+                                                                                                                    %>
+                                                                                                            </p>
+                                                                </a>
+                                                            </div>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <%- include('../home/footer') %>
+</body>
+
+<script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
+</html>

@@ -17,8 +17,7 @@ const loginRouter = require('./loginRouter/loginRouter');
 router.use('/', loginRouter);
 
 //middel part-----------------------------------------------------------------
-const header = require('./PathRouter/MiddelPath/Header')
-router.use('header',header);
+
 
 //center component
 

@@ -81,9 +81,9 @@
                         aria-haspopup="true" aria-expanded="false" href="#">
                         Profile
                             <!-- Profile picture image-->
-                            <% if (header.profile_image) { %>
+                            <% if (profile_image) { %>
                                 <img id="profilePicture" class="img-account-profile rounded-circle "
-                                    style="height: 30px;" <% const imagePath=header.profile_image.substring(6); %>
+                                    style="height: 30px;" <% const imagePath=profile_image.substring(6); %>
                                 src="<%= imagePath %>" alt="">
                                     <% } else { %>
                                         <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
@@ -93,13 +93,13 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="dropdown-item">
-                            <a href="/profile/<%= header.id  %>">
+                            <a href="/profile">
                                 <div class="profile-card-h">
                                     <div class="image-h">
-                                        <% if (header.profile_image) { %>
+                                        <% if (profile_image) { %>
                                             <img id="profilePicture" class="img-account-profile rounded-circle "
                                                 style="height: 80px;" <% const
-                                                imagePath=header.profile_image.substring(6); %>
+                                                imagePath=profile_image.substring(6); %>
                                             src="<%= imagePath %>" alt="">
                                                 <% } else { %>
                                                     <img id="profilePicture" class="img-account-profile rounded-circle "
