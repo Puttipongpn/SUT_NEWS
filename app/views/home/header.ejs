@@ -47,45 +47,47 @@
 <body>
     <header>
         <div class="toppage d-flex justify-content-end">
-            <ul class="head ">
+            <ul class="head d-flex justify-content-center">
                 <li class="head-item head-dropdown" style="padding-left: 5px;">
                     <a class="head-link" id="Asetting_page" href="/setting_page">แก้ไขเว็ปเพจ</a>
                 </li>
                 <li class="head-item head-dropdown" style="padding-left: 8px;">
                     <a class="head-link" id="Arequest_ADMIN" href="/approve">รับคำร้องประกาศข่าว</a>
                 </li>
-                <li class="head-item head-dropdown" style="padding-left: 8px;">
+                <li class="head-item head-dropdown" style="margin-left: 8px;">
                     <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการคำร้องสมาชิกทางการ</a>
                 </li>
+                <li class="head-item ">
+                    <a class="head-link" style="margin-left: 8px;" href="/Section" id="section_setting">เพิ่ม section</a>
+                </li>
+                <li class="head-item ">
+                    <a class="head-link" style="margin-left: 8px;" href="/setting_news"
+                        id="setting_news">จัดการข่าวสาร</a>
+                </li>
+                <li class="head-item ">
+                    <a class="head-link" style="margin-left: 8px;" id="subscriber" href="/subscriber">การติดตาม</a>
+                </li>
                 <li class="head-item " style="padding-left: 8px;">
-                    <a class="head-link"  id="bookmake" href="/bookmark">ข่าวที่บันทึกไว้</a>
+                    <a class="head-link" id="bookmake" href="/bookmark">ข่าวที่บันทึกไว้</a>
                 </li>
-                <li class="head-item " style="padding-left: 8px;">
-                    <a class="head-link"  id="save_tags" href="/save_tags">แท็กที่บันทึกไว้</a>
+                <li class="head-item " style="margin-left: 8px;">
+                    <a class="head-link" id="save_tags" href="/save_tags">แท็กที่บันทึกไว้</a>
                 </li>
-                <li class="head-item ">
-                    <a class="head-link" href="/setting_news" id="setting_news">จัดการข่าวสาร</a>
-                </li>
-                <li class="head-item ">
-                    <a class="head-link" href="/Section" id="section_setting">เพิ่ม section</a>
-                </li>
-                <li class="head-item ">
-                    <a class="head-link" id="subscriber" href="/subscriber">กำลังติดตาม</a>
-                </li>
+
                 <li class="head-item ">
                     <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false" href="#">
                         Profile
-                            <!-- Profile picture image-->
-                            <% if (profile_image) { %>
-                                <img id="profilePicture" class="img-account-profile rounded-circle "
-                                    style="height: 30px;" <% const imagePath=profile_image.substring(6); %>
-                                src="<%= imagePath %>" alt="">
-                                    <% } else { %>
-                                        <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
-                                            style="height: 30px;"
-                                            src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                        <% } %>
+                        <!-- Profile picture image-->
+                        <% if (profile_image) { %>
+                            <img id="profilePicture" class="img-account-profile rounded-circle " style="height: 30px;"
+                                <% const imagePath=profile_image.substring(6); %>
+                            src="<%= imagePath %>" alt="">
+                                <% } else { %>
+                                    <img id="profilePicture" class="img-account-profile rounded-circle mb-2"
+                                        style="height: 30px;" src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                        alt="">
+                                    <% } %>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <div class="dropdown-item">
@@ -94,8 +96,7 @@
                                     <div class="image-h">
                                         <% if (profile_image) { %>
                                             <img id="profilePicture" class="img-account-profile rounded-circle "
-                                                style="height: 80px;" <% const
-                                                imagePath=profile_image.substring(6); %>
+                                                style="height: 80px;" <% const imagePath=profile_image.substring(6); %>
                                             src="<%= imagePath %>" alt="">
                                                 <% } else { %>
                                                     <img id="profilePicture" class="img-account-profile rounded-circle "
@@ -118,7 +119,7 @@
                         </div>
 
                         <div class="dropdown-item">
-                            <a href="/setting_profile" id="setting_profile">
+                            <a href="/setting_profile" style="padding-left: 5px;" id="setting_profile">
                                 <div style="padding-left: 5px;">
                                     setting profile
                                 </div>
@@ -128,7 +129,7 @@
                             <a id="Logout" href="/logout" style="padding-left: 30px;">logout</a>
                         </div>
                         <div class="dropdown-item">
-                            <a id="LOGIN" href="/logout">login</a>
+                            <a id="LOGIN"style="padding-left: 35px;" href="/logout">login</a>
                         </div>
                     </div>
                 </li>
@@ -239,7 +240,7 @@
                 role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('subscriber');
-            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN'|| currentUser.role === 'USER') {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN' || currentUser.role === 'USER'  ) {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
@@ -250,7 +251,7 @@
                 role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('save_tags');
-            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN'|| currentUser.role === 'USER') {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN' || currentUser.role === 'USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
