@@ -99,18 +99,20 @@
 
 
                                             </td>
-                                            <td><%- settingnews.formattedDate %></td>
+                                            <td style="width: 8px; max-width: 8px; word-wrap: break-word; white-space: normal;"><%- settingnews.formattedDate %></td>
                                             <td style="width: 12px; max-width: 12px; word-wrap: break-word; white-space: normal;"><%- settingnews.response %></td>
                                             <td class="text-start" style=" justify-content: space-between;">
-                                                <a href="/details/<%= settingnews.news_id %>" class="view"><i class="material-icons" data-toggle="view" title="view">&#xe8ff;</i></a><br>
-                                                <a href="/addnews/<%= settingnews.news_id %>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a><br>
-                                                <form action="/setting_news/delete_news/<%= settingnews.news_id %>" method="POST">
-                                                    <button type="submit" style="background: none; border: none;">
-                                                        <i class="fa-solid fa-trash fa-lg" style="color: #d01616;"></i>
-                                                    </button>
-                                                </form>
+                                                <div style="display: flex; align-items: center; justify-content: center;">
+                                                    <a href="/details/<%= settingnews.news_id %>" class="view" style="margin-right: 5%;"><i class="material-icons" style="font-size: xx-large;" data-toggle="view" title="view">&#xe8ff;</i></a>
+                                                    <a href="/addnews/<%= settingnews.news_id %>" class="edit" style="margin-right: 5%;"><i class="material-icons" style="font-size: xx-large;" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                                    <form action="/setting_news/delete_news/<%= settingnews.news_id %>" method="POST">
+                                                        <button type="submit" style="background: none; border: none;">
+                                                            <i class="fa-solid fa-trash fa-xl "data-toggle="Delete" title="Delete" style="color: #d01616;"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
+                                                
                                             </td>
-                                            
                                         </tr>
                                         <% }); %>
                                 </tbody>
