@@ -34,34 +34,33 @@
 <body>
   <%- include('../home/header') %>
     <%- include('../home/nav') %>
-      <div class="container mt-3">
+      <div class="container mt-3" style="margin-bottom: 3%;">
         <h2 style="text-align: center; margin-top: 5%; margin-bottom: 3%;"><b>Request News</b></h2>
         <a href="/approve/his_approve"><button type="button" class="btn btn-primary mb-3">History Approve</button></a>
         <div class="table-responsive">
         <table id="example" class="table table-striped" style="width:100%">
           <thead>
             <tr>
-              <th data-field="id" style="width: 3%;">ID</th>
-              <th data-field="newsid"style="width: 3%;">News_ID</th>
+              <th data-field="id" style="width: 4%;">ID</th>
+              <th data-field="newsid"style="width: 10%;">News_ID</th>
               <th data-field="title"style="width: 20%;">Title</th>
-              <th data-field="welding"style="width: 20%;">Welding</th>
+              <th data-field="welding"style="width: 30%;">Welding</th>
               <th data-field="writer"style="width: 10%;">Writer</th>
               <th data-field="date"style="width: 10%;">Post Date</th>
-              <th data-field="view"style="width: 3%;" data-formatter="operateFormatter" data-events="operateEvents">View
-              </th>
-              <th data-field="decide"style="width: 3%;" data-formatter="Formatter" data-events="operateEvents">Decide</th>
+              <th data-field="view"style="width: 8%;" data-formatter="operateFormatter" data-events="operateEvents">View</th>
+              <th data-field="decide"style="width: 8%;" data-formatter="Formatter" data-events="operateEvents">Decide</th>
             </tr>
           </thead>
           <tbody>
             <% index=0 %>
               <% approve.forEach((approve,index)=> { %>
                 <tr>
-                  <td> <%- index+1 %></td>
-                  <td><%- approve.news_id %></td>
-                  <td><%- approve.title %></td>
-                  <td><%- approve.welding_para %></td>
-                  <td><%- approve.user_name %></td>
-                  <td><%- approve.formattedDate %></td>
+                  <td><%- index+1 %></td>
+                  <td style="width: 10px; max-width: 10px; word-wrap: break-word; white-space: normal;"><%- approve.news_id %></td>
+                  <td style="width: 20px; max-width: 20px; word-wrap: break-word; white-space: normal;"><%- approve.title %></td>
+                  <td style="width: 30px; max-width: 30px; word-wrap: break-word; white-space: normal;"><%- approve.welding_para %></td>
+                  <td style="width: 15px; max-width: 10px; word-wrap: break-word; white-space: normal;"><%- approve.user_name %></td>
+                  <td style="width: 10px; max-width: 10px; word-wrap: break-word; white-space: normal;"><%- approve.formattedDate %></td>
                   <td><a href="/details/<%= approve.news_id %>"><i class="bi bi-arrow-up-circle fa-xl" style="margin-left: 25%;"></i></a></td>
                   <td><a href="/approve/<%= approve.news_id %>"><i class="bi bi-plus-circle fa-xl" style="margin-left: 35%;"></i></a></td>
                 </tr>
@@ -81,7 +80,8 @@
           $('#example').DataTable({
             //disable sorting on last column
             "columnDefs": [
-              { "orderable": false, "targets": 5 }
+              { "orderable": false, "targets": 6 },
+              { "orderable": false, "targets": 7 }
             ],
             language: {
               //customize pagination prev and next buttons: use arrows instead of words
@@ -107,88 +107,90 @@
 
 </body>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
   .wrapper {
-    margin-top: 5vh;
+      margin-top: 5vh;
   }
 
   .dataTables_filter {
-    float: right;
+      float: right;
   }
 
   .table-hover>tbody>tr:hover {
-    background-color: #ccffff;
+      background-color: #ccffff;
   }
 
   @media only screen and (min-width: 768px) {
-    .table {
-      table-layout: fixed;
-      max-width: 100% !important;
-    }
+      .table {
+          table-layout: fixed;
+          max-width: 100% !important;
+      }
   }
 
   thead {
-    background: #ddd;
+      background: #ddd;
   }
 
   .table td:nth-child(2) {
-    overflow: hidden;
-    text-overflow: ellipsis;
+      overflow: hidden;
+      text-overflow: ellipsis;
   }
 
   .highlight {
-    background: #ffff99;
+      background: #ffff99;
   }
 
   @media only screen and (max-width: 767px) {
 
-    /* Force table to not be like tables anymore */
-    table,
-    thead,
-    tbody,
-    th,
-    td,
-    tr {
-      display: block;
-    }
+      /* Force table to not be like tables anymore */
+      table,
+      thead,
+      tbody,
+      th,
+      td,
+      tr {
+          display: block;
+      }
 
-    /* Hide table headers (but not display: none;, for accessibility) */
-    thead tr,
-    tfoot tr {
-      position: absolute;
-      top: -9999px;
-      left: -9999px;
-    }
+      /* Hide table headers (but not display: none;, for accessibility) */
+      thead tr,
+      tfoot tr {
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+      }
 
-    td {
-      /* Behave  like a "row" */
-      border: none;
-      border-bottom: 1px solid #eee;
-      position: relative;
-      padding-left: 50% !important;
-    }
+      td {
+          /* Behave  like a "row" */
+          border: none;
+          border-bottom: 1px solid #eee;
+          position: relative;
+          padding-left: 50% !important;
+      }
 
-    td:before {
-      /* Now like a table header */
-      position: absolute;
-      /* Top/left values mimic padding */
-      top: 6px;
-      left: 6px;
-      width: 45%;
-      padding-right: 10px;
-      white-space: nowrap;
-    }
+      td:before {
+          /* Now like a table header */
+          position: absolute;
+          /* Top/left values mimic padding */
+          top: 6px;
+          left: 6px;
+          width: 45%;
+          padding-right: 10px;
+          white-space: nowrap;
+      }
 
-    .table td:nth-child(1) {
-      background: #ccc;
-      height: 100%;
-      top: 0;
-      left: 0;
-      font-weight: bold;
-    }
+      .table td:nth-child(1) {
+          background: #ccc;
+          height: 100%;
+          top: 0;
+          left: 0;
+          font-weight: bold;
+      }
 
-    /*
-  Label the data
-  */
+      /*
+Label the data
+*/
     td:nth-of-type(1):before {
       content: "ID";
     }
@@ -210,13 +212,48 @@
     }
 
     td:nth-of-type(6):before {
-      content: "Post_Date";
+      content: "date";
     }
-
+    td:nth-of-type(7):before {
+      content: "view";
+    }
+    td:nth-of-type(8):before {
+      content: "decide";
+    }
     .dataTables_length {
       display: none;
     }
-  
+  }
+
+  /* Add border to table */
+  table {
+      border-collapse: collapse;
+      width: 100%;
+  }
+
+  /* Style for table header */
+  th {
+      background-color: #f2f2f2;
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+  }
+
+  /* Style for table data (even rows) */
+  tr:nth-child(even) {
+      background-color: #f2f2f2;
+  }
+
+  /* Style for table data (odd rows) */
+  tr:nth-child(odd) {
+      background-color: #ffffff;
+  }
+
+  /* Style for table data cells */
+  td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
   }
 </style>
 
