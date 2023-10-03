@@ -61,7 +61,7 @@
                     <a class="head-link"  id="bookmake" href="/bookmark">ข่าวที่บันทึกไว้</a>
                 </li>
                 <li class="head-item " style="padding-left: 8px;">
-                    <a class="head-link"  id="" href="/save_tags">แท็กที่บันทึกไว้</a>
+                    <a class="head-link"  id="save_tags" href="/save_tags">แท็กที่บันทึกไว้</a>
                 </li>
                 <li class="head-item ">
                     <a class="head-link" href="/setting_news" id="setting_news">จัดการข่าวสาร</a>
@@ -70,7 +70,7 @@
                     <a class="head-link" href="/Section" id="section_setting">เพิ่ม section</a>
                 </li>
                 <li class="head-item ">
-                    <a class="head-link" href="/subscriber">กำลังติดตาม</a>
+                    <a class="head-link" id="subscriber" href="/subscriber">กำลังติดตาม</a>
                 </li>
                 <li class="head-item ">
                     <a style="margin-top: 3px;" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -128,7 +128,7 @@
                             <a id="Logout" href="/logout" style="padding-left: 30px;">logout</a>
                         </div>
                         <div class="dropdown-item">
-                            <a id="LOGIN" href="/">login</a>
+                            <a id="LOGIN" href="/logout">login</a>
                         </div>
                     </div>
                 </li>
@@ -227,9 +227,30 @@
             var currentUser = {
                 role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
-            console.log(currentUser.role)
             var userButton = document.getElementById('setting_news');
             if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            var userButton = document.getElementById('subscriber');
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN'|| currentUser.role === 'USER') {
+                userButton.style.display = 'block'; // แสดงปุ่ม
+            } else {
+                userButton.style.display = 'none'; // ซ่อนปุ่ม
+            }
+        </script>
+        <script>
+            var currentUser = {
+                role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
+            };
+            var userButton = document.getElementById('save_tags');
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN'|| currentUser.role === 'USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม

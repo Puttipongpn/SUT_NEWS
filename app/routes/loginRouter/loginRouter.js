@@ -29,47 +29,6 @@ router.use((req, res, next) => {
     res.locals.dayFormat = dayFormat;
     next();
 });
-// Middleware functions
-
-// // Root Page
-// router.get('/', ifNotLoggedin, (req, res, next) => {
-//     // Your code here
-//     console.log('Session expires at:', req.session.cookie.expires); // แสดงเวลาหมดอายุของเซสชันในรูปแบบ timestamp
-//     console.log('Session max age:', req.session.cookie.maxAge); // แสดงค่าเวลาที่เหลืออยู่ในเซสชันในรูปแบบมิลลิวินาที
-//     console.log(req.session.header)
-//     dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2")
-//         .then(([rows]) => {
-//             const otherRows = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1");
-//             if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
-//                 dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
-//                     .then(([Bookmark]) => {
-//                         res.render('home/centerpage', {
-//                             bookmark_id: Bookmark,
-//                             center: rows,
-//                             Center: rows[0],
-//                             header: req.session.header,
-//                             // newsname: rows[0].name,
-//                             // newsrole:  rows[0].role,
-//                             // newsuser_name:  rows[0].user_name,
-//                             // newsemail:  rows[0].email,
-//                             // newsprofile_image:  rows[0].profile_image,
-//                         })
-
-//                     });
-//             } else {
-//                 dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;")
-//                     .then(([rows]) => {
-//                         res.render('home/centerpage', {
-//                             center: rows,
-//                             name: "Guest",
-//                             role: "Guest",
-//                             user_name: "Guest",
-//                             email: "Guest",
-//                         })
-//                     })
-//             }
-//         });
-// });
 
 router.get('/', ifNotLoggedin, async (req, res, next) => {
     try {
@@ -82,14 +41,14 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
         // ทำคำสั่ง SQL ดึงข้อมูลสไลด์บาร์ข่าวหลัก
         const top_slidebar = await dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 AND approve_news.location_post_id = 1 ORDER BY news.news_id DESC");
 
-        if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER") {
+        if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER" || req.session.role == "GUEST") {
             const Bookmark = await dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID]);
             const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
             const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
             const CommentCounts = Count_Like[0].reduce((bcc, comment) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
-            }, {});console.log(CommentCounts)
+            }, {});
             dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")
                 .then(([likeRows]) => {
                     const likeCounts = likeRows.reduce((acc, like) => {
@@ -115,6 +74,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
         } else {
             const [rows] = await dbConnection.execute("SELECT * FROM news LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN users ON users.id = news.user_id ;");
             res.render('home/centerpage', {
+                
                 center: rows,
                 name: "Guest",
                 role: "Guest",
@@ -128,6 +88,36 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
+// เส้นทางสำหรับเข้าสู่ระบบเป็นผู้เยี่ยมชม (Guest)
+// router.get('/login-as-guest', async (req, res, next) => {
+//     try {
+//         const guestData = {
+//             id: 5,
+//             role: 'OFFICIAL USER',
+//             user_name: "P'Cream Sudarat",
+//             name: 'Cream',
+//             email: 'c@gmail.com',
+//             gender: 'female',
+//             password: '$2b$12$d5G7emhWbrTzJtpbBTdtVOqEZ1IaQez1FgxCqwCWHchUizaFsBqy6',
+//             profile_image: 'public\\images\\users_picture\\205551038_516695639758007_8769628568148858641_n.jpg'
+//         };
+//         req.session.header = guestData;
+//         req.session.isLoggedIn = true;
+
+//         res.render('home/centerpage', {
+//             header:  req.session.header,
+//             profile_image:guestData.profile_image,
+//         });
+//     } catch (error) {
+//         // จัดการข้อผิดพลาดที่เกิดขึ้น
+//         console.error(error);
+//         res.status(500).send("Internal Server Error");
+//     }
+// });
+
+
+
 
 
 // REGISTER PAGE
@@ -245,6 +235,121 @@ router.post('/', ifLoggedin, [
         });
     }
 });
+
+
+// Login Route
+
+router.post('/login-as-guest', ifLoggedin, (req, res) => {
+    // Your code here
+    const validation_result = validationResult(req);
+    const user_pass = "123456";
+    const user_email = "guest2";
+    //const { user_pass, user_email } = req.body;
+    if (validation_result.isEmpty()) {
+        dbConnection.execute("SELECT * FROM `users` WHERE `email`=?", [user_email])
+            .then(([rows]) => {
+                bcrypt.compare(user_pass, rows[0].password).then(compare_result => {
+                    if (compare_result === true) {
+                        dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [rows[0].id])
+                            .then(([Bookmark]) => {
+                                req.session.bookmark_id = Bookmark;
+                                req.session.isLoggedIn = true;
+                                req.session.header = rows[0];
+                                req.session.userID = rows[0].id;
+                                req.session.name = rows[0].name; // กำหนดค่าชื่อผู้ใช้ใน session
+                                req.session.user_name = rows[0].user_name;
+                                req.session.email = rows[0].email;
+                                req.session.role = rows[0].role; // กำหนดค่าบทบาทผู้ใช้ใน session 
+                                req.session.profile_image = rows[0].profile_image;
+                                res.redirect('/');
+                            })
+                    }
+                    else {
+                        res.render('login2', {
+                            login_errors: ['Invalid Password!']
+                        });
+                    }
+                })
+                    .catch(err => {
+                        if (err) throw err;
+                    });
+
+
+            }).catch(err => {
+                if (err) throw err;
+            });
+    }
+    else {
+        let allErrors = validation_result.errors.map((error) => {
+            return error.msg;
+        });
+        // REDERING login-register PAGE WITH LOGIN VALIDATION ERRORS
+        res.render('login2', {
+            login_errors: allErrors
+        });
+    }
+});
+
+
+// // เส้นทางสำหรับล็อกอินผู้เยี่ยมชม
+// router.post('/login-as-guest', ifNotLoggedin, [
+//     body('user_pass', 'Password is empty!').trim().not().isEmpty(),
+//     // Validation and authentication logic
+// ], (req, res) => {
+//     // กำหนดชื่อผู้ใช้ที่คุณต้องการเป็นค่าคงที่
+//     const guestUserName = "Guest2"; // ตั้งค่าชื่อผู้ใช้ที่คุณต้องการ
+
+//     const validation_result = validationResult(req);
+//     const { user_pass } = req.body;
+
+//     if (validation_result.isEmpty()) {
+//         // ในกรณีนี้คุณไม่ต้องตรวจสอบชื่อผู้ใช้
+//         // เพราะคุณกำหนดชื่อผู้ใช้ไว้ใน guestUserName แล้ว
+//         // ตรวจสอบรหัสผ่านเท่านั้น
+
+//         // เช็ครหัสผ่านที่คุณต้องการ เช่นเช็ครหัสผ่านกับรหัสผ่าน Guest
+//         const isPasswordValid = (user_pass === '123456'); // ตั้งค่ารหัสผ่าน Guest ที่คุณต้องการ
+
+//         if (isPasswordValid) {
+//             // ถ้ารหัสผ่านถูกต้อง กำหนดข้อมูลผู้เยี่ยมชม
+//             const guestData = {
+//                 id: 20,
+//                 role: 'GUEST',
+//                 user_name: "GUEST",
+//                 name: 'GUEST',
+//                 email: 'Guest2@gmail.com',
+//                 gender: 'GUEST',
+//                 password: '$2b$12$c36ho0JftBlqblhGeghpvuBdDkvCvbPgomWf940pLNHy2j.jt0hZ6',
+//                 profile_image: 'public\\images\\users_picture\\205551038_516695639758007_8769628568148858641_n.jpg'
+//             };
+
+//             // เก็บข้อมูลผู้เยี่ยมชมใน req.session.header
+//             req.session.header = guestData;
+//             req.session.isLoggedIn = true;
+//             req.session.userID = guestData.id;
+//             req.session.name = guestData.name;
+//             req.session.user_name = guestData.user_name;
+//             req.session.email = guestData.email;
+//             req.session.role = guestData.role;
+//             req.session.profile_image = guestData.profile_image;
+
+//             res.redirect('/');
+//         } else {
+//             res.render('login2', {
+//                 login_errors: ['Invalid Password!']
+//             });
+//         }
+//     } else {
+//         let allErrors = validation_result.errors.map((error) => {
+//             return error.msg;
+//         });
+//         // REDERING login-register PAGE WITH LOGIN VALIDATION ERRORS
+//         res.render('login2', {
+//             login_errors: allErrors
+//         });
+//     }
+// });
+
 // LOGOUT
 router.get('/logout', (req, res) => {
     //session destroy

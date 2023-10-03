@@ -46,11 +46,18 @@
                                                         <%= error_msg %>
                                                     </div>
                                                     <% }); } %>
-                                                        <button type="submit" class="btn btn-primary" style="margin-top: 40px;">Login</button>
-                                                    <div>
-                                                        <a class="nav-link"   href="centerpage" style="margin-top: 20px;">LOG IN AS A GUEST</a>
-                                                    </div>
+                                                        <button type="submit" class="btn btn-primary"
+                                                            style="margin-top: 40px;">Login</button>
                                             </form>
+                                            <div class="d-flex alias-items-center justify-content-center">
+                                                <form method="post" action="/login-as-guest">
+                                                    <button type="submit" class="nav-link" style="margin-top: 20px;">
+                                                        LOGINAS A GUEST  
+                                                    </button>
+                                                </form>
+                                            </div>
+
+
                                         </div>
                                     </div>
                                 </div>
@@ -84,11 +91,12 @@
                                                         <%= error_msg %>
                                                     </div>
                                                     <% }); } %>
-                                                        <button type="submit" class="btn btn-success" style="margin-top: 20px;">Sign Up</button>
+                                                        <button type="submit" class="btn btn-success"
+                                                            style="margin-top: 20px;">Sign Up</button>
                                             </form>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>

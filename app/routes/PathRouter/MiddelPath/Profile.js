@@ -50,7 +50,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                 .then(([likeRows]) => {
                                     const likeCounts = likeRows.reduce((acc, like) => {
                                         acc[like.like_news_id] = like.like_count;
-                                        console.log(acc)
                                         return acc;
                                     }, {});
                                     res.render('center/profile_session', {
