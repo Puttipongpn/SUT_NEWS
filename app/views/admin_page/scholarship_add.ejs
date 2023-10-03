@@ -53,7 +53,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                     
+                                        <% console.log(tags) %>
                                             <% tags.forEach((tags , index)=> { %>
                                                 <% if (tags.section_id) { %>
                                                     <tr>
@@ -69,7 +69,7 @@
                                                                     class="bi bi-info-circle-fill " id="viewIcon"
                                                                     style="margin-left: 9px;"></i></a></td>
                                                         <td class="small-column"><i class="bi bi-archive-fill"
-                                                                id="deleteIcon" data-tags-id="<%= tags.save_tags_id %>"
+                                                                id="deleteIcon" data-tags-id="<%= tags.scholarship_id %>"
                                                                 style="margin-left: 13px;"
                                                                 onclick="deletetags(this)"></i>
                                                         </td>
@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="col-12 col-md-4 mt-2 d-flex align-items-end"
                                     style="padding-block-end: 10px;">
-                                    <a href="/save_tags">
+                                    <a href="/scholarship">
                                         <button type="submit" class="btn btn-warning" id="saveButton">BACK</button>
                                     </a>
                                 </div>
@@ -122,7 +122,7 @@
 
                         try {
                             // ส่งค่า ID ไปบันทึก
-                            const response = await fetch(`/setting_save_tags/${selectedId}`, {
+                            const response = await fetch(`/scholarship/scholarship_save_tags/${selectedId}`, {
                                 method: 'POST'
                                 // ตรวจสอบว่าคุณต้องการใส่ headers, body หรืออื่น ๆ ตามที่เหมาะสม
                             })
@@ -146,7 +146,7 @@
             <script>
                 function deletetags(icon) {
                     const tags_id = icon.getAttribute('data-tags-id');
-                    fetch(`/setting_save_tags/${tags_id}`, {
+                    fetch(`/scholarship/scholarship_delete_tags/${tags_id}`, {
                         method: 'DELETE',
                         headers: {
                             'Content-Type': 'application/json'
@@ -171,7 +171,7 @@
                 const dataSelect_tags = document.getElementById('news_type_select');
 
                 // ดึงข้อมูลจากฐานข้อมูล
-                fetch('/addnews/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+                fetch('/scholarship/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
                     .then(response => response.json())
                     .then(data => {
                         // สร้างตัวเลือกใน datalist
