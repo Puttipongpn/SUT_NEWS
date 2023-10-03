@@ -15,7 +15,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
             }, {});
-        dbConnection.execute("SELECT DISTINCT news.*,users.* FROM news LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id LEFT JOIN scholarship ON scholarship.sc_section_id = group_section.section_id LEFT JOIN users ON users.id = news.user_id WHERE scholarship.sc_section_id = group_section.section_id  ORDER BY news.news_id DESC;")
+        dbConnection.execute("SELECT DISTINCT news.*,users.* FROM news LEFT JOIN group_section ON group_section.news_id = news.news_id LEFT JOIN section ON section.section_id = group_section.section_id LEFT JOIN scholarship ON scholarship.sc_section_id = group_section.section_id LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE scholarship.sc_section_id = group_section.section_id AND approve_news.status_id = 2  ORDER BY news.news_id DESC;")
             .then(([rows]) => {
                 if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
