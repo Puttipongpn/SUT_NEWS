@@ -65,6 +65,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         Center: rows[0],
                         Top_slidebar: top_slidebar,
                         top_slidebar: top_slidebar[0],
+                        role:req.session.role,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
                         likeCounts: likeCounts,

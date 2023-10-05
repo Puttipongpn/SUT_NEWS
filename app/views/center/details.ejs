@@ -183,18 +183,74 @@
                         <b style="font-size: 18px;">Comment</b>
                     </div>
                 </div>
-                <div class="row g-0 d-flex justify-content-center align-items-center">
-                    <div class="col-md-12 ">
-                        <div class="card-body">
-                            <div id="editor">
+                <% if (role==="GUEST" ) { %>
+                    <div class="row g-0 d-flex justify-content-center align-items-center">
+                        <div class="col-md-12 ">
+                            <div class="card-body">
+                                <div >
+                                    <div class="d-flex justify-content-center align-items-center ">
+                                      <p>เข้าสู้ระบบเพื่อแสดงความคิดเห็น</p>   
+                                    </div>
+                                    <div class="d-flex justify-content-center align-items-center ">
+                                        <style>
+                                            .btn-logout{
+                                            background-image: linear-gradient(90deg, rgba(25, 136, 247, 1) 0%, rgba(247, 25, 136, 1) 100%);
+                                            border: 1px solid #ffffff;
+                                            border-radius: 15px;
+                                            }
+                                            .btn-logout:hover{
+                                                color: rgb(255, 255, 255);
+                                                background-color: #000;
+                                            }
+                                            .btn-logout span {
+                                                cursor: pointer;
+                                                display: inline-block;
+                                                position: relative;
+                                                transition: 0.5s;
+                                                font-size: 16px;
+                                                color: #ffffff;
+                                            }
+                                        
+                                            .btn-logout span:after {
+                                                position: absolute;
+                                                opacity: 0;
+                                                top: 0;
+                                                right: -20px;
+                                                transition: 0.5s;
+                                            }
+                                        
+                                            .btn-logout:hover span {
+                                                padding-right: 10px;
+                                                padding-left: 10px;
+                                            }
+                                        
+                                            .btn-logout:hover span:after {
+                                                opacity: 1;
+                                                right: 0;
+                                            }
+                                        </style>
+                                        <button id="logoutButton" class="btn btn-logout" onclick="logout()"><span>Login</span></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class=" d-flex justify-content-end align-items-center"
-                    style="padding: 10px;padding-right:20px;margin-top:-10px">
-                    <button class="btn btn-primary" onclick="saveComment()">Comment</button>
-                </div>
+                    <% } else { %>
+                        <div class="row g-0 d-flex justify-content-center align-items-center">
+                            <div class="col-md-12 ">
+                                <div class="card-body">
+                                    <div id="editor">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class=" d-flex justify-content-end align-items-center"
+                            style="padding: 10px;padding-right:20px;margin-top:-10px">
+                            <button class="btn btn-primary" onclick="saveComment()">Comment</button>
+                        </div>
+                        <% }%>
+
+
             </div>
             <% comment.forEach(comment=> { %>
                 <div class="card mb-3 mt-2" style="max-width: auto;">
@@ -248,6 +304,31 @@
                     </div>
                 </div>
                 <% }) %>
+
+                <script>
+                    function logout() {
+                        // ส่งคำขอ GET ไปยังเส้นทาง '/logout'
+                        fetch('/logout', {
+                            method: 'GET',
+                        })
+                        .then(response => {
+                            // หากสำเร็จ, คุณอาจต้องจัดการการเปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่นตามที่คุณต้องการ
+                            // ตัวอย่างเช่น:
+                            if (response.ok) {
+                                alert('โปรดเข้าสู่ระบบก่อนใช้งาน');
+                                window.location.href = '/'; // เปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่น
+                            } else {
+                                // จัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้น
+                                console.error('ไม่สามารถออกจากระบบได้');
+                            }
+                        })
+                        .catch(error => {
+                            // จัดการข้อผิดพลาดที่เกิดขึ้นในการส่งคำขอ
+                            console.error('ข้อผิดพลาดในการส่งคำขอ:', error);
+                        });
+                    }
+                    
+                </script>
 
                     <script>
                         var quill = new Quill('#editor', {
