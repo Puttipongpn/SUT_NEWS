@@ -248,7 +248,8 @@ router.get('/general', ifNotLoggedin, (req, res, next) => {
                 if (req.session.role === "ADMIN") {
                     res.render('admin_page/general_subject', {
                         tags: rows,
-                        header: req.session.header
+                        header: req.session.header,
+                        profile_image: req.session.profile_image
                     });
                 } else {
                     res.render('404page', {

@@ -64,6 +64,7 @@
                                 <input class="form-control" type="text" placeholder="add news section"
                                     name="section_name" aria-label="">
                                 <button class="btn btn-warning me-2  ml-3" type="submit">Add</button>
+                            </form>
                         </div>
                     </div>
                     <div class="container px-2">
@@ -85,12 +86,14 @@
                                                     <%- section.section_id %>
                                                 </p>
                                             </td>
-                                            <td style="width: 55px; max-width: 55px; word-wrap: break-word; white-space: normal;">
+                                            <td
+                                                style="width: 55px; max-width: 55px; word-wrap: break-word; white-space: normal;">
                                                 <p class="fw-normal mb-1">
                                                     <%- section.section_name %>
                                                 </p>
                                             </td>
-                                            <td style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;">
+                                            <td
+                                                style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;">
                                                 <p class="fw-normal mb-1">
                                                     <%- section.user_name %>
                                                 </p>
@@ -131,7 +134,7 @@
                                 $(document).ready(function () {
                                     $('#example').DataTable({
                                         //disable sorting on last column
-                                       
+
                                         language: {
                                             //customize pagination prev and next buttons: use arrows instead of words
                                             'paginate': {

@@ -41,7 +41,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
             bcc[comment.c_news_id] = comment.comment_count;
             return bcc;
         }, {});
-        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [req.session.userID])
+        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id  WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [req.session.userID])
             .then(([rows]) => {
                 if (rows) {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
@@ -61,6 +61,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         name:req.session.name,
                                         email:req.session.email,
                                         role:req.session.role,
+                                        description:req.session.description,
                                         profile: rows[0],
                                         profile_image:req.session.profile_image ,
                                         subscribe: sub[0],
@@ -93,7 +94,7 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
             bcc[comment.c_news_id] = comment.comment_count;
             return bcc;
         }, {});
-        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [user_id])
+        dbConnection.execute("SELECT * FROM users LEFT JOIN news ON users.id = news.user_id LEFT JOIN topic ON news.topic_id = topic.topic_id LEFT JOIN news_type ON news.news_type_id = news_type.news_type_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id LEFT JOIN user_request ON user_request.user_id = users.id WHERE users.id = ? and approve_news.status_id = 2 ORDER BY news.news_id DESC;", [user_id])
             .then(([rows]) => {
                 if (rows) {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
@@ -102,7 +103,6 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
                                 .then(([likeRows]) => {
                                     const likeCounts = likeRows.reduce((acc, like) => {
                                         acc[like.like_news_id] = like.like_count;
-                                        console.log(acc)
                                         return acc;
                                     }, {});
                                     res.render('center/profile', {

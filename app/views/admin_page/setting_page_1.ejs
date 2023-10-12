@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/stylesheets/setting_page.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Document</title>
+</head>
+
+
+<body>
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+            <div class="container light-style flex-grow-1 container-p-y">
+
+                <h4 class="font-weight-bold py-3 mb-4">
+                    Wabsite settings NAVBAR
+                </h4>
+
+                <div class="card overflow-hidden">
+                    <div class="row no-gutters row-bordered row-border-light">
+                        <div class="col-md-3 pt-0">
+                            <div class="list-group list-group-flush account-settings-links">
+                                <a class="list-group-item" href="/setting_page/setting_page_1"><b>Setting navbar</b></a>
+                                <a class="list-group-item" href="/setting_page/setting_page_2">Setting Footer</a>
+                                <a class="list-group-item" href="/setting_page/setting_page_3">Setting Topic</a>
+                                <a class="list-group-item" href="/setting_page/setting_page_4">Setting main menu</a>
+                            </div>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="tab-content">
+                                <div class="" >
+                                    <form method="post"
+                                        action="/setting_page/update_website/<%= website[0].website_id %>"
+                                        enctype="multipart/form-data">
+                                        <div class="card d-flex justify-content-between align-items-center">
+                                            <div class="card-body">
+                                                <b>LOGO WEBSITE</b>
+                                            </div>
+
+                                            <div class="media align-items-center">
+                                                <div class="card-body text-center">
+                                                    <!-- Profile picture image-->
+                                                    <% if (website[0].website_picture) { %>
+                                                        <img id="profilePicture-s"
+                                                            class="img-account-profile rounded-circle mb-2"
+                                                            style="height: 150px;" <% const
+                                                            imagePath=website[0].website_picture.substring(6); %>
+                                                        src="<%= imagePath %>" alt="">
+                                                            <% } else { %>
+                                                                <img id="profilePicture-s"
+                                                                    class="img-account-profile rounded-circle mb-2"
+                                                                    src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                    style="height: 150px;" alt="">
+                                                                <% } %>
+                                                                    <!-- Profile picture help block-->
+                                                                    <div class="small font-italic text-muted mb-4">JPG
+                                                                        or
+                                                                        PNG no
+                                                                        larger
+                                                                        than 5 MB And Picture size 2048 x 2048 pixels
+                                                                    </div>
+                                                                    <!-- Profile picture upload button-->
+                                                                    <!-- <input id="profileImage" type="file" class="btn btn-primary"name="profile_image"
+                                                        style="height: 38px; padding-top:4px"> -->
+                                                                    <input type="file" id="profileImage"
+                                                                        name="website_picture" style="display: none;"
+                                                                        onchange="previewImage(this);">
+                                                                    <label for="profileImage" class="btn btn-warning"
+                                                                        type="button">Upload new image</label>
+                                                                    <!-- Preview image container -->
+                                                                    <div id="imagePreview" style="display: none;"></div>
+                                                </div>
+                                                <script>
+                                                    function previewImage(input) {
+                                                        if (input.files && input.files[0]) {
+                                                            var reader = new FileReader();
+
+                                                            reader.onload = function (e) {
+                                                                document.getElementById('profilePicture-s').src = e.target.result;
+                                                            }
+
+                                                            reader.readAsDataURL(input.files[0]);
+
+                                                            // แสดงภาพที่เลือกในตัวอย่างตัวอย่างด้านล่าง
+                                                            var imagePreview = document.getElementById('imagePreview');
+                                                            imagePreview.style.display = 'block';
+                                                            imagePreview.innerHTML = '<img src="' + e.target.result + '" class="img-fluid">';
+                                                        }
+                                                    }
+                                                </script>
+                                            </div>
+                                        </div>
+                                        <hr class="border-light m-0">
+                                        <div class="card mt-2" style="padding-block-end: 10px;">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <label class="form-label">website name</label>
+                                                    <input type="text" class="form-control mb-1" name="website_name"
+                                                        value="<%= website[0].website_name %>">
+                                                </div>
+                                            </div>
+                                            <div class="text-right" style="padding-right: 20px;">
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4">
+                <%- include('../home/footer') %>
+            </div>
+</body>
+
+<script>
+    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+    const searchInput = document.getElementById('tags_search_input');
+    const datalist = document.getElementById('europe-countries');
+
+    const dataSelect_tags = document.getElementById('news_type_select');
+
+    // ดึงข้อมูลจากฐานข้อมูล
+    fetch('/setting_page/menu') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+        .then(response => response.json())
+        .then(data => {
+            // สร้างตัวเลือกใน datalist
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.topic_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
+                option.setAttribute('data-id', item.topic_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
+                datalist.appendChild(option);
+            });
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+
+    // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
+    searchInput.addEventListener('input', function () {
+        const searchText = searchInput.value.toLowerCase();
+        const options = datalist.options;
+
+        for (let i = 0; i < options.length; i++) {
+            const option = options[i];
+            const optionText = option.value.toLowerCase();
+
+            // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
+            if (optionText.includes(searchText)) {
+                option.style.display = 'block'; // แสดงตัวเลือก
+            } else {
+                option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
+            }
+        }
+    });
+</script>
+
+<script>
+    function goToSettingMainMenu() {
+        // ให้ window.location.href เป็น URL ของลิงก์ "Setting main menu"
+        window.location.href = '#setting-main-menu'; // เปลี่ยนเป็น URL ของลิงก์ของคุณ
+    }
+</script>
+
+<script>
+    // เมื่อคลิกที่ปุ่ม "SAVE"
+    const saveButton = document.getElementById('saveButton');
+    saveButton.addEventListener('click', async function () {
+        const selectedTag = document.getElementById('selected-tags').value;
+        const selectedOption = datalist.querySelector(`[value="${selectedTag}"]`); // ค้นหาตัวเลือกที่มีค่าเท่ากับ selectedTag
+
+        if (selectedOption) {
+            const selectedId = selectedOption.getAttribute('data-id'); // ดึงค่า ID จาก attribute data-id
+            console.log('คุณเลือก: ' + selectedTag + ' (ID: ' + selectedId + ')');
+
+            try {
+                // ส่งค่า ID ไปบันทึก
+                const response = await fetch(`/setting_page/${selectedId}`, {
+                    method: 'POST'
+                    // ตรวจสอบว่าคุณต้องการใส่ headers, body หรืออื่น ๆ ตามที่เหมาะสม
+                })
+                    .then(response => {
+                        alert('เพิ่มแท็กแล้ว');
+                        window.location.reload();
+                    })
+                    .catch(error => {
+                        // จัดการข้อผิดพลาด
+                    });
+            } catch (error) {
+                console.error('เกิดข้อผิดพลาดในการส่งข้อมูล:', error);
+            }
+        } else {
+            console.error('ไม่พบตัวเลือกที่เลือก');
+        }
+    });
+
+</script>
+
+
+
+<script>
+    function deletetags(icon) {
+        const tags_id = icon.getAttribute('data-tags-id');
+        fetch(`/setting_page/${tags_id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        })
+            .then(response => {
+                alert('แท็กถูกลบแล้ว');
+                // รีโหลดหน้า
+                window.location.reload();
+                goToSettingMainMenu();
+
+            })
+            .catch(error => {
+                // จัดการข้อผิดพลาด
+            });
+    }
+</script>
+
+</html>
