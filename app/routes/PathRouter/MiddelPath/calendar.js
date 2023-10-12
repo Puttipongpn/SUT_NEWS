@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
     
             res.render('home/calendar',{
                 header:req.session.header,
-                profile_image: req.session.profile_image
+                profile_image: req.session.profile_image,
+                home_website:req.session.website,
             });
 });
 

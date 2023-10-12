@@ -39,7 +39,8 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         profile_image: req.session.profile_image,
                                         like: Like[0],
                                         likeCounts: likeCounts,
-                                        CommentCounts: CommentCounts
+                                        CommentCounts: CommentCounts,
+                                        home_website:req.session.website,
                                     });
                                 });
                         })

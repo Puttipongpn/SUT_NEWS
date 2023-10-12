@@ -11,7 +11,8 @@ router.get('/', (req, res) => {
     
             res.render('home/sut_map',{
                 header:req.session.header,
-                profile_image: req.session.profile_image
+                profile_image: req.session.profile_image,
+                home_website:req.session.website,
             });
 });
 

@@ -41,7 +41,8 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         profile_image: req.session.profile_image,
                                         like: Like[0],
                                         likeCounts: likeCounts,
-                                        CommentCounts: CommentCounts
+                                        CommentCounts: CommentCounts,
+                                        home_website:req.session.website,
                                     });
                                 });
                         })
@@ -100,6 +101,7 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
                     user_name: req.session.user_name,
                     email: req.session.email,
                     profile_image: req.session.profile_image,
+                    home_website:req.session.website,
                 });
             } else {
                 res.render('home/404page')

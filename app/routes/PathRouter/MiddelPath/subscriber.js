@@ -36,7 +36,8 @@ router.get('/', async (req, res) => {
                                         header: req.session.header,
                                         like: Like[0],
                                         likeCounts: likeCounts,
-                                        CommentCounts: CommentCounts
+                                        CommentCounts: CommentCounts,
+                                        home_website:req.session.website,
                                     });
                                 });
                         })

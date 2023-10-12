@@ -63,6 +63,7 @@ router.get('/:news_id', ifNotLoggedin, async (req, res, next) => {
                                     section_id: newsData.section_id,
                                     view_count: newsData.view_count[0],
                                     comment: comment[0],
+                                    home_website:req.session.website,
                                 });
                             } else {
                                 res.render('center/details', {

@@ -19,6 +19,7 @@ router.get('/:type_id', ifNotLoggedin, (req, res, next) => {
                     profile_image: req.session.profile_image,
                     type: rows,
                     header:req.session.header,
+                    home_website:req.session.website,
                     
                 });   
                 })

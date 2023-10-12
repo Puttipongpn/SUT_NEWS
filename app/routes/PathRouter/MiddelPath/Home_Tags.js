@@ -23,6 +23,7 @@ router.get('/:section_id', ifNotLoggedin, (req, res, next) => {
                     user_name: req.session.user_name,
                     email: req.session.email,
                     profile_image: req.session.profile_image,
+                    home_website:req.session.website,
                 });   
                 })
                 

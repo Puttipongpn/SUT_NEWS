@@ -67,7 +67,8 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         subscribe: sub[0],
                                         like: Like[0],
                                         likeCounts: likeCounts,
-                                        CommentCounts: CommentCounts
+                                        CommentCounts: CommentCounts,
+                                        home_website:req.session.website,
                                     });
                                 });
                         })
@@ -120,7 +121,8 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
                                         subscribe: sub[0],
                                         like: Like[0],
                                         likeCounts: likeCounts,
-                                        CommentCounts: CommentCounts
+                                        CommentCounts: CommentCounts,
+                                        home_website:req.session.website,
                                     });
                                 });
                         })

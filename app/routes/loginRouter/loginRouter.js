@@ -78,7 +78,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         profile_image:req.session.profile_image,
                         likeCounts: likeCounts,
                         CommentCounts:CommentCounts,
-                        website:req.session.website,
+                        home_website:req.session.website,
                     });
                 })
         } else {
