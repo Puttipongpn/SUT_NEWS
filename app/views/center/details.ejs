@@ -48,9 +48,16 @@
                                 style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
                                         newsData.news_type_name %></b></button></a>
                         <a href="/news_topic/<%- newsData.topic_id %>">
-                            <button type="button" class="btn"
+                            <% if (newsData.topic_name) { %>
+                             <button type="button" class="btn"
                                 style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%-
                                         newsData.topic_name %></b></button></a>
+                            <% } else { %>
+                                <button type="button" class="btn"
+                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) " disabled><b>topic ถูกลบ</b></button></a>
+                            <% } %>
+                              
+                            
                         <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
                             <% const date=newsData.time_stamp %>
                                 <% const newDate=new Date(date); %>
