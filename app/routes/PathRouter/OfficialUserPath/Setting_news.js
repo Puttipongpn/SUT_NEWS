@@ -94,10 +94,12 @@ router.post('/delete_news/:id', async (req, res, next) => {
         await dbConnection.query("DELETE FROM news WHERE news_id = ?", [ID]);
         
         // เมื่อลบข้อมูลเสร็จสิ้น
-        res.redirect('/setting_news');
+        res.json({ message: 'ข้อมูลถูกลบแล้ว' });
+        //res.redirect('/setting_news');
     } catch (err) {
         console.error('เกิดข้อผิดพลาดในการลบข้อมูล: ' + err.message);
         // คุณอาจต้องจัดการข้อผิดพลาดที่นี่
+        res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบข้อมูล' });
     }
 });
 

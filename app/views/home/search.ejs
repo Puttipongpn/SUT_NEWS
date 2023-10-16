@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bookmake</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/splide.min.css">
+    <link rel="stylesheet" href="/stylesheets/card.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+    <%- include('../home/header') %>
+        <%- include('../home/nav') %>
+            <section class="h-100  gradient-custom-2 py-5 d-flex justify-content-center ">
+                <div class="container-st h-100 ">
+                    <div class="row d-flex align-items-center" style="margin-top: -40px;">
+                        <div class="card card-block mb-2 mb-3 align-items-center" style="border: #ffffff;">
+                            <h2 class="card-title-h mt-5"><b>SEARCH</b></h2><br>
+                            <p class="card-text">Search for news.</p>
+                        </div>
+
+                        <div class="container-xxl ">
+                            <div class="table-responsive">
+                                <table id="example" class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <th data-field="Section_id" style="width:5%">no.</th>
+                                            <th data-field="Section_id" style="width:20%">news picture</th>
+                                            <th data-field="Section_id" style="width:30%">title</th>
+                                            <th data-field="Section_name" style="width: 35%;">welding</th>
+                                            <th data-field="Section_name" style="width: 5%;">bookmark</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% users.forEach((section,index)=> { %>
+                                            <tr>
+                                                <td>
+                                                    <p class="fw-normal mb-1">
+                                                        <%= index+1 %>
+                                                    </p>
+                                                </td>
+                                                <td>
+                                                    <% if (section.card_picture) { %>
+                                                        <% const imcard=section.card_picture.substring(7) %>
+                                                            <!-- bookmark -->
+                                                            <a href="/details/<%= section.news_id %>">
+                                                                <!-- image -->
+                                                                <img class="card-img-top" src="<%= imcard %>" alt="">
+                                                                <% } %>
+                                                            </a>
+                                                </td>
+                                                <td>
+                                                    <p class="fw-normal mb-1">
+                                                        <%- section.title %>
+                                                    </p>
+                                                </td>
+                                                <td
+                                                    style="width: 55px; max-width: 55px; word-wrap: break-word; white-space: normal;">
+                                                    <p class="fw-normal mb-1">
+                                                        <%- section.welding_para %>
+                                                    </p>
+                                                </td>
+                                                <td
+                                                    style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;">
+                                                    <% const news_id=section.news_id; %>
+                                                        <% const isBookmarked=bookmark_id.some(item=>
+                                                            item.b_news_id
+                                                            ===
+                                                            news_id);
+                                                            %>
+                                                            <% if (isBookmarked) { %>
+                                                                <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
+                                                                    data-news-id="<%= news_id %>"
+                                                                    onclick="removeBookmark(this)"></i>
+                                                                <% } else { %>
+                                                                    <i class="bi bi-bookmark" id="bookmarkIcon"
+                                                                        data-news-id="<%= news_id %>"
+                                                                        onclick="addBookmark(this)"></i>
+                                                                    <% } %>
+                                                                        <!---------------->
+                                                </td>
+                                            </tr>
+                                            <% }); %>
+                                    </tbody>
+                                </table>
+                                <!-- jQuery -->
+                                <script src='https://code.jquery.com/jquery-3.7.0.js'></script>
+                                <!-- Data Table JS -->
+                                <script src='https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js'></script>
+                                <script
+                                    src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
+                                <script
+                                    src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
+                        
+                                <script>
+                                    $(document).ready(function () {
+                                        $('#example').DataTable({
+                                            //disable sorting on last column
+                                            "columnDefs": [
+                                                { "orderable": false, "targets": 4 },
+                                            ],
+                                            "pageLength": 5,
+                                            "search": {
+                                                "search": "", // ไม่ให้ DataTables สร้าง input ค้นหา
+                                            },
+                                            language: {
+                                                //customize pagination prev and next buttons: use arrows instead of words
+                                                'paginate': {
+                                                    'previous': '<span class="fa fa-chevron-left"></span>',
+                                                    'next': '<span class="fa fa-chevron-right"></span>'
+                                                },
+                                                //customize number of elements to be displayed
+                                                "lengthMenu": 'Display <select class="form-control-display input-sm">' +
+                                                    '<option value="5">5</option>' +
+                                                    '<option value="10">10</option>' +
+                                                    '<option value="15">15</option>' +
+                                                    '<option value="20">20</option>' +
+                                                    '<option value="25">25</option>' +
+                                                    '<option value="-1">All</option>' +
+                                                    '</select> results',
+                                            }
+                                        });
+                                    });
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <style>
+                .form-control {
+                    display: block;
+                    width: 400px;
+                    height: calc(1.5em + .75rem + 2px);
+                    padding: .375rem .75rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 1px solid #ced4da;
+                    border-radius: .25rem;
+                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
+                .form-control-display {
+                    display: block;
+                    width: 100%;
+                    height: calc(1.5em + .75rem + 2px);
+                    padding: .375rem .75rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    line-height: 1.5;
+                    color: #495057;
+                    background-color: #fff;
+                    background-clip: padding-box;
+                    border: 1px solid #ced4da;
+                    border-radius: .25rem;
+                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                }
+                .col-md-6{
+
+                }
+            </style>
+</body>
+<script>
+    function shareButton(iconElement) {
+        // รับข้อมูล news_id จาก data attribute ของไอคอนที่ถูกคลิก
+        var newsId = iconElement.getAttribute("data-news-id");
+        // สร้าง URL ให้ใช้จาก ngrok
+        var urlToShare = "https://3a18-2405-9800-bc20-9f6a-52-9d8a-9c9a-b24.ngrok-free.app/details/<%= bookmark.news_id %>";
+        // เปิดหน้าแชร์ลิงก์บน Facebook
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(urlToShare), "_blank");
+    }
+</script>
+<script>
+    async function addBookmark(icon) {
+        const newsId = icon.getAttribute('data-news-id');
+
+        try {
+            const response = await fetch(`/bookmark/${newsId}`, {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                bookmark_id.push({ b_news_id: newsId });
+                icon.classList.add('bi-bookmark-check-fill');
+                icon.classList.remove('bi-bookmark');
+            } window.location.reload();
+
+            console.log(data.message);
+        } catch (error) {
+            console.error('เกิดข้อผิดพลาด:', error);
+        }
+    }
+
+    async function removeBookmark(icon) {
+        const newsId = icon.getAttribute('data-news-id');
+
+        try {
+            const response = await fetch(`/bookmark/${newsId}`, {
+                method: 'DELETE'
+            });
+            const data = await response.json();
+            if (data.success) {
+                const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                if (index !== -1) {
+                    bookmark_id.splice(index, 1);
+                }
+                icon.classList.add('bi-bookmark');
+                icon.classList.remove('bi-bookmark-check-fill');
+            } window.location.reload();
+
+            console.log(data.message);
+        } catch (error) {
+            console.error('เกิดข้อผิดพลาด:', error);
+        }
+    }
+</script>
+<%- include('../home/footer') %>
+    <script src="https://kit.fontawesome.com/4c6ee23687.js" crossorigin="anonymous"></script>
+
+</html>
