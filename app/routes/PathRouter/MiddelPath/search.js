@@ -11,13 +11,14 @@ router.use(express.urlencoded({ extended: false }));
 
 router.get('/', ifNotLoggedin, async (req, res, next) => {
     try {
+        const tags = await dbConnection.execute("SELECT * FROM `save_section`LEFT JOIN section ON section.section_id = save_section.tags_id WHERE save_section.t_user_id = ? ;", [req.session.userID]);
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
         const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
             const CommentCounts = Count_Like[0].reduce((bcc, comment) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
             }, {});
-        dbConnection.execute("SELECT users.* , bookmark.*, news.* FROM bookmark LEFT JOIN news ON bookmark.b_news_id = news.news_id LEFT JOIN users ON news.user_id = users.id WHERE bookmark.b_users_id = ? ORDER BY news.news_id DESC;", [req.session.userID])
+        dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 ORDER BY news.news_id DESC")
             .then(([rows]) => {
                 if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
@@ -28,11 +29,11 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         acc[like.like_news_id] = like.like_count;
                                         return acc;
                                     }, {});
-                                    res.render('center/bookmake', {
+                                    res.render('home/search', {
                                         bookmark_id: Bookmark,
                                         users: rows,
                                         header: req.session.header,
-
+                                        tags: tags,
                                         bookmark: rows,
                                         name: req.session.name,
                                         role: req.session.role,
@@ -57,57 +58,6 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
     }
 });
 
-router.post('/:id', ifNotLoggedin, (req, res, next) => {
-    const newsDataWithUserId = {
-        b_news_id: req.params.id,
-        b_users_id: req.session.userID
-    };
-    dbConnection.query("INSERT INTO bookmark SET ?", [newsDataWithUserId])
-        .then(([rows]) => {
-            res.redirect
-            res.json({ message: 'บันทึกสำเร็จ' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'เกิดข้อผิดพลาดในการบันทึก' });
-        });
-});
-
-router.delete('/:id', ifNotLoggedin, (req, res, next) => {
-    const deleteData = {
-        news_id: req.params.id, // แก้ไขตรงนี้
-        users_id: req.session.userID
-    };
-
-    dbConnection.query("DELETE FROM `bookmark` WHERE b_news_id = ? AND b_users_id = ?", [deleteData.news_id, deleteData.users_id])
-        .then(([rows]) => {
-            res.json({ message: 'ลบสำเร็จ' });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({ error: 'เกิดข้อผิดพลาดในการลบ' });
-        });
-});
-
-router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
-    dbConnection.execute("SELECT * FROM users LEFT JOIN bookmark ON users.id = bookmark.b_users_id LEFT JOIN news ON bookmark.b_news_id = news.news_id  LEFT JOIN news_type ON bookmark.b_news_id = news_type.news_type_id  LEFT JOIN topic ON bookmark.news_id = topic.topic_id WHERE bookmark.b_users_id = ?", [req.session.userID])
-        .then(([rows]) => {
-            if (req.session.role === "USER" || req.session.role === "OFFICIAL USER" || req.session.role === "ADMIN") {
-                res.render('center/setting_bookmark', {
-                    users: rows,
-                    bookmark: rows,
-                    name: req.session.name,
-                    role: req.session.role,
-                    user_name: req.session.user_name,
-                    email: req.session.email,
-                    profile_image: req.session.profile_image,
-                    home_website:req.session.website,
-                });
-            } else {
-                res.render('home/404page')
-            }
-        });
-});
 
 // Export router
 module.exports = router;

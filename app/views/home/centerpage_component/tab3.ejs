@@ -1,7 +1,8 @@
 <div class="splide" role="group" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
         <ul class="splide__list">
-            <% Center.forEach((profile)=> { %>
+            <% console.log(Center) %>
+            <% attention.forEach((profile)=> { %>
                 <li class="splide__slide" style="margin-bottom: 6%;">
                     <div class="card h-100" style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
                         <div class="top">
@@ -26,8 +27,8 @@
                                                 <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_id %>"
                                                     onclick="addLike(this)"></i>
                                                 <% } %>
-                                                     <!-- ส่วนของคอมเม้น -->
-                                                     <% if (CommentCounts[profile.news_id] !==undefined) { %>
+                                                    <!-- ส่วนของคอมเม้น -->
+                                                    <% if (CommentCounts[profile.news_id] !==undefined) { %>
                                                         <i class="bi bi-chat" id="commentIcon"
                                                             onclick="goToNewsDetailAndScroll('<%= profile.news_id %>')"></i>
                                                         <p style="font-size: 14px; margin-left:-5px; margin-top:6px; margin-bottom: -6px;">

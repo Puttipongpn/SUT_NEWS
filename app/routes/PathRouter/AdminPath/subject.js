@@ -20,6 +20,7 @@ router.get('/subject_details/:id', ifNotLoggedin,async (req, res, next) => {
                         role: req.session.role,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {
@@ -44,6 +45,7 @@ router.get('/home_elective_subject', ifNotLoggedin, (req, res, next) => {
                         role: req.session.role,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {
@@ -67,6 +69,7 @@ router.get('/elective', ifNotLoggedin, (req, res, next) => {
                         tags: rows,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {
@@ -129,6 +132,7 @@ router.get('/add_subject', ifNotLoggedin, (req, res, next) => {
                         tags: rows,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {
@@ -226,6 +230,7 @@ router.get('/home_general_subject', ifNotLoggedin, (req, res, next) => {
                         role: req.session.role,
                         header: req.session.header,
                         profile_image:req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {
@@ -248,7 +253,9 @@ router.get('/general', ifNotLoggedin, (req, res, next) => {
                 if (req.session.role === "ADMIN") {
                     res.render('admin_page/general_subject', {
                         tags: rows,
-                        header: req.session.header
+                        header: req.session.header,
+                        profile_image: req.session.profile_image,
+                        home_website:req.session.website,
                     });
                 } else {
                     res.render('404page', {

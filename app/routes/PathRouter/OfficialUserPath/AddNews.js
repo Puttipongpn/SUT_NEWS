@@ -75,6 +75,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     user_name: rows[0].user_name,
                     email: rows[0].email,
                     profile_image: req.session.profile_image,
+                    home_website:req.session.website,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')
@@ -154,6 +155,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                     user_name: rows.user_name,
                     email: rows.email,
                     profile_image: req.session.profile_image,
+                    home_website:req.session.website,
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')

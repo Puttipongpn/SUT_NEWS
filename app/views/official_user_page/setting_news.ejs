@@ -35,13 +35,23 @@
     <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
     <!-- Font Awesome CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <%- include('../home/header') %>
     <%- include('../home/nav') %>
 
         <body>
+            <script>
+                // ตรวจสอบค่า deleted
+                if (deleted) {
+                    Swal.fire({
+                        title: 'Good job!',
+                        text: 'You clicked the button!',
+                        icon: 'success'
+                    });
+                }
+            </script>
             <!-- For demo purpose -->
             <div class="container text-center text-white">
                 <div class="row pt-3">
@@ -65,12 +75,12 @@
                                 <thead>
                                     <tr>
                                         <th data-field="No." style="width: 3%;">No.</th>
-                                        <th data-field="Title"style="width: 15%;">Title</th>
-                                        <th data-field="Welding"style="width: 25%;">Welding</th>
-                                        <th data-field="Status"style="width: 7%;">Status</th>
-                                        <th data-field="Date_Time"style="width: 8%;">Date Time</th>
-                                        <th data-field="Comment"style="width: 12%;">Comment</th>
-                                        <th data-field="Actions"style="width:10%;">Actions</th>
+                                        <th data-field="Title" style="width: 15%;">Title</th>
+                                        <th data-field="Welding" style="width: 25%;">Welding</th>
+                                        <th data-field="Status" style="width: 7%;">Status</th>
+                                        <th data-field="Date_Time" style="width: 8%;">Date Time</th>
+                                        <th data-field="Comment" style="width: 12%;">Comment</th>
+                                        <th data-field="Actions" style="width:10%;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,11 +89,14 @@
                                             <th scope="row" class="small-column">
                                                 <%= index+1 %>
                                             </th>
-                                            <td style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;"><%- settingnews.title %></td>
-                                            <td style="width: 25px; max-width: 25px; word-wrap: break-word; white-space: normal;">
+                                            <td
+                                                style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;">
+                                                <%- settingnews.title %></td>
+                                            <td
+                                                style="width: 25px; max-width: 25px; word-wrap: break-word; white-space: normal;">
                                                 <%- settingnews.welding_para %>
-                                              </td>
-                                              
+                                            </td>
+
                                             <td>
                                                 <% if (settingnews.status_id===2) { %>
                                                     <i class="fa fa-check-circle-o green"></i> approve
@@ -99,19 +112,58 @@
 
 
                                             </td>
-                                            <td style="width: 8px; max-width: 8px; word-wrap: break-word; white-space: normal;"><%- settingnews.formattedDate %></td>
-                                            <td style="width: 12px; max-width: 12px; word-wrap: break-word; white-space: normal;"><%- settingnews.response %></td>
+                                            <td
+                                                style="width: 8px; max-width: 8px; word-wrap: break-word; white-space: normal;">
+                                                <%- settingnews.formattedDate %></td>
+                                            <td
+                                                style="width: 12px; max-width: 12px; word-wrap: break-word; white-space: normal;">
+                                                <%- settingnews.response %></td>
                                             <td class="text-start" style=" justify-content: space-between;">
-                                                <div style="display: flex; align-items: center; justify-content: center;">
-                                                    <a href="/details/<%= settingnews.news_id %>" class="view" style="margin-right: 5%;"><i class="material-icons" style="font-size: xx-large;" data-toggle="view" title="view">&#xe8ff;</i></a>
-                                                    <a href="/addnews/<%= settingnews.news_id %>" class="edit" style="margin-right: 5%;"><i class="material-icons" style="font-size: xx-large;" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                                    <form action="/setting_news/delete_news/<%= settingnews.news_id %>" method="POST">
-                                                        <button type="submit" style="background: none; border: none;">
-                                                            <i class="fa-solid fa-trash fa-xl "data-toggle="Delete" title="Delete" style="color: #d01616;"></i>
-                                                        </button>
-                                                    </form>
+                                                <div
+                                                    style="display: flex; align-items: center; justify-content: center;">
+                                                    <a href="/details/<%= settingnews.news_id %>" class="view"
+                                                        style="margin-right: 5%;"><i class="material-icons"
+                                                            style="font-size: xx-large;" data-toggle="view"
+                                                            title="view">&#xe8ff;</i></a>
+                                                    <a href="/addnews/<%= settingnews.news_id %>" class="edit"
+                                                        style="margin-right: 5%;"><i class="material-icons"
+                                                            style="font-size: xx-large;" data-toggle="tooltip"
+                                                            title="Edit">&#xE254;</i></a>
+
+                                                    <button type="submit" style="background: none; border: none;">
+                                                        <i class="fa-solid fa-trash fa-xl " data-toggle="Delete"
+                                                            title="Delete" style="color: #d01616;"
+                                                            data-tags-id="<%= settingnews.news_id %>"
+                                                            onclick="deletetags(this)"></i>
+                                                    </button>
+                                                    <script>
+                                                        function deletetags(icon) {
+                                                            const tags_id = icon.getAttribute('data-tags-id');
+                                                            fetch(`/setting_news/delete_news/${tags_id}`, {
+                                                                method: 'POST',
+                                                                headers: {
+                                                                    'Content-Type': 'application/json'
+                                                                },
+                                                            })
+                                                                .then(response => {
+                                                                    //alert('แท็กถูกลบแล้ว');
+                                                                    // รีโหลดหน้า
+                                                                    Swal.fire({
+                                                                        title: 'Delete news success!',
+                                                                        text: 'You news have deleted!',
+                                                                        icon: 'success'
+                                                                    }).then(() => {
+                                                                        window.location.reload();
+                                                                    });
+                                                                })
+                                                                .catch(error => {
+                                                                    // จัดการข้อผิดพลาด
+                                                                });
+                                                        }
+                                                    </script>
+
                                                 </div>
-                                                
+
                                             </td>
                                         </tr>
                                         <% }); %>
@@ -325,5 +377,6 @@
                 padding: 8px;
             }
         </style>
+
 
 </html>

@@ -76,6 +76,9 @@ router.use('/save_tags', save_tags);
 const setting_save_tags = require('./PathRouter/MiddelPath/user_setting_tags')
 router.use('/setting_save_tags', setting_save_tags);
 
+const search = require('./PathRouter/MiddelPath/search')
+router.use('/search', search);
+
 //Official || user part------------------------------------------------------
 const Official_request = require('./PathRouter/UserPath/Official_request')
 router.use('/request_official', Official_request);
