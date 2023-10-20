@@ -14,6 +14,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
         .card {
             margin-left: 14.5%;
@@ -29,6 +30,10 @@
             border: #ffffff;
             color: #ffffff;
             padding: 5px;
+        }
+        #deleteIcon:hover {
+            cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+            /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
         }
     </style>
 
@@ -49,28 +54,30 @@
                                         newsData.news_type_name %></b></button></a>
                         <a href="/news_topic/<%- newsData.topic_id %>">
                             <% if (newsData.topic_name) { %>
-                             <button type="button" class="btn"
-                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%-
-                                        newsData.topic_name %></b></button></a>
-                            <% } else { %>
                                 <button type="button" class="btn"
-                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) " disabled><b>topic ถูกลบ</b></button></a>
+                                    style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) "><b><%-
+                                            newsData.topic_name %></b></button>
+                        </a>
+                        <% } else { %>
+                            <button type="button" class="btn"
+                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) " disabled><b>ไม่มี topic นี้แล้ว
+                                    </b></button></a>
                             <% } %>
-                              
-                            
-                        <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
-                            <% const date=newsData.time_stamp %>
-                                <% const newDate=new Date(date); %>
-                                    <% newDate.setHours(newDate.getHours() + 7); %>
-                                        <% const formattedDate=new Date(newDate).toISOString().substring(0,
-                                            19).replace('T', ' ' )%>
-                                            <b><%- formattedDate %></b>
-                        </button>
-                        <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
-                                class="bi bi-eye"></i><b><%- newsData.view_count %> view</b></button>
-                        <button type="button" class="btn">
-                            <p><%- newsData.section %></p>
-                        </button>
+
+
+                                <button type="button" class="btn" style="background-color: rgb(219, 160, 23);">
+                                    <% const date=newsData.time_stamp %>
+                                        <% const newDate=new Date(date); %>
+                                            <% newDate.setHours(newDate.getHours() + 7); %>
+                                                <% const formattedDate=new Date(newDate).toISOString().substring(0,
+                                                    19).replace('T', ' ' )%>
+                                                    <b><%- formattedDate %></b>
+                                </button>
+                                <button type="button" class="btn" style="background-color: rgb(187, 187, 187);"><i
+                                        class="bi bi-eye"></i><b><%- newsData.view_count %> view</b></button>
+                                <button type="button" class="btn">
+                                    <p><%- newsData.section %></p>
+                                </button>
                     </div>
                     <hr>
                     <div class="card-title">
@@ -194,21 +201,23 @@
                     <div class="row g-0 d-flex justify-content-center align-items-center">
                         <div class="col-md-12 ">
                             <div class="card-body">
-                                <div >
+                                <div>
                                     <div class="d-flex justify-content-center align-items-center ">
-                                      <p>เข้าสู้ระบบเพื่อแสดงความคิดเห็น</p>   
+                                        <p>เข้าสู้ระบบเพื่อแสดงความคิดเห็น</p>
                                     </div>
                                     <div class="d-flex justify-content-center align-items-center ">
                                         <style>
-                                            .btn-logout{
-                                            background-image: linear-gradient(90deg, rgba(25, 136, 247, 1) 0%, rgba(247, 25, 136, 1) 100%);
-                                            border: 1px solid #ffffff;
-                                            border-radius: 15px;
+                                            .btn-logout {
+                                                background-image: linear-gradient(90deg, rgba(25, 136, 247, 1) 0%, rgba(247, 25, 136, 1) 100%);
+                                                border: 1px solid #ffffff;
+                                                border-radius: 15px;
                                             }
-                                            .btn-logout:hover{
+
+                                            .btn-logout:hover {
                                                 color: rgb(255, 255, 255);
                                                 background-color: #000;
                                             }
+
                                             .btn-logout span {
                                                 cursor: pointer;
                                                 display: inline-block;
@@ -217,7 +226,7 @@
                                                 font-size: 16px;
                                                 color: #ffffff;
                                             }
-                                        
+
                                             .btn-logout span:after {
                                                 position: absolute;
                                                 opacity: 0;
@@ -225,18 +234,19 @@
                                                 right: -20px;
                                                 transition: 0.5s;
                                             }
-                                        
+
                                             .btn-logout:hover span {
                                                 padding-right: 10px;
                                                 padding-left: 10px;
                                             }
-                                        
+
                                             .btn-logout:hover span:after {
                                                 opacity: 1;
                                                 right: 0;
                                             }
                                         </style>
-                                        <button id="logoutButton" class="btn btn-logout" onclick="logout()"><span>Login</span></button>
+                                        <button id="logoutButton" class="btn btn-logout"
+                                            onclick="logout()"><span>Login</span></button>
                                     </div>
                                 </div>
                             </div>
@@ -298,10 +308,8 @@
                                 <div>
                                     <i class="bi bi-chat-left-dots-fill" style="font-size: 16px;"></i>
                                     <% if (comment.c_user_id===id || role==='ADMIN' ) { %>
-                                        <a href="" style="color: #ad0000;">
-                                            <i class="bi bi-trash-fill" data-comment-id="<%= comment.comment_id %>"
-                                                style="font-size: 16px;" onclick="deleteComment(this)"></i>
-                                        </a>
+                                        <i  class="bi bi-trash-fill" data-comment-id="<%= comment.comment_id %>" id="deleteIcon"
+                                            style="font-size: 16px;color: #ad0000;" onclick="deleteComment(this)"></i>
                                         <% } %>
                                             <%- comment.comment %>
                                 </div>
@@ -312,39 +320,56 @@
                 </div>
                 <% }) %>
 
-                <script>
-                    function logout() {
-                        // ส่งคำขอ GET ไปยังเส้นทาง '/logout'
-                        fetch('/logout', {
-                            method: 'GET',
-                        })
-                        .then(response => {
-                            // หากสำเร็จ, คุณอาจต้องจัดการการเปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่นตามที่คุณต้องการ
-                            // ตัวอย่างเช่น:
-                            if (response.ok) {
-                                alert('โปรดเข้าสู่ระบบก่อนใช้งาน');
-                                window.location.href = '/'; // เปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่น
-                            } else {
-                                // จัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้น
-                                console.error('ไม่สามารถออกจากระบบได้');
-                            }
-                        })
-                        .catch(error => {
-                            // จัดการข้อผิดพลาดที่เกิดขึ้นในการส่งคำขอ
-                            console.error('ข้อผิดพลาดในการส่งคำขอ:', error);
-                        });
-                    }
-                    
-                </script>
+                    <script>
+                        function logout() {
+                            // ส่งคำขอ GET ไปยังเส้นทาง '/logout'
+                            fetch('/logout', {
+                                method: 'GET',
+                            })
+                                .then(response => {
+                                    // หากสำเร็จ, คุณอาจต้องจัดการการเปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่นตามที่คุณต้องการ
+                                    // ตัวอย่างเช่น:
+                                    if (response.ok) {
+                                        alert('โปรดเข้าสู่ระบบก่อนใช้งาน');
+                                        window.location.href = '/'; // เปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่น
+                                    } else {
+                                        // จัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้น
+                                        console.error('ไม่สามารถออกจากระบบได้');
+                                    }
+                                })
+                                .catch(error => {
+                                    // จัดการข้อผิดพลาดที่เกิดขึ้นในการส่งคำขอ
+                                    console.error('ข้อผิดพลาดในการส่งคำขอ:', error);
+                                });
+                        }
+
+                    </script>
 
                     <script>
                         var quill = new Quill('#editor', {
                             theme: 'snow'
                         });
                     </script>
-                    <script>
+                    <!-- <script>
                         function saveComment() {
                             var commentdata = quill.root.innerHTML; // ดึงข้อมูลจาก Quill editor
+                            const { value: accept } = await Swal.fire({
+                                title: 'Terms and conditions',
+                                input: 'checkbox',
+                                inputValue: 1,
+                                inputPlaceholder:
+                                    'I agree with the terms and conditions',
+                                confirmButtonText:
+                                    'Continue <i class="fa fa-arrow-right"></i>',
+                                inputValidator: (result) => {
+                                    return !result && 'You need to agree with T&C'
+                                }
+                            })
+
+                            if (accept) {
+                                Swal.fire('You agreed with T&C :)')
+                            }
+
                             // ตรวจสอบว่า commentdata ไม่ใช่สตริงว่าง
                             if (commentdata.trim() !== "") {
                                 // ส่งข้อมูลไปยังเซิร์ฟเวอร์ (ใช้ Fetch API เป็นตัวอย่าง)
@@ -369,7 +394,55 @@
                                 console.log("กรุณากรอกความคิดเห็นก่อนบันทึก");
                             }
                         }
+                    </script> -->
+                    <script>
+                        async function saveComment() {
+                            var commentdata = quill.root.innerHTML; // ดึงข้อมูลจาก Quill editor
+
+                            const { value: accept } = await Swal.fire({
+                                title: 'คุณต้องแสดงความคิดเห็นภายใต้เงื่อนไขชุมชน',
+                                input: 'checkbox',
+                                inputValue: 1,
+                                inputPlaceholder: 'ฉันได้อ่านและยอมรับข้อบังคับของชุมชน',
+                                confirmButtonText: 'Continue <i class="fa fa-arrow-right"></i>',
+                                inputValidator: (result) => {
+                                    return !result && 'คุณต้องคลิกยอมรับเงื่อนไขของชุมชน';
+                                }
+                            });
+
+                            if (accept) {
+                                if (commentdata.trim() !== "") {
+                                    // ส่งข้อมูลไปยังเซิร์ฟเวอร์ (ใช้ Fetch API เป็นตัวอย่าง)
+                                    fetch('/comment/<%= newsData.news_id %>', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ content: commentdata })
+
+                                    })
+                                        .then(response => {
+
+                                            // รีโหลดหน้า
+                                            Swal.fire('ความคิดเห็นของคุณถูกโพสต์แล้ว :)').then(() => {
+                                                window.location.reload();
+                                            })
+                                            //
+                                        })
+                                        .catch(error => {
+                                            // จัดการข้อผิดพลาด
+                                        });
+                                } else {
+                                    // แสดงข้อความหรือทำการจัดการเมื่อ commentdata ว่างเปล่า
+                                    console.log("กรุณากรอกความคิดเห็นก่อนบันทึก");
+                                }
+                            } else {
+                                // ผู้ใช้ไม่ได้ตรวจสอบกล่องเลือก (checkbox)
+                                console.log("คุณต้องยอมรับเงื่อนไขและข้อกำหนดก่อนบันทึกความคิดเห็น");
+                            }
+                        }
                     </script>
+
                     <script>
                         function deleteComment(icon) {
                             const comment_id = icon.getAttribute('data-comment-id');
@@ -380,9 +453,13 @@
                                 },
                             })
                                 .then(response => {
-                                    alert('ข้อความถูกลบแล้ว');
-                                    // รีโหลดหน้า
-                                    window.location.reload();
+                                    Swal.fire({
+                                        title: 'Delete comment success!',
+                                        text: 'You comment have deleted!',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
                                 })
                                 .catch(error => {
                                     // จัดการข้อผิดพลาด

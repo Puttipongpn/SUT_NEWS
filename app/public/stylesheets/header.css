@@ -1,3 +1,14 @@
+nav {
+    font-family: 'Itim', cursive;
+   
+}
+.hero__items h2 {
+    font-family: 'Itim', cursive;
+}
+.hero__items p {
+    font-family: 'Itim', cursive;
+}
+
 .toppage {
     background-color: #1c1c1d;
     height: 30px;
@@ -5,9 +16,10 @@
     justify-content: space-between;
     margin-left: auto;
     margin-right: auto;
-   
-  }
-  .head { 
+
+}
+
+.head {
     text-align: center;
     align-items: center;
     display: flex;
@@ -16,17 +28,18 @@
     padding: 0;
 }
 
-.head-item{
+.head-item {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
-    gap: 5px; /* ระยะห่างระหว่างไอเท็ม */
+    gap: 5px;
+    /* ระยะห่างระหว่างไอเท็ม */
 }
 
 .head-item a {
     text-decoration: none;
     color: rgb(255, 255, 255);
     font-size: 15px;
-   
+
 }
 
 .head-link {
@@ -36,7 +49,8 @@
 }
 
 .dropdown-item a {
-    color: black; /* เปลี่ยนสีข้อความให้เป็นสีดำ */
+    color: black;
+    /* เปลี่ยนสีข้อความให้เป็นสีดำ */
     align-items: center;
     justify-items: center;
 }

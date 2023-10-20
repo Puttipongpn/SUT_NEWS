@@ -33,7 +33,7 @@ router.delete('/:id', ifNotLoggedin, (req, res, next) => {
 
     dbConnection.query("DELETE FROM `comment` WHERE comment_id = ?", [commentData.comment_id])
         .then(result => {
-            res.json({ message: 'ลบสำเร็จ' });
+            res.json(result);
         })
         .catch(err => {
             console.log(err);

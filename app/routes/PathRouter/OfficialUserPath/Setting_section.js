@@ -53,9 +53,9 @@ router.post('/', ifNotLoggedin, (req, res) => {
 router.post('/delete/:id', ifNotLoggedin, (req, res) => {
     let sectionId = req.params.id; // ใช้ req.params ไม่ใช่ req.body
     dbConnection.query("DELETE FROM `section` WHERE section_id = ?", [sectionId])
-        .then(() => {
-            req.session.message = 'บันทึกสำเร็จ';
-            res.redirect('/section');
+        .then(([rows]) => {
+            res.json(rows);
+            //res.redirect('/section');
         })
         .catch(err => {
             console.log(err);

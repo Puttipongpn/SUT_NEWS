@@ -1,6 +1,5 @@
 body {
     background: #232321;
-    
 }
 
 /* h1 {
@@ -14,22 +13,31 @@ a {
     
 } */
 
+
 #likeIcon:hover {
-    cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+    cursor: pointer;
+    /* เปลี่ยนรูปร่างเป็นรูปมือ */
     /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
 }
+
 #bookmarkIcon:hover {
-    cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+    cursor: pointer;
+    /* เปลี่ยนรูปร่างเป็นรูปมือ */
     /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
 }
+
 #commentIcon:hover {
-    cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+    cursor: pointer;
+    /* เปลี่ยนรูปร่างเป็นรูปมือ */
     /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
 }
+
 #shareIcon:hover {
-    cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+    cursor: pointer;
+    /* เปลี่ยนรูปร่างเป็นรูปมือ */
     /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
 }
+
 .text-muted i {
     color: #000;
     margin: 0 10px;
@@ -51,7 +59,8 @@ a {
     border: 0;
     margin-bottom: 1rem;
     margin-top: 40px;
-  }
+    font-family: 'Mitr', sans-serif;
+}
 
 .card-text {
     overflow: hidden;

@@ -29,7 +29,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
         integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
         crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <!-- Data Table CSS -->
@@ -59,12 +59,38 @@
                         <div style="margin-top: -10px ;">
                             <b>เพิ่ม section</b>
                         </div>
-                        <div>
-                            <form class="d-flex" method="post" action="Section">
-                                <input class="form-control" type="text" placeholder="add news section"
-                                    name="section_name" aria-label="">
-                                <button class="btn btn-warning me-2  ml-3" type="submit">Add</button>
-                            </form>
+                        <div class="d-flex">
+
+                            <input class="form-control" type="text" placeholder="add news section" name="section_name"
+                                aria-label="">
+                            <button class="btn btn-warning me-2  ml-3" type="submit" onclick="addsection()">Add</button>
+
+                            <script>
+                                function addsection() {
+                                    const sectionName = document.querySelector('input[name="section_name"]').value;
+                                    fetch(`/section`, {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({ section_name: sectionName })
+                                    })
+                                        .then(response => {
+                                            //alert('แท็กถูกลบแล้ว');
+                                            // รีโหลดหน้า
+                                            Swal.fire({
+                                                title: 'your topic is created!',
+                                                text: 'You can now use this topic.!',
+                                                icon: 'success'
+                                            }).then(() => {
+                                                window.location.reload();
+                                            });
+                                        })
+                                        .catch(error => {
+                                            // จัดการข้อผิดพลาด
+                                        });
+                                }
+                            </script>
                         </div>
                     </div>
                     <div class="container px-2">
@@ -101,13 +127,11 @@
                                             <td style="text-align: center;">
                                                 <% if (section.section_user_id==id) { %>
                                                     <p class="fw-normal mb-1">
-                                                    <form method="POST"
-                                                        action="/section/delete/<%- section.section_id %>">
                                                         <button type="submit" style="background: none; border: none;">
                                                             <i class="fa-solid fa-trash fa-lg"
-                                                                style="color: #d01616;"></i>
+                                                                data-tags-id="<%= section.section_id %>"
+                                                                onclick="deletetags(this)" style="color: #d01616;"></i>
                                                         </button>
-                                                    </form>
                                                     </p>
                                                     <% } else { %>
                                                         <p class="fw-normal mb-1">
@@ -119,6 +143,31 @@
                                                         </p>
                                                         <% } %>
                                             </td>
+                                            <script>
+                                                function deletetags(icon) {
+                                                    const tags_id = icon.getAttribute('data-tags-id');
+                                                    fetch(`/section/delete/${tags_id}`, {
+                                                        method: 'POST',
+                                                        headers: {
+                                                            'Content-Type': 'application/json'
+                                                        },
+                                                    })
+                                                        .then(response => {
+                                                            //alert('แท็กถูกลบแล้ว');
+                                                            // รีโหลดหน้า
+                                                            Swal.fire({
+                                                                title: 'Delete news success!',
+                                                                text: 'You news have deleted!',
+                                                                icon: 'success'
+                                                            }).then(() => {
+                                                                window.location.reload();
+                                                            });
+                                                        })
+                                                        .catch(error => {
+                                                            // จัดการข้อผิดพลาด
+                                                        });
+                                                }
+                                            </script>
                                         </tr>
                                         <% }); %>
                                 </tbody>

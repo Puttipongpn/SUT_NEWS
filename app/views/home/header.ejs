@@ -24,8 +24,10 @@
     <!-- AlpineJS -->
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-    <!-- Tailwind -->
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Kanit:ital,wght@1,100&display=swap"
+        rel="stylesheet">
     <title>CenterPage</title>
 </head>
 <style>
@@ -41,6 +43,22 @@
     .head-item:not(:last-child):hover {
         background-color: #b34801;
         /* เปลี่ยนสีพื้นหลังเมื่อ hover */
+    }
+
+    .head-link {
+        font-family: 'Itim', cursive;
+    }
+
+    .dropdown-item a {
+        font-family: 'Itim', cursive;
+    }
+
+    #dropdownMenuButton {
+        font-family: 'Itim', cursive;
+    }
+
+    .data-h {
+        font-family: 'Itim', cursive;
     }
 </style>
 
@@ -58,7 +76,8 @@
                     <a class="head-link" id="Aallow_Offuser" href="/manage_users">จัดการคำร้องสมาชิกทางการ</a>
                 </li>
                 <li class="head-item ">
-                    <a class="head-link" style="margin-left: 8px;" href="/Section" id="section_setting">เพิ่ม section</a>
+                    <a class="head-link" style="margin-left: 8px;" href="/Section" id="section_setting">เพิ่ม
+                        section</a>
                 </li>
                 <li class="head-item ">
                     <a class="head-link" style="margin-left: 8px;" href="/setting_news"
@@ -129,7 +148,7 @@
                             <a id="Logout" href="/logout" style="padding-left: 30px;">logout</a>
                         </div>
                         <div class="dropdown-item">
-                            <a id="LOGIN"style="padding-left: 35px;" href="/logout">login</a>
+                            <a id="LOGIN" style="padding-left: 35px;" href="/logout">login</a>
                         </div>
                     </div>
                 </li>
@@ -240,7 +259,7 @@
                 role: '<%= header.role %>' // ใส่ค่า row ที่ได้รับมาจากตัวแปร row ในหน้า HTML/EJS
             };
             var userButton = document.getElementById('subscriber');
-            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN' || currentUser.role === 'USER'  ) {
+            if (currentUser.role === 'OFFICIAL USER' || currentUser.role === 'ADMIN' || currentUser.role === 'USER') {
                 userButton.style.display = 'block'; // แสดงปุ่ม
             } else {
                 userButton.style.display = 'none'; // ซ่อนปุ่ม
