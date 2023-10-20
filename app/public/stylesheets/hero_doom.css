@@ -5,9 +5,7 @@ body {
     -webkit-font-smoothing: antialiased;
     background: #0b0c2a;
 }
-.hero {
-    padding-top: 20px;
-}
+
 .hero__items {
     padding: 250px 0 42px 50px;
     border-radius: 5px;

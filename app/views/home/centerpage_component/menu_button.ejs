@@ -7,12 +7,25 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <% save_topic.forEach(save_topic=> { %>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><b><%= save_topic.topic_name %></b></a>
-          </li>
+          <% if (save_topic.topic_id == "15") { %>
+            <li class="nav-item">
+              <a class="nav-link" href="/news_type/15"><b><%= save_topic.topic_name %></b></a>
+            </li>
+          <% }  else if (save_topic.topic_id == "16") { %> 
+            <li class="nav-item">
+              <a class="nav-link" href="/news_type/16"><b><%= save_topic.topic_name %></b></a>
+            </li>
+          <% } else  { %>  
+            <li class="nav-item">
+              <a class="nav-link" href="/news_topic/<%= save_topic.topic_id %>"><b><%= save_topic.topic_name %></b></a>
+            </li>
+              <% }%> 
+         
           <% }) %>
       </ul>
       
+      
+        
     </div>
   </div>
 </nav>
