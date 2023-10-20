@@ -28,8 +28,7 @@
                             <h2 class="card-title-h mt-5"><b>SEARCH</b></h2><br>
                             <p class="card-text">Search for news.</p>
                         </div>
-
-                        <div class="container-xxl ">
+                        <div class="container-xl ">
                             <div class="table-responsive">
                                 <table id="example" class="table table-striped" style="width:100%">
                                     <thead>
@@ -79,13 +78,18 @@
                                                             news_id);
                                                             %>
                                                             <% if (isBookmarked) { %>
-                                                                <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
-                                                                    data-news-id="<%= news_id %>"
-                                                                    onclick="removeBookmark(this)"></i>
+                                                                <div
+                                                                    class="d-flex justify-content-center align-items-center">
+                                                                    <i class="bi bi-bookmark-check-fill " style="font-size: 20px;"
+                                                                        id="bookmarkIcon" data-news-id="<%= news_id %>"
+                                                                        onclick="removeBookmark(this)"></i>
+                                                                </div>
                                                                 <% } else { %>
-                                                                    <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                                        data-news-id="<%= news_id %>"
-                                                                        onclick="addBookmark(this)"></i>
+                                                                    <div class="d-flex justify-content-center align-items-center">
+                                                                        <i class="bi bi-bookmark" id="bookmarkIcon" style="font-size: 20px;"
+                                                                            data-news-id="<%= news_id %>"
+                                                                            onclick="addBookmark(this)"></i>
+                                                                    </div>
                                                                     <% } %>
                                                                         <!---------------->
                                                 </td>
@@ -101,7 +105,22 @@
                                     src='https://cdn.datatables.net/responsive/2.1.0/js/dataTables.responsive.min.js'></script>
                                 <script
                                     src='https://cdn.datatables.net/1.13.5/js/dataTables.bootstrap5.min.js'></script>
-                        
+                                <style>
+                                    .dataTables_filter label {
+
+                                        font-size: 16px;
+                                        margin-left: -500px;
+                                    }
+
+                                    .dataTables_filter input {
+                                        padding: 5px;
+                                        border: 1px solid #ccc;
+                                        border-radius: 5px;
+                                        align-items: end;
+                                        justify-content: end;
+
+                                    }
+                                </style>
                                 <script>
                                     $(document).ready(function () {
                                         $('#example').DataTable({
@@ -110,15 +129,13 @@
                                                 { "orderable": false, "targets": 4 },
                                             ],
                                             "pageLength": 5,
-                                            "search": {
-                                                "search": "", // ไม่ให้ DataTables สร้าง input ค้นหา
-                                            },
                                             language: {
                                                 //customize pagination prev and next buttons: use arrows instead of words
                                                 'paginate': {
                                                     'previous': '<span class="fa fa-chevron-left"></span>',
                                                     'next': '<span class="fa fa-chevron-right"></span>'
                                                 },
+
                                                 //customize number of elements to be displayed
                                                 "lengthMenu": 'Display <select class="form-control-display input-sm">' +
                                                     '<option value="5">5</option>' +
@@ -151,8 +168,9 @@
                     background-clip: padding-box;
                     border: 1px solid #ced4da;
                     border-radius: .25rem;
-                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+                    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
                 }
+
                 .form-control-display {
                     display: block;
                     width: 100%;
@@ -166,10 +184,7 @@
                     background-clip: padding-box;
                     border: 1px solid #ced4da;
                     border-radius: .25rem;
-                    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-                }
-                .col-md-6{
-
+                    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
                 }
             </style>
 </body>
