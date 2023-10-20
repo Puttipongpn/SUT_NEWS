@@ -25,6 +25,8 @@ router.get('/setting_page_1', ifNotLoggedin, async (req, res, next) => {
                         email: rows[0].email,
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+                        
                     });
                 } else if (rows[0].role === "USER") {
                     res.render('404page')
@@ -56,6 +58,8 @@ router.get('/setting_page_2', ifNotLoggedin, async (req, res, next) => {
                         email: rows[0].email,
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else if (rows[0].role === "USER") {
                     res.render('404page')
@@ -87,6 +91,8 @@ router.get('/setting_page_3', ifNotLoggedin, async (req, res, next) => {
                         email: rows[0].email,
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else if (rows[0].role === "USER") {
                     res.render('404page')
@@ -120,6 +126,8 @@ router.get('/setting_page_4', ifNotLoggedin, async (req, res, next) => {
                         email: rows[0].email,
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else if (rows[0].role === "USER") {
                     res.render('404page')

@@ -12,7 +12,6 @@ router.get('/:topic_id', ifNotLoggedin, async (req, res, next) => {
         const topic_id = req.params.topic_id;
         const sub = await dbConnection.execute("SELECT * FROM `subscribe` WHERE subscribe.user_id = ? ", [req.session.userID]);
         const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
-        const save_topic = await dbConnection.execute("SELECT * FROM `save_topic` LEFT JOIN topic ON topic.topic_id = save_topic.s_topic_id");
         const Count_comment = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
         const CommentCounts = Count_comment[0].reduce((bcc, comment) => {
             bcc[comment.c_news_id] = comment.comment_count;
@@ -40,8 +39,7 @@ router.get('/:topic_id', ifNotLoggedin, async (req, res, next) => {
                     likeCounts: likeCounts,
                     CommentCounts: CommentCounts,
                     home_website:req.session.website,
-                    save_topic:save_topic[0],
-                    
+                    save_topic:req.session.save_topic,
                 });   
             });
         })

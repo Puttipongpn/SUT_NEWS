@@ -46,6 +46,7 @@ router.get('/home_elective_subject', ifNotLoggedin, (req, res, next) => {
                         header: req.session.header,
                         profile_image:req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
                     });
                 } else {
                     res.render('404page', {
@@ -70,6 +71,8 @@ router.get('/elective', ifNotLoggedin, (req, res, next) => {
                         header: req.session.header,
                         profile_image:req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else {
                     res.render('404page', {
@@ -133,6 +136,8 @@ router.get('/add_subject', ifNotLoggedin, (req, res, next) => {
                         header: req.session.header,
                         profile_image:req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else {
                     res.render('404page', {
@@ -231,6 +236,8 @@ router.get('/home_general_subject', ifNotLoggedin, (req, res, next) => {
                         header: req.session.header,
                         profile_image:req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else {
                     res.render('404page', {
@@ -256,6 +263,8 @@ router.get('/general', ifNotLoggedin, (req, res, next) => {
                         header: req.session.header,
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
+                        save_topic:req.session.save_topic,
+
                     });
                 } else {
                     res.render('404page', {

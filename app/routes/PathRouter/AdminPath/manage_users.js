@@ -22,7 +22,9 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     user_name: req.session.user_name,
                     email: req.session.email,
                     home_website:req.session.website,
-                    message: message  // เพิ่ม message ในข้อมูลที่ส่งไปยังหน้า view
+                    message: message,  // เพิ่ม message ในข้อมูลที่ส่งไปยังหน้า view
+                    save_topic:req.session.save_topic,
+                    
                 });
             } else {
                 res.render('404page');

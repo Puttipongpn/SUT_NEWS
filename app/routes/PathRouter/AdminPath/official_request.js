@@ -39,6 +39,8 @@ router.get('/:id', ifNotLoggedin, (req, res, next) => {
                 email: rows[0].email,
                 profile_image: req.session.profile_image,
                 home_website:req.session.website,
+                save_topic:req.session.save_topic,
+
             });
         })
         .catch(err => {

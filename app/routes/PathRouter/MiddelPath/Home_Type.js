@@ -23,9 +23,7 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
         if (req.session.role == "ADMIN" || req.session.role == "USER" || req.session.role == "OFFICIAL USER" || req.session.role == "GUEST") {
             const Bookmark = await dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID]);
             const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
-            const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
-            const save_topic = await dbConnection.execute("SELECT * FROM `save_topic` LEFT JOIN topic ON topic.topic_id = save_topic.s_topic_id");
-           
+            const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");           
             const CommentCounts = Count_Like[0].reduce((bcc, comment) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
@@ -40,7 +38,7 @@ router.get('/:id', ifNotLoggedin, async (req, res, next) => {
                     // ส่งข้อมูลจำนวนการกดไลค์ไปยัง template
                     res.render('center/Home_Type', {
                         // อื่น ๆ ของข่าว...
-                        save_topic:save_topic[0],
+                        save_topic:req.session.save_topic,
                         bookmark_id: Bookmark[0],
                         like: Like[0],
                         center: rows,

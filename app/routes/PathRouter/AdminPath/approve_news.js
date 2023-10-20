@@ -30,6 +30,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     email: req.session.email,
                     profile_image: req.session.profile_image,
                     home_website:req.session.website,
+                    save_topic:req.session.save_topic,
+                    
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -63,6 +65,8 @@ router.get('/his_approve', ifNotLoggedin, (req, res, next) => {
                     email: req.session.email,
                     profile_image: req.session.profile_image,
                     home_website:req.session.website,
+                    save_topic:req.session.save_topic,
+
                 });
             } else if (rows[0].role === "USER") {
                 res.render('404page')
@@ -110,6 +114,8 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                     email: req.session.email,
                     profile_image: req.session.profile_image,
                     home_website:req.session.website,
+                    save_topic:req.session.save_topic,
+
                 });
 
             } else {

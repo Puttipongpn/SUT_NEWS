@@ -18,6 +18,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     user_name: rows[0].user_name,
                     email: rows[0].email,
                     profile_image: req.session.profile_image,
+                    save_topic:req.session.save_topic,
+
                 });
             } else if (rows[0].role === "ADMIN") {
                 res.render('404page')

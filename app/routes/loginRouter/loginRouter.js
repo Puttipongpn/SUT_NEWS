@@ -61,11 +61,13 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         acc[like.like_news_id] = like.like_count;
                         return acc;
                     }, {});
+
+                    req.session.save_topic=save_topic[0];
                     
                     // ส่งข้อมูลจำนวนการกดไลค์ไปยัง template
                     res.render('home/centerpage', {
                         // อื่น ๆ ของข่าว...
-                        save_topic:save_topic[0],
+                        save_topic:req.session.save_topic,
                         bookmark_id: Bookmark[0],
                         like: Like[0],
                         center: rows,

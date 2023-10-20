@@ -32,7 +32,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         bookmark_id: Bookmark,
                                         users: rows,
                                         header: req.session.header,
-
+                                        save_topic:req.session.save_topic,
                                         bookmark: rows,
                                         name: req.session.name,
                                         role: req.session.role,
@@ -102,6 +102,7 @@ router.get('/setting_bookmark', ifNotLoggedin, (req, res, next) => {
                     email: req.session.email,
                     profile_image: req.session.profile_image,
                     home_website:req.session.website,
+                    save_topic:req.session.save_topic,
                 });
             } else {
                 res.render('home/404page')

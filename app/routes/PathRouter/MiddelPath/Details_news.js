@@ -64,10 +64,12 @@ router.get('/:news_id', ifNotLoggedin, async (req, res, next) => {
                                     view_count: newsData.view_count[0],
                                     comment: comment[0],
                                     home_website:req.session.website,
+                                    save_topic:req.session.save_topic,
                                 });
                             } else {
                                 res.render('center/details', {
                                     header: req.session.header,
+                                    save_topic:req.session.save_topic,
                                     newsData: newsData,
                                     email: newsData.email,
                                     groupData: null, // ไม่พบข้อมูล group_id

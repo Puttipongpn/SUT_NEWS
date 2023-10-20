@@ -38,6 +38,8 @@ router.get('/', async (req, res) => {
                                         likeCounts: likeCounts,
                                         CommentCounts: CommentCounts,
                                         home_website:req.session.website,
+                                        save_topic:req.session.save_topic,
+
                                     });
                                 });
                         })

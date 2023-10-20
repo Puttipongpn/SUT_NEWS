@@ -13,6 +13,8 @@ router.get('/', (req, res) => {
                 header:req.session.header,
                 profile_image: req.session.profile_image,
                 home_website:req.session.website,
+                save_topic:req.session.save_topic,
+
             });
 });
 
