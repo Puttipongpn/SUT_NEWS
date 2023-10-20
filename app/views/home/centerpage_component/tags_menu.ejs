@@ -1,0 +1,48 @@
+<div class="splide" id="splide1" role="group" aria-label="Splide Basic HTML Example">
+    <div class="splide__track">
+        <ul class="splide__list">
+            <% tags.forEach(tags=> { %>
+                <li class="splide__slide" style="margin-block-end: 10px;">
+                    <div class="mt-3" >
+                        <a class="btn btn-warning" href="/tags/<%- tags.section_id  %>" style="margin-top: -10px;">
+                            <%= tags.section_name %>
+                        </a>
+                    </div>
+                </li>
+                <% }) %>
+        </ul>
+    </div>
+</div>
+
+<style>
+    /* กำหนดความยามสูงสุดของปุ่ม */
+    .splide__slide a.btn {
+        width: 155px;
+        /* กำหนดความยาว */
+        white-space: nowrap;
+        /* ป้องกันข้อความขึ้นบรรทัดใหม่ */
+        overflow: hidden;
+        /* ซ่อนข้อความที่เกินความยาม */
+        text-overflow: ellipsis;
+        /* แสดงเครื่องหมาย ... หากข้อความเกินความยาม */
+    }
+
+    .splide__pagination {
+        left: 0;
+        padding: 0 1em;
+        position: absolute;
+        right: 0;
+        z-index: 1;
+    }
+</style>
+<script>
+    var splide1 = new Splide('#splide1', {
+        type: 'loop',
+        perPage: 8,
+        focus: 'center',
+    });
+
+    splide1.mount();
+</script>
+
+</html>

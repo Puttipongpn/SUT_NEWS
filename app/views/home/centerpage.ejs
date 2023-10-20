@@ -28,7 +28,7 @@
 
 <%- include('../home/header') %>
     <%- include('../home/nav') %>
-    
+
 
         <body>
             <!-- <h1 class="header" style="margin-left: 4%; margin-top: 2%;"><b>Highlights</b></h1> -->
@@ -75,24 +75,7 @@
                             </div>
                     </section>
 
-                    <!-- <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
-                        <div class="container-xxl h-100 ">
-                            <div class="row d-flex justify-content-center align-items-center"
-                                style="margin-top: -40px;">
-                                <div class="row" id="cards_landscape_wrap-2">
-                                    <div class="col-lg-12 my-2">
-                                        <div class="row  pt-3" style="margin-bottom: 2%;">
-
-                                            <%-// include('../home/centerpage_component/tab1.ejs') %>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section> -->
-
-                    <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
+                    <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center" style="margin-top: -50px;">
                         <div class="container-xxl h-100 ">
                             <div>
                                 <h2 class="mt-4" style="margin-bottom: -3px;"><b>ยอดเข้าชมสูงสุด</b></h2>
@@ -110,43 +93,27 @@
                         </div>
                     </section>
 
+                    <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center"style="margin-top: -70px;">
+                        <div class="container-xxl h-100 ">
+                            <div>
+                                <h2 class="mt-4" style="margin-bottom: -3px;"><b>ข่าวทั่วไป</b></h2>
+                            </div>
+                            <div class="row d-flex justify-content-center align-items-center mt-1"
+                                style="margin-top: -40px;">
+                                <div class="row" id="cards_landscape_wrap-2">
+                                    <div class="col-lg-12 my-2">
+                                        <div class="row pt-3" style="margin-bottom: 2%;">
+                                            <%- include('../home/centerpage_component/tags_menu.ejs') %>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
 
                     <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
                         <div class="container-xxl h-100 ">
-                            <div>
-                                <h2 class="mt-2" style="margin-bottom: -3px;"><b>ข่าวทั่วไป</b></h2>
-                            </div>
-
-                            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel" style="margin-top: 2%;">
-                                <div class="carousel-inner border p-1">
-                                    <div class="carousel-item active">
-                                        <ul class="nav flex-row justify-content-center"> <!-- เพิ่มคลาส "justify-content-center" ที่นี่ -->
-                                            <% tags.forEach((tags, index) => { %>
-                                                <li>
-                                                    <a class="nav-link active" aria-current="page"
-                                                        href="/tags/<%- tags.section_id  %>"><b>
-                                                        <%= tags.section_name %>
-                                                        </b></a>
-                                                </li>
-                                            <% }) %>
-                                        </ul>
-                                    </div>
-                                    <a class="carousel-control-prev" href="#carouselExampleInterval"
-                                        role="button" data-slide="prev">
-                                        <span class="carousel-control-prev-icon"
-                                            aria-hidden="true"></span>
-                                        <span class="sr-only">Previous</span>
-                                    </a>
-                                    <a class="carousel-control-next" href="#carouselExampleInterval"
-                                        role="button" data-slide="next">
-                                        <span class="carousel-control-next-icon"
-                                            aria-hidden="true"></span>
-                                        <span class="sr-only">Next</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="row d-flex justify-content-center align-items-center mt-2"
+                            <div class="row d-flex justify-content-center align-items-center"
                                 style="margin-top: -40px;">
                                 <div class="row" id="cards_landscape_wrap-2">
                                     <div class="col-sm-6 col-lg-8">
