@@ -197,25 +197,33 @@ ul {
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 offset-lg-2 footer-column">
+                    <div class="col-lg-3 col-md-6 col-sm-12 offset-lg-1 footer-column">
                         <div class="service-widget footer-widget">
                             <div class="footer-title">News</div>
-                            <ul class="list">
-                                <li><a href="#">Sport</a></li>
-                                <li><a href="#">Bursary</a></li>
-                                <li><a href="#">Club</a></li>
-                                <li><a href="#">Student Organization</a></li>
-                                <li><a href="#">volunteer</a></li>
-                                <li><a href="#">SEDA</a></li>
-                                <li><a href="#">Dormitory</a></li>
-                                <li><a href="#">Guide</a></li> 
+                            <ul class="list"> 
+                              <% save_topic.forEach(save_topic=> { %>
+                                <% if (save_topic.topic_id == "15") { %>
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="/news_type/15"><b><%= save_topic.topic_name %></b></a>
+                                  </li>
+                                <% }  else if (save_topic.topic_id == "16") { %> 
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="/news_type/16"><b><%= save_topic.topic_name %></b></a>
+                                  </li>
+                                <% } else  { %>  
+                                  <li class="nav-item">
+                                    <a class="nav-link" href="/news_topic/<%= save_topic.topic_id %>"><b><%= save_topic.topic_name %></b></a>
+                                  </li>
+                                    <% }%> 
+                               
+                                <% }) %>
                             </ul>
                         </div>
                     </div>
                     <div class="col-lg-3 col-md-6 col-sm-12 footer-widget">
                         <div class="contact-widget footer-widget">
                             <div class="footer-title">Contacts</div>
-                            <div class="text">
+                            <div class="text" style="color: #9ea0a9;">
                               <%- home_website.website_contacts %>
                             </div>
                         </div>

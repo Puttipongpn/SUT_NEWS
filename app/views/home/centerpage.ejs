@@ -122,7 +122,7 @@
                                     <div class="carousel-item active">
                                         <ul class="nav flex-row justify-content-center"> <!-- เพิ่มคลาส "justify-content-center" ที่นี่ -->
                                             <% tags.forEach((tags, index) => { %>
-                                                <li id="tags-item<%= index %>" <% if (index > 9) { %>style="display: none;"<% } %>>
+                                                <li>
                                                     <a class="nav-link active" aria-current="page"
                                                         href="/tags/<%- tags.section_id  %>"><b>
                                                         <%= tags.section_name %>
