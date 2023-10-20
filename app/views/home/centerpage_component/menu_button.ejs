@@ -1,3 +1,33 @@
+<style>
+  #navbar-b .navbar-brand {
+      margin-right: 0;
+  }
+  #navbar-b .navbar-brand img {
+      width: 80px;
+  }
+  @media screen and (min-width: 768px) {
+      #navbar-b .navbar-brand img {
+          width: 100px;
+      }
+      #navbar-b .container-fluid {
+          flex-direction: column;
+      }
+      #navbar-b .navbar-nav .nav-item {
+          padding: 0.5em 1em;
+      }
+      #navbar-b .navbar-nav {
+          border-bottom: 2px solid #000000;
+      }
+  }
+  #navbar-b .navbar-nav .nav-link {
+      color: #000000;
+      font-size: 1.1em;
+  }
+  #navbar-b .navbar-nav {
+      border-top: 2px solid #000000;
+      margin-top: 0.5em;
+  }
+</style>
 <nav id="navbar-b" class="navbar navbar-expand-md navbar-dark mt-3 mb-4" style="background-color:#ffffff">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -7,13 +37,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav mx-auto">
         <% save_topic.forEach(save_topic=> { %>
-          <% if (save_topic.topic_id == "20") { %>
+          <% if (save_topic.topic_id == "15") { %>
             <li class="nav-item">
-              <a class="nav-link" href="/news_type/20"><b><%= save_topic.topic_name %></b></a>
+              <a class="nav-link" href="/news_type/15"><b><%= save_topic.topic_name %></b></a>
             </li>
-          <% }  else if (save_topic.topic_id == "21") { %> 
+          <% }  else if (save_topic.topic_id == "16") { %> 
             <li class="nav-item">
-              <a class="nav-link" href="/news_type/21"><b><%= save_topic.topic_name %></b></a>
+              <a class="nav-link" href="/news_type/16"><b><%= save_topic.topic_name %></b></a>
             </li>
           <% } else  { %>  
             <li class="nav-item">
@@ -23,9 +53,6 @@
          
           <% }) %>
       </ul>
-      
-      
-        
     </div>
   </div>
 </nav>
