@@ -50,7 +50,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
             const Like = await dbConnection.execute("SELECT * FROM `like` WHERE like_user_id = ?", [req.session.userID]);
             const Count_Like = await dbConnection.execute("SELECT c_news_id, COUNT(*) AS comment_count FROM `comment` GROUP BY c_news_id;");
             const save_topic = await dbConnection.execute("SELECT * FROM `save_topic` LEFT JOIN topic ON topic.topic_id = save_topic.s_topic_id");
-           
+            const tags = await dbConnection.execute("SELECT * FROM `section`");
             const CommentCounts = Count_Like[0].reduce((bcc, comment) => {
                 bcc[comment.c_news_id] = comment.comment_count;
                 return bcc;
@@ -79,6 +79,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                         likeCounts: likeCounts,
                         CommentCounts:CommentCounts,
                         home_website:req.session.website,
+                        tags: tags[0]
                     });
                 })
         } else {

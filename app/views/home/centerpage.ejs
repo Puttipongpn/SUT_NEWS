@@ -115,6 +115,36 @@
                             <div>
                                 <h2 class="mt-2" style="margin-bottom: -3px;"><b>ข่าวทั่วไป</b></h2>
                             </div>
+
+                            <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel" style="margin-top: 2%;">
+                                <div class="carousel-inner border p-1">
+                                    <div class="carousel-item active">
+                                        <ul class="nav flex-row justify-content-center"> <!-- เพิ่มคลาส "justify-content-center" ที่นี่ -->
+                                            <% tags.forEach((tags, index) => { %>
+                                                <li id="tags-item<%= index %>" <% if (index > 9) { %>style="display: none;"<% } %>>
+                                                    <a class="nav-link active" aria-current="page"
+                                                        href="/tags/<%- tags.section_id  %>"><b>
+                                                        <%= tags.section_name %>
+                                                        </b></a>
+                                                </li>
+                                            <% }) %>
+                                        </ul>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleInterval"
+                                        role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon"
+                                            aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleInterval"
+                                        role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon"
+                                            aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+
                             <div class="row d-flex justify-content-center align-items-center mt-2"
                                 style="margin-top: -40px;">
                                 <div class="row" id="cards_landscape_wrap-2">
