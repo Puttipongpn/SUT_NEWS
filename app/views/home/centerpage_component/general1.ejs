@@ -6,7 +6,7 @@
                     <div class="card-menu mb-3" style="max-width: 600px;height:200px">
                         <div class="row g-0">
                             <div class="col-md-6">
-                                <div class="top-menu" style="margin-left: 10px;margin-top:25px">
+                                <div class="top-menu" style="margin-left: 10px;margin-top:10px">
                                     <% if (center.card_picture) { %>
                                         <% const imcard=center.card_picture.substring(7) %>
                                             <a href="/details/<%= center.news_id %>">
@@ -62,14 +62,14 @@
     }
 
     .card-menu {
+        margin-top: 20px;
+        border: 2px solid #cacaca;
+        border-radius: 10px;
         background: #ffffff;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
-        border-radius: 5px;
-        border: 0;
         margin-bottom: 1rem;
         font-family: 'Mitr', sans-serif;
     }
+
 </style>
 
 <style>
@@ -83,8 +83,8 @@
         direction: 'ttb',
         height: '70rem',
         perMove: 1,
-        perPage: 4,
-        //autoplay: true,
+        perPage: 5,
+       // autoplay: true,
     });
     splide2.mount();
 </script>
