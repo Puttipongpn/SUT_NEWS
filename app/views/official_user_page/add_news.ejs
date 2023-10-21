@@ -26,7 +26,8 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="needs-validation"novalidate>
+            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data"
+                class="needs-validation" novalidate>
                 <div class="container">
                     <div class=" row gutters">
                         <div class="col-12 col-md-3">
@@ -104,8 +105,8 @@
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                        required name="news_type_id"
-                                                        aria-label="Default select example"required>
+                                                        required name="news_type_id" aria-label="Default select example"
+                                                        required>
                                                     </select>
                                                     <div class="invalid-feedback">
                                                         Please select news type!!!
@@ -165,9 +166,9 @@
                                                     <input id="input_card" type="file" class="btn btn-primary"
                                                         name="card_picture" style="height: 38px; padding-top:4px"
                                                         required>
-                                                        <div class="invalid-feedback">
-                                                            Please select card picture!!!
-                                                        </div>
+                                                    <div class="invalid-feedback">
+                                                        Please select card picture!!!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -177,10 +178,10 @@
                                             </div>
 
                                             <input list="europe-countries" class="form-control"
-                                                placeholder="select tags..." id="tags"required>
-                                                <div class="invalid-feedback">
-                                                    Please select tags!!!
-                                                </div>
+                                                placeholder="select tags..." id="tags" required>
+                                            <div class="invalid-feedback">
+                                                Please select tags!!!
+                                            </div>
                                             <datalist id="europe-countries">
                                             </datalist>
 
@@ -213,9 +214,9 @@
                                         <h1>Edit News Paragrap </h1>
                                         <textarea rows="20" cols="70" id="newseditor" name="news_content"
                                             required></textarea>
-                                            <div class="invalid-feedback">
-                                                Please enter main paragraph!!!..
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            Please enter main paragraph!!!..
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row gutters">
