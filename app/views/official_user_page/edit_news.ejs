@@ -26,785 +26,794 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="news"
-                enctype="multipart/form-data" class="">
-                <div class="container">
-                    <div class=" row gutters">
-                        <div class="col-12 col-md-3">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="account-settings">
-                                        <div class="user-profile">
-                                            <div class="user-avatar">
-                                                <% if (users[0].profile_image) { %>
-                                                    <img id="profilePicture-s"
-                                                        class="img-account-profile rounded-circle mb-2" <% const
-                                                        imagePath=users[0].profile_image.substring(6); %>
-                                                    src="<%= imagePath %>" alt="">
-                                                        <% } else { %>
+            <% if (users[0]) { %>
+                <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="news"
+                    enctype="multipart/form-data">
+                    <form method="post" action="/addnews/update/<%= users[0].news_id %>" id="news"
+                        enctype="multipart/form-data" class="">
+                        <div class="container">
+                            <div class=" row gutters">
+                                <div class="col-12 col-md-3">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="account-settings">
+                                                <div class="user-profile">
+                                                    <div class="user-avatar">
+                                                        <% if (users[0].profile_image) { %>
                                                             <img id="profilePicture-s"
-                                                                class="img-account-profile rounded-circle mb-2"
-                                                                src="http://bootdey.com/img/Content/avatar/avatar1.png"
-                                                                alt="">
-                                                            <% } %>
+                                                                class="img-account-profile rounded-circle mb-2" <% const
+                                                                imagePath=users[0].profile_image.substring(6); %>
+                                                            src="<%= imagePath %>" alt="">
+                                                                <% } else { %>
+                                                                    <img id="profilePicture-s"
+                                                                        class="img-account-profile rounded-circle mb-2"
+                                                                        src="http://bootdey.com/img/Content/avatar/avatar1.png"
+                                                                        alt="">
+                                                                    <% } %>
+                                                    </div>
+                                                    <h5 class="user-name">
+                                                        <%- users[0].user_name %>
+                                                    </h5>
+                                                    <h6 class="user-email"><%- users[0].email %></h6>
+                                                </div>
                                             </div>
-                                            <h5 class="user-name">
-                                                <%- users[0].user_name %>
-                                            </h5>
-                                            <h6 class="user-email"><%- users[0].email %></h6>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="card d-flex justify-content-between align-items-center"
-                                style="margin-top: -5px;">
-                                <div class="col-12">
-                                    <h5 class="text-center" style="padding-top: 5px;">วันที่จัดกิจกรรม</h5>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <p>เริ่มกิจกรรม</p>
-                                        </div>
-                                        <div style="padding-left: 10px;">
-
-                                            <% if (isNaN(new Date(users[0].start))) { %>
-                                                <input type="date" name="start">
-                                                <% } else if (users[0].start) { %>
-                                                    <input type="date" name="start"
-                                                        value="<%= users[0].start.toISOString().split('T')[0] %>">
-                                                    <% }else { %>
-                                                        <input type="date" name="start">
-                                                        <% } %>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex align-items-center justify-content-between">
-                                        <div>
-                                            <p>สิ้นสุด</p>
-                                        </div>
-                                        <div style="padding-left: 10px;">
-
-                                            <% if (isNaN(new Date(users[0].end))) { %>
-                                                <input type="date" name="end">
-                                                <% } else if (users[0].end) { %>
-                                                    <input type="date" name="end"
-                                                        value="<%= users[0].end.toISOString().split('T')[0] %>">
-                                                    <% }else { %>
-                                                        <input type="date" name="end">
-                                                        <% } %>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-explain  " style="margin-top: -5px;">
-                                <div class="col-12 d-flex flex-column align-items-center justify-content-center"
-                                    style="padding-block-end: 15px;">
-                                    <div>
-                                        <p style="padding-top: 10px;">สิ่งที่ผู้เข้าร่วมควรทราบ</p>
-                                    </div>
-                                    <div style="margin-top: -10px;">
-                                        <textarea id="editor" name="explain" value="<%- users[0].explain %>"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-md-9">
-                            <div class="card" style="padding-block-end: 5.5%;">
-                                <div class="card-body">
-                                    <div class="row gutters">
+                                    <div class="card d-flex justify-content-between align-items-center"
+                                        style="margin-top: -5px;">
                                         <div class="col-12">
-                                            <h1 class="mb-3 ">CARD SETTING</h1>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="form-group">
+                                            <h5 class="text-center" style="padding-top: 5px;">วันที่จัดกิจกรรม</h5>
+                                            <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <label for="news_type_select">NEWS TYPE</label>
+                                                    <p>เริ่มกิจกรรม</p>
                                                 </div>
-                                                <div>
-                                                    <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                        name="news_type_id" aria-label="Default select example"
-                                                        value="<%- users[0].news_type_name %>">
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6">
-                                            <div class="">
-                                                <div>
-                                                    <label for="">NEWS TOPIC</label>
-                                                </div>
-                                                <div>
-                                                    <select class="form-select-ad form-select-sm" id="news_topic_select"
-                                                        name="topic_id" placeholder="Enter email ID"
-                                                        aria-label="Default select example">
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div class="">
-                                                <label for="title">Title</label>
-                                                <input type="text" class="form-control form-control-lg" id="title"
-                                                    name="title" placeholder="เพิ่มหัวข้อข่าว"
-                                                    value="<%- users[0].title %>">
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div class="">
-                                                <label for="welding_para">Welding</label>
-                                                <input class="form-control form-control-lg" id="welding_para"
-                                                    name="welding_para" value="<%- users[0].welding_para %>">
-                                            </div>
+                                                <div style="padding-left: 10px;">
 
-                                        </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div>
+                                                    <% if (isNaN(new Date(users[0].start))) { %>
+                                                        <input type="date" name="start">
+                                                        <% } else if (users[0].start) { %>
+                                                            <input type="date" name="start"
+                                                                value="<%= users[0].start.toISOString().split('T')[0] %>">
+                                                            <% }else { %>
+                                                                <input type="date" name="start">
+                                                                <% } %>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex align-items-center justify-content-between">
                                                 <div>
-                                                    <label for="street">Card Picture</label>
+                                                    <p>สิ้นสุด</p>
                                                 </div>
-                                                <div>
-                                                    <img id="img" <% const image=users[0].card_picture.substring(6); %>
-                                                    src="<%= image %>"
-                                                        height="200">
-                                                </div>
-                                                <div style="padding-top: 10px;">
-                                                    <input id="input_card" type="file" class="btn btn-primary"
-                                                        name="card_picture" style="height: 38px; padding-top:4px">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 col-md-6" style="padding-top: 20px;">
-                                            <div>
-                                                <label for="tags">Tags Select</label>
-                                            </div>
-                                            <div>
-                                                <input list="europe-countries" class="form-control"
-                                                    placeholder="Start typing..." id="tags">
-                                                <datalist id="europe-countries">
-                                                </datalist>
-                                            </div>
+                                                <div style="padding-left: 10px;">
 
-                                            <div style="padding-top: 10px;">
-                                                <table id="selectedTagsTable">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>tags id</th>
-                                                            <th>tags name</th>
-                                                            <th>delect</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                    </tbody>
-                                                </table>
+                                                    <% if (isNaN(new Date(users[0].end))) { %>
+                                                        <input type="date" name="end">
+                                                        <% } else if (users[0].end) { %>
+                                                            <input type="date" name="end"
+                                                                value="<%= users[0].end.toISOString().split('T')[0] %>">
+                                                            <% }else { %>
+                                                                <input type="date" name="end">
+                                                                <% } %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-explain  " style="margin-top: -5px;">
+                                        <div class="col-12 d-flex flex-column align-items-center justify-content-center"
+                                            style="padding-block-end: 15px;">
+                                            <div>
+                                                <p style="padding-top: 10px;">สิ่งที่ผู้เข้าร่วมควรทราบ</p>
+                                            </div>
+                                            <div style="margin-top: -10px;">
+                                                <textarea id="editor" name="explain"
+                                                    value="<%- users[0].explain %>"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-9">
+                                    <div class="card" style="padding-block-end: 5.5%;">
+                                        <div class="card-body">
+                                            <div class="row gutters">
+                                                <div class="col-12">
+                                                    <h1 class="mb-3 ">CARD SETTING</h1>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="form-group">
+                                                        <div>
+                                                            <label for="news_type_select">NEWS TYPE</label>
+                                                        </div>
+                                                        <div>
+                                                            <select class="form-select-ad form-select-lg"
+                                                                id="news_type_select" name="news_type_id"
+                                                                aria-label="Default select example"
+                                                                value="<%- users[0].news_type_name %>">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6">
+                                                    <div class="">
+                                                        <div>
+                                                            <label for="">NEWS TOPIC</label>
+                                                        </div>
+                                                        <div>
+                                                            <select class="form-select-ad form-select-sm"
+                                                                id="news_topic_select" name="topic_id"
+                                                                placeholder="Enter email ID"
+                                                                aria-label="Default select example">
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                                    <div class="">
+                                                        <label for="title">Title</label>
+                                                        <input type="text" class="form-control form-control-lg"
+                                                            id="title" name="title" placeholder="เพิ่มหัวข้อข่าว"
+                                                            value="<%- users[0].title %>">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                                    <div class="">
+                                                        <label for="welding_para">Welding</label>
+                                                        <input class="form-control form-control-lg" id="welding_para"
+                                                            name="welding_para" value="<%- users[0].welding_para %>">
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                                    <div>
+                                                        <div>
+                                                            <label for="street">Card Picture</label>
+                                                        </div>
+                                                        <div>
+                                                            <img id="img" <% const
+                                                                image=users[0].card_picture.substring(6); %>
+                                                            src="<%= image %>"
+                                                                height="200">
+                                                        </div>
+                                                        <div style="padding-top: 10px;">
+                                                            <input id="input_card" type="file" class="btn btn-primary"
+                                                                name="card_picture"
+                                                                style="height: 38px; padding-top:4px">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-6" style="padding-top: 20px;">
+                                                    <div>
+                                                        <label for="tags">Tags Select</label>
+                                                    </div>
+                                                    <div>
+                                                        <input list="europe-countries" class="form-control"
+                                                            placeholder="Start typing..." id="tags">
+                                                        <datalist id="europe-countries">
+                                                        </datalist>
+                                                    </div>
+
+                                                    <div style="padding-top: 10px;">
+                                                        <table id="selectedTagsTable">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>tags id</th>
+                                                                    <th>tags name</th>
+                                                                    <th>delect</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
+                                <div class=" row gutters">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="col-12">
+                                                <div class="col-12" style="padding-top:20px">
+                                                    <h1>Edit News Paragrap </h1>
+                                                    <textarea rows="20" cols="70" id="newseditor"
+                                                        name="news_content"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row gutters">
+                                                <div class="col-12" style="padding-top: 20px;">
+                                                    <div class="d-flex justify-content-between">
+                                                        <button type="" id="submit" name="submit"
+                                                            class="btn btn-danger">Cancel</button>
+                                                        <button type="submit" class="btn btn-primary">Sent
+                                                            Update</button>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="container" style="margin-top: -40px;padding-block-end: 20px;">
-                        <div class=" row gutters">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="col-12">
-                                        <div class="col-12" style="padding-top:20px">
-                                            <h1>Edit News Paragrap </h1>
-                                            <textarea rows="20" cols="70" id="newseditor"
-                                                name="news_content"></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="row gutters">
-                                        <div class="col-12" style="padding-top: 20px;">
-                                            <div class="d-flex justify-content-between">
-                                                <button type="" id="submit" name="submit"
-                                                    class="btn btn-danger">Cancel</button>
-                                                <button type="submit" class="btn btn-primary">Sent Update</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <%- include('../home/footer') %>
-                <style>
-                    /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
-                    .form-select-ad {
-                        color: #000000;
-                        background: #ffffff;
-                        width: 100%;
-                        height: 40px;
-                    }
+                    </form>
 
-                    .card {
-                        background: #fcfcff;
-                        -webkit-border-radius: 5px;
-                        -moz-border-radius: 5px;
-                        border-radius: 5px;
-                        border: 0;
-                        margin-bottom: 1rem;
-                        margin-top: 40px;
-                    }
+                    <%- include('../home/footer') %>
+                        <style>
+                            /* กำหนดความสูงของ textarea ให้มีการแสดงแถวมากขึ้น */
+                            .form-select-ad {
+                                color: #000000;
+                                background: #ffffff;
+                                width: 100%;
+                                height: 40px;
+                            }
 
-                    body {
-                        background: #1A233A;
-                    }
+                            .card {
+                                background: #fcfcff;
+                                -webkit-border-radius: 5px;
+                                -moz-border-radius: 5px;
+                                border-radius: 5px;
+                                border: 0;
+                                margin-bottom: 1rem;
+                                margin-top: 40px;
+                            }
 
-                    table {
-                        border-collapse: collapse;
-                    }
+                            body {
+                                background: #1A233A;
+                            }
 
-                    table,
-                    th,
-                    td {
-                        border: 1px solid black;
-                    }
+                            table {
+                                border-collapse: collapse;
+                            }
 
-                    th,
-                    td {
-                        padding: 10px;
-                    }
+                            table,
+                            th,
+                            td {
+                                border: 1px solid black;
+                            }
 
-                    .image-button {
-                        background-color: transparent;
-                        border: none;
-                        cursor: pointer;
-                        text-decoration: underline;
-                        color: blue;
-                    }
+                            th,
+                            td {
+                                padding: 10px;
+                            }
 
-                    .modal {
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        width: 100%;
-                        height: 100%;
-                        background-color: rgba(0, 0, 0, 0.7);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        z-index: 9999;
-                    }
+                            .image-button {
+                                background-color: transparent;
+                                border: none;
+                                cursor: pointer;
+                                text-decoration: underline;
+                                color: blue;
+                            }
 
-                    .modal-image {
-                        max-width: 80%;
-                        max-height: 80%;
-                    }
+                            .modal {
+                                position: fixed;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(0, 0, 0, 0.7);
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                z-index: 9999;
+                            }
 
-                    .form-control {
-                        border: 1px solid #fefefe;
-                        -webkit-border-radius: 2px;
-                        -moz-border-radius: 2px;
-                        border-radius: 2px;
-                        font-size: .825rem;
-                        background: #ffffff;
-                        border-color: #000000;
-                        color: #000000;
-                    }
-                </style>
+                            .modal-image {
+                                max-width: 80%;
+                                max-height: 80%;
+                            }
 
-</body>
-<script>
-    let img = document.getElementById('img');
-    let input = document.getElementById('input_card');
-    input.onchange = (e) => {
-        if (input.files[0])
-            img.src = URL.createObjectURL(input.files[0]);
-    };
-
-</script>
-<script> //ดึงข้อมูลเข้า combobox
-    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    const dataSelect_news_type = document.getElementById('news_type_select');
-    const defaultOption2 = document.createElement('option');
-    defaultOption2.value = "<%= users[0].news_type_id %>"; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-    defaultOption2.textContent = "<%= users[0].news_type_name %>";
-    dataSelect_news_type.appendChild(defaultOption2);
-    // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/AddNews/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-        .then(response => response.json())
-        .then(data => {
-            // สร้างตัวเลือกในกล่องคอมโบ
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.news_type_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
-                option.textContent = item.news_type_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
-                dataSelect_news_type.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-</script>
-
-<script> //ดึงข้อมูลเข้า combobox news_type
-    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    const dataSelect_topic = document.getElementById('news_topic_select');
-    const defaultOption1 = document.createElement('option');
-    defaultOption1.value = '<%= users[0].topic_id  %>'; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
-    defaultOption1.textContent = '<%= users[0].topic_name  %>';
-    dataSelect_topic.appendChild(defaultOption1);
-
-    // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/AddNews/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-        .then(response => response.json())
-        .then(data => {
-            // สร้างตัวเลือกในกล่องคอมโบ
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.topic_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
-                option.textContent = item.topic_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
-                dataSelect_topic.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-</script>
-
-<script>
-    // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
-    const searchInput = document.getElementById('tags');
-    const datalist = document.getElementById('europe-countries');
-
-    const dataSelect_tags = document.getElementById('news_type_select');
-
-    // ดึงข้อมูลจากฐานข้อมูล
-    fetch('/AddNews/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
-        .then(response => response.json())
-        .then(data => {
-            // สร้างตัวเลือกใน datalist
-            data.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.section_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
-                option.setAttribute('data-id', item.section_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
-                datalist.appendChild(option);
-            });
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-
-    // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
-    searchInput.addEventListener('input', function () {
-        const searchText = searchInput.value.toLowerCase();
-        const options = datalist.options;
-
-        for (let i = 0; i < options.length; i++) {
-            const option = options[i];
-            const optionText = option.value.toLowerCase();
-
-            // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
-            if (optionText.includes(searchText)) {
-                option.style.display = 'block'; // แสดงตัวเลือก
-            } else {
-                option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
-            }
-        }
-    });
-</script>
+                            .form-control {
+                                border: 1px solid #fefefe;
+                                -webkit-border-radius: 2px;
+                                -moz-border-radius: 2px;
+                                border-radius: 2px;
+                                font-size: .825rem;
+                                background: #ffffff;
+                                border-color: #000000;
+                                color: #000000;
+                            }
+                        </style>
 
 
-<!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
-<script>
-    // Fetch section data and populate the select dropdown when the page loads
-    document.addEventListener('DOMContentLoaded', function () {
-        const tagsSelect = document.getElementById('tags');
-        const selectedTagsTable = document.getElementById('selectedTagsTable');
-        const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+                        <script>
+                            let img = document.getElementById('img');
+                            let input = document.getElementById('input_card');
+                            input.onchange = (e) => {
+                                if (input.files[0])
+                                    img.src = URL.createObjectURL(input.files[0]);
+                            };
 
-        // Fetch section data and populate the select dropdown when the page loads
-        fetch('/AddNews/section/<%= users[0].news_id %>')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(tag => {
-                    console.log(tag);
-                    const option = document.createElement('option');
-                    const newRow = selectedTagsTableBody.insertRow();
-                    selectedId = tag.section_id;
-                    selectedTag = tag.section_name;
-                    const idCell = newRow.insertCell();
-                    idCell.textContent = selectedId;
-                    const nameCell = newRow.insertCell();
-                    nameCell.textContent = selectedTag;
-                    const actionCell = newRow.insertCell();
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.addEventListener('click', function () {
-                        event.preventDefault();
-                        // ดึงข้อมูล ID ของข้อมูลที่ต้องการลบ
-                        const idCell = newRow.querySelector('td:nth-child(1)');
-                        const group_id = tag.group_id;
+                        </script>
+                        <script> //ดึงข้อมูลเข้า combobox
+                            // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+                            const dataSelect_news_type = document.getElementById('news_type_select');
+                            const defaultOption2 = document.createElement('option');
+                            defaultOption2.value = "<%= users[0].news_type_id %>"; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+                            defaultOption2.textContent = "<%= users[0].news_type_name %>";
+                            dataSelect_news_type.appendChild(defaultOption2);
+                            // ดึงข้อมูลจากฐานข้อมูล
+                            fetch('/AddNews/news_type_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+                                .then(response => response.json())
+                                .then(data => {
+                                    // สร้างตัวเลือกในกล่องคอมโบ
+                                    data.forEach(item => {
+                                        const option = document.createElement('option');
+                                        option.value = item.news_type_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
+                                        option.textContent = item.news_type_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
+                                        dataSelect_news_type.appendChild(option);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        </script>
 
-                        // ส่งคำขอลบไปยังเซิร์ฟเวอร์
-                        fetch(`/AddNews/delete_section/${group_id}`, {
-                            method: 'DELETE',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                        })
-                            .then(response => {
-                                if (response.ok) {
-                                    // ลบแถวที่เลือกออกจากตาราง
-                                    selectedTagsTableBody.removeChild(newRow);
-                                } else {
-                                    console.error('Failed to delete section');
+                        <script> //ดึงข้อมูลเข้า combobox news_type
+                            // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+                            const dataSelect_topic = document.getElementById('news_topic_select');
+                            const defaultOption1 = document.createElement('option');
+                            defaultOption1.value = '<%= users[0].topic_id  %>'; // กำหนดค่าว่างให้เป็นค่าเริ่มต้น
+                            defaultOption1.textContent = '<%= users[0].topic_name  %>';
+                            dataSelect_topic.appendChild(defaultOption1);
+
+                            // ดึงข้อมูลจากฐานข้อมูล
+                            fetch('/AddNews/news_topic_combobox') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+                                .then(response => response.json())
+                                .then(data => {
+                                    // สร้างตัวเลือกในกล่องคอมโบ
+                                    data.forEach(item => {
+                                        const option = document.createElement('option');
+                                        option.value = item.topic_id; // แทนที่ 'id' ด้วยฟิลด์ที่ใช้เป็นค่าตัวเลือก
+                                        option.textContent = item.topic_name; // แทนที่ 'name' ด้วยฟิลด์ที่ใช้เป็นข้อความตัวเลือก
+                                        dataSelect_topic.appendChild(option);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+                        </script>
+
+                        <script>
+                            // ในส่วนที่เรียกใช้หน้า HTML ที่มีฟอร์ม
+                            const searchInput = document.getElementById('tags');
+                            const datalist = document.getElementById('europe-countries');
+
+                            const dataSelect_tags = document.getElementById('news_type_select');
+
+                            // ดึงข้อมูลจากฐานข้อมูล
+                            fetch('/AddNews/tags') // เปลี่ยนเป็นเส้นทางที่เขียนรหัสหลังบ้านของคุณเพื่อดึงข้อมูล
+                                .then(response => response.json())
+                                .then(data => {
+                                    // สร้างตัวเลือกใน datalist
+                                    data.forEach(item => {
+                                        const option = document.createElement('option');
+                                        option.value = item.section_name; // ใช้ข้อมูลชื่อเป็นค่าตัวเลือก
+                                        option.setAttribute('data-id', item.section_id); // กำหนด attribute data-id เพื่อเก็บค่า ID
+                                        datalist.appendChild(option);
+                                    });
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                });
+
+                            // เมื่อผู้ใช้พิมพ์ข้อความในช่องค้นหา
+                            searchInput.addEventListener('input', function () {
+                                const searchText = searchInput.value.toLowerCase();
+                                const options = datalist.options;
+
+                                for (let i = 0; i < options.length; i++) {
+                                    const option = options[i];
+                                    const optionText = option.value.toLowerCase();
+
+                                    // เปรียบเทียบข้อความที่ใส่ในช่องค้นหากับข้อความใน datalist
+                                    if (optionText.includes(searchText)) {
+                                        option.style.display = 'block'; // แสดงตัวเลือก
+                                    } else {
+                                        option.style.display = 'none'; // ซ่อนตัวเลือกที่ไม่ตรง
+                                    }
                                 }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
                             });
-                    });
-                    actionCell.appendChild(deleteButton);
-                });
-            })
-            .catch(error => {
-                console.error('Error fetching section data:', error);
-            });
-
-    });
-
-</script>
-
-<script>
-    const tagsSelect = document.getElementById('tags');
-    const selectedTagsTable = document.getElementById('selectedTagsTable');
-    const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
-
-    searchInput.addEventListener('change', function () {
-        const selectedTag = searchInput.value;
-        const selectedId = datalist.querySelector(`option[value="${selectedTag}"]`).getAttribute('data-id');
-
-        if (selectedTag && selectedId) {
-            const newRow = selectedTagsTableBody.insertRow();
-            const idCell = newRow.insertCell();
-            idCell.textContent = selectedId;
-            const nameCell = newRow.insertCell();
-            nameCell.textContent = selectedTag;
-            const actionCell = newRow.insertCell();
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Delete';
-            deleteButton.addEventListener('click', function () {
-                selectedTagsTableBody.removeChild(newRow);
-            });
-            actionCell.appendChild(deleteButton);
-        }
-    });
-
-    // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
-    const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
-    form.addEventListener('submit', function () {
-        const rows = selectedTagsTableBody.querySelectorAll('tr');
-        console.log(rows);
-        const sectionIds = [];
-        rows.forEach(row => {
-            const idCell = row.querySelector('td:nth-child(1)');
-            const sectionId = idCell.textContent.trim();
-            
-            sectionIds.push(sectionId);
-        });
-
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'section_id';
-        hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
-        form.appendChild(hiddenInput);
-    });
-</script>
+                        </script>
 
 
-<script>
-    // This sample still does not showcase all CKEditor&nbsp;5 features (!)
-    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.ClassicEditor.create(document.getElementById("newseditor"), {
-        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
-        toolbar: {
-            items: [
-                'exportPDF', 'exportWord', '|',
-                'findAndReplace', 'selectAll', '|',
-                'heading', '|',
-                'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+                        <!-- ส่วนของการเพิ่ม section ที่เลือกจาก combobox มาเก็บในตาราง -->
+                        <script>
+                            // Fetch section data and populate the select dropdown when the page loads
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const tagsSelect = document.getElementById('tags');
+                                const selectedTagsTable = document.getElementById('selectedTagsTable');
+                                const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
 
-                '|',
-                'outdent', 'indent', '|',
-                'undo', 'redo',
-                '-',
-                'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
-                'alignment', '|',
-                'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
-                'specialCharacters', 'horizontalLine', 'pageBreak', '|',
-                'textPartLanguage', '|',
-                'sourceEditing'
-            ],
-            shouldNotGroupWhenFull: true
-        },
+                                // Fetch section data and populate the select dropdown when the page loads
+                                fetch('/AddNews/section/<%= users[0].news_id %>')
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        data.forEach(tag => {
+                                            console.log(tag);
+                                            const option = document.createElement('option');
+                                            const newRow = selectedTagsTableBody.insertRow();
+                                            selectedId = tag.section_id;
+                                            selectedTag = tag.section_name;
+                                            const idCell = newRow.insertCell();
+                                            idCell.textContent = selectedId;
+                                            const nameCell = newRow.insertCell();
+                                            nameCell.textContent = selectedTag;
+                                            const actionCell = newRow.insertCell();
+                                            const deleteButton = document.createElement('button');
+                                            deleteButton.textContent = 'Delete';
+                                            deleteButton.addEventListener('click', function () {
+                                                event.preventDefault();
+                                                // ดึงข้อมูล ID ของข้อมูลที่ต้องการลบ
+                                                const idCell = newRow.querySelector('td:nth-child(1)');
+                                                const group_id = tag.group_id;
+
+                                                // ส่งคำขอลบไปยังเซิร์ฟเวอร์
+                                                fetch(`/AddNews/delete_section/${group_id}`, {
+                                                    method: 'DELETE',
+                                                    headers: {
+                                                        'Content-Type': 'application/json',
+                                                    },
+                                                })
+                                                    .then(response => {
+                                                        if (response.ok) {
+                                                            // ลบแถวที่เลือกออกจากตาราง
+                                                            selectedTagsTableBody.removeChild(newRow);
+                                                        } else {
+                                                            console.error('Failed to delete section');
+                                                        }
+                                                    })
+                                                    .catch(error => {
+                                                        console.error('Error:', error);
+                                                    });
+                                            });
+                                            actionCell.appendChild(deleteButton);
+                                        });
+                                    })
+                                    .catch(error => {
+                                        console.error('Error fetching section data:', error);
+                                    });
+
+                            });
+
+                        </script>
+
+                        <script>
+                            const tagsSelect = document.getElementById('tags');
+                            const selectedTagsTable = document.getElementById('selectedTagsTable');
+                            const selectedTagsTableBody = selectedTagsTable.querySelector('tbody');
+
+                            searchInput.addEventListener('change', function () {
+                                const selectedTag = searchInput.value;
+                                const selectedId = datalist.querySelector(`option[value="${selectedTag}"]`).getAttribute('data-id');
+
+                                if (selectedTag && selectedId) {
+                                    const newRow = selectedTagsTableBody.insertRow();
+                                    const idCell = newRow.insertCell();
+                                    idCell.textContent = selectedId;
+                                    const nameCell = newRow.insertCell();
+                                    nameCell.textContent = selectedTag;
+                                    const actionCell = newRow.insertCell();
+                                    const deleteButton = document.createElement('button');
+                                    deleteButton.textContent = 'Delete';
+                                    deleteButton.addEventListener('click', function () {
+                                        selectedTagsTableBody.removeChild(newRow);
+                                    });
+                                    actionCell.appendChild(deleteButton);
+                                }
+                            });
+
+                            // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
+                            const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
+                            form.addEventListener('submit', function () {
+                                const rows = selectedTagsTableBody.querySelectorAll('tr');
+                                console.log(rows);
+                                const sectionIds = [];
+                                rows.forEach(row => {
+                                    const idCell = row.querySelector('td:nth-child(1)');
+                                    const sectionId = idCell.textContent.trim();
+
+                                    sectionIds.push(sectionId);
+                                });
+
+                                const hiddenInput = document.createElement('input');
+                                hiddenInput.type = 'hidden';
+                                hiddenInput.name = 'section_id';
+                                hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
+                                form.appendChild(hiddenInput);
+                            });
+                        </script>
+                        <script>
+                            // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+                            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+                            CKEDITOR.ClassicEditor.create(document.getElementById("newseditor"), {
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                                toolbar: {
+                                    items: [
+                                        'exportPDF', 'exportWord', '|',
+                                        'findAndReplace', 'selectAll', '|',
+                                        'heading', '|',
+                                        'bold', 'italic', 'strikethrough', 'underline', 'code', 'subscript', 'superscript', 'removeFormat', '|',
+
+                                        '|',
+                                        'outdent', 'indent', '|',
+                                        'undo', 'redo',
+                                        '-',
+                                        'fontSize', 'fontFamily', 'fontColor', 'fontBackgroundColor', 'highlight', '|',
+                                        'alignment', '|',
+                                        'link', 'insertImage', 'blockQuote', 'insertTable', 'mediaEmbed', 'codeBlock', 'htmlEmbed', '|',
+                                        'specialCharacters', 'horizontalLine', 'pageBreak', '|',
+                                        'textPartLanguage', '|',
+                                        'sourceEditing'
+                                    ],
+                                    shouldNotGroupWhenFull: true
+                                },
 
 
-        // Changing the language of the interface requires loading the language file using the <script> tag.
-        // language: 'es',
-        list: {
-            properties: {
-                styles: true,
-                startIndex: true,
-                reversed: true
-            }
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-            ]
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-        placeholder: 'เขียนข่าวของคุณที่นี่!!!',
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
-        fontFamily: {
-            options: [
-                'default',
-                'Arial, Helvetica, sans-serif',
-                'Courier New, Courier, monospace',
-                'Georgia, serif',
-                'Lucida Sans Unicode, Lucida Grande, sans-serif',
-                'Tahoma, Geneva, sans-serif',
-                'Times New Roman, Times, serif',
-                'Trebuchet MS, Helvetica, sans-serif',
-                'Verdana, Geneva, sans-serif'
-            ],
-            supportAllValues: true
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
-        fontSize: {
-            options: [10, 12, 14, 'default', 18, 20, 22],
-            supportAllValues: true
-        },
-        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
-        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
-        htmlSupport: {
-            allow: [
-                {
-                    name: /.*/,
-                    attributes: true,
-                    classes: true,
-                    styles: true
-                }
-            ]
-        },
-        // Be careful with enabling previews
-        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
-        htmlEmbed: {
-            showPreviews: true
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
-        link: {
-            decorators: {
-                addTargetToExternalLinks: true,
-                defaultProtocol: 'https://',
-                toggleDownloadable: {
-                    mode: 'manual',
-                    label: 'Downloadable',
-                    attributes: {
-                        download: 'file'
-                    }
-                }
-            }
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
-        mention: {
-            feeds: [
-                {
-                    marker: '@',
-                    feed: [
-                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-                        '@sugar', '@sweet', '@topping', '@wafer'
-                    ],
-                    minimumCharacters: 1
-                }
-            ]
-        },
+                                // Changing the language of the interface requires loading the language file using the <script> tag.
+                                // language: 'es',
+                                list: {
+                                    properties: {
+                                        styles: true,
+                                        startIndex: true,
+                                        reversed: true
+                                    }
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                                heading: {
+                                    options: [
+                                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                                    ]
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                                placeholder: 'เขียนข่าวของคุณที่นี่!!!',
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                                fontFamily: {
+                                    options: [
+                                        'default',
+                                        'Arial, Helvetica, sans-serif',
+                                        'Courier New, Courier, monospace',
+                                        'Georgia, serif',
+                                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                                        'Tahoma, Geneva, sans-serif',
+                                        'Times New Roman, Times, serif',
+                                        'Trebuchet MS, Helvetica, sans-serif',
+                                        'Verdana, Geneva, sans-serif'
+                                    ],
+                                    supportAllValues: true
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                                fontSize: {
+                                    options: [10, 12, 14, 'default', 18, 20, 22],
+                                    supportAllValues: true
+                                },
+                                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                                htmlSupport: {
+                                    allow: [
+                                        {
+                                            name: /.*/,
+                                            attributes: true,
+                                            classes: true,
+                                            styles: true
+                                        }
+                                    ]
+                                },
+                                // Be careful with enabling previews
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                                htmlEmbed: {
+                                    showPreviews: true
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                                link: {
+                                    decorators: {
+                                        addTargetToExternalLinks: true,
+                                        defaultProtocol: 'https://',
+                                        toggleDownloadable: {
+                                            mode: 'manual',
+                                            label: 'Downloadable',
+                                            attributes: {
+                                                download: 'file'
+                                            }
+                                        }
+                                    }
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                                mention: {
+                                    feeds: [
+                                        {
+                                            marker: '@',
+                                            feed: [
+                                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                                '@sugar', '@sweet', '@topping', '@wafer'
+                                            ],
+                                            minimumCharacters: 1
+                                        }
+                                    ]
+                                },
 
-        // The "super-build" contains more premium features that require additional configuration, disable them below.
-        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
-        removePlugins: [
-            // These two are commercial, but you can try them out without registering to a trial.
-            // 'ExportPdf',
-            // 'ExportWord',
-            'CKBox',
-            'CKFinder',
-            'EasyImage',
-            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
-            // Storing images as Base64 is usually a very bad idea.
-            // Replace it on production website with other solutions:
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-            // 'Base64UploadAdapter',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
-            // from a local file system (file://) - load this site via HTTP server if you enable MathType.
-            'MathType',
-            // The following features are part of the Productivity Pack and require additional license.
-            'SlashCommand',
-            'Template',
-            'DocumentOutline',
-            'FormatPainter',
-            'TableOfContents'
-        ]
-    }).then(editor => {
-        // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
-        editor.setData('<%- users[0].news_content %>');
-    }).catch(error => {
-        console.error(error);
-    });
-</script>
-<script>
-    // This sample still does not showcase all CKEditor&nbsp;5 features (!)
-    // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
-    CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
-        // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
-        toolbar: {
-            items: [
-                'bold', 'italic',
-                'fontSize', 'fontFamily', 'fontColor', 'highlight', 'alignment',
-                'insertTable', 'numberedList'
-            ],
-            shouldNotGroupWhenFull: true
-        },
+                                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                                removePlugins: [
+                                    // These two are commercial, but you can try them out without registering to a trial.
+                                    // 'ExportPdf',
+                                    // 'ExportWord',
+                                    'CKBox',
+                                    'CKFinder',
+                                    'EasyImage',
+                                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                                    // Storing images as Base64 is usually a very bad idea.
+                                    // Replace it on production website with other solutions:
+                                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                                    // 'Base64UploadAdapter',
+                                    'RealTimeCollaborativeComments',
+                                    'RealTimeCollaborativeTrackChanges',
+                                    'RealTimeCollaborativeRevisionHistory',
+                                    'PresenceList',
+                                    'Comments',
+                                    'TrackChanges',
+                                    'TrackChangesData',
+                                    'RevisionHistory',
+                                    'Pagination',
+                                    'WProofreader',
+                                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                                    // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+                                    'MathType',
+                                    // The following features are part of the Productivity Pack and require additional license.
+                                    'SlashCommand',
+                                    'Template',
+                                    'DocumentOutline',
+                                    'FormatPainter',
+                                    'TableOfContents'
+                                ]
+                            }).then(editor => {
+                                // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
+                                editor.setData('<%- users[0].news_content %>');
+                            }).catch(error => {
+                                console.error(error);
+                            });
+                        </script>
+                        <script>
+                            // This sample still does not showcase all CKEditor&nbsp;5 features (!)
+                            // Visit https://ckeditor.com/docs/ckeditor5/latest/features/index.html to browse all the features.
+                            CKEDITOR.ClassicEditor.create(document.getElementById("editor"), {
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/toolbar/toolbar.html#extended-toolbar-configuration-format
+                                toolbar: {
+                                    items: [
+                                        'bold', 'italic',
+                                        'fontSize', 'fontFamily', 'fontColor', 'highlight', 'alignment',
+                                        'insertTable', 'numberedList'
+                                    ],
+                                    shouldNotGroupWhenFull: true
+                                },
 
-        // Changing the language of the interface requires loading the language file using the <script> tag.
-        // language: 'es',
-        list: {
-            properties: {
-                styles: true,
-                startIndex: true,
-                reversed: true
-            }
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
-        heading: {
-            options: [
-                { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
-                { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
-                { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
-                { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
-                { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
-                { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
-                { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
-            ]
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
-        placeholder: 'รายละเอี่ยดที่ควรทราบ เช่น กำหนดการต่างๆ,การแต่งกาย',
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
-        fontFamily: {
-            options: [
-                'default',
-                'Arial, Helvetica, sans-serif',
-                'Courier New, Courier, monospace',
-                'Georgia, serif',
-                'Lucida Sans Unicode, Lucida Grande, sans-serif',
-                'Tahoma, Geneva, sans-serif',
-                'Times New Roman, Times, serif',
-                'Trebuchet MS, Helvetica, sans-serif',
-                'Verdana, Geneva, sans-serif'
-            ],
-            supportAllValues: true
-        },
-        // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
-        fontSize: {
-            options: [10, 12, 14, 'default', 18, 20, 22],
-            supportAllValues: true
-        },
-        // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
-        // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
-        htmlSupport: {
-            allow: [
-                {
-                    name: /.*/,
-                    attributes: true,
-                    classes: true,
-                    styles: true
-                }
-            ]
-        },
-        // Be careful with enabling previews
-        // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
+                                // Changing the language of the interface requires loading the language file using the <script> tag.
+                                // language: 'es',
+                                list: {
+                                    properties: {
+                                        styles: true,
+                                        startIndex: true,
+                                        reversed: true
+                                    }
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/headings.html#configuration
+                                heading: {
+                                    options: [
+                                        { model: 'paragraph', title: 'Paragraph', class: 'ck-heading_paragraph' },
+                                        { model: 'heading1', view: 'h1', title: 'Heading 1', class: 'ck-heading_heading1' },
+                                        { model: 'heading2', view: 'h2', title: 'Heading 2', class: 'ck-heading_heading2' },
+                                        { model: 'heading3', view: 'h3', title: 'Heading 3', class: 'ck-heading_heading3' },
+                                        { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
+                                        { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
+                                        { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' }
+                                    ]
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/editor-placeholder.html#using-the-editor-configuration
+                                placeholder: 'รายละเอี่ยดที่ควรทราบ เช่น กำหนดการต่างๆ,การแต่งกาย',
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-family-feature
+                                fontFamily: {
+                                    options: [
+                                        'default',
+                                        'Arial, Helvetica, sans-serif',
+                                        'Courier New, Courier, monospace',
+                                        'Georgia, serif',
+                                        'Lucida Sans Unicode, Lucida Grande, sans-serif',
+                                        'Tahoma, Geneva, sans-serif',
+                                        'Times New Roman, Times, serif',
+                                        'Trebuchet MS, Helvetica, sans-serif',
+                                        'Verdana, Geneva, sans-serif'
+                                    ],
+                                    supportAllValues: true
+                                },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/font.html#configuring-the-font-size-feature
+                                fontSize: {
+                                    options: [10, 12, 14, 'default', 18, 20, 22],
+                                    supportAllValues: true
+                                },
+                                // Be careful with the setting below. It instructs CKEditor to accept ALL HTML markup.
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/general-html-support.html#enabling-all-html-features
+                                htmlSupport: {
+                                    allow: [
+                                        {
+                                            name: /.*/,
+                                            attributes: true,
+                                            classes: true,
+                                            styles: true
+                                        }
+                                    ]
+                                },
+                                // Be careful with enabling previews
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/html-embed.html#content-previews
 
-        // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/link.html#custom-link-attributes-decorators
 
-        // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
-        mention: {
-            feeds: [
-                {
-                    marker: '@',
-                    feed: [
-                        '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
-                        '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
-                        '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
-                        '@sugar', '@sweet', '@topping', '@wafer'
-                    ],
-                    minimumCharacters: 1
-                }
-            ]
-        },
+                                // https://ckeditor.com/docs/ckeditor5/latest/features/mentions.html#configuration
+                                mention: {
+                                    feeds: [
+                                        {
+                                            marker: '@',
+                                            feed: [
+                                                '@apple', '@bears', '@brownie', '@cake', '@cake', '@candy', '@canes', '@chocolate', '@cookie', '@cotton', '@cream',
+                                                '@cupcake', '@danish', '@donut', '@dragée', '@fruitcake', '@gingerbread', '@gummi', '@ice', '@jelly-o',
+                                                '@liquorice', '@macaroon', '@marzipan', '@oat', '@pie', '@plum', '@pudding', '@sesame', '@snaps', '@soufflé',
+                                                '@sugar', '@sweet', '@topping', '@wafer'
+                                            ],
+                                            minimumCharacters: 1
+                                        }
+                                    ]
+                                },
 
-        // The "super-build" contains more premium features that require additional configuration, disable them below.
-        // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
-        removePlugins: [
-            // These two are commercial, but you can try them out without registering to a trial.
-            'ExportPdf',
-            'ExportWord',
-            'CKBox',
-            'CKFinder',
-            'EasyImage',
-            // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
-            // Storing images as Base64 is usually a very bad idea.
-            // Replace it on production website with other solutions:
-            // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
-            // 'Base64UploadAdapter',
-            'RealTimeCollaborativeComments',
-            'RealTimeCollaborativeTrackChanges',
-            'RealTimeCollaborativeRevisionHistory',
-            'PresenceList',
-            'Comments',
-            'TrackChanges',
-            'TrackChangesData',
-            'RevisionHistory',
-            'Pagination',
-            'WProofreader',
-            // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
-            // from a local file system (file://) - load this site via HTTP server if you enable MathType.
-            'MathType',
-            // The following features are part of the Productivity Pack and require additional license.
-            'SlashCommand',
-            'Template',
-            'DocumentOutline',
-            'FormatPainter',
-            'TableOfContents'
-        ]
-    }).then(editor => {
-        // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
-        editor.setData('<%- users[0].explain %>');
-    }).catch(error => {
-        console.error(error);
-    });
-</script>
-
+                                // The "super-build" contains more premium features that require additional configuration, disable them below.
+                                // Do not turn them on unless you read the documentation and know how to configure them and setup the editor.
+                                removePlugins: [
+                                    // These two are commercial, but you can try them out without registering to a trial.
+                                    'ExportPdf',
+                                    'ExportWord',
+                                    'CKBox',
+                                    'CKFinder',
+                                    'EasyImage',
+                                    // This sample uses the Base64UploadAdapter to handle image uploads as it requires no configuration.
+                                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/base64-upload-adapter.html
+                                    // Storing images as Base64 is usually a very bad idea.
+                                    // Replace it on production website with other solutions:
+                                    // https://ckeditor.com/docs/ckeditor5/latest/features/images/image-upload/image-upload.html
+                                    // 'Base64UploadAdapter',
+                                    'RealTimeCollaborativeComments',
+                                    'RealTimeCollaborativeTrackChanges',
+                                    'RealTimeCollaborativeRevisionHistory',
+                                    'PresenceList',
+                                    'Comments',
+                                    'TrackChanges',
+                                    'TrackChangesData',
+                                    'RevisionHistory',
+                                    'Pagination',
+                                    'WProofreader',
+                                    // Careful, with the Mathtype plugin CKEditor will not load when loading this sample
+                                    // from a local file system (file://) - load this site via HTTP server if you enable MathType.
+                                    'MathType',
+                                    // The following features are part of the Productivity Pack and require additional license.
+                                    'SlashCommand',
+                                    'Template',
+                                    'DocumentOutline',
+                                    'FormatPainter',
+                                    'TableOfContents'
+                                ]
+                            }).then(editor => {
+                                // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
+                                editor.setData('<%- users[0].explain %>');
+                            }).catch(error => {
+                                console.error(error);
+                            });
+                        </script>
+                        <% } %>
+</body>
 </html>

@@ -26,7 +26,7 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data"
+            <form method="post" action="/addnews/<%= users[0].id %>" id="addnews" enctype="multipart/form-data"
                 class="needs-validation" novalidate>
                 <div class="container">
                     <div class=" row gutters">
@@ -178,10 +178,8 @@
                                             </div>
 
                                             <input list="europe-countries" class="form-control"
-                                                placeholder="select tags..." id="tags" required>
-                                            <div class="invalid-feedback">
-                                                Please select tags!!!
-                                            </div>
+                                                placeholder="select tags..." id="tags">
+
                                             <datalist id="europe-countries">
                                             </datalist>
 
@@ -222,8 +220,7 @@
                                 <div class="row gutters">
                                     <div class="col-12" style="padding-top: 20px;">
                                         <div class="d-flex justify-content-between">
-                                            <button type="" id="submit" name="submit"
-                                                class="btn btn-danger">Cancel</button>
+                                            <a href="/setting_news" class="btn btn-danger">Cancel</a>
                                             <button type="submit" class="btn btn-primary">Sent</button>
                                         </div>
                                     </div>
@@ -439,21 +436,29 @@
     });
 
     // ตรงนี้คือการส่งค่าที่ถูกเลือกในตารางกลับไปในฟอร์มในตอนที่คลิกที่ปุ่ม "บันทึก"
-    const form = document.getElementById('news'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
+    const form = document.getElementById('addnews'); // แทนค่า yourFormId ด้วย ID ของฟอร์มของคุณ
     form.addEventListener('submit', function () {
         const rows = selectedTagsTableBody.querySelectorAll('tr');
         const sectionIds = [];
+        const nullsectionIds = ['1'];
         rows.forEach(row => {
             const idCell = row.querySelector('td:nth-child(1)');
             const sectionId = idCell.textContent.trim();
             sectionIds.push(sectionId);
         });
 
-        const hiddenInput = document.createElement('input');
-        hiddenInput.type = 'hidden';
-        hiddenInput.name = 'section_id';
-        hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
-        form.appendChild(hiddenInput);
+        if (sectionIds.length > 0) {
+            const hiddenInput = document.createElement('input');
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = 'section_id';
+            hiddenInput.value = JSON.stringify(sectionIds); // แปลงเป็น JSON string
+            form.appendChild(hiddenInput);
+        } else {
+            hiddenInput.type = 'hidden';
+            hiddenInput.name = '1';
+            hiddenInput.value = JSON.stringify(nullsectionIds); // แปลงเป็น JSON string
+            form.appendChild(hiddenInput);
+        }
     });
 </script>
 
