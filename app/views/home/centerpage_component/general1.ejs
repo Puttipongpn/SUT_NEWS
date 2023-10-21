@@ -4,23 +4,38 @@
             <% Center.forEach(center=> { %>
                 <li class="splide__slide" style="max-height: 200px; ">
                     <div class="card-menu mb-3" style="max-width: 600px;height:200px">
-                        <div class="row g-0" >
-                            <div class="col-md-6" >
-                                <div class="top-menu" style="margin-left: 10px;margin-top:10px">
+                        <div class="row g-0">
+                            <div class="col-md-6">
+                                <div class="top-menu" style="margin-left: 10px;margin-top:25px">
                                     <% if (center.card_picture) { %>
                                         <% const imcard=center.card_picture.substring(7) %>
                                             <a href="/details/<%= center.news_id %>">
-                                                <img class="card-img-top mx-auto"  src="<%= imcard %>" alt="">
+                                                <img class="card-img-top mx-auto" src="<%= imcard %>" alt="">
                                                 <% } %>
                                             </a>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="card-body">
-                                    <h5 class="card-title " style="font-size: 16px;"><b><%= center.title.substring(0, 50)%>...</b></h5>
-                                    <p class="card-text "><%= center.welding_para.substring(0, 50)%>...</p>
-                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    <h5 class="card-title " style="font-size: 16px;"><b>
+                                            <%= center.title.substring(0, 50)%>...
+                                        </b></h5>
+                                    <p class="card-text ">
+                                        <%= center.welding_para.substring(0, 50)%>...
                                     </p>
+                                    <% const start=center.start%>
+                                        <% const newStart=new Date(start); %>
+                                            <% newStart.setHours(newStart.getHours()+7); %>
+                                                <% const formattedStart=new Date(newStart).toISOString().substring(5,10)%>
+                                                    <% const end=center.end%>
+                                                        <% const newEnd=new Date(end); %>
+                                                            <% newEnd.setHours(newEnd.getHours()+7); %>
+                                                                <% const formattedEnd=new Date(newEnd).toISOString().substring(5,10)%>
+                                                                    <p class="card-text"><small
+                                                                            class="text-body-secondary">
+                                                                          วันที่  <%= formattedStart %> - <%= formattedEnd %>
+                                                                        </small>
+                                                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -30,6 +45,8 @@
         </ul>
     </div>
 </div>
+
+
 
 <style>
     /* สไลด์เฉพาะในหน้านี้ */
@@ -51,8 +68,6 @@
         border-radius: 5px;
         border: 0;
         margin-bottom: 1rem;
-        box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
-        
         font-family: 'Mitr', sans-serif;
     }
 </style>
