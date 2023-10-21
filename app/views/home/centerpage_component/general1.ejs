@@ -1,90 +1,32 @@
 <div class="splide " id="splide2" role="group" aria-label="Splide Basic HTML Example">
     <div class="splide__track">
         <ul class="splide__list">
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+            <% Center.forEach(center=> { %>
+                <li class="splide__slide" style="max-height: 200px; ">
+                    <div class="card-menu mb-3" style="max-width: 600px;height:200px">
+                        <div class="row g-0" >
+                            <div class="col-md-6" >
+                                <div class="top-menu" style="margin-left: 10px;margin-top:10px">
+                                    <% if (center.card_picture) { %>
+                                        <% const imcard=center.card_picture.substring(7) %>
+                                            <a href="/details/<%= center.news_id %>">
+                                                <img class="card-img-top mx-auto"  src="<%= imcard %>" alt="">
+                                                <% } %>
+                                            </a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card-body">
+                                    <h5 class="card-title " style="font-size: 16px;"><b><%= center.title.substring(0, 50)%>...</b></h5>
+                                    <p class="card-text "><%= center.welding_para.substring(0, 50)%>...</p>
+                                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
-            <li class="splide__slide">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://mpics.mgronline.com/pics/Images/565000009894201.JPEG" class="card-img-top"
-                        alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of
-                            the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
-                </div>
-            </li>
+                </li>
+                <% }) %>
         </ul>
     </div>
 </div>
@@ -94,12 +36,29 @@
     #splide2 .splide__arrow {
         margin-top: -50px;
         margin-block-end: -50px;
-        margin-right: -30px;
-        margin-left: -30px;
+        margin-right: -15px;
+        margin-left: -15px;
     }
+
     #splide2 .splide__pagination__page {
-        margin-left: 300px;
+        margin-left: 400px;
     }
+
+    .card-menu {
+        background: #ffffff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        border: 0;
+        margin-bottom: 1rem;
+        box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);
+        
+        font-family: 'Mitr', sans-serif;
+    }
+</style>
+
+<style>
+
 </style>
 
 
@@ -107,9 +66,10 @@
     var splide2 = new Splide('#splide2', {
         type: 'loop',
         direction: 'ttb',
-        height: '70rem',
+        height: '69rem',
         perMove: 1,
-        perPage: 3,
+        perPage: 4,
+        //autoplay: true,
     });
     splide2.mount();
 </script>

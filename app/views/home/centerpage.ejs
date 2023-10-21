@@ -25,6 +25,12 @@
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@300&family=Mitr:wght@300&display=swap"
         rel="stylesheet">
 </head>
+<style>
+    h2{
+        font-family: 'Itim', cursive;
+        color: rgb(82, 82, 82);
+    }
+</style>
 
 <%- include('../home/header') %>
     <%- include('../home/nav') %>
@@ -40,7 +46,7 @@
 
             <article>
                 <%- include('../home/centerpage_component/menu_button.ejs') %>
-                    <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
+                    <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center" style="margin-top: -40px;">
                         <div class="container-xxl ">
                             <div class="row d-flex justify-content-center align-items-center"
                                 style="margin-top: -40px;">
@@ -57,17 +63,19 @@
                                                     <%- include('../home/centerpage_component/tab2.ejs') %>
                                                         <a class="carousel-control-prev" href="#carouselExampleInterval"
                                                             role="button" data-slide="prev">
-                                                            <span class="carousel-control-prev-icon" style=" background-color:black"
+                                                            <span class="carousel-control-prev-icon"
+                                                                style=" background-color:black"
                                                                 aria-hidden="true"></span>
-                                                            <span  class="sr-only">Previous</span>
+                                                            <span class="sr-only">Previous</span>
                                                         </a>
                                                         <a class="carousel-control-next" href="#carouselExampleInterval"
                                                             role="button" data-slide="next">
-                                                            <span class="carousel-control-next-icon" style=" background-color:black"
+                                                            <span class="carousel-control-next-icon"
+                                                                style=" background-color:black"
                                                                 aria-hidden="true"></span>
                                                             <span class="sr-only">Next</span>
                                                         </a>
-                                                        
+
                                                 </div>
                                             </div>
                                         </div>
@@ -80,7 +88,7 @@
                         style="margin-top: -50px;">
                         <div class="container-xxl h-100 ">
                             <div>
-                                <h2 class="mt-4" style="margin-bottom: -3px;"><b>ยอดเข้าชมสูงสุด</b></h2>
+                                <h2 class="mt-4" style="margin-bottom: -3px;"><b>กำลังได้รับความสนใจ</b></h2>
                             </div>
                             <div class="row d-flex justify-content-center align-items-center"
                                 style="margin-top: -40px;">
@@ -104,6 +112,7 @@
                             <div class="row d-flex justify-content-center align-items-center mt-1"
                                 style="margin-top: -40px;">
                                 <div class="row" id="cards_landscape_wrap-2">
+
                                     <div class="col-lg-12 my-2">
                                         <div class="row pt-3" style="margin-bottom: 2%;">
                                             <%- include('../home/centerpage_component/tags_menu.ejs') %>
@@ -116,7 +125,7 @@
 
                     <section class="h-100  gradient-custom-2 py-3 d-flex justify-content-center align-items-center">
                         <div class="container-xxl h-100 ">
-                            <div class="row d-flex justify-content-center align-items-center"
+                            <div class="row d-flex justify-content-center align-items-center mt-2"
                                 style="margin-top: -40px;">
                                 <div class="row" id="cards_landscape_wrap-2">
                                     <div class="col-sm-6 col-lg-8">
@@ -125,12 +134,19 @@
                                         </div>
                                     </div>
                                     <div class="col-6 col-lg-4 " style="margin-top: 45px;">
-                                        <%- include('../home/centerpage_component/general1.ejs') %>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <h2 style="margin-top: -135px;"> <b>Event today</b> </h2>
+                                        </div>
+                                        <div>
+                                            <%- include('../home/centerpage_component/general1.ejs') %>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </section>
+
 
 
 

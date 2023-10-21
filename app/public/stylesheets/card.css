@@ -180,13 +180,19 @@ a {
     margin-top: 50px;
 }
 
+.top-menu {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .top {
     border: none;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
 .top:hover i {
