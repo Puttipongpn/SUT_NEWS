@@ -27,24 +27,28 @@
                         <div class="col">
                             <div class="card"
                                 style="height: 100%; width: 100%;box-shadow: 2px 2px 8px 4px rgba(0, 0, 0, 0.1);">
-                                <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height: 200px;">
+                                <div class="rounded-top text-white d-flex flex-row"
+                                    style="background-color: #000; height: 200px;">
                                     <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px; padding-top: 40px">
-                                     
-                                      <% if (profile_image) { %>
-                                        <% const imagePath = profile_image.substring(6); %>
-                                        <img id="profilePicture" alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
-                                          style="width: 150px; z-index: 1" src="<%= imagePath %>" alt="">
-                                      <% } else { %>
-                                        <img id="profilePicture" class="img-fluid img-thumbnail mt-4 mb-2"
-                                          style="width: 150px; z-index: 1"
-                                          src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
-                                      <% } %>
-                                      <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                        <a href="/setting_profile" style="color: #000;">Edit profile</a>
-                                      </button>
+
+                                        <% if (profile_image) { %>
+                                            <% const imagePath=profile_image.substring(6); %>
+                                                <img id="profilePicture" alt="Generic placeholder image"
+                                                    class="img-fluid img-thumbnail mt-4 mb-2"
+                                                    style="width: 150px; z-index: 1" src="<%= imagePath %>" alt="">
+                                                <% } else { %>
+                                                    <img id="profilePicture" class="img-fluid img-thumbnail mt-4 mb-2"
+                                                        style="width: 150px; z-index: 1"
+                                                        src="http://bootdey.com/img/Content/avatar/avatar1.png" alt="">
+                                                    <% } %>
+                                                        <button type="button" class="btn btn-outline-dark"
+                                                            data-mdb-ripple-color="dark" style="z-index: 1;">
+                                                            <a href="/setting_profile" style="color: #000;">Edit
+                                                                profile</a>
+                                                        </button>
                                     </div>
-                                  </div>
-                                  
+                                </div>
+
                                 <div class="p-4 text-black" style="background-color: #f8f9fa;">
                                     <div class="row gutters">
                                         <div class="col-12 ">
@@ -105,7 +109,7 @@
                                         <p class="lead fw-normal mb-1">About</p>
                                         <div class="p-4" style="background-color: #f8f9fa;">
                                             <% console.log(description) %>
-                                            <%- description %>
+                                                <%- description %>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -334,9 +338,32 @@
                                                                 <a style="font-size: 12px; color:#6e6e6e;">
                                                                     <p style="font-size: small; "><i
                                                                             class="bi bi-calendar2-week fa-xl"
-                                                                            style="color: palevioletred; padding-right:5px"></i>กำหนดการ:
-                                                                        12 ส.ค. 66 - 19 ส.ค.
-                                                                        66
+                                                                            style="color: palevioletred; padding-right:5px"></i>
+                                                                        <% if (profile.start) { %>
+                                                                            <% const start=profile.start%>
+                                                                                <% const newStart=new Date(start); %>
+                                                                                    <% newStart.setHours(newStart.getHours()+7);
+                                                                                        %>
+                                                                                        <% const formattedStart=new
+                                                                                            Date(newStart).toISOString().substring(0,10)%>
+                                                                                            <% const end=profile.end%>
+                                                                                                <% const newEnd=new
+                                                                                                    Date(end); %>
+                                                                                                    <% newEnd.setHours(newEnd.getHours()+7);
+                                                                                                        %>
+                                                                                                        <% const
+                                                                                                            formattedEnd=new
+                                                                                                            Date(newEnd).toISOString().substring(0,10)%>
+                                                                                                            <%= formattedStart
+                                                                                                                %> - <%=
+                                                                                                                    formattedEnd
+                                                                                                                    %>
+                                                                                                                    <% } else
+                                                                                                                        {
+                                                                                                                        %>
+                                                                                                                        ไม่มีกำหนดการ
+                                                                                                                        <% }
+                                                                                                                            %>
                                                                     </p>
                                                                     <!-- ชื่อ -->
                                                                     <!-- <i class="bi bi-person-circle fa-sm" style="padding-right: 5px;padding-left:10px;"></i>-->
