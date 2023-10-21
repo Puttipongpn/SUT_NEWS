@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,7 +26,7 @@
 <body>
     <%- include('../home/header') %>
         <%- include('../home/nav') %>
-            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="">
+            <form method="post" action="/addnews/<%= users[0].id %>" id="news" enctype="multipart/form-data" class="needs-validation"novalidate>
                 <div class="container">
                     <div class=" row gutters">
                         <div class="col-12 col-md-3">
@@ -105,8 +104,12 @@
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-lg" id="news_type_select"
-                                                        name="news_type_id" aria-label="Default select example">
+                                                        required name="news_type_id"
+                                                        aria-label="Default select example"required>
                                                     </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select news type!!!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -118,23 +121,33 @@
                                                 <div>
                                                     <select class="form-select-ad form-select-sm" id="news_topic_select"
                                                         name="topic_id" placeholder="Enter email ID"
-                                                        aria-label="Default select example">
+                                                        aria-label="Default select example" required>
                                                     </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select news topic !!!
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div class="">
                                                 <label for="title">Title</label>
-                                                <input type="text" class="form-control form-control-lg" id="title"
-                                                    name="title" placeholder="เพิ่มหัวข้อข่าว">
+                                                <input type="text" class="form-control form-control-lg"
+                                                    id="validationCustom01" name="title" placeholder="เพิ่มหัวข้อข่าว"
+                                                    required>
+                                                <div class="invalid-feedback">
+                                                    Please enter title!!!
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="col-12 col-md-6" style="padding-top: 20px;">
                                             <div class="">
                                                 <label for="welding_para">Welding</label>
                                                 <input class="form-control form-control-lg" id="welding_para"
-                                                    name="welding_para">
+                                                    name="welding_para" placeholder="เพิ่มส่วนขยาย" required>
+                                                <div class="invalid-feedback">
+                                                    Please enter welding paragraph!!!
+                                                </div>
                                             </div>
 
                                         </div>
@@ -150,7 +163,11 @@
                                                 </div>
                                                 <div style="padding-top: 10px;">
                                                     <input id="input_card" type="file" class="btn btn-primary"
-                                                        name="card_picture" style="height: 38px; padding-top:4px">
+                                                        name="card_picture" style="height: 38px; padding-top:4px"
+                                                        required>
+                                                        <div class="invalid-feedback">
+                                                            Please select card picture!!!
+                                                        </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -160,7 +177,10 @@
                                             </div>
 
                                             <input list="europe-countries" class="form-control"
-                                                placeholder="Start typing..." id="tags">
+                                                placeholder="select tags..." id="tags"required>
+                                                <div class="invalid-feedback">
+                                                    Please select tags!!!
+                                                </div>
                                             <datalist id="europe-countries">
                                             </datalist>
 
@@ -191,7 +211,11 @@
                                 <div class="col-12">
                                     <div class="col-12" style="padding-top:20px">
                                         <h1>Edit News Paragrap </h1>
-                                        <textarea rows="20" cols="70" id="newseditor" name="news_content"></textarea>
+                                        <textarea rows="20" cols="70" id="newseditor" name="news_content"
+                                            required></textarea>
+                                            <div class="invalid-feedback">
+                                                Please enter main paragraph!!!..
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="row gutters">
@@ -713,6 +737,29 @@
             'TableOfContents'
         ]
     });
+</script>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 
 </html>
