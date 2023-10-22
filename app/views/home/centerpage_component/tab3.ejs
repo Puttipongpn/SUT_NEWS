@@ -7,7 +7,7 @@
                     <div class="card h-100" style=" box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
                         <div class="top">
                             <% if (profile.card_picture) { %>
-                                <% const imcard=profile.card_picture.substring(7) %>
+                                <% const imcard=profile.card_picture.substring(6) %>
                                     <a href="/details/<%= profile.news_id %>">
                                         <img class="card-img-top" src="<%= imcard %>" alt="">
                                         <% } %>

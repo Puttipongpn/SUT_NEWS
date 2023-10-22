@@ -7,7 +7,7 @@
                     <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
                         <div class="top">
                             <% if (profile.card_picture) { %>
-                                <% const imcard=profile.card_picture.substring(7) %>
+                                <% const imcard=profile.card_picture.substring(6) %>
                                     <a href="/details/<%= profile.news_id %>">
                                         <img class="card-img-top" src="<%= imcard %>" alt="">
                                         <% } %>
@@ -273,7 +273,7 @@
         </div>
         <% } %>
             <% }); %>
-                <% Center.forEach((profile, index)=> { %>
+                <% center.forEach((profile, index)=> { %>
                     <% for (let i=1; i < Center.length; i++) { %>
                         <% const profile=Center[i]; %>
                             <!-- ทำงานกับ profile ที่มี index มากกว่าหรือเท่ากับ 1 -->
@@ -285,7 +285,7 @@
                                             data-mdb-ripple-color="light">
                                             <div class="top">
                                                 <% if (profile.card_picture) { %>
-                                                    <% const imcard=profile.card_picture.substring(7) %>
+                                                    <% const imcard=profile.card_picture.substring(6) %>
                                                         <a href="/details/<%= profile.news_id %>">
                                                             <img class="card-img-top" src="<%= imcard %>" alt="">
                                                             <% } %>
