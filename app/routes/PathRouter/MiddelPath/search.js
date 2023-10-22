@@ -20,7 +20,7 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
             }, {});
         dbConnection.execute("SELECT users.* , news.* FROM news LEFT JOIN users ON news.user_id = users.id LEFT JOIN approve_news ON approve_news.news_id = news.news_id WHERE approve_news.status_id = 2 ORDER BY news.news_id DESC")
             .then(([rows]) => {
-                if (req.session.role === "OFFICIAL USER" || req.session.role === "USER" || req.session.role === "ADMIN") {
+                if (rows) {
                     dbConnection.execute("SELECT * FROM `bookmark` WHERE b_users_id = ?", [req.session.userID])
                         .then(([Bookmark]) => {
                             dbConnection.execute("SELECT like_news_id, COUNT(*) AS like_count FROM `like` GROUP BY like_news_id;")

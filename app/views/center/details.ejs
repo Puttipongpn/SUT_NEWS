@@ -31,8 +31,10 @@
             color: #ffffff;
             padding: 5px;
         }
+
         #deleteIcon:hover {
-            cursor: pointer; /* เปลี่ยนรูปร่างเป็นรูปมือ */
+            cursor: pointer;
+            /* เปลี่ยนรูปร่างเป็นรูปมือ */
             /* เพิ่มอื่น ๆ ตามต้องการ เช่น เปลี่ยนสีของไอคอนเมื่อโฮเวอร์ */
         }
     </style>
@@ -48,10 +50,17 @@
                         <%- newsData.title %>
                     </h2>
                     <div style="margin-left: 2%; margin-right: 2%;">
-                        <a href="/news_type/<%- newsData.news_type_id %>">
-                            <button type="button" class="btn"
-                                style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
-                                        newsData.news_type_name %></b></button></a>
+                        <% if (newsData.news_type_id == "1") { %>
+                            <a href="/news_type/news/insut">
+                                <button type="button" class="btn"
+                                    style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
+                                            newsData.news_type_name %></b></button></a>
+                        <% }  else if (newsData.news_type_id == "2") { %>
+                            <a href="/news_type/news/outsut">
+                                <button type="button" class="btn"
+                                    style="background-color: #297cc5;color:rgb(253, 253, 253) "><b><%-
+                                            newsData.news_type_name %></b></button></a>
+                            <% }%>
                         <a href="/news_topic/<%- newsData.topic_id %>">
                             <% if (newsData.topic_name) { %>
                                 <button type="button" class="btn"
@@ -60,8 +69,9 @@
                         </a>
                         <% } else { %>
                             <button type="button" class="btn"
-                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) " disabled><b>ไม่มี topic นี้แล้ว
-                                    </b></button></a>
+                                style="background-color: rgb(48, 48, 48);color:rgb(255, 255, 255) " disabled><b>ไม่มี
+                                    topic นี้แล้ว
+                                </b></button></a>
                             <% } %>
 
 
@@ -308,8 +318,9 @@
                                 <div>
                                     <i class="bi bi-chat-left-dots-fill" style="font-size: 16px;"></i>
                                     <% if (comment.c_user_id===id || role==='ADMIN' ) { %>
-                                        <i  class="bi bi-trash-fill" data-comment-id="<%= comment.comment_id %>" id="deleteIcon"
-                                            style="font-size: 16px;color: #ad0000;" onclick="deleteComment(this)"></i>
+                                        <i class="bi bi-trash-fill" data-comment-id="<%= comment.comment_id %>"
+                                            id="deleteIcon" style="font-size: 16px;color: #ad0000;"
+                                            onclick="deleteComment(this)"></i>
                                         <% } %>
                                             <%- comment.comment %>
                                 </div>
@@ -323,26 +334,20 @@
                     <script>
                         function logout() {
                             // ส่งคำขอ GET ไปยังเส้นทาง '/logout'
-                            fetch('/logout', {
-                                method: 'GET',
+                            Swal.fire({
+                                title: 'You want to login?',
+                                text: "You must be logged in to use the Comment function!",
+                                icon: 'warning',
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: 'Yes, navigate to login !'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    window.location.href = '/logout';
+                                }
                             })
-                                .then(response => {
-                                    // หากสำเร็จ, คุณอาจต้องจัดการการเปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่นตามที่คุณต้องการ
-                                    // ตัวอย่างเช่น:
-                                    if (response.ok) {
-                                        alert('โปรดเข้าสู่ระบบก่อนใช้งาน');
-                                        window.location.href = '/'; // เปลี่ยนเส้นทางไปที่หน้าแรกหรือหน้าอื่น
-                                    } else {
-                                        // จัดการข้อผิดพลาดอื่น ๆ ที่เกิดขึ้น
-                                        console.error('ไม่สามารถออกจากระบบได้');
-                                    }
-                                })
-                                .catch(error => {
-                                    // จัดการข้อผิดพลาดที่เกิดขึ้นในการส่งคำขอ
-                                    console.error('ข้อผิดพลาดในการส่งคำขอ:', error);
-                                });
                         }
-
                     </script>
 
                     <script>
