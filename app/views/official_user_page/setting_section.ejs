@@ -68,6 +68,16 @@
                             <script>
                                 function addsection() {
                                     const sectionName = document.querySelector('input[name="section_name"]').value;
+                                    // เพิ่มเงื่อนไขความยาวของ sectionName
+                                    if (sectionName.length < 3) {
+                                        Swal.fire(
+                                            'กรุณากรอกข้อมูลที่มีความยาวมากกว่า 2 ตัวอักษร',
+                                            'ข้อมูลไม่ถูกต้อง',
+                                            'error'
+                                        );
+                                        return;
+                                    }
+
                                     fetch(`/section`, {
                                         method: 'POST',
                                         headers: {
@@ -80,14 +90,18 @@
                                             // รีโหลดหน้า
                                             Swal.fire({
                                                 title: 'your topic is created!',
-                                                text: 'You can now use this topic.!',
+                                                text: 'now You can  use this topic.!',
                                                 icon: 'success'
                                             }).then(() => {
                                                 window.location.reload();
                                             });
                                         })
                                         .catch(error => {
-                                            // จัดการข้อผิดพลาด
+                                            Swal.fire(
+                                                'Please add a tag name?',
+                                                'You havent added any content yet.!',
+                                                'question'
+                                            )
                                         });
                                 }
                             </script>

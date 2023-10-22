@@ -461,7 +461,7 @@
 
 
                         <% } else { %>
-                          <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์ค) ... -->
+                          <!-- ... (โค้ดสำหรับแสดงรายการบุ๊กมาร์คที่ถูกลบ) ... -->
                           <div class="col-lg-3 col-md-6 mb-3">
                             <div class="card h-100"
                               style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
@@ -512,6 +512,30 @@
                             </div>
                           </div>
                           <% } %>
+                          <script>
+                            async function removeBookmark(icon) {
+                              const newsId = icon.getAttribute('data-news-id');
+  
+                              try {
+                                const response = await fetch(`/bookmark/${newsId}`, {
+                                  method: 'DELETE'
+                                });
+                                const data = await response.json();
+                                if (data.success) {
+                                  const index = bookmark_id.findIndex(item => item.b_news_id === newsId);
+                                  if (index !== -1) {
+                                    bookmark_id.splice(index, 1);
+                                  }
+                                  icon.classList.add('bi-bookmark');
+                                  icon.classList.remove('bi-bookmark-check-fill');
+                                } window.location.reload();
+  
+                                console.log(data.message);
+                              } catch (error) {
+                                console.error('เกิดข้อผิดพลาด:', error);
+                              }
+                            }
+                          </script>
                             <% }); %>
                 </div>
               </div>
