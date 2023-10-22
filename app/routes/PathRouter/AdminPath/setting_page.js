@@ -14,6 +14,7 @@ router.get('/setting_page_1', ifNotLoggedin, async (req, res, next) => {
         const website = await dbConnection.execute("SELECT * FROM `website`");
         dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
             .then(([rows]) => {
+                req.session.website = website[0][0];
                 if (rows[0].role === "ADMIN") {
                     res.render('admin_page/setting_page_1', {
                         users: rows,
@@ -26,8 +27,8 @@ router.get('/setting_page_1', ifNotLoggedin, async (req, res, next) => {
                         profile_image: req.session.profile_image,
                         home_website:req.session.website,
                         save_topic:req.session.save_topic,
-                        
                     });
+                    
                 } else if (rows[0].role === "USER") {
                     res.render('404page')
                 } else {
@@ -45,8 +46,11 @@ router.get('/setting_page_1', ifNotLoggedin, async (req, res, next) => {
 router.get('/setting_page_2', ifNotLoggedin, async (req, res, next) => {
     try {
         const website = await dbConnection.execute("SELECT * FROM `website`");
+        
+        const save_topic = await dbConnection.execute("SELECT * FROM `save_topic` LEFT JOIN topic ON topic.topic_id = save_topic.s_topic_id");
         dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
             .then(([rows]) => {
+                req.session.website=website[0][0];
                 if (rows[0].role === "ADMIN") {
                     res.render('admin_page/setting_page_2', {
                         users: rows,
@@ -110,15 +114,15 @@ router.get('/setting_page_3', ifNotLoggedin, async (req, res, next) => {
 router.get('/setting_page_4', ifNotLoggedin, async (req, res, next) => {
     try {
         const save_topic = await dbConnection.execute("SELECT * FROM `save_topic` LEFT JOIN topic ON topic.topic_id = save_topic.s_topic_id");
-        const topic = await dbConnection.execute("SELECT * FROM `topic`");
+        //const topic = await dbConnection.execute("SELECT * FROM `topic`");
         dbConnection.execute("SELECT `name`,`role` FROM `users` WHERE `id`=?", [req.session.userID])
             .then(([rows]) => {
                 if (rows[0].role === "ADMIN") {
-
+                    req.session.save_topic = save_topic[0];
                     res.render('admin_page/setting_page_4', {
                         users: rows,
-                        topic: topic[0],
-                        save_topic: save_topic[0],
+                        //topic: topic[0],
+                        _save_topic: save_topic[0],
                         header: req.session.header,
                         name: rows[0].name,
                         role: rows[0].role,

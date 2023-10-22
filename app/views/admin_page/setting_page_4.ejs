@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/stylesheets/setting_page.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 
@@ -25,7 +26,8 @@
                                 <a class="list-group-item" href="/setting_page/setting_page_1">Setting navbar</a>
                                 <a class="list-group-item" href="/setting_page/setting_page_2">Setting Footer</a>
                                 <a class="list-group-item" href="/setting_page/setting_page_3">Setting Topic</a>
-                                <a class="list-group-item" href="/setting_page/setting_page_4"><b>Setting main menu</b></a>
+                                <a class="list-group-item" href="/setting_page/setting_page_4"><b>Setting main
+                                        menu</b></a>
                             </div>
                         </div>
                         <div class="col-md-9">
@@ -42,7 +44,8 @@
                                                 </datalist>
                                             </div>
                                             <div class="col-12 col-md-4 mt-3">
-                                                <button type="submit" class="btn btn-warning" id="saveButton">ADD MENU</button>
+                                                <button type="submit" class="btn btn-warning" id="saveButton">ADD
+                                                    MENU</button>
                                             </div>
                                         </div>
 
@@ -57,7 +60,7 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <% save_topic.forEach((save_topic , index)=> { %>
+                                                    <% _save_topic.forEach((save_topic , index)=> { %>
                                                         <% if (save_topic) { %>
                                                             <tr>
                                                                 <th scope="row">
@@ -164,8 +167,13 @@
                     // ตรวจสอบว่าคุณต้องการใส่ headers, body หรืออื่น ๆ ตามที่เหมาะสม
                 })
                     .then(response => {
-                        alert('เพิ่มแท็กแล้ว');
-                        window.location.reload();
+                        Swal.fire({
+                            title: 'Add Tags in list success!',
+                            text: '.............',
+                            icon: 'success'
+                        }).then(() => {
+                            window.location.reload();
+                        });
                     })
                     .catch(error => {
                         // จัดการข้อผิดพลาด
@@ -190,14 +198,17 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-        })
-            .then(response => {
-                alert('แท็กถูกลบแล้ว');
-                // รีโหลดหน้า
+        }).then(response => {
+            Swal.fire({
+                title: 'delete Tags in list success!',
+                text: '.............',
+                icon: 'success'
+            }).then(() => {
                 window.location.reload();
-                goToSettingMainMenu();
+            });
 
-            })
+
+        })
             .catch(error => {
                 // จัดการข้อผิดพลาด
             });

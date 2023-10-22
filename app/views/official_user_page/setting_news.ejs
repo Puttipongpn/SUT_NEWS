@@ -146,15 +146,10 @@
                                                                 },
                                                             })
                                                                 .then(response => {
-                                                                    //alert('แท็กถูกลบแล้ว');
+                                                                    alert('แท็กถูกลบแล้ว');
+                                                                    window.location.reload();
                                                                     // รีโหลดหน้า
-                                                                    Swal.fire({
-                                                                        title: 'Delete news success!',
-                                                                        text: 'You news have deleted!',
-                                                                        icon: 'success'
-                                                                    }).then(() => {
-                                                                        window.location.reload();
-                                                                    });
+                                                                
                                                                 })
                                                                 .catch(error => {
                                                                     // จัดการข้อผิดพลาด
