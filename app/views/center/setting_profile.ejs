@@ -100,9 +100,9 @@
                                         </div>
                                         <!-- Form Group (location)-->
                                         <div class="col-md-6">
-                                            <label class="small mb-1" for="inputLocation">PASSWORD</label>
-                                            <input class="form-control" id="inputLocation" type="text"
-                                                value="<%- users[0].password %>" disabled>
+                                            <label class="small mb-1" for="inputRow">ROLE</label>
+                                            <input class="form-control" id="inputRow" type="text" name="Row"
+                                                value="<%- users[0].role %> " disabled>
                                         </div>
                                     </div>
                                     <!-- Form Row-->
@@ -121,23 +121,16 @@
                                                 </option>
                                             </select>
                                         </div>
-                                        <!-- Form Group (birthday)-->
-                                        <div class="col-md-6">
-                                            <label class="small mb-1" for="inputRow">ROLE</label>
-                                            <input class="form-control" id="inputRow" type="text" name="Row"
-                                                value="<%- users[0].role %> " disabled>
-                                        </div>
+                                      
                                     </div>
                                     <!-- Save changes button-->
                                     <div style="display: flex; justify-content: space-between;">
                                         <!-- justify-content: space-betweenกำหนดให้ Flex Items (องค์ประกอบภายใน Flex Container) กระจายตัวอย่างเท่าที่จำเป็นเพื่อเต็มพื้นที่ของ Flex Container -->
                                         <a class="btn btn-info" href="/"
                                             style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);">
-                                            <span class="material-symbols-outlined material-icons">
                                                 BLACK
-                                            </span>
                                         </a>
-                                        <button type="submit" class="btn btn-danger "
+                                        <button type="submit" class="btn btn-danger"
                                             style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);">
                                             SAVE
                                         </button>
@@ -148,13 +141,10 @@
             </div>
             </div>
             </div>
-            <div class="container-xl px-4 " style="margin-right: 5ยป;margin-top: -5px;">
-                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a class="btn btn-warning" style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);" href="/request_official
-                    " id="request_officeal">
-                        <span class="material-symbols-outlined material-icons">
+            <div class="container-xl px-4" style="margin-top: -5px;">
+                <div class="d-grid gap-2 d-md-flex justify-content-end">
+                    <a class="btn btn-warning" style="box-shadow: -1px 2px 8px 4px rgba(0, 0, 0, 0.1);" href="/request_official" id="request_officeal">
                             request official account
-                        </span>
                     </a>
                 </div>
             </div>
