@@ -32,20 +32,24 @@ router.get('/:id', ifNotLoggedin, (req, res, next) => {
     dbConnection.execute("SELECT * FROM users JOIN user_request ON users.id = user_request.user_id WHERE user_id = ?;", [userId])
         .then(([rows]) => {
             // แสดงหน้าเว็บ view พร้อมข้อมูลของผู้ใช้
-            res.render('admin_page/view_user', {
-                users: rows,
-                header:req.session.header,
-                user_name: rows[0].user_name,
-                email: rows[0].email,
-                profile_image: req.session.profile_image,
-                home_website:req.session.website,
-                save_topic:req.session.save_topic,
+            if (req.session.role === "ADMIN") {
+                res.render('admin_page/view_user', {
+                    users: rows,
+                    header: req.session.header,
+                    user_name: rows[0].user_name,
+                    email: rows[0].email,
+                    profile_image: req.session.profile_image,
+                    home_website: req.session.website,
+                    save_topic: req.session.save_topic,
 
-            });
+                });
+            }else {
+                res.render('home/404page');
+            }
         })
         .catch(err => {
             console.log(err);
-            res.render('404page');
+            res.render('home/404page');
         });
 });
 

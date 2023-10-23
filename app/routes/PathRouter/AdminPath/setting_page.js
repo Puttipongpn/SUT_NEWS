@@ -29,10 +29,8 @@ router.get('/setting_page_1', ifNotLoggedin, async (req, res, next) => {
                         save_topic:req.session.save_topic,
                     });
                     
-                } else if (rows[0].role === "USER") {
-                    res.render('404page')
                 } else {
-                    res.render('404page')
+                    res.render('home/404page')
                 }
             });
     } catch (error) {
@@ -65,10 +63,8 @@ router.get('/setting_page_2', ifNotLoggedin, async (req, res, next) => {
                         save_topic:req.session.save_topic,
 
                     });
-                } else if (rows[0].role === "USER") {
-                    res.render('404page')
                 } else {
-                    res.render('404page')
+                    res.render('home/404page')
                 }
             });
     } catch (error) {
@@ -98,10 +94,8 @@ router.get('/setting_page_3', ifNotLoggedin, async (req, res, next) => {
                         save_topic:req.session.save_topic,
 
                     });
-                } else if (rows[0].role === "USER") {
-                    res.render('404page')
-                } else {
-                    res.render('404page')
+                }  else {
+                    res.render('home/404page')
                 }
             });
     } catch (error) {
@@ -133,10 +127,8 @@ router.get('/setting_page_4', ifNotLoggedin, async (req, res, next) => {
                         save_topic:req.session.save_topic,
 
                     });
-                } else if (rows[0].role === "USER") {
-                    res.render('404page')
                 } else {
-                    res.render('404page')
+                    res.render('home/404page')
                 }
             });
     } catch (error) {

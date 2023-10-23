@@ -76,10 +76,7 @@ router.get('/elective', ifNotLoggedin, (req, res, next) => {
 
                     });
                 } else {
-                    res.render('404page', {
-                        name: 'PLEASE LOGIN',
-                        role: 'GUEST'
-                    })
+                    res.render('home/404page')
                 }
             });
     } catch (error) {
@@ -141,10 +138,7 @@ router.get('/add_subject', ifNotLoggedin, (req, res, next) => {
 
                     });
                 } else {
-                    res.render('404page', {
-                        name: 'PLEASE LOGIN',
-                        role: 'GUEST'
-                    })
+                    res.render('home/404page')
                 }
             });
     } catch (error) {

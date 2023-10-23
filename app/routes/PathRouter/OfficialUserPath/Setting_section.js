@@ -24,15 +24,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     save_topic:req.session.save_topic,
                     
                 });
-            } else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
-                res.render('404page');
-            }
-            else {
-                req.session.isLoggedIn === true;
-                res.render('home/page1', {
-                    name: 'PLEASE LOGIN',
-                    role: 'GUEST'
-                })
+            }else {
+                res.render('home/page1')
             }
         });
 });

@@ -10,9 +10,7 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
     req.session.message = undefined;
     dbConnection.execute("SELECT * FROM users LEFT JOIN user_request ON users.id = user_request.user_id WHERE user_request.request_status = 'waiting for approval';")
         .then(([rows]) => {
-            console.log(req.session.role)
-            const isAdmin = req.session.role === "ADMIN";
-            if (isAdmin) {
+            if (req.session.role === "ADMIN") {
                 res.render('admin_page/manage_account', {
                     users: rows,
                     header:req.session.header,
@@ -27,12 +25,12 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     
                 });
             } else {
-                res.render('404page');
+                res.render('home/404page');
             }
         })
         .catch(err => {
             console.log(err);
-            res.render('404page');
+            res.render('home/404page');
         });
 });
 module.exports = router;

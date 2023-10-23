@@ -33,10 +33,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     save_topic:req.session.save_topic,
                     
                 });
-            } else if (rows[0].role === "USER") {
-                res.render('404page')
             } else {
-                res.redirect('/')
+                res.render('home/404page')
             }
         });
 });
@@ -68,10 +66,8 @@ router.get('/his_approve', ifNotLoggedin, (req, res, next) => {
                     save_topic:req.session.save_topic,
 
                 });
-            } else if (rows[0].role === "USER") {
-                res.render('404page')
-            } else {
-                res.redirect('/')
+            } else{
+                res.render('home/404page')
             }
         });
 });
@@ -104,7 +100,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
     const news_id = req.params.news_id;
     dbConnection.execute("SELECT * FROM `news` LEFT JOIN users ON users.id = news.user_id LEFT JOIN approve_news ON approve_news.news_id = news.news_id LEFT JOIN user_request ON news.user_id = user_request.user_id WHERE news.news_id  = ?", [news_id])
         .then(([rows]) => {
-            if (rows) {
+            if (req.session.role === "ADMIN" ) {
                 res.render('admin_page/approve', {
                     approve: rows,
                     header: req.session.header,
@@ -119,7 +115,7 @@ router.get('/:news_id', ifNotLoggedin, (req, res, next) => {
                 });
 
             } else {
-                console.error(error);
+                res.render('home/404page')
             }
         });
 });

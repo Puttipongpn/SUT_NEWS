@@ -79,11 +79,8 @@ router.get('/', ifNotLoggedin, (req, res, next) => {
                     save_topic:req.session.save_topic,
 
                 });
-            } else if (rows[0].role === "ADMIN") {
-                res.render('404page')
-            }
-            else {
-                res.render('404page')
+            }else {
+                res.render('home/404page')
             }
         });
 });
