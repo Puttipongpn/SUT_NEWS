@@ -8,6 +8,7 @@
     <!-- Add icon library -->
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+    <link rel="stylesheet" href="/stylesheets/font.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -106,7 +107,7 @@
                                         <% const randomColorIndex=Math.floor(Math.random() * colors.length); %>
                                             <% if (group.section_id) { %>
                                                 <a href="/tags/<%- group.section_id  %>" type="button" class="btn"
-                                                    style="font: 1.2em sans-serif; background-color: <%= colors[randomColorIndex] %>;">
+                                                    style="font-size: 15px; background-color: <%= colors[randomColorIndex] %>;">
                                                     <%= group.section_name %>
                                                 </a>
                                                 <% } %>
