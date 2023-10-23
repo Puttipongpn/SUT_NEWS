@@ -10,7 +10,7 @@
                                     <% if (center.card_picture) { %>
                                         <% const imcard=center.card_picture.substring(6) %>
                                             <a href="/details/<%= center.news_id %>">
-                                                <img class="card-img-top mx-auto" src="<%= imcard %>" alt="">
+                                                <img class="card-img-top" src="<%= imcard %>" alt="" style="max-height: 175px;">
                                                 <% } %>
                                             </a>
                                 </div>

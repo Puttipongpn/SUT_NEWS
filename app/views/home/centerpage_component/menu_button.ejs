@@ -39,15 +39,15 @@
         <% save_topic.forEach(save_topic=> { %>
           <% if (save_topic.topic_id == "15") { %>
             <li class="nav-item">
-              <a class="nav-link" href="/news_type/news/insut"><b><%= save_topic.topic_name %></b></a>
+              <a class="nav-link" href="/news_type/news/insut" style="font-size: 20px;  color: #424242;"><b><%= save_topic.topic_name %></b></a>
             </li>
           <% }  else if (save_topic.topic_id == "16") { %> 
             <li class="nav-item">
-              <a class="nav-link" href="/news_type/news/outsut"><b><%= save_topic.topic_name %></b></a>
+              <a class="nav-link" href="/news_type/news/outsut" style="font-size: 20px;  color: #424242;"><b><%= save_topic.topic_name %></b></a>
             </li>
           <% } else  { %>  
             <li class="nav-item">
-              <a class="nav-link" href="/news_topic/<%= save_topic.topic_id %>"><b><%= save_topic.topic_name %></b></a>
+              <a class="nav-link" href="/news_topic/<%= save_topic.topic_id %>" style="font-size: 20px; color: #424242;"><b><%= save_topic.topic_name %></b></a>
             </li>
               <% }%> 
          
