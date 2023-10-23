@@ -67,7 +67,7 @@
                               </button>
                               <% } else { %>
                                 <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark"
-                                  style="z-index: 1;" data-sub-id="<%= sub_user %>" onclick="addsubscribe(this)">
+                                  style="z-index: 1;" data-sub-id="<%= sub_user %>" data-role="<%= role %>" onclick="addsubscribe(this)">
                                   ติดตาม
                                 </button>
                                 <% } %>
@@ -81,8 +81,9 @@
                     </div>
                     <script>
                       async function addsubscribe(icon) {
+                        const role = icon.getAttribute('data-role');
                         const Sub_user = icon.getAttribute('data-sub-id');
-                        if (role = "GUEST") {
+                        if (role === "GUEST") {
                           Swal.fire({
                             title: 'You want to login?',
                             text: "You must be logged in to use the Subscribe function!",
@@ -171,7 +172,7 @@
                                   <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
                                     data-news-id="<%= news_like_id %>" onclick="removeLike(this)"></i>
                                   <% } else { %>
-                                    <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_like_id %>"
+                                    <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_like_id %>"  data-role="<%= role %>"
                                       onclick="addLike(this)"></i>
                                     <% } %>
                                       <!-- ส่วนของคอมเม้น -->
@@ -217,7 +218,7 @@
                                                     data-news-id="<%= news_id %>" onclick="removeBookmark(this)"></i>
                                                   <% } else { %>
                                                     <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                      data-news-id="<%= news_id %>" onclick="addBookmark(this)"></i>
+                                                      data-news-id="<%= news_id %>"  data-role="<%= role %>" onclick="addBookmark(this)"></i>
                                                     <% } %>
 
                           </div>
@@ -237,8 +238,10 @@
                             <% } %>
                               <script>
                                 async function addBookmark(icon) {
+                                  const role = icon.getAttribute('data-role');
                                   const newsId = icon.getAttribute('data-news-id');
-                                  if (role = "GUEST") {
+                                  if (role === "GUEST") {
+
                                     Swal.fire({
                                       title: 'You want to login?',
                                       text: "You must be logged in to use the bookmarks function!",
@@ -272,7 +275,6 @@
                                     }
                                   }
                                 }
-
                                 async function removeBookmark(icon) {
                                   const newsId = icon.getAttribute('data-news-id');
 
@@ -298,9 +300,9 @@
                               </script>
                               <script>
                                 async function addLike(icon) {
+                                  const role = icon.getAttribute('data-role');
                                   const newsId = icon.getAttribute('data-news-id');
-
-                                  if (role = "GUEST") {
+                                  if (role === "GUEST") {
                                     Swal.fire({
                                       title: 'You want to login?',
                                       text: "You must be logged in to use the Like function!",
@@ -334,6 +336,7 @@
                                     }
                                   }
                                 }
+
 
                                 async function removeLike(icon) {
                                   const newsId = icon.getAttribute('data-news-id');

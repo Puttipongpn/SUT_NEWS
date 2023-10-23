@@ -23,7 +23,7 @@
                                             <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
                                                 data-news-id="<%= news_id %>" onclick="removeLike(this)"></i>
                                             <% } else { %>
-                                                <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_id %>"
+                                                <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_id %>" data-role="<%= role %>"
                                                     onclick="addLike(this)"></i>
                                                 <% } %>
                                                     <!-- ส่วนของคอมเม้น -->
@@ -73,7 +73,7 @@
                                                                             onclick="removeBookmark(this)"></i>
                                                                         <% } else { %>
                                                                             <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                                                data-news-id="<%= news_id %>"
+                                                                                data-news-id="<%= news_id %>" data-role="<%= role %>"
                                                                                 onclick="addBookmark(this)"></i>
                                                                             <% } %>
 
@@ -95,8 +95,24 @@
                         </div>
                         <script>
                             async function addBookmark(icon) {
+                                const role = icon.getAttribute('data-role');
                                 const newsId = icon.getAttribute('data-news-id');
-                                if (profile.role != 'GUEST') {
+                                if (role === "GUEST") {
+                                    
+                                    Swal.fire({
+                                        title: 'You want to login?',
+                                        text: "You must be logged in to use the bookmarks function!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, navigate to login !'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = '/logout';
+                                        }
+                                    })
+                                } else {
                                     try {
                                         const response = await fetch(`/bookmark/${newsId}`, {
                                             method: 'POST'
@@ -114,24 +130,6 @@
                                     } catch (error) {
                                         console.error('เกิดข้อผิดพลาด:', error);
                                     }
-                                }else{
-                                    Swal.fire({
-                                        title: 'Are you sure?',
-                                        text: "You won't be able to revert this!",
-                                        icon: 'warning',
-                                        showCancelButton: true,
-                                        confirmButtonColor: '#3085d6',
-                                        cancelButtonColor: '#d33',
-                                        confirmButtonText: 'Yes, delete it!'
-                                      }).then((result) => {
-                                        if (result.isConfirmed) {
-                                          Swal.fire(
-                                            'Deleted!',
-                                            'Your file has been deleted.',
-                                            'success'
-                                          )
-                                        }
-                                      })
                                 }
                             }
 
@@ -160,24 +158,40 @@
                         </script>
                         <script>
                             async function addLike(icon) {
+                                const role = icon.getAttribute('data-role');
                                 const newsId = icon.getAttribute('data-news-id');
+                                if (role === "GUEST") {
+                                    Swal.fire({
+                                        title: 'You want to login?',
+                                        text: "You must be logged in to use the Like function!",
+                                        icon: 'warning',
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes, navigate to login !'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            window.location.href = '/logout';
+                                        }
+                                    })
+                                } else {
+                                    try {
+                                        const response = await fetch(`/like/${newsId}`, {
+                                            method: 'POST'
+                                        });
 
-                                try {
-                                    const response = await fetch(`/like/${newsId}`, {
-                                        method: 'POST'
-                                    });
+                                        const data = await response.json();
 
-                                    const data = await response.json();
+                                        if (data.success) {
+                                            like_id.push({ like_news_id: newsId });
+                                            icon.classList.add('bi-bookmark-check-fill');
+                                            icon.classList.remove('bi-heart');
+                                        } window.location.reload();
 
-                                    if (data.success) {
-                                        like_id.push({ like_news_id: newsId });
-                                        icon.classList.add('bi-bookmark-check-fill');
-                                        icon.classList.remove('bi-heart');
-                                    } window.location.reload();
-
-                                    console.log(data.message);
-                                } catch (error) {
-                                    console.error('เกิดข้อผิดพลาด:', error);
+                                        console.log(data.message);
+                                    } catch (error) {
+                                        console.error('เกิดข้อผิดพลาด:', error);
+                                    }
                                 }
                             }
 

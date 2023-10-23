@@ -19,7 +19,7 @@
                                 <i class="bi bi-heart-fill" style="color: rgb(143, 1, 1);" id="likeIcon"
                                     data-news-id="<%= news_id %>" onclick="removeLike(this)"></i>
                                 <% } else { %>
-                                    <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_id %>"
+                                    <i class="bi bi-heart" id="likeIcon" data-news-id="<%= news_id %>" data-role="<%= role %>"
                                         onclick="addLike(this)"></i>
                                     <% } %>
 
@@ -66,17 +66,17 @@
                                                         %>
                                                         <% if (isBookmarked) { %>
                                                             <i class="bi bi-bookmark-check-fill" id="bookmarkIcon"
-                                                                data-news-id="<%= news_id %>"
+                                                                data-news-id="<%= news_id %>" 
                                                                 onclick="removeBookmark(this)"></i>
                                                             <% } else { %>
                                                                 <i class="bi bi-bookmark" id="bookmarkIcon"
-                                                                    data-news-id="<%= news_id %>"
+                                                                    data-news-id="<%= news_id %>" data-role="<%= role %>"
                                                                     onclick="addBookmark(this)"></i>
                                                                 <% } %>
 
                 </div>
             </div>
-
+<% console.log(role);  %>
             <% if (likeCounts[profile.news_id] !==undefined) { %>
                 <div style="margin-top: -15px;margin-left:20px">
                     <p style="font-size: 13px;color:#1e1e1e;">
@@ -94,9 +94,10 @@
                     <% } %>
                         <script>
                             async function addBookmark(icon) {
+                                const role = icon.getAttribute('data-role');
                                 const newsId = icon.getAttribute('data-news-id');
-
-                                if (role = "GUEST") {
+                                if (role === "GUEST") {
+                                    
                                     Swal.fire({
                                         title: 'You want to login?',
                                         text: "You must be logged in to use the bookmarks function!",
@@ -156,8 +157,9 @@
                         </script>
                         <script>
                             async function addLike(icon) {
+                                const role = icon.getAttribute('data-role');
                                 const newsId = icon.getAttribute('data-news-id');
-                                if (role = "GUEST") {
+                                if (role === "GUEST") {
                                     Swal.fire({
                                         title: 'You want to login?',
                                         text: "You must be logged in to use the Like function!",
