@@ -12,6 +12,7 @@
     <link rel='stylesheet' href='https://cdn.datatables.net/1.13.5/css/dataTables.bootstrap5.min.css'>
     <!-- Font Awesome CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 
@@ -45,7 +46,7 @@
                                                 <input type="text" class="form-control mb-1" name="topic_name">
                                             </div>
                                             <div class="text-right mt-3">
-                                                <button type="button" class="btn btn-default">Cancel</button>
+                                                <button type="reset" class="btn btn-default">Cancel</button>
                                                 <button type="submit" class="btn btn-primary">Save
                                                     changes</button>&nbsp;
                                             </div>
@@ -77,9 +78,10 @@
                                                         </td>
                                                         <td style="text-align: center;">
                                                             <p class="fw-normal mb-1">
-                                                                <i id="deleteIcon" class="fa-solid fa-trash fa-lg" 
-                                                                data-tags-id="<%= topic.topic_id %>" style="color: #d01616;"
-                                                                onclick="deletetags(this)"></i>
+                                                                <i id="deleteIcon" class="fa-solid fa-trash fa-lg"
+                                                                    data-tags-id="<%= topic.topic_id %>"
+                                                                    style="color: #d01616;"
+                                                                    onclick="deletetags(this)"></i>
                                                             </p>
                                                         </td>
                                                     </tr>
@@ -107,14 +109,22 @@
                         data: $(this).serialize(),
                         success: function (response) {
                             if (response.success) {
-                                // บันทึกสำเร็จ
-                                alert(response.message);
-                                window.location.reload();
-                                // รีเซ็ตค่าของ input หรือทำอย่างอื่นตามที่ต้องการ
+                                Swal.fire({
+                                    title: 'ERR!',
+                                    text: 'web site update',
+                                    icon: 'success'
+                                }).then(() => {
+                                    window.location.reload();
+                                });
                             } else {
                                 // บันทึกไม่สำเร็จ
-                                alert(response.message);
-                                window.location.reload();
+                                Swal.fire({
+                                    title: 'Add Topic in list success!',
+                                    text: 'web site update',
+                                    icon: 'success'
+                                }).then(() => {
+                                    window.location.reload();
+                                });
                             }
                         },
                         error: function () {
@@ -125,24 +135,39 @@
                 });
 
             </script>
+
+
 </body>
 <script>
     function deletetags(icon) {
         const tags_id = icon.getAttribute('data-tags-id');
-        fetch(`/setting_page/${tags_id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: 'Save',
+            denyButtonText: `Don't save`,
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                Swal.fire('Saved!', '', 'success').then(() => {
+                    fetch(`/setting_page/${tags_id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                    }).then(response => {
+                        window.location.reload();
+                    }).catch(error => {
+                        // จัดการข้อผิดพลาด
+                    });
+                })
+            } else if (result.isDenied) {
+                Swal.fire('Changes are not saved', '', 'info')
+            }
         })
-            .then(response => {
-                alert('แท็กถูกลบแล้ว');
-                // รีโหลดหน้า
-                window.location.reload();
-            })
-            .catch(error => {
-                // จัดการข้อผิดพลาด
-            });
+
+
     }
 </script>
 

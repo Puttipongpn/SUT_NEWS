@@ -156,7 +156,8 @@
                     </div>
 
                     <div class="col-12 col-md-4">
-                        <form method="post" action="/approve/<%= approve[0].news_id %>" class="">
+                        <form method="post" action="/approve/<%= approve[0].news_id %>" class="needs-validation"
+                            novalidate>
                             <div class="card" style="padding-block-end: 5.5%;">
                                 <div class="card-body ">
                                     <div class="row gutters">
@@ -170,20 +171,22 @@
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-lg" id="status_id"
-                                                        name="status_id" aria-label="Default select example">
+                                                        name="status_id" aria-label="Default select example" required>
                                                     </select>
+                                                    <div class="invalid-feedback">
+                                                        Please select a Approve Status.
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12 ">
-                                             <div class="">
+                                            <div class="">
                                                 <div>
                                                     <label for="location_post_id">Special Location Post</label>
                                                 </div>
                                                 <div>
                                                     <select class="form-select-ad form-select-sm" id="location_post_id"
-                                                        name="location_post_id" 
-                                                        aria-label="Default select example">
+                                                        name="location_post_id" aria-label="Default select example">
                                                     </select>
                                                 </div>
                                             </div>
@@ -197,13 +200,36 @@
                                     </div>
                                     <div class="d-flex d-md-flex justify-content-md-end mb-3 mt-2">
                                         <div class="p-2 bd-highlight"><button type="button"
-                                                class="bd-highlight ms-auto me-auto btn btn-warning ">Reset</button></div>
+                                                class="bd-highlight ms-auto me-auto btn btn-warning ">Reset</button>
+                                        </div>
                                         <div class="ms-auto p-2 bd-highlight"><button type="submit"
                                                 class="ms-auto me-auto btn btn-primary ">Save</button></div>
                                     </div>
                                 </div>
                             </div>
                         </form>
+                        <script>
+                            // Example starter JavaScript for disabling form submissions if there are invalid fields
+                            (function () {
+                                'use strict'
+
+                                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                                var forms = document.querySelectorAll('.needs-validation')
+
+                                // Loop over them and prevent submission
+                                Array.prototype.slice.call(forms)
+                                    .forEach(function (form) {
+                                        form.addEventListener('submit', function (event) {
+                                            if (!form.checkValidity()) {
+                                                event.preventDefault()
+                                                event.stopPropagation()
+                                            }
+
+                                            form.classList.add('was-validated')
+                                        }, false)
+                                    })
+                            })()
+                        </script>
                     </div>
                 </div>
             </div>

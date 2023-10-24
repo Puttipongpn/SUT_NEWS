@@ -108,7 +108,7 @@
                     <div class="col-md-12">
                         <label class="small mb-1" for="inputdescription">DESCRIPTION</label>
                         <div style="display: flex;">
-                            <textarea value="<%- users[0].description %>" id="description"
+                            <textarea id="description"
                                 name="description"></textarea>
                         </div>
                     </div>
@@ -280,6 +280,11 @@
                     'FormatPainter',
                     'TableOfContents'
                 ]
+            }).then(editor => {
+                // นำข้อมูลจากฐานข้อมูลมาใส่ใน CKEditor
+                editor.setData('<%- users[0].description %>');
+            }).catch(error => {
+                console.error(error);
             });
         </script>
 

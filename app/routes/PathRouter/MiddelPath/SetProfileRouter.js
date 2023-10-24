@@ -87,8 +87,8 @@ const upload_profile = multer({
                   // ลบไฟล์รูปภาพเดิมออกจากโฟลเดอร์อัปโหลด (ถ้าต้องการ)
                   // fs.unlinkSync(req.session.profile_image);
                   req.session.profile_image = imagePath; // อัปเดตเส้นทางไฟล์รูปภาพใน session
-                  res.redirect('/setting_profile');
                   req.session.message = 'บันทึกสำเร็จ';
+                  res.redirect('/setting_profile');
               })
               .catch(err => {
                   console.log(err);
@@ -99,8 +99,8 @@ const upload_profile = multer({
           // ถ้าไม่มีการอัปโหลดรูปภาพ ให้แก้ไขข้อมูลอื่นๆ โดยไม่เปลี่ยนแปลงรูปภาพ
           dbConnection.execute("UPDATE users SET user_name= ?,name= ? ,email= ? ,gender= ? WHERE id = ?", [user_name, name, email, gender, userId])
               .then(() => {
-                  res.redirect('/setting_profile');
                   req.session.message = 'บันทึกสำเร็จ';
+                  res.redirect('/setting_profile');
               })
               .catch(err => {
                   console.log(err);

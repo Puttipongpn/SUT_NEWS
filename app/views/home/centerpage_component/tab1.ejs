@@ -1,5 +1,5 @@
 <% Center.forEach((profile)=> { %>
-    <div class="col-lg-4 col-md-6 mb-3 tab-1">
+    <div class="col-lg-6 col-md-6 mb-3 tab-1">
         <div class="card h-100" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); transition: 0.3s;">
             <div class="top">
                 <% if (profile.card_picture) { %>
@@ -293,13 +293,13 @@
             // Function to toggle card visibility
             function toggleCardVisibility(index) {
                 cards.forEach((card, i) => {
-                    card.style.display = i >= index && i < index + 6 ? 'block' : 'none';
+                    card.style.display = i >= index && i < index + 4 ? 'block' : 'none';
                 });
             }
 
             // Function to update the current card index
             function updateCardIndex() {
-                currentIndex = (currentIndex + 6) % cards.length;
+                currentIndex = (currentIndex + 4) % cards.length;
             }
 
             // Initial display
