@@ -77,8 +77,8 @@
                                     <tr>
                                         <th data-field="No." style="width: 3%;">No.</th>
                                         <th data-field="Title" style="width: 15%;">Title</th>
-                                        <th data-field="Welding" style="width: 25%;">Welding</th>
-                                        <th data-field="Status" style="width: 7%;">Status</th>
+                                        <th data-field="Welding" style="width: 22%;">Welding</th>
+                                        <th data-field="Status" style="width: 10%;">Status</th>
                                         <th data-field="Date_Time" style="width: 8%;">Date Time</th>
                                         <th data-field="Comment" style="width: 12%;">Comment</th>
                                         <th data-field="Actions" style="width:10%;">Actions</th>
@@ -94,7 +94,7 @@
                                                 style="width: 15px; max-width: 15px; word-wrap: break-word; white-space: normal;">
                                                 <%- settingnews.title %></td>
                                             <td
-                                                style="width: 25px; max-width: 25px; word-wrap: break-word; white-space: normal;">
+                                                style="width: 22px; max-width: 22px; word-wrap: break-word; white-space: normal;">
                                                 <%- settingnews.welding_para %>
                                             </td>
 
@@ -105,10 +105,10 @@
                                                         <i class="fa fa-dot-circle-o text-danger"></i> Disapproved
                                                         <% } else if (settingnews.status_id===3) { %>
                                                             <i class="fa fa-dot-circle-o " style="color: #ff5c33;"></i>
-                                                            แก้ไข
+                                                            Edit
                                                             <% } else if (settingnews.status_id===1) { %>
                                                                 <i class="fa fa-dot-circle-o"
-                                                                    style="color: #ffd500;"></i> รอการพิจารณา
+                                                                    style="color: #ffd500;"></i> Waiting to consider
                                                                 <% } %>
 
 
