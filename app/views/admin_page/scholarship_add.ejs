@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>setting tags</title>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <style>
@@ -53,29 +54,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                      
-                                            <% tags.forEach((tags , index)=> { %>
-                                                <% if (tags.section_id) { %>
-                                                    <tr>
-                                                        <th scope="row">
-                                                            <%= index+1 %>
-                                                        </th>
-                                                        <td>
-                                                            <%= tags.section_name %>
-                                                        </td>
-                                                        <td class="small-column "><a
-                                                                href="/tags/<%- tags.section_id  %>"
-                                                                style="color: rgb(33, 33, 33);"><i
-                                                                    class="bi bi-info-circle-fill " id="viewIcon"
-                                                                    style="margin-left: 9px;"></i></a></td>
-                                                        <td class="small-column"><i class="bi bi-archive-fill"
-                                                                id="deleteIcon" data-tags-id="<%= tags.scholarship_id %>"
-                                                                style="margin-left: 13px;"
-                                                                onclick="deletetags(this)"></i>
-                                                        </td>
-                                                    </tr>
-                                                    <% } %>
-                                                        <% }) %>
+
+                                        <% tags.forEach((tags , index)=> { %>
+                                            <% if (tags.section_id) { %>
+                                                <tr>
+                                                    <th scope="row">
+                                                        <%= index+1 %>
+                                                    </th>
+                                                    <td>
+                                                        <%= tags.section_name %>
+                                                    </td>
+                                                    <td class="small-column "><a href="/tags/<%- tags.section_id  %>"
+                                                            style="color: rgb(33, 33, 33);"><i
+                                                                class="bi bi-info-circle-fill " id="viewIcon"
+                                                                style="margin-left: 9px;"></i></a></td>
+                                                    <td class="small-column"><i class="bi bi-archive-fill"
+                                                            id="deleteIcon" data-tags-id="<%= tags.scholarship_id %>"
+                                                            style="margin-left: 13px;" onclick="deletetags(this)"></i>
+                                                    </td>
+                                                </tr>
+                                                <% } %>
+                                                    <% }) %>
                                     </tbody>
                                 </table>
                             </div>
@@ -127,9 +126,13 @@
                                 // ตรวจสอบว่าคุณต้องการใส่ headers, body หรืออื่น ๆ ตามที่เหมาะสม
                             })
                                 .then(response => {
-                                    alert('เพิ่มแท็กแล้ว');
-                                    // รีโหลดหน้า
-                                    window.location.reload();
+                                    Swal.fire({
+                                        title: 'Add Tags in list success!',
+                                        text: 'web site update',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
                                 })
                                 .catch(error => {
                                     // จัดการข้อผิดพลาด
@@ -146,20 +149,30 @@
             <script>
                 function deletetags(icon) {
                     const tags_id = icon.getAttribute('data-tags-id');
-                    fetch(`/scholarship/scholarship_delete_tags/${tags_id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                    Swal.fire({
+                        title: 'Do you want to save the changes?',
+                        showDenyButton: true,
+                        showCancelButton: true,
+                        confirmButtonText: 'Save',
+                        denyButtonText: `Don't save`,
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            fetch(`/scholarship/scholarship_delete_tags/${tags_id}`, {
+                                method: 'DELETE',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                            })
+                                .then(response => {
+                                    window.location.reload();
+                                })
+                                .catch(error => {
+                                    // จัดการข้อผิดพลาด
+                                });
+                        } else if (result.isDenied) {
+                            Swal.fire('Changes are not saved', '', 'info')
+                        }
                     })
-                        .then(response => {
-                            alert('แท็กถูกลบแล้ว');
-                            // รีโหลดหน้า
-                            window.location.reload();
-                        })
-                        .catch(error => {
-                            // จัดการข้อผิดพลาด
-                        });
                 }
             </script>
 

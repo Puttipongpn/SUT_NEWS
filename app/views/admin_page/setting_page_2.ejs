@@ -14,6 +14,7 @@
     <!-- Font Awesome CSS -->
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>Document</title>
 </head>
 
@@ -78,13 +79,21 @@
                             .then(response => response.json())
                             .then(data => {
                                 if (data.success) {
-                                    // บันทึกสำเร็จ
-                                    alert(data.message);
-                                    window.location.reload();
+                                    Swal.fire({
+                                        title: 'Add Tags in list success!',
+                                        text: 'web site update',
+                                        icon: 'success'
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
                                 } else {
-                                    // บันทึกไม่สำเร็จ
-                                    alert(data.message);
-                                    window.location.reload();
+                                    Swal.fire({
+                                        title: 'Oops!',
+                                        text: 'Something went wrong!',
+                                        icon: 'error'
+                                    }).then(() => {
+                                        window.location.reload();
+                                    });
                                 }
                             })
                             .catch(() => {

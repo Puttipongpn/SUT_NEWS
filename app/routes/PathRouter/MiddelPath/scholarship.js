@@ -42,6 +42,8 @@ router.get('/', ifNotLoggedin, async (req, res, next) => {
                                         CommentCounts: CommentCounts,
                                         home_website:req.session.website,
                                         save_topic:req.session.save_topic,
+                                        home_website:req.session.website,
+                                        save_topic:req.session.save_topic,
 
                                     });
                                 });
@@ -70,6 +72,8 @@ router.get('/scholarship_add', ifNotLoggedin, (req, res, next) => {
                     tags: rows,
                     header: req.session.header,
                     profile_image:req.session.profile_image,
+                    home_website:req.session.website,
+                    save_topic:req.session.save_topic,
                 });
             } else if (rows[0].role === "USER" || rows[0].role === "ADMIN") {
                 res.render('404page');
