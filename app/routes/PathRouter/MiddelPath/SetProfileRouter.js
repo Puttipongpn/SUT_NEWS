@@ -4,7 +4,7 @@ const router = express.Router();
 //let conn = require('./connect')
 const path = require('path');
 const cookieSession = require('cookie-session');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const dbConnection = require('../../connect');
 const { body, validationResult, Result } = require('express-validator');
 
